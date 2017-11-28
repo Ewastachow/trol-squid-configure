@@ -8,7 +8,7 @@ import java.util.List;
 public class DomainList {
 
     private List<String> domainList;
-    private static String path;
+    private String path;
 
     public DomainList(String path) {
         this.domainList = new ArrayList<String>();
@@ -43,4 +43,6 @@ public class DomainList {
         //TODO: Implement
         return null;
     }
+
+    //TODO: Wygenerowac przciaznie dla clonowania
 }
