@@ -7,7 +7,13 @@ import java.util.List;
 
 public class DomainList {
 
-    private List<String> domainList = new ArrayList<String>();
+    private List<String> domainList;
+    private static String path;
+
+    public DomainList(String path) {
+        this.domainList = new ArrayList<String>();
+        this.path = path;
+    }
 
     public String toString(){
         //TODO: Implement
@@ -19,11 +25,11 @@ public class DomainList {
         return null;
     }
 
-    public void toFile(String path){
+    public void toFile(){
         //TODO: Implement
     }
 
-    public DomainList fromFile(String path){
+    public DomainList fromFile(){
         //TODO: Implement
         return null;
     }
