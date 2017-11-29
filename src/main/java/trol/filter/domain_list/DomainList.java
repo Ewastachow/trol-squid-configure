@@ -51,7 +51,7 @@ public class DomainList implements Cloneable{
 
     public void toFile() throws IOException {
         Path file = Paths.get(path);
-        Files.write(file, domainList, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
+        Files.write(file, domainList, Charset.forName("UTF-8"), StandardOpenOption.TRUNCATE_EXISTING);
     }
 
     public DomainList fromFile() throws IOException {
@@ -66,17 +66,19 @@ public class DomainList implements Cloneable{
         return this;
     }
 
-    public boolean add(String domain){
+    public boolean add(String domain) throws IOException {
         boolean valid = isCorrectDomain(domain);
         if(valid)
             domainList.add(domain);
+        toFile();
         return valid;
     }
 
-    public boolean remove(String domain){
+    public boolean remove(String domain) throws IOException {
         boolean valid = isCorrectDomain(domain) && domainList.contains(domain);
         if(valid)
             domainList.remove(domain);
+        toFile();
         return valid;
     }
 

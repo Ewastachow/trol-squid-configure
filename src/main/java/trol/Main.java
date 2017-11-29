@@ -9,7 +9,7 @@ public class Main {
         System.out.println("Main run");
 //        TerminalExecute te = new TerminalExecute();
 //        te.test1();
-        TerminalController terminalController = new TerminalController(new DomainList("/etc/squid/squid.conf"));
+        TerminalController terminalController = new TerminalController(new DomainList("/etc/squid/black-list.acl"));
         while (true) terminalController
                 .showMenu()
                 .executeAction();

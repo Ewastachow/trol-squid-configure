@@ -50,18 +50,28 @@ public class TerminalController {
     public TerminalController addToBlackList(){
         System.out.println("Please type domain URL to add:");
         String answer = scanner.nextLine();
-        System.out.println(
-                blackList.add(answer) ? "Added" : "Bad domain URL"
-        );
+        try {
+            System.out.println(
+                    blackList.add(answer) ? "Added" : "Bad domain URL"
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Cant write to file");
+        }
         return this;
     }
 
     public TerminalController removeFromBlackList(){
         System.out.println("Please type domain URL to remove:");
         String answer = scanner.nextLine();
-        System.out.println(
-                blackList.remove(answer) ? "Removed" : "Bad domain URL or domain not in list"
-        );
+        try {
+            System.out.println(
+                    blackList.remove(answer) ? "Removed" : "Bad domain URL or domain not in list"
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Cant write to file");
+        }
         return this;
     }
 
@@ -96,7 +106,8 @@ public class TerminalController {
     private void resetSquid(){
         TerminalExecute exec = new TerminalExecute();
         try {
-            String output = exec.executeCommand("service squid restart");
+//            String output = exec.executeCommand("service squid restart");
+            String output = exec.executeCommand("systemctl restart squid.service");
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             System.out.println("Error 0001");
