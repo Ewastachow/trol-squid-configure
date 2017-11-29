@@ -22,6 +22,7 @@ public class TerminalExecute {
     }
 
     public void test1(){
+        //TODO: To remove
         String output = "Lama3";
         try {
             output = executeCommand("service squid restart");
