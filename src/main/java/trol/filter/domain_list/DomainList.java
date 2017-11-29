@@ -22,6 +22,10 @@ public class DomainList implements Cloneable{
         this.path = path;
     }
 
+    public List<String> getDomainList() {
+        return domainList;
+    }
+
     public DomainList(String path) {
         this(new ArrayList<>(),path);
     }
@@ -60,6 +64,13 @@ public class DomainList implements Cloneable{
         if(isCorrectDomain(domain))
             domainList.add(domain);
         return this;
+    }
+
+    public boolean add(String domain){
+        boolean valid = isCorrectDomain(domain);
+        if(valid)
+            domainList.add(domain);
+        return valid;
     }
 
     public DomainList removeDomain(String domain){
