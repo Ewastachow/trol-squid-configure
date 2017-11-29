@@ -1,8 +1,12 @@
 package trol;
 
+import trol.terminal.TerminalExecute;
+
 public class Main {
     public static void main(String[] args){
         System.out.println("Main run");
+        TerminalExecute te = new TerminalExecute();
+        te.test1();
     }
 
 //    public static void main(String[] args){
