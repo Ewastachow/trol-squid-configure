@@ -73,6 +73,13 @@ public class DomainList implements Cloneable{
         return valid;
     }
 
+    public boolean remove(String domain){
+        boolean valid = isCorrectDomain(domain) && domainList.contains(domain);
+        if(valid)
+            domainList.remove(domain);
+        return valid;
+    }
+
     public DomainList removeDomain(String domain){
         if(domainList.contains(domain))
             domainList.remove(domain);

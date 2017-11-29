@@ -41,10 +41,19 @@ public class TerminalController {
     }
 
     public TerminalController addToBlackList(){
-        System.out.println("Please type domain URL:");
+        System.out.println("Please type domain URL to add:");
         String answer = scanner.nextLine();
         System.out.println(
                 blackList.add(answer) ? "Added" : "Bad domain URL"
+        );
+        return this;
+    }
+
+    public TerminalController removeFromBlackList(){
+        System.out.println("Please type domain URL to remove:");
+        String answer = scanner.nextLine();
+        System.out.println(
+                blackList.remove(answer) ? "Removed" : "Bad domain URL or domain not in list"
         );
         return this;
     }
@@ -69,7 +78,7 @@ public class TerminalController {
                     addToBlackList();
                     break;
                 case 3:
-                    showBlackList();
+                    removeFromBlackList();
                     break;
             }
         return this;
