@@ -22,12 +22,12 @@ public class DomainList implements Cloneable{
         this.path = path;
     }
 
-    public List<String> getDomainList() {
-        return domainList;
-    }
-
     public DomainList(String path) {
         this(new ArrayList<>(),path);
+    }
+
+    public List<String> getDomainList() {
+        return domainList;
     }
 
     @Override

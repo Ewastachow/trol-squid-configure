@@ -7,9 +7,9 @@ import trol.terminal_interface.TerminalController;
 public class Main {
     public static void main(String[] args){
         System.out.println("Main run");
-        TerminalExecute te = new TerminalExecute();
-        te.test1();
-        TerminalController terminalController = new TerminalController(new DomainList("list.txt"));
+//        TerminalExecute te = new TerminalExecute();
+//        te.test1();
+        TerminalController terminalController = new TerminalController(new DomainList("/etc/squid/squid.conf"));
         while (true) terminalController
                 .showMenu()
                 .executeAction();

@@ -1,7 +1,9 @@
 package trol.terminal_interface;
 
 import trol.filter.domain_list.DomainList;
+import trol.terminal.TerminalExecute;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +20,11 @@ public class TerminalController {
 
     public TerminalController(DomainList blackList){
         this.blackList = blackList;
+        try {
+            this.blackList.fromFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         scanner=new Scanner(System.in);
     }
 
@@ -76,11 +83,24 @@ public class TerminalController {
                     break;
                 case 2:
                     addToBlackList();
+                    resetSquid();
                     break;
                 case 3:
                     removeFromBlackList();
+                    resetSquid();
                     break;
             }
         return this;
+    }
+
+    private void resetSquid(){
+        TerminalExecute exec = new TerminalExecute();
+        try {
+            String output = exec.executeCommand("service squid restart");
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            System.out.println("Error 0001");
+        }
+        System.out.println("Server reseted succesfully");
     }
 }
