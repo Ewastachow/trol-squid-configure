@@ -1,5 +1,8 @@
 package trol.terminal_interface;
 
+import trol.model.filter.domain_list.DomainList;
+import trol.model.terminal.TerminalExecute;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
