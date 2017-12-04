@@ -1,6 +1,5 @@
 package trol.filter.domain_list;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -20,13 +19,16 @@ public class DomainList implements Cloneable{
     public DomainList(List<String> readyList, String path) {
         this.domainList = readyList;
         this.path = path;
+        toFile();
     }
 
     public DomainList(String path) {
-        this(new ArrayList<>(),path);
+        this.path = path;
+        fromFile();
     }
 
     public List<String> getDomainList() {
+        // fromFile();
         return domainList;
     }
 
@@ -49,53 +51,50 @@ public class DomainList implements Cloneable{
         return this;
     }
 
-    public void toFile() throws IOException {
+    public boolean toFile(){
         Path file = Paths.get(path);
-        Files.write(file, domainList, Charset.forName("UTF-8"), StandardOpenOption.TRUNCATE_EXISTING);
+        try {
+            Files.write(file, domainList, Charset.forName("UTF-8"), StandardOpenOption.TRUNCATE_EXISTING);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
-    public DomainList fromFile() throws IOException {
+    public boolean fromFile(){
         Path file = Paths.get(path);
-        domainList = Files.readAllLines(file, Charset.forName("UTF-8"));
-        return this;
+        try {
+            domainList = Files.readAllLines(file, Charset.forName("UTF-8"));
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
-    public DomainList addDomain(String domain){
-        if(isCorrectDomain(domain))
-            domainList.add(domain);
-        return this;
-    }
-
-    public boolean add(String domain) throws IOException {
+    public boolean addDomain(String domain) throws IOException {
         boolean valid = isCorrectDomain(domain);
         if(valid)
             domainList.add(domain);
-        toFile();
-        return valid;
+        boolean success = toFile();
+        return valid && success;
     }
 
-    public boolean remove(String domain) throws IOException {
+    public boolean removeDomain(String domain) throws IOException {
         boolean valid = isCorrectDomain(domain) && domainList.contains(domain);
         if(valid)
             domainList.remove(domain);
-        toFile();
-        return valid;
-    }
-
-    public DomainList removeDomain(String domain){
-        if(domainList.contains(domain))
-            domainList.remove(domain);
-        return this;
+        boolean success = toFile();
+        return valid && success;
     }
 
     /* Przciaznie dla clonowania */
     @Override
     public Object clone() throws CloneNotSupportedException {
         super.clone();
-       List<String> domainsCopy = new ArrayList<>();
+        List<String> domainsCopy = new ArrayList<>();
 
-     for(String s : domainList)
-         domainsCopy.add(s);
+        for(String s : domainList)
+            domainsCopy.add(s);
 
         return new DomainList(domainsCopy,path);
     }

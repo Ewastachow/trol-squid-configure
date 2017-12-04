@@ -20,11 +20,7 @@ public class TerminalController {
 
     public TerminalController(DomainList blackList){
         this.blackList = blackList;
-        try {
-            this.blackList.fromFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.blackList.fromFile();
         scanner=new Scanner(System.in);
     }
 
@@ -52,7 +48,7 @@ public class TerminalController {
         String answer = scanner.nextLine();
         try {
             System.out.println(
-                    blackList.add(answer) ? "Added" : "Bad domain URL"
+                    blackList.addDomain(answer) ? "Added" : "Bad domain URL"
             );
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,7 +62,7 @@ public class TerminalController {
         String answer = scanner.nextLine();
         try {
             System.out.println(
-                    blackList.remove(answer) ? "Removed" : "Bad domain URL or domain not in list"
+                    blackList.removeDomain(answer) ? "Removed" : "Bad domain URL or domain not in list"
             );
         } catch (IOException e) {
             e.printStackTrace();
