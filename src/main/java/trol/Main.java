@@ -1,7 +1,5 @@
 package trol;
 
-import trol.filter.domain_list.DomainList;
-import trol.terminal.TerminalExecute;
 import trol.terminal_interface.TerminalController;
 
 public class Main {
