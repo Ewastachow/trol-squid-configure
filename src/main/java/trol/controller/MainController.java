@@ -9,4 +9,9 @@ public class MainController {
         model.addAttribute("fullName", "Lama");
         return "index";
     }
+
+    @RequestMapping("/todo")
+    String todo_index(ModelMap model) {
+        return "public/todo/indexToDo";
+    }
 }
