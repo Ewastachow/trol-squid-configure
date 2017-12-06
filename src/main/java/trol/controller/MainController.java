@@ -12,6 +12,6 @@ public class MainController {
 
     @RequestMapping("/todo")
     String todo_index(ModelMap model) {
-        return "public/todo/indexToDo";
+        return "indexToDo";
     }
 }
