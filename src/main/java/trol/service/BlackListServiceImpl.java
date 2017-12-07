@@ -17,7 +17,7 @@ public class BlackListServiceImpl implements BlackListService {
         fakeList.add(".google.com");
         DomainList domainList = null;
         try {
-            domainList = new DomainList(fakeList, "C:\\lista");
+            domainList = new DomainList(fakeList, "/etc/squid/black-list.acl");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -26,7 +26,12 @@ public class BlackListServiceImpl implements BlackListService {
 
     @Override
     public DomainList getBlackList() {
-        //TODO dodac prawdziwa liste i usunac fake
-        return getFakeList();
+        DomainList blackList = null;
+        try {
+            blackList = new DomainList("/etc/squid/black-list.acl");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return blackList;
     }
 }
