@@ -2,10 +2,7 @@ package trol.domain.filter.domain_list;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -16,13 +13,17 @@ public class DomainList implements Cloneable{
     private List<String> domainList;
     final private String path;
 
-    public DomainList(List<String> readyList, String path) {
+    public DomainList(List<String> readyList, String path) throws IOException {
+        if(!Files.exists(Paths.get(path), LinkOption.NOFOLLOW_LINKS))
+            Files.createFile(Paths.get(path));
         this.domainList = readyList;
         this.path = path;
         toFile();
     }
 
-    public DomainList(String path) {
+    public DomainList(String path) throws IOException {
+        if(!Files.exists(Paths.get(path), LinkOption.NOFOLLOW_LINKS))
+            Files.createFile(Paths.get(path));
         this.path = path;
         fromFile();
     }
@@ -51,8 +52,10 @@ public class DomainList implements Cloneable{
         return this;
     }
 
-    public boolean toFile(){
+    public boolean toFile() throws IOException {
         Path file = Paths.get(path);
+        if(!Files.exists(file, LinkOption.NOFOLLOW_LINKS))
+            Files.createFile(file);
         try {
             Files.write(file, domainList, Charset.forName("UTF-8"), StandardOpenOption.TRUNCATE_EXISTING);
             return true;
@@ -61,8 +64,10 @@ public class DomainList implements Cloneable{
         }
     }
 
-    public boolean fromFile(){
+    public boolean fromFile() throws IOException {
         Path file = Paths.get(path);
+        if(!Files.exists(file, LinkOption.NOFOLLOW_LINKS))
+            Files.createFile(file);
         try {
             domainList = Files.readAllLines(file, Charset.forName("UTF-8"));
             return true;
@@ -96,7 +101,12 @@ public class DomainList implements Cloneable{
         for(String s : domainList)
             domainsCopy.add(s);
 
-        return new DomainList(domainsCopy,path);
+        try {
+            return new DomainList(domainsCopy,path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private boolean isCorrectDomain(String string) {

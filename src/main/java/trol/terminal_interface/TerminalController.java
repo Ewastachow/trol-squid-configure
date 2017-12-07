@@ -20,7 +20,11 @@ public class TerminalController {
 
     public TerminalController(DomainList blackList){
         this.blackList = blackList;
-        this.blackList.fromFile();
+        try {
+            this.blackList.fromFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         scanner=new Scanner(System.in);
     }
 
