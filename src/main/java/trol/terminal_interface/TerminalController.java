@@ -2,6 +2,7 @@ package trol.terminal_interface;
 
 import trol.domain.filter.domain_list.DomainList;
 import trol.domain.terminal.TerminalExecute;
+import trol.exceptions.IncorrectDomainException;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -51,12 +52,12 @@ public class TerminalController {
         System.out.println("Please type domain URL to add:");
         String answer = scanner.nextLine();
         try {
-            System.out.println(
-                    blackList.addDomain(answer) ? "Added" : "Bad domain URL"
-            );
+            blackList.addDomain(answer);
+            System.out.println("Added");
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println("Cant write to file");
+        } catch (IncorrectDomainException e) {
+            System.out.println("Incorrect domain");
         }
         return this;
     }
@@ -65,18 +66,22 @@ public class TerminalController {
         System.out.println("Please type domain URL to remove:");
         String answer = scanner.nextLine();
         try {
-            System.out.println(
-                    blackList.removeDomain(answer) ? "Removed" : "Bad domain URL or domain not in list"
-            );
+            blackList.removeDomain(answer);
+            System.out.println("Removed");
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println("Cant write to file");
+        } catch (IncorrectDomainException e) {
+            System.out.println("Incorrect domain");
         }
         return this;
     }
 
     public TerminalController showBlackList(){
-        blackList.getDomainList().forEach(System.out::println);
+        try {
+            blackList.getDomainList().forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 

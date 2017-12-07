@@ -2,6 +2,8 @@ package trol.service;
 
 import org.springframework.stereotype.Service;
 import trol.domain.filter.domain_list.DomainList;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,12 @@ public class BlackListServiceImpl implements BlackListService {
         List<String> fakeList = new ArrayList<>();
         fakeList.add(".facebook.com");
         fakeList.add(".google.com");
-        DomainList domainList = new DomainList(fakeList, "C:\\lista");
+        DomainList domainList = null;
+        try {
+            domainList = new DomainList(fakeList, "C:\\lista");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return domainList;
     }
 
