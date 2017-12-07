@@ -1,14 +1,15 @@
 package trol.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+@Controller
 public class MainController {
     @RequestMapping("/")
-    String index(ModelMap model) {
-
-        model.addAttribute("fullName", "Lama");
-        return "index";
-
+     ModelAndView index(){
+        ModelAndView model = new ModelAndView("index");
+        return model;
     }
 }

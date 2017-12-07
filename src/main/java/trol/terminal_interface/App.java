@@ -1,6 +1,6 @@
 package trol.terminal_interface;
 
-import trol.model.filter.domain_list.DomainList;
+import trol.domain.filter.domain_list.DomainList;
 
 public class App {
 

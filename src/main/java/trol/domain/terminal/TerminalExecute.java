@@ -1,4 +1,4 @@
-package trol.model.terminal;
+package trol.domain.terminal;
 
 import java.io.BufferedReader;
 import java.io.IOException;

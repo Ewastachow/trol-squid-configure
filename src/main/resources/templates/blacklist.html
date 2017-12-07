@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Black list</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="box col-md-6 col-md-offset-3">
+            <div class="stormpath-header">
+                <img src="http://stormpath.com/images/template/logo-nav.png"/>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Domain</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item: ${blacklist.getDomainList()}">
+                    <td th:text="${item}">Empty</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package trol.model.filter.domain_list;
+package trol.domain.filter.domain_list;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
