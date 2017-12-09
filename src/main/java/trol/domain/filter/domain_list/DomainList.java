@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 public class DomainList implements Cloneable{
 
     private List<String> domainList;
+
     final private Path path;
 
     public DomainList(List<String> readyList, String path) throws IOException {
