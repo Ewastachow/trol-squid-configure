@@ -9,6 +9,14 @@
             <div class="stormpath-header">
                 <img src="http://stormpath.com/images/template/logo-nav.png"/>
             </div>
+
+            <div>
+                <form action="#" th:action="@{/blacklist}" method="post">
+                    <p>Add domain: <input type="text" /></p>
+                    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+                </form>
+            </div>
+
             <table>
                 <thead>
                 <tr>
@@ -16,7 +24,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="item: ${blacklist.getDomainList()}">
+                <tr th:each="item: ${blacklist}">
                     <td th:text="${item}">Empty</td>
                 </tr>
                 </tbody>
