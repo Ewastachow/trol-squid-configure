@@ -9,29 +9,25 @@ import java.util.List;
 
 @Service("blackListSerevice")
 public class BlackListServiceImpl implements BlackListService {
-    //private DomainList domainList = new DomainList();
+    List<String> blacklist = getFakeList();
 
-    private DomainList getFakeList(){
+
+    private List<String> getFakeList(){
         List<String> fakeList = new ArrayList<>();
         fakeList.add(".facebook.com");
         fakeList.add(".google.com");
-        DomainList domainList = null;
-        try {
-            domainList = new DomainList(fakeList, "/etc/squid/black-list.acl");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return domainList;
+        return fakeList;
     }
 
     @Override
-    public DomainList getBlackList() {
-        DomainList blackList = null;
-        try {
-            blackList = new DomainList("/etc/squid/black-list.acl");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return blackList;
+    public List<String> getBlackList() {
+        return blacklist;
     }
+
+    @Override
+    public void addToBlackList(String domain){
+        blacklist.add(domain);
+    }
+
+
 }
