@@ -1,6 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Black list</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="list.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -9,15 +11,27 @@
             <div class="stormpath-header">
                 <img src="http://stormpath.com/images/template/logo-nav.png"/>
             </div>
+
+            <div>
+                <form action="#" th:action="@{/blacklist}" th:object="${blacklist}" method="post">
+                    <p>Add domain: <input type="text" th:field="*{newDomain}" /></p>
+                    <p th:if="${#fields.hasErrors('newDomain')}" th:errors="*{newDomain}">Error</p>
+                    <p><button type="submit">Add</button></p>
+                </form>
+            </div>
+
             <table>
                 <thead>
                 <tr>
                     <th>Domain</th>
                 </tr>
+                <tr></tr>
                 </thead>
                 <tbody>
-                <tr th:each="item: ${blacklist.getDomainList()}">
-                    <td th:text="${item}">Empty</td>
+                <tr th:each="item : ${blacklist.getDomains()}">
+                    <td class="domain" th:text="${item}">Empty</td>
+                    <td><button class="removedomain" th:value="${item}">Remove</button></td>
+                    <td><button class="editdomain" th:value="${item}">Edit</button></td>
                 </tr>
                 </tbody>
             </table>
