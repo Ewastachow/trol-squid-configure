@@ -8,7 +8,8 @@ public class AclTime extends Acl {
 
     @Override
     public String getConfigString() {
-        return super.configString;
+        //TODO: Implement
+        return null;
     }
 
 }
