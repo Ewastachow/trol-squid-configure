@@ -3,18 +3,23 @@ package trol.domain.trol_api;
 import trol.domain.squid.SquidConf;
 import trol.domain.trol_api.domain.DomainsFile;
 import trol.domain.trol_api.domain.Mode;
+import trol.domain.trol_api.header.Headers;
+import trol.domain.trol_api.header.TransmisionType;
+import trol.domain.trol_api.user.User;
+import trol.domain.trol_api.word.WordsFile;
 
 import java.time.LocalTime;
 import java.util.List;
 
 public class TrolAPI {
-    SquidConf squidConf;
+    private SquidConf squidConf;
 
     public TrolAPI() {
         squidConf = new SquidConf();
 
     }
-//###################### DOMAINS #############################
+
+    //###################### DOMAINS #############################
 
     public List<DomainsFile> getDomainsFileList(){
         // Zwraca Listę plików które przechowują zapisane domany możliwe do blokowania
@@ -58,9 +63,96 @@ public class TrolAPI {
         return false;
     }
 
-//###################### DOMAINS #############################
+    //###################### DOMAINS #############################
+    //###################### Headers #############################
 
+    public List<Headers> getHeadersList() {
+        //TODO: Implement
+        return null;
+    }
 
+    public boolean changeHeaderBlockedMode(TransmisionType mode, boolean block) {
+        //TODO: Implement
+        return false;
+    }
 
+    public boolean changeHeaderTime(TransmisionType mode, LocalTime newTimeBegin, LocalTime newTimeEnd) {
+        //TODO: Implement
+        return false;
+    }
+
+    //###################### Headers #############################
+    // ###################### Users #############################
+
+    public List<User> getUsersList() {
+        //TODO: Implement
+        return null;
+    }
+
+    public boolean createUser(String address){
+        //TODO: Implement
+        return false;
+    }
+
+    public boolean deleteUser(String address){
+        //TODO: Implement
+        return false;
+    }
+
+    public boolean changeUserBlockedMode(String address, boolean block) {
+        //TODO: Implement
+        return false;
+    }
+
+    public boolean changeUserTime(String address, LocalTime newTimeBegin, LocalTime newTimeEnd) {
+        //TODO: Implement
+        return false;
+    }
+
+    // ###################### Users #############################
+    // ###################### Words #############################
+
+    public List<WordsFile> getWordsFileList(){
+        // Zwraca Listę plików które przechowują blokowane słowa
+        //TODO: Implement
+        return null;
+    }
+
+    public WordsFile getWordsListFromWordsFile(String wordsListName){
+        //TODO: Implement
+        return null;
+    }
+
+    public boolean createNewWordsList(String wordsListName){
+        //TODO: Impement
+        return false;
+    }
+
+    public boolean createWordInList(String wordsListName, String word){
+        //TODO: Implement
+        return false;
+    }
+
+    public boolean deleteWordFromList(String wordsListName, String word){
+        //TODO: Implement
+        return false;
+    }
+
+    public boolean deleteWordsList(String wordsListName){
+        //TODO: Implement
+        return false;
+    }
+
+    public boolean changeBlockModeInWordsList(String wordsListName, boolean block){
+        //TODO: Implement
+        return false;
+    }
+
+    public boolean changeTimeInWordsList(String wordsListName, LocalTime newTimeBegin, LocalTime newTimeEnd){
+        //TODO: Implement
+        return false;
+    }
+
+    // ###################### Words #############################
 
 }
