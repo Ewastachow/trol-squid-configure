@@ -18,6 +18,7 @@ public class SquidConf {
 
 // To tak, musimy wczytać plik squid.conf, i po kolei dla każdej linijki, dzielimy na tockeny, w sensie dla każdej linii tworzymy List<String> - czyli listę wyrazów
 
+
     private void createLineObject(List<String> words){
         if(words.get(0).toLowerCase().equals("acl")){
             if(words.get(2).toLowerCase().equals("dstdomain")){
