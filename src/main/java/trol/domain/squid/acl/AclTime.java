@@ -1,8 +1,10 @@
 package trol.domain.squid.acl;
 
+import java.time.LocalTime;
+
 public class AclTime extends Acl {
-    // aclType = TIME
-    // cos z czasem co nam bd generowalo przedzia czasu
+    LocalTime timeBegin;
+    LocalTime timeEnd;
 
     @Override
     public String getConfigString() {
