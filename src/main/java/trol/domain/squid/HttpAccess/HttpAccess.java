@@ -5,7 +5,7 @@ import trol.domain.squid.acl.Acl;
 import trol.domain.squid.acl.AclTime;
 
 public class HttpAccess implements ConfigElem{
-    String configString;
+//    String configString;
     HttpAccessType accessType;
     Acl alc;
     boolean isTimed;
@@ -13,6 +13,7 @@ public class HttpAccess implements ConfigElem{
 
     @Override
     public String getConfigString() {
+        //TODO: Implement
         return null;
     }
 }
