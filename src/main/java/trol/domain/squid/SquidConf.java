@@ -3,6 +3,7 @@ package trol.domain.squid;
 import trol.domain.squid.HttpAccess.HttpAccess;
 import trol.domain.squid.acl.Acl;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -16,9 +17,14 @@ public class SquidConf {
     Behavior behavior;
 
 // To tak, musimy wczytać plik squid.conf, i po kolei dla każdej linijki, dzielimy na tockeny, w sensie dla każdej linii tworzymy List<String> - czyli listę wyrazów
-
+//TODO: Napisać metody wczytujące plik, czytajce po lini
     private List<String> createWordsListFromLine(String line){
         //TODO: Implement -> Przyjmóje Stringa z linijką z squid.conf, zwraca listę wyrazów w tym stringu
+        return null;
+    }
+
+    private List<String> createLineListFromFile(Files file){
+        //TODO: Implement -> Przyjmóje plik, przerabia go na listę linii
         return null;
     }
 
