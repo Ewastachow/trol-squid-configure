@@ -2,6 +2,7 @@ package trol.domain.squid.acl;
 
 import trol.domain.squid.util.FileHelper;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -14,7 +15,7 @@ public class AclDomainList extends Acl{
     List<String> content;
 
     // Konstruktor do tworzenia jeśli tworzymy podczas zczytywania z pliku
-    public AclDomainList(String name, String pathString) {
+    public AclDomainList(String name, String pathString) throws IOException {
         aclName = name;
         path = Paths.get(pathString);
         content = FileHelper.createLineListFromFile(pathString);
