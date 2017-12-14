@@ -35,4 +35,9 @@ public class FileHelper {
         //TODO: Implement -> Przyjmóje Stringa z linijką z squid.conf, zwraca listę wyrazów w tym stringu
         return null;
     }
+
+    public static String createStringFromWordsList(List<String> words){
+        //TODO: Implement -> Przeciwieństwo do createWordsListFromLine(String line) - przyjmuje listę słów, zwraca stringa oddzielając go spacjami
+        return null;
+    }
 }

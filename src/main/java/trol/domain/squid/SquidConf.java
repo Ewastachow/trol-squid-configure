@@ -21,26 +21,25 @@ public class SquidConf {
 
     private void createLineObject(List<String> words){
         if(words.get(0).toLowerCase().equals("acl")){
-            if(words.get(2).toLowerCase().equals("dstdomain")){
-                //TODO: Co wtedy?
-            }else if(words.get(2).toLowerCase().equals("dstdomain")){
-                //TODO: Co wtedy?
-            }else if(words.get(2).toLowerCase().equals("req_mime_type") || words.get(2).toLowerCase().equals("rep_mime_type")){
-                //TODO: Co wtedy?
-            }else if(words.get(2).toLowerCase().equals("time")){
-                //TODO: Co wtedy?
-            }else if(words.get(2).toLowerCase().equals("user")){ //TODO: zmienić user, jaki jest typ dla adresu ip???
-                //TODO: Co wtedy?
-            }else{
-                // TODO  jeżeli nie pasuje zamieniamy spowrotem na stringa i wrzucamy do innych acli jako string
-            }
+            aclList.add(Acl.createAclFromTokens(words));
         }else if(words.get(0).toLowerCase().equals("http_port")){
-            //TODO: Co wtedy?
+            //TODO: Co wtedy? - port = words.toString - tylko trzeba jakoś spacje dodać
         }else if(words.get(0).toLowerCase().equals("http_access") || words.get(0).toLowerCase().equals("http_reply_access") ){
-            //TODO: Co wtedy?
+            httpAccessList.add(createHttpAccessFromTokens(words));
         }else{
             //TODO: Jeśli nie pasuje to zamieniamy na stringa i wrzucamy do footer
         }
+    }
+
+    private Acl getAclFromAclName(String name){
+        //TODO iteruje po liście Acl-ek i zwraca referencję do acl-ki o tej nazwie, jeżeli nie znajdzie to niech np. wyrzuca jakiś nasz exception
+        return null;
+    }
+
+    private HttpAccess createHttpAccessFromTokens(List<String> words){
+        // Konstruktor od words i potem wywołanie iteracji i dodanie referencji do acl
+        //TODO: Implement ->  rzuca wyjątek jak nie ten typ- tylko co -, a w funkcji w której było wywołane dodaje te referencje do listy
+        return null;
     }
 
 }
