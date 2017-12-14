@@ -80,4 +80,21 @@ public class FileHelperTest {
         String result = FileHelper.createStringFromWordsList(null);
         Assert.assertEquals("",result);
     }
+
+    @Test
+    public void removeQuotationMarks() {
+        String path = "\"some/path/file\"";
+        Assert.assertEquals("some/path/file",FileHelper.removeQuotationMarks(path));
+    }
+
+    @Test
+    public void removeQuotationMarksEmptyString() {
+        String path = "";
+        Assert.assertEquals("",FileHelper.removeQuotationMarks(path));
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void removeQuotationMarksForNull() {
+        FileHelper.removeQuotationMarks(null);
+    }
 }

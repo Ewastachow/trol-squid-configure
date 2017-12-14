@@ -56,8 +56,7 @@ public class FileHelper {
         return builder.toString();
     }
 
-    public static String removeQuotationMarks(String string){
-        //TODO: jak jest string "/etc/lama" to żeby zostało /etc/lama
-        return null;
+    public static String removeQuotationMarks(String string) {
+        return string.replace("\"", "");
     }
 }
