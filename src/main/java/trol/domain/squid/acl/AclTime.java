@@ -3,9 +3,9 @@ package trol.domain.squid.acl;
 import java.time.LocalTime;
 
 public class AclTime extends Acl {
-    String aclName;
-    LocalTime timeBegin;
-    LocalTime timeEnd;
+    private String aclName;
+    private LocalTime timeBegin;
+    private LocalTime timeEnd;
 
     @Override
     public String getConfigString() {
