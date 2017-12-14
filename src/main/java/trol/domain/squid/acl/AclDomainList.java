@@ -24,11 +24,12 @@ public class AclDomainList extends Acl{
     }
 
     public AclDomainList(List<String> words) throws IOException {
+        //TODO: co jak na początku jest hash? wtedy pewnie bd words od innych wartości np, parametr index start,
+        //TODO: i wteedy przesuniemy o 1 czyli bd words.get(1+param) gdzie param to bd 0 - niezakomentowany lub 1 - zakomentowany
         //TODO: Implement, czy powinno rzucac wyjątek jak coś bd nie tak???
         aclName = words.get(1);
-        path = Paths.get(words.get(4));
+        path = Paths.get(FileHelper.removeQuotationMarks(words.get(4)));
         content = FileHelper.createLineListFromFile(path.toString());
-        //TODO: filehel[er: usunąć " i "  z words(4)
         //TODO: filehelper: jedna z metod, żamiast od string to od path
         //TODO: resztę ustawiamy po wystąpieniu w w http-access
         //TODO: czy dodać tu też referencję do http_ACCESS
@@ -38,6 +39,6 @@ public class AclDomainList extends Acl{
 
     @Override
     public String getConfigString() {
-        return "acl " + aclName + " dstdomain \"" + path.toString() +"\"" ;
+        return ((isCommented) ? "# " : "") + "acl " + aclName + " dstdomain \"" + path.toString() +"\"" ;
     }
 }
