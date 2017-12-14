@@ -14,7 +14,7 @@ public class SquidConf {
     String httpPortString;
     List<HttpAccess> httpAccessList;
     List<String> footer;
-    Behavior behavior;
+    Behavior behavior; //TODO: Co ja do cholery miałam na myśli pisząc tu behavior???
 
 // To tak, musimy wczytać plik squid.conf, i po kolei dla każdej linijki, dzielimy na tockeny, w sensie dla każdej linii tworzymy List<String> - czyli listę wyrazów
 
