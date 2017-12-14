@@ -23,6 +23,10 @@ public class AclDomainList extends Acl{
         isCommented = true;
     }
 
+    public AclDomainList(List<String> words){
+        //TODO: Implement, czy powinno rzucac wyjątek jak coś bd nie tak???
+    }
+
     // Konstruktor jeżeli modyfikujemy w programie
 
     @Override
