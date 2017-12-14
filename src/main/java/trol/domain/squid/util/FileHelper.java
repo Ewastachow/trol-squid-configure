@@ -8,6 +8,7 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FileHelper {
@@ -32,12 +33,26 @@ public class FileHelper {
     }
 
     public static List<String> createWordsListFromLine(String line){
-        //TODO: Implement -> Przyjmóje Stringa z linijką z squid.conf, zwraca listę wyrazów w tym stringu
-        return null;
+        List<String> result = new ArrayList<>();
+        result.addAll(Arrays.asList(line.split("[\r \t]+")));
+        return result;
     }
 
+    /**
+     *
+     * @param words
+     * @return "" if words is null or words length is equal to zero
+     */
     public static String createStringFromWordsList(List<String> words){
-        //TODO: Implement -> Przeciwieństwo do createWordsListFromLine(String line) - przyjmuje listę słów, zwraca stringa oddzielając go spacjami
-        return null;
+        if(words == null || words.size() == 0)
+            return "";
+
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < words.size()-1; ++i) {
+            builder.append(words.get(i));
+            builder.append(" ");
+        }
+        builder.append(words.get(words.size()-1));
+        return builder.toString();
     }
 }
