@@ -18,6 +18,10 @@ public class FileHelper {
         return Files.readAllLines(filePath, Charset.forName("UTF-8"));
     }
 
+    public static List<String> createLineListFromPath(Path path) throws IOException {
+        return Files.readAllLines(path, Charset.forName("UTF-8"));
+    }
+
     public static List<String> createLineListFromFileWithoutBlank(String path) throws IOException {
         Path filePath = Paths.get(path);
         List<String> result = new ArrayList<>();
