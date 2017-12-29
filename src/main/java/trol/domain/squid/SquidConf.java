@@ -32,7 +32,7 @@ public class SquidConf {
         //TODO Iteracja po liscie http_access i dodawanie referencji do acl i to samo na odwrot
     }
 
-    public void saveToFile(){
+    public void saveToFile() throws IOException {
         //TODO kolejnosc http accesow!!!! zwrocic na to uwage
         List<String> result = new ArrayList<>();
         result.addAll(portsAclList);

@@ -1,8 +1,13 @@
 package trol.domain.squid.util;
 
+
 import org.junit.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -96,5 +101,100 @@ public class FileHelperTest {
     @Test (expected = NullPointerException.class)
     public void removeQuotationMarksForNull() {
         FileHelper.removeQuotationMarks(null);
+    }
+
+    @Test
+    public void saveStringAsFileCreation() throws IOException {
+        Path p = Paths.get("testsaveStringAsFile.txt");
+        FileHelper.saveStringAsFile(p,"String\nto\ntest");
+        List<String> l = Files.readAllLines(p);
+        Assert.assertEquals(3,l.size());
+        Assert.assertEquals("String",l.get(0));
+        Assert.assertEquals("to",l.get(1));
+        Assert.assertEquals("test",l.get(2));
+        Files.delete(p);
+    }
+
+    @Test
+    public void saveStringAsFileTruncate() throws IOException {
+        Path p = Paths.get("testsaveStringAsFile.txt");
+        List<String> l = Arrays.asList("Should","Not","Exist");
+        Files.write(p,l);
+        l = Files.readAllLines(p);
+        Assert.assertEquals(3,l.size());
+        Assert.assertEquals("Should",l.get(0));
+        Assert.assertEquals("Not",l.get(1));
+        Assert.assertEquals("Exist",l.get(2));
+
+        FileHelper.saveStringAsFile(p,"String\nto\ntest");
+        l = Files.readAllLines(p);
+
+        Assert.assertEquals(3,l.size());
+        Assert.assertEquals("String",l.get(0));
+        Assert.assertEquals("to",l.get(1));
+        Assert.assertEquals("test",l.get(2));
+        Files.delete(p);
+    }
+
+    @Test
+    public void saveStringListAsFileCreation() throws IOException {
+        Path p = Paths.get("testsaveStringAsFile.txt");
+        List<String> strings = Arrays.asList("String","to","test");
+        FileHelper.saveStringListAsFile(p,strings);
+        List<String> l = Files.readAllLines(p);
+        Assert.assertEquals(3,l.size());
+        Assert.assertEquals("String",l.get(0));
+        Assert.assertEquals("to",l.get(1));
+        Assert.assertEquals("test",l.get(2));
+        Files.delete(p);
+    }
+
+    @Test
+    public void saveStringListAsFileTruncate() throws IOException {
+        Path p = Paths.get("testsaveStringAsFile.txt");
+        List<String> l = Arrays.asList("Should","Not","Exist");
+        Files.write(p,l);
+        l = Files.readAllLines(p);
+        Assert.assertEquals(3,l.size());
+        Assert.assertEquals("Should",l.get(0));
+        Assert.assertEquals("Not",l.get(1));
+        Assert.assertEquals("Exist",l.get(2));
+
+        List<String> strings = Arrays.asList("String","to","test");
+        FileHelper.saveStringListAsFile(p,strings);
+        l = Files.readAllLines(p);
+
+        Assert.assertEquals(3,l.size());
+        Assert.assertEquals("String",l.get(0));
+        Assert.assertEquals("to",l.get(1));
+        Assert.assertEquals("test",l.get(2));
+        Files.delete(p);
+
+    }
+
+    @Test
+    public void getPathStringFromIncludeLineCorrect() {
+        Assert.assertEquals("/etc/some/file",
+                FileHelper.getPathStringFromIncludeLine(".Include</etc/some/file>"));
+    }
+
+    @Test
+    public void getPathStringFromIncludeLineIncorrectBegin() {
+        Assert.assertEquals(null,
+                FileHelper.getPathStringFromIncludeLine("Include</etc/some/file>"));
+        Assert.assertEquals(null,
+                FileHelper.getPathStringFromIncludeLine(".include</etc/some/file>"));
+        Assert.assertEquals(null,
+                FileHelper.getPathStringFromIncludeLine(".Includ</etc/some/file>"));
+    }
+
+    @Test
+    public void getPathStringFromIncludeLineIncorrectBrackets() {
+        Assert.assertEquals(null,
+                FileHelper.getPathStringFromIncludeLine(".Include>/etc/some/file<"));
+        Assert.assertEquals(null,
+                FileHelper.getPathStringFromIncludeLine(".Include/etc/some/file>"));
+        Assert.assertEquals(null,
+                FileHelper.getPathStringFromIncludeLine(".Include</etc/some/file"));
     }
 }

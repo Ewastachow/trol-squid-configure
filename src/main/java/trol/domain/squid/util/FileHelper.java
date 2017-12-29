@@ -3,13 +3,11 @@ package trol.domain.squid.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class FileHelper {
 
@@ -59,25 +57,37 @@ public class FileHelper {
         return builder.toString();
     }
 
+    /**
+     * NullPointerException raised in case of null parameter
+     */
     public static String removeQuotationMarks(String string) {
         return string.replace("\"", "");
     }
 
-    public static void saveStringAsFile(Path path, String string) {
-        //TODO zakladam ze string zawiera w sb juz np entery
-        //TODO jezeli uwazasz ze zamiast stringa z enterami lepsza by byla lista stringow jako lista linii pliku to zmien
-        //TODO jezeli uwazasz ze jeszcze inna forma bd lepsza to tez zmien
-        //TODO i zapisujemy (nadpisujemy, w pliku ma byc tylko zawartosc stringa) do pliku wskazanego w path, jak nie ma to tworzymy go
+    /**
+     *
+     * @param path to file create if necessary
+     * @param string with line breaks already
+     */
+    public static void saveStringAsFile(Path path, String string) throws IOException {
+        List<String> lines = Arrays.asList(string.split("\\r\\n|[\\r\\n]"));
+        Files.write(path, lines, Charset.forName("UTF-8"));
     }
 
-    public static void saveStringListAsFile(Path path, List<String> stringList) {
-        //TODO i zapisujemy (nadpisujemy, w pliku ma byc tylko zawartosc listy) do pliku wskazanego w path, jak nie ma to tworzymy go
+    public static void saveStringListAsFile(Path path, List<String> stringList) throws IOException {
+        Files.write(path, stringList, Charset.forName("UTF-8"));
     }
 
+    /**
+     * Accept include lines in format .Include<path>
+     * @param includeLine
+     * @return path from include if includeLine had correct format, otherwise null
+     */
     public static String getPathStringFromIncludeLine(String includeLine){
-        // TODO includeLine wyglada tak: .Include</etc/dansguardian/anotherbannedurllist>
-        // TODO chcemy wycignac String patha z tego czyli w tym przypadku rezultat to: /etc/dansguardian/anotherbannedurllist
-        // TODO jeeli string posiada inna forme to zwracamy null
-        return null;
+        String rex = "^.Include<.+>$";
+        if(includeLine.matches(rex))
+            return includeLine.substring(9,includeLine.length()-1);
+        else
+            return null;
     }
 }
