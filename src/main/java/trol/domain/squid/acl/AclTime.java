@@ -9,6 +9,7 @@ public class AclTime extends Acl {
     private LocalTime timeEnd;
 
     public AclTime(List<String> words){
+        super();
         //TODO: Implement, czy powinno rzucac wyjątek jak coś bd nie tak???
         aclName = words.get(1);
         aclType = AclType.TIME;

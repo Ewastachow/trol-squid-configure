@@ -9,6 +9,7 @@ public class AclHeader extends Acl {
     private String param; //TODO: acl StreamingRequest1 req_mime_type -i ^video/x-ms-asf$ -> co z tym "-i"???
 
     public AclHeader(List<String> words){
+        super();
         aclName = words.get(1);
         blockedHeader = words.get(4);
         headerType = (words.get(2).equals("req_mime_type")) ? HeaderType.REQ_MIME_TYPE : HeaderType.REP_MIME_TYPE;

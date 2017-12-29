@@ -8,6 +8,7 @@ public class AclUser extends Acl{
 
 
     public AclUser(List<String> words){
+        super();
         aclType = AclType.USER;
         //TODO: Implement, czy powinno rzucac wyjątek jak coś bd nie tak???
     }

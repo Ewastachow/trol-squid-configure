@@ -15,6 +15,7 @@ public class AclDomainList extends Acl{
 
     // Konstruktor do tworzenia jeśli tworzymy podczas zczytywania z pliku
     public AclDomainList(String name, String pathString) throws IOException {
+        super();
         aclName = name;
         path = Paths.get(pathString);
         content = FileHelper.createLineListFromFile(pathString);
@@ -24,6 +25,7 @@ public class AclDomainList extends Acl{
     }
 
     public AclDomainList(List<String> words) throws IOException {
+        super();
         //TODO: co jak na początku jest hash? wtedy pewnie bd words od innych wartości np, parametr index start,
         //TODO: i wteedy przesuniemy o 1 czyli bd words.get(1+param) gdzie param to bd 0 - niezakomentowany lub 1 - zakomentowany
         //TODO: Implement, czy powinno rzucac wyjątek jak coś bd nie tak???

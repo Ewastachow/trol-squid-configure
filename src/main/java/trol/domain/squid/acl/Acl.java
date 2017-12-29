@@ -25,4 +25,8 @@ public abstract class Acl implements ConfigElem{
     public AclType getAclType() {
         return aclType;
     }
+
+    public List<HttpAccess> getAccessesList() {
+        return accessesList;
+    }
 }

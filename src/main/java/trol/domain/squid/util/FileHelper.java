@@ -73,4 +73,11 @@ public class FileHelper {
     public static void saveStringListAsFile(Path path, List<String> stringList) {
         //TODO i zapisujemy (nadpisujemy, w pliku ma byc tylko zawartosc listy) do pliku wskazanego w path, jak nie ma to tworzymy go
     }
+
+    public static String getPathStringFromIncludeLine(String includeLine){
+        // TODO includeLine wyglada tak: .Include</etc/dansguardian/anotherbannedurllist>
+        // TODO chcemy wycignac String patha z tego czyli w tym przypadku rezultat to: /etc/dansguardian/anotherbannedurllist
+        // TODO jeeli string posiada inna forme to zwracamy null
+        return null;
+    }
 }

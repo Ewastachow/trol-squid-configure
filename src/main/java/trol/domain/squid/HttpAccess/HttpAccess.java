@@ -18,13 +18,18 @@ public class HttpAccess implements ConfigElem{
     public HttpAccess(List<String> words, List<Acl> aclList){
         accessType = (words.get(1).equals("allow")) ? HttpAccessType.ALLOW : HttpAccessType.DENY;
         aclList.forEach(e -> {
-            if(e.getAclName().equals(words.get(2)) && !e.getAclType().equals(AclType.TIME)) acl = e;
+            if(e.getAclName().equals(words.get(2)) && !e.getAclType().equals(AclType.TIME)){
+                acl = e;
+                e.getAccessesList().add(this);
+
+            }
         });
         if(words.size()>3 && !acl.getAclType().equals(AclType.HEADER))
             aclList.forEach(e -> {
                 if(e.getAclName().equals(words.get(3)) && e.getAclType().equals(AclType.TIME) && e.getClass().equals(AclTime.class)){
                     isTimed = true;
                     time = (AclTime)e;
+                    e.getAccessesList().add(this);
                 }
             });
         else if(words.size()>3 && acl.getAclType().equals(AclType.HEADER))
