@@ -6,6 +6,8 @@ import trol.domain.squid.util.FileHelper;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SquidConf {
@@ -17,8 +19,17 @@ public class SquidConf {
     List<String> footer;
     Behavior behavior; //TODO: Co ja do cholery miałam na myśli pisząc tu behavior???
 
-// To tak, musimy wczytać plik squid.conf, i po kolei dla każdej linijki, dzielimy na tockeny, w sensie dla każdej linii tworzymy List<String> - czyli listę wyrazów
-
+    public SquidConf(String path) throws IOException {
+        this.path = Paths.get(path);
+        portsAclList = new ArrayList<>();
+        aclList = new ArrayList<>();
+        httpAccessList = new ArrayList<>();
+        footer = new ArrayList<>();
+        List<String> fileLines = FileHelper.createLineListFromPath(this.path);
+//        fileLines.forEach(e -> createLineObject(FileHelper.createWordsListFromLine(e)));
+        for(String i: fileLines)
+            createLineObject(FileHelper.createWordsListFromLine(i));
+    }
 
     private void createLineObject(List<String> words) throws IOException {
         //TODO A co jak pierwszy znak to #????? trzeba coś z tym zrobić !!!!!
@@ -37,7 +48,6 @@ public class SquidConf {
         }else if(words.get(0).toLowerCase().equals("http_port")){
             httpPortString = FileHelper.createStringFromWordsList(words);
         }else if(words.get(0).toLowerCase().equals("http_access") || words.get(0).toLowerCase().equals("http_reply_access") ){
-
             httpAccessList.add(createHttpAccessFromTokens(words));
         }else{
             footer.add(FileHelper.createStringFromWordsList(words));

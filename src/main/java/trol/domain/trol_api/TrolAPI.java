@@ -15,7 +15,7 @@ public class TrolAPI {
     private SquidConf squidConf;
 
     public TrolAPI() {
-        squidConf = new SquidConf();
+//        squidConf = new SquidConf();
 
     }
 

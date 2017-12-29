@@ -28,7 +28,7 @@ public class AclDomainList extends Acl{
         //TODO: i wteedy przesuniemy o 1 czyli bd words.get(1+param) gdzie param to bd 0 - niezakomentowany lub 1 - zakomentowany
         //TODO: Implement, czy powinno rzucac wyjątek jak coś bd nie tak???
         aclName = words.get(1);
-        path = Paths.get(FileHelper.removeQuotationMarks(words.get(4)));
+        path = Paths.get(FileHelper.removeQuotationMarks(words.get(3)));
         content = FileHelper.createLineListFromPath(path);
         //TODO: filehelper: jedna z metod, żamiast od string to od path
         //TODO: resztę ustawiamy po wystąpieniu w w http-access
