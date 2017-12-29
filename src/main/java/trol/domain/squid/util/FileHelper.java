@@ -68,6 +68,9 @@ public class FileHelper {
         //TODO jezeli uwazasz ze zamiast stringa z enterami lepsza by byla lista stringow jako lista linii pliku to zmien
         //TODO jezeli uwazasz ze jeszcze inna forma bd lepsza to tez zmien
         //TODO i zapisujemy (nadpisujemy, w pliku ma byc tylko zawartosc stringa) do pliku wskazanego w path, jak nie ma to tworzymy go
+    }
 
+    public static void saveStringListAsFile(Path path, List<String> stringList) {
+        //TODO i zapisujemy (nadpisujemy, w pliku ma byc tylko zawartosc listy) do pliku wskazanego w path, jak nie ma to tworzymy go
     }
 }

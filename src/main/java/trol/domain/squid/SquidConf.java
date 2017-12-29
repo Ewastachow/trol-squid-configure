@@ -31,6 +31,11 @@ public class SquidConf {
             createLineObject(FileHelper.createWordsListFromLine(i));
     }
 
+    public void saveToFile(){
+        //TODO zapisuje aktualna konfiguracje do pliku
+
+    }
+
     private void createLineObject(List<String> words) throws IOException {
         //TODO A co jak pierwszy znak to #????? trzeba coś z tym zrobić !!!!!
         if(words.get(0).toLowerCase().equals("acl")){
