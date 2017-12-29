@@ -29,11 +29,18 @@ public class SquidConf {
 //        fileLines.forEach(e -> createLineObject(FileHelper.createWordsListFromLine(e)));
         for(String i: fileLines)
             createLineObject(FileHelper.createWordsListFromLine(i));
+        //TODO Iteracja po liscie http_access i dodawanie referencji do acl i to samo na odwrot
     }
 
     public void saveToFile(){
-        //TODO zapisuje aktualna konfiguracje do pliku
-
+        //TODO kolejnosc http accesow!!!! zwrocic na to uwage
+        List<String> result = new ArrayList<>();
+        result.addAll(portsAclList);
+        aclList.forEach(e -> result.add(e.getConfigString()));
+        result.add(httpPortString);
+        httpAccessList.forEach(e -> result.add(e.getConfigString()));
+        result.addAll(footer);
+        FileHelper.saveStringListAsFile(path,result);
     }
 
     private void createLineObject(List<String> words) throws IOException {

@@ -12,6 +12,7 @@ public class AclHeader extends Acl {
         aclName = words.get(1);
         blockedHeader = words.get(4);
         headerType = (words.get(2).equals("req_mime_type")) ? HeaderType.REQ_MIME_TYPE : HeaderType.REP_MIME_TYPE;
+        aclType = AclType.HEADER;
 
         //TODO: Implement, czy powinno rzucac wyjątek jak coś bd nie tak???
     }
