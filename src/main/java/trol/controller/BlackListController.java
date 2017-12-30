@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import trol.model.DomainsList.DomainsList;
+import trol.model.DomainsListOld;
 import trol.model.DomainsList.DomainsListUpdate;
 import trol.service.DomainsService;
 import javax.validation.Valid;
@@ -22,13 +22,13 @@ public class BlackListController {
     public ModelAndView getBlackList() {
         ModelAndView model = new ModelAndView();
         model.addObject("blacklist",
-                new DomainsList(domainsService.getDomainsList()));
+                new DomainsListOld(domainsService.getDomainsList()));
         model.setViewName("blacklist");
         return model;
     }
 
     @RequestMapping(value={"/blacklist"}, method = RequestMethod.POST)
-    public String addToBlackList(@Valid DomainsList blacklist, BindingResult bindingResult){
+    public String addToBlackList(@Valid DomainsListOld blacklist, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             //TODO add message - in validator
             return "redirect:/blacklist";
@@ -46,7 +46,7 @@ public class BlackListController {
 
     @RequestMapping(value = {"/blacklist"}, method = RequestMethod.PUT)
     public String put(@RequestBody DomainsListUpdate update){
-        domainsService.replaceDomain(update.getOldValue(),update.getNewValue());
+        domainsService.replaceDomain(update.getOldDomain(),update.getNewDomain());
         return "index";
     }
 }
