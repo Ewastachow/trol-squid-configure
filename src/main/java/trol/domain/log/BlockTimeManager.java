@@ -1,10 +1,14 @@
 package trol.domain.log;
 
-public class BlockTimeManager {
-    String timesPath;
+import java.util.List;
 
-    BlockTimeManager(String timesPath) {
+public class BlockTimeManager {
+    private String timesPath;
+    private List<String> users;
+
+    BlockTimeManager(String timesPath, List<String> users) {
         this.timesPath = timesPath;
+        this.users = users;
     }
 
     public boolean addTime(int seconds, String user) {

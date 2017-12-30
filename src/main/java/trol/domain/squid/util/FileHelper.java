@@ -1,6 +1,8 @@
 package trol.domain.squid.util;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.*;
@@ -10,6 +12,22 @@ import java.util.List;
 
 
 public class FileHelper {
+
+    public static List<String> readLastLinesSince(String path, int N) throws IOException {
+        Path filePath = Paths.get(path);
+        List<String> result = new ArrayList<>();
+        BufferedReader reader = Files.newBufferedReader(filePath, Charset.forName("UTF-8"));
+        String line = "";
+        int counter = 0;
+
+        while ((line = reader.readLine()) != null) {
+            if (counter >= N)
+                result.add(line);
+            ++counter;
+        }
+
+        return result;
+    }
 
     public static List<String> createLineListFromFile(String path) throws IOException {
         Path filePath = Paths.get(path);

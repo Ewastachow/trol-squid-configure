@@ -197,4 +197,9 @@ public class FileHelperTest {
         Assert.assertEquals(null,
                 FileHelper.getPathStringFromIncludeLine(".Include</etc/some/file"));
     }
+
+    @Test
+    public void readLastNLines() {
+        //TODO: implement
+    }
 }
