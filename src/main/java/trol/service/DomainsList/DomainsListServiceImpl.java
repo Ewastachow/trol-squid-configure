@@ -1,51 +1,78 @@
 package trol.service.DomainsList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import trol.exceptions.DomainsListCreationException;
 import trol.exceptions.DomainsListHeaderUpdateException;
-import trol.exceptions.DomainsListNotFoundException;
 import trol.exceptions.DomainsListUpdateException;
 import trol.model.DomainsList.DomainsList;
-
-import java.util.HashMap;
+import trol.service.AccessControlList.AccessControlListService;
 import java.util.List;
-import java.util.Map;
 
 @Service("domainsListService")
 public class DomainsListServiceImpl implements DomainsListService {
-    private static Map<String,DomainsList> testList = new HashMap<>();
+    @Autowired
+    private AccessControlListService accessControlListService;
+
+//    @Override
+////    public DomainsList getList(String listName) throws DomainsListNotFoundException {
+////        if (list.stream().noneMatch(d -> d.name == listName)) throw  new DomainsListNotFoundException();
+////        return list.stream().filter(d -> d.name.equals(listName)).findFirst().get();
+////    }
+////
+////    @Override
+////    public void addList(DomainsList list) throws DomainsListCreationException {
+////        testList.put(list.name,list);
+////    }
 
     @Override
-    public DomainsList getList(String listName) throws DomainsListNotFoundException {
-        if (!testList.containsKey(listName)) throw new DomainsListNotFoundException("not found");
-        return testList.get(listName);
-    }
-
-    @Override
-    public void addList(DomainsList list) throws DomainsListCreationException {
-        testList.put(list.name,list);
-    }
-
-    @Override
-    public void editListHeader(DomainsList list) throws DomainsListHeaderUpdateException {
-        list.setDomainList(testList.get(list.name).domainList);
-        testList.replace(list.name,list);
+    public void editListHeader(DomainsList newList) throws DomainsListHeaderUpdateException {
+        try {
+            DomainsList oldList = accessControlListService.getDomainsList(newList.name);
+            List<DomainsList> domainsLists = accessControlListService
+                    .getAccessControlList()
+                    .getDomainsLists();
+            domainsLists.set(
+                    domainsLists.indexOf(oldList),
+                    newList
+            );
+        } catch (Exception e) {
+            throw new DomainsListHeaderUpdateException();
+        }
     }
 
     @Override
     public void editDomainInList(String listName, String oldDomain, String newDomain) throws DomainsListUpdateException {
-        List<String> domains = testList.get(listName).getDomainList();
-        testList.get(listName).getDomainList().set(domains.indexOf(oldDomain),newDomain);
+        try {
+            DomainsList list = accessControlListService.getDomainsList(listName);
+            list.getDomainList()
+                    .set(
+                      list.getDomainList().indexOf(oldDomain),
+                      newDomain
+                    );
+        } catch (Exception e) {
+            throw new DomainsListUpdateException();
+        }
     }
 
     @Override
     public void deleteDomainInList(String listName, String domain) throws DomainsListUpdateException {
-        testList.get(listName).getDomainList().remove(domain);
+        try {
+            accessControlListService.getDomainsList(listName)
+                    .getDomainList()
+                    .remove(domain);
+        } catch (Exception e) {
+            throw new DomainsListUpdateException();
+        }
     }
 
     @Override
     public void addDomainInList(String listName, String domain) throws DomainsListUpdateException {
-        testList.get(listName).getDomainList().add(domain);
-
+        try {
+            accessControlListService.getDomainsList(listName)
+                    .getDomainList()
+                    .add(domain);
+        } catch (Exception e) {
+            throw new DomainsListUpdateException();
+        }
     }
 }

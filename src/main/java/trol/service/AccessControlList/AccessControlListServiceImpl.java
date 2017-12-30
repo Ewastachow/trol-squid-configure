@@ -19,20 +19,31 @@ public class AccessControlListServiceImpl implements AccessControlListService {
 
     @Override
     public void addDomainsList(DomainsList domainsList) throws Exception {
-        boolean isInList = accessControlList.getAccessControlList().stream()
+        boolean isInList = accessControlList.getDomainsLists().stream()
                 .anyMatch(d -> d.name.equals(domainsList.name));
 
         if (isInList) throw new ListNameException("List with that name already exists!");
-        accessControlList.getAccessControlList().add(domainsList);
+        accessControlList.getDomainsLists().add(domainsList);
+    }
+
+    @Override
+    public DomainsList getDomainsList(String domainsListName) throws Exception {
+        boolean isInList = accessControlList.getDomainsLists().stream()
+                .anyMatch(d -> d.name.equals(domainsListName));
+        if (!isInList) throw new ListNameException("List with that name cannot be found!");
+        return accessControlList.getDomainsLists().stream()
+                .filter(d -> d.name.equals(domainsListName))
+                .findFirst()
+                .get();
     }
 
     @Override
     public void deleteDomainsList(String domainsListName) throws Exception {
-        Optional<DomainsList> listOptional = accessControlList.getAccessControlList().stream()
+        Optional<DomainsList> listOptional = accessControlList.getDomainsLists().stream()
                 .filter(d -> d.name.equals(domainsListName))
                 .findFirst();
 
         if (!listOptional.isPresent()) throw new ListNameException("List with that name does not exist!");
-        accessControlList.getAccessControlList().remove(listOptional.get());
+        accessControlList.getDomainsLists().remove(listOptional.get());
     }
 }
