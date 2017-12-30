@@ -12,4 +12,8 @@ public class BlockTimeManager {
         //TODO: to myk myk zwraca true i w ten sposób przekazuje że użytkownika trzeba zablokować
         return false;
     }
+
+    public void clearWastedTime() {
+        //TODO: Wywoływana domyślnie o 00:00 chodzi o wyzerowanie wasted timeu w pliku
+    }
 }
