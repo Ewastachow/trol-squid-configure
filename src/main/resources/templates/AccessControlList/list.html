@@ -8,7 +8,7 @@
     <div class="row">
         <div class="box col-md-6 col-md-offset-3">
             <h2>Access Control List</h2>
-            <a th:href="@{/lists/list/add}" class="btn" role="button">Add</a>
+            <a th:href="@{/lists/add}" class="btn" role="button">Add</a>
             <div>
                 <table>
                     <thead>
@@ -18,7 +18,7 @@
                     <tr></tr>
                     </thead>
                     <tbody>
-                    <tr th:each="item : ${accessControlList.getAccessControlList()}">
+                    <tr th:each="item : ${accessControlList.getDomainsLists()}">
                         <td class="domain" th:text="${item.getName()}">Empty</td>
                         <td><a th:href="@{/lists/list/}+${item.getName()}" class="btn" role="button">Edit</a></td>
                     </tr>

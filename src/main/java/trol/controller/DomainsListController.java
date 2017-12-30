@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import trol.exceptions.DomainsListNotFoundException;
 import trol.exceptions.DomainsListUpdateException;
+import trol.model.AccessControlList.AccessControlList;
 import trol.model.DomainsList.DomainInList;
 import trol.model.DomainsList.DomainsList;
 import trol.model.DomainsList.DomainsListUpdate;
 import trol.model.UpdateResult;
+import trol.service.AccessControlList.AccessControlListService;
 import trol.service.DomainsList.DomainsListService;
 
 import javax.validation.Valid;
@@ -20,16 +22,18 @@ import javax.validation.Valid;
 public class DomainsListController {
     @Autowired
     private DomainsListService domainsListService;
+    @Autowired
+    private AccessControlListService accessControlListService;
 
     @GetMapping(value = "/lists/list/{listName}")
     public ModelAndView getDomainsList(@PathVariable String listName){
         ModelAndView model;
         try {
-            DomainsList list = domainsListService.getList(listName);
+            DomainsList list = accessControlListService.getDomainsList(listName);
             model = new ModelAndView();
             model.addObject("domainsList",list);
             model.setViewName("domainsList");
-        } catch (DomainsListNotFoundException e) {
+        } catch (Exception e) {
             model = new ModelAndView("redirect:/error.html");
         }
         return model;

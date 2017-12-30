@@ -7,9 +7,7 @@ import trol.exceptions.DomainsListUpdateException;
 import trol.model.DomainsList.DomainsList;
 
 public interface DomainsListService {
-    DomainsList getList(String listName) throws DomainsListNotFoundException;
-    void addList(DomainsList list) throws DomainsListCreationException;
-    void editListHeader(DomainsList list) throws DomainsListHeaderUpdateException;
+    void editListHeader(DomainsList newList) throws DomainsListHeaderUpdateException;
     void editDomainInList(String listName, String oldDomain, String newDomain) throws DomainsListUpdateException;
     void deleteDomainInList(String listName, String domain) throws DomainsListUpdateException;
     void addDomainInList(String listName, String domain) throws DomainsListUpdateException;
