@@ -43,6 +43,16 @@ public class SquidConf {
         FileHelper.saveStringListAsFile(path,result);
     }
 
+    public void unblockTimeBlockedUsers(List<String> users) {
+        //TODO: wyzerowanie czasu zużytego i odbanowanie użytkowników z listy
+        //TODO: lub odbanowanie po prostu wszystkich zbanowanych z zużtego czasu bez tej lsity
+    }
+
+    public void blockTimeUser(String user) {
+        //TODO: pakiet log zdecydował na podstawie logów, że tego użytkownika trzeba zablokować
+        //TODO: bo już za długo siedzi na necie
+    }
+
     private void createLineObject(List<String> words) throws IOException {
         //TODO A co jak pierwszy znak to #????? trzeba coś z tym zrobić !!!!!
         if(words.get(0).toLowerCase().equals("acl")){
