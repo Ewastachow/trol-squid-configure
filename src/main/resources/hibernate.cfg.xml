@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">org.sqlite.JDBC</property>
+        <property name="connection.url">jdbc:sqlite:proxy.sqlite</property>
+        <property name="hibernate.connection.username"></property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLiteDialect</property>
+        <property name="hibernate.show_sql">true</property>
+
+        <mapping class="trol.domain.database_models.Words"/>
+        <mapping resource="database_schema.Words.hbm.xml"/>
+        <mapping class="trol.domain.database_models.WordsLists"/>
+        <mapping resource="database_schema.WordsLists.hbm.xml"/>
+        <!--<mapping class="DataSchema.CopiesEntity"/>-->
+        <!--<mapping resource="DataSchema/CopiesEntity.hbm.xml"/>-->
+        <!--<mapping class="DataSchema.EmployeeEntity"/>-->
+        <!--<mapping resource="DataSchema/EmployeeEntity.hbm.xml"/>-->
+        <!--<mapping class="DataSchema.NotificationsEntity"/>-->
+        <!--<mapping resource="DataSchema/NotificationsEntity.hbm.xml"/>-->
+        <!--<mapping resource="DataSchema/ReadersEntity.hbm.xml"/>-->
+        <!--<mapping class="DataSchema.ReadersEntity"/>-->
+        <!--<mapping class="DataSchema.ReservedEntity"/>-->
+        <!--<mapping resource="DataSchema/ReservedEntity.hbm.xml"/>-->
+        <!--<mapping resource="DataSchema/BooksEntity.hbm.xml"/>-->
+        <!--<mapping resource="DataSchema/BooksEntity.hbm.xml"/>-->
+        <!--<mapping resource="DataSchema/BooksEntity.hbm.xml"/>-->
+        <!--<mapping resource="DataSchema/BooksEntity.hbm.xml"/>-->
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

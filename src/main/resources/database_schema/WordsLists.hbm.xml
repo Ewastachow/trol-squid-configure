@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="trol.domain.database_models.WordsLists" table="wordsLists">
+        <id name="idWordsList" column="idWordsList">
+            <generator class="native"/>
+        </id>
+        <property name="wordsListName" column="wordsListName"/>
+        <property name="isActive" column="isActive"/>
+        <property name="isTimed" column="isTimed"/>
+        <property name="timeBegin" column="timeBegin"/>
+        <property name="timeEnd" column="timeEnd"/>
+        <set name="wordsSet" table="words" inverse="true">
+            <key column="idWordsList"/>
+            <one-to-many class="trol.domain.database_models.Words"/>
+        </set>
+    </class>
+</hibernate-mapping>
