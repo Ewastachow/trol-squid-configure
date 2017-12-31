@@ -1,20 +1,30 @@
 package trol.domain.trol_api;
 
+import org.hibernate.Session;
 import trol.domain.database_models.*;
+import trol.domain.util.HibernateUtil;
 
 import java.sql.Time;
 import java.util.List;
 
 public class TrolAPI {
 
-    //###################### DOMAINS #############################
+//###################### DOMAINS #############################
 
     public List<DomainsListsEntity> getDomainsListsList(){
         // Zwraca Listę plików które przechowują zapisane domany możliwe do blokowania
-        //TODO: Implement
-        return null;
+        //TODO: Check
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        List<DomainsListsEntity> domainsListsEntityList = session.createQuery("FROM DomainsListsEntity").list();
+
+        session.getTransaction().commit();
+        return domainsListsEntityList;
     }
 
+    //INFO @Dzieniu DomainsListsEntity zawiera w sb pole Set<Domains> - wystarczy wywołac getDomainsEntitySet()
     public DomainsListsEntity getDomainsList(int domainsListIp){
         //TODO: Implement
         // Zwraca informacje o danej liście domen, czas w jakim jest blokowana ( lub czy wg jest blokowana czasowo), tryb jej blokowania itp
@@ -52,12 +62,20 @@ public class TrolAPI {
         return false;
     }
 
-    //###################### DOMAINS #############################
-    //###################### Headers #############################
+//###################### DOMAINS #############################
+
+//###################### Headers #############################
 
     public List<TransmissionTypesEntity> getHeadersList() {
-        //TODO: Implement
-        return null;
+        //TODO: Check
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        List<TransmissionTypesEntity> transmissionTypesEntityList = session.createQuery("FROM TransmissionTypesEntity ").list();
+
+        session.getTransaction().commit();
+        return transmissionTypesEntityList;
     }
 
     public boolean changeHeaderActivityMode(TransmissionTypesEntity transmisionType, boolean isActive) {
@@ -70,12 +88,20 @@ public class TrolAPI {
         return false;
     }
 
-    //###################### Headers #############################
-    //###################### Users #############################
+//###################### Headers #############################
+
+//###################### Users #############################
 
     public List<UserEntity> getUsersList() {
-        //TODO: Implement
-        return null;
+        //TODO: Check
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        List<UserEntity> userEntityList = session.createQuery("FROM UserEntity ").list();
+
+        session.getTransaction().commit();
+        return userEntityList;
     }
 
     public boolean createUser(String addressIp){
@@ -114,16 +140,24 @@ public class TrolAPI {
         return false;
     }
 
-    //###################### Users #############################
-    //###################### Words #############################
+//###################### Users #############################
+
+//###################### Words #############################
 
     public List<WordsListsEntity> getWordsListsList(){
-        // Zwraca Listę plików które przechowują blokowane słowa
-        //TODO: Implement
-        return null;
+        //TODO: Check
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        List<WordsListsEntity> wordsListsEntityList = session.createQuery("FROM WordsListsEntity ").list();
+
+        session.getTransaction().commit();
+        return wordsListsEntityList;
     }
 
-    public List<WordsEntity> getWordsListFromWordsFile(int wordsListId){
+    //INFO @Dzieniu WordsListsEntity zawiera w sb pole Set<Words> - wystarczy wywołac getWordsEntitySet()
+    public WordsListsEntity getWordsList(int wordsListId){
         //TODO: Implement
         return null;
     }
@@ -157,8 +191,9 @@ public class TrolAPI {
         //TODO: Implement
         return false;
     }
-    //###################### Words #############################
-    //###################### SAVE  #############################
+//###################### Words #############################
+
+//###################### SAVE  #############################
 
     public boolean saveConfiguration(){
         //TODO zapis z bazy do plików
@@ -166,6 +201,6 @@ public class TrolAPI {
         return false;
     }
 
-    //###################### SAVE  #############################
+//###################### SAVE  #############################
 
 }
