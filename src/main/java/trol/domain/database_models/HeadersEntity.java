@@ -1,16 +1,20 @@
 package trol.domain.database_models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "headers", schema = "estacho1")
-public class HeadersEntity {
+public class HeadersEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int idHeader;
     private String headerString;
-    private int idTransmissionType;
+    private TransmissionTypesEntity idTransmissionType;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_header")
     public int getIdHeader() {
         return idHeader;
@@ -52,11 +56,11 @@ public class HeadersEntity {
 
     @Basic
     @Column(name = "id_transmission_type")
-    public int getIdTransmissionType() {
+    public TransmissionTypesEntity getIdTransmissionType() {
         return idTransmissionType;
     }
 
-    public void setIdTransmissionType(int idTransmissionType) {
+    public void setIdTransmissionType(TransmissionTypesEntity idTransmissionType) {
         this.idTransmissionType = idTransmissionType;
     }
 }

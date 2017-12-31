@@ -1,11 +1,17 @@
 package trol.domain.database_models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Time;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "transmission_types", schema = "estacho1")
-public class TransmissionTypesEntity {
+public class TransmissionTypesEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int idTransmissionType;
     private String transmissionTypeName;
     private byte isActive;
@@ -13,8 +19,18 @@ public class TransmissionTypesEntity {
     private Time timeBegin;
     private Time timeEnd;
 
+    private Set<HeadersEntity> headersEntitySet = new HashSet<>();
+
+    public Set<HeadersEntity> getHeadersEntitySet() {
+        return headersEntitySet;
+    }
+
+    public void setHeadersEntitySet(Set<HeadersEntity> headersEntitySet) {
+        this.headersEntitySet = headersEntitySet;
+    }
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_transmission_type")
     public int getIdTransmissionType() {
         return idTransmissionType;

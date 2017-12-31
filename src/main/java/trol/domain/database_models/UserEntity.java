@@ -1,11 +1,15 @@
 package trol.domain.database_models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Time;
 
 @Entity
 @Table(name = "user", schema = "estacho1")
-public class UserEntity {
+public class UserEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int idUser;
     private String userIp;
     private byte isActive;
@@ -17,7 +21,7 @@ public class UserEntity {
     private Integer usedTime;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
     public int getIdUser() {
         return idUser;

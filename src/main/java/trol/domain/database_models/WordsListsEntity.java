@@ -1,11 +1,17 @@
 package trol.domain.database_models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Time;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "words_lists", schema = "estacho1")
-public class WordsListsEntity {
+public class WordsListsEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int idWordsList;
     private String wordsListName;
     private byte isActive;
@@ -13,8 +19,18 @@ public class WordsListsEntity {
     private Time timeBegin;
     private Time timeEnd;
 
+    private Set<WordsEntity> wordsEntitySet = new HashSet<>();
+
+    public Set<WordsEntity> getWordsEntitySet() {
+        return wordsEntitySet;
+    }
+
+    public void setWordsEntitySet(Set<WordsEntity> wordsEntitySet) {
+        this.wordsEntitySet = wordsEntitySet;
+    }
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_words_list")
     public int getIdWordsList() {
         return idWordsList;

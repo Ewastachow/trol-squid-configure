@@ -1,11 +1,17 @@
 package trol.domain.database_models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Time;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "domains_lists", schema = "estacho1")
-public class DomainsListsEntity {
+public class DomainsListsEntity  implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int idDomainsList;
     private String domainsListName;
     private byte isActive;
@@ -14,8 +20,18 @@ public class DomainsListsEntity {
     private Time timeBegin;
     private Time timeEnd;
 
+    private Set<DomainsEntity> domainsEntitySet = new HashSet<>();
+
+    public Set<DomainsEntity> getDomainsEntitySet() {
+        return domainsEntitySet;
+    }
+
+    public void setDomainsEntitySet(Set<DomainsEntity> domainsEntitySet) {
+        this.domainsEntitySet = domainsEntitySet;
+    }
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_domains_list")
     public int getIdDomainsList() {
         return idDomainsList;

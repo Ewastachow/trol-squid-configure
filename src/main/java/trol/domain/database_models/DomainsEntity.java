@@ -1,16 +1,20 @@
 package trol.domain.database_models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "domains", schema = "estacho1")
-public class DomainsEntity {
+public class DomainsEntity  implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int idDomain;
     private String domainString;
-    private int idDomainsList;
+    private DomainsListsEntity idDomainsList;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_domain")
     public int getIdDomain() {
         return idDomain;
@@ -52,11 +56,11 @@ public class DomainsEntity {
 
     @Basic
     @Column(name = "id_domains_list")
-    public int getIdDomainsList() {
+    public DomainsListsEntity getIdDomainsList() {
         return idDomainsList;
     }
 
-    public void setIdDomainsList(int idDomainsList) {
+    public void setIdDomainsList(DomainsListsEntity idDomainsList) {
         this.idDomainsList = idDomainsList;
     }
 }

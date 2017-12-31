@@ -9,16 +9,24 @@
         <property name="hibernate.connection.username">estacho1</property>
         <property name="hibernate.connection.password">4o43gQXTmgHeocFD</property>
         <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="current_session_context_class">thread</property>
 
-        <!--<property name="hibernate.hbm2ddl.auto">update</property>-->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
         <mapping class="trol.domain.database_models.WordsEntity"/>
-        <!--<mapping resource="trol/domain/database_models/words.hbm.xml"/>-->
+        <mapping resource="trol/domain/database_models/WordsEntity.hbm.xml"/>
         <mapping class="trol.domain.database_models.WordsListsEntity"/>
+        <mapping resource="trol/domain/database_models/WordsListsEntity.hbm.xml"/>
         <mapping class="trol.domain.database_models.DomainsEntity"/>
+        <mapping resource="trol/domain/database_models/DomainsEntity.hbm.xml"/>
         <mapping class="trol.domain.database_models.DomainsListsEntity"/>
+        <mapping resource="trol/domain/database_models/DomainsListsEntity.hbm.xml"/>
         <mapping class="trol.domain.database_models.UserEntity"/>
+        <mapping resource="trol/domain/database_models/UserEntity.hbm.xml"/>
         <mapping class="trol.domain.database_models.HeadersEntity"/>
+        <mapping resource="trol/domain/database_models/HeadersEntity.hbm.xml"/>
         <mapping class="trol.domain.database_models.TransmissionTypesEntity"/>
+        <mapping resource="trol/domain/database_models/TransmissionTypesEntity.hbm.xml"/>
         <!--<mapping class="DataSchema.CopiesEntity"/>-->
         <!--<mapping resource="DataSchema/CopiesEntity.hbm.xml"/>-->
 

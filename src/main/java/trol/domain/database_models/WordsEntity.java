@@ -1,17 +1,20 @@
 package trol.domain.database_models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "words", schema = "estacho1")
-public class WordsEntity {
+public class WordsEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int idWord;
     private String wordString;
-    private int idWordsList;
+    private WordsListsEntity idWordsList;
 
     @Id
-    @GeneratedValue
-    @Column(name = "id_word")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdWord() {
         return idWord;
     }
@@ -28,6 +31,16 @@ public class WordsEntity {
 
     public void setWordString(String wordString) {
         this.wordString = wordString;
+    }
+
+    @Basic
+    @Column(name = "id_words_list")
+    public WordsListsEntity getIdWordsList() {
+        return idWordsList;
+    }
+
+    public void setIdWordsList(WordsListsEntity idWordsList) {
+        this.idWordsList = idWordsList;
     }
 
     @Override
@@ -48,15 +61,5 @@ public class WordsEntity {
         int result = idWord;
         result = 31 * result + (wordString != null ? wordString.hashCode() : 0);
         return result;
-    }
-
-    @Basic
-    @Column(name = "id_words_list")
-    public int getIdWordsList() {
-        return idWordsList;
-    }
-
-    public void setIdWordsList(int idWordsList) {
-        this.idWordsList = idWordsList;
     }
 }
