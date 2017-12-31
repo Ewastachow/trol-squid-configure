@@ -19,3 +19,7 @@ body{
 .jumbo, .login, .domains, .domainsform, .domainslist, .wordsform, .words, .wordslist{
     padding-top: 80px;
 }
+
+.text-jumbo{
+    text-align: center;
+}
