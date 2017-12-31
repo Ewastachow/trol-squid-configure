@@ -12,17 +12,49 @@
         <div class="box col-md-6 col-md-offset-3">
             <h2>Add new domains list:</h2>
                 <form th:action="@{/domains/add}" th:object="${domainsList}" method="post">
-                    <p>List name: <input type="text" th:field="*{info.name}" /></p>
-                    <p>Is this list timed?
-                        <input type="checkbox" name="isTimed" th:field="*{info.isTimed}"/>
-                    </p>
-                    <p>Start time: <input type="time" th:field="*{info.timeBegin}"/></p>
-                    <p>End time: <input type="time" th:field="*{info.timeEnd}"/></p>
-                    <div class="input-group">
-                        <input type="radio" name="mode" th:value="${domainsList.mode.BLACKLIST}">Blacklist</input>
-                        <input type="radio" name="mode" th:value="${domainsList.mode.WHITELIST}">Whitelist</input>
+                    <div class="form-group">
+                        <label for="name">List name:</label>
+                        <input type="text" class="form-control" th:field="*{info.name}" id="name"/>
                     </div>
-                    <p><button type="submit">Add</button></p>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" th:field="*{info.isTimed}"/>
+                            Is this list timed?
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="timebegin">Start time:</label>
+                        <input type="time" class="form-control" th:field="*{info.timeBegin}" id="timebegin"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeend">End time:</label>
+                        <input type="time" class="form-control" th:field="*{info.timeEnd}" id="timeend"/>
+                    </div>
+                    <fieldset class="form-group">
+                        <legend>Mode</legend>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio"
+                                       class="form-check-input"
+                                       name="mode"
+                                       th:value="${domainsList.mode.BLACKLIST}"
+                                       id="optionsRadios1"/>
+                                Blacklist
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio"
+                                       class="form-check-input"
+                                       name="mode"
+                                       th:value="${domainsList.mode.WHITELIST}"
+                                       id="optionsRadios2"/>
+                                Whitelist
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <button type="submit" class="btn btn-primary">Add</button>
                 </form>
         </div>
     </div>
