@@ -4,3 +4,18 @@ body{
     background: linear-gradient(to right, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.navbar-brand {
+    padding: 2px 15px;
+}
+
+.navbar-brand>img {
+    display: inline-block;
+}
+
+.container-fluid {
+    padding-top: 30px;
+}
+
+.jumbo{ /*Tutaj coś nie działa*/
+    padding-top: 80px;
+}
