@@ -1,6 +1,6 @@
 package trol.domain.squid.acl;
 
-import trol.domain.squid.util.FileHelper;
+import trol.domain.util.FileHelper;
 
 import java.io.IOException;
 import java.nio.file.Path;

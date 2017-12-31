@@ -1,6 +1,6 @@
 package trol.domain.log;
 
-import trol.domain.squid.util.FileHelper;
+import trol.domain.util.FileHelper;
 import trol.domain.terminal.TerminalExecute;
 
 import java.io.IOException;

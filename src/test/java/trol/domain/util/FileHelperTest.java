@@ -1,4 +1,4 @@
-package trol.domain.squid.util;
+package trol.domain.util;
 
 
 import org.junit.*;
