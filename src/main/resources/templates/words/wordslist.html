@@ -1,15 +1,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Black list</title>
+    <title>Words</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"/>
 </head>
 <body>
 <div class="container-fluid">
     <div class="row">
         <div class="box col-md-6 col-md-offset-3">
-            <h2>Edit domains list:</h2>
-            <input type="hidden" id="listName" th:value="${domainsList.getName()}"/>
-            <form action="#" th:action="@{/lists/list/}+${domainsList.name}" th:object="${domainsList}" method="post">
+            <h2>Edit words list:</h2>
+            <input type="hidden" id="listName" th:value="${words.getName()}"/>
+            <form action="#" th:action="@{/words/list/}+${words.getName()}" th:object="${words}" method="post">
                 <p>List name: <input type="text" th:field="*{name}" /></p>
                 <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
                 <p>Is this list timed?
@@ -17,44 +17,34 @@
                 </p>
                 <p>Start time: <input type="time" th:field="*{timeBegin}"/></p>
                 <p>End time: <input type="time" th:field="*{timeEnd}"/></p>
-                <div class="input-group">
-                    <input type="radio" name="mode"
-                           th:field="*{mode}"
-                           th:value="${domainsList.mode.INACTIVE}">Not active</input>
-                    <input type="radio" name="mode"
-                           th:field="*{mode}"
-                           th:value="${domainsList.mode.BLACKLIST}">Blacklist</input>
-                    <input type="radio" name="mode"
-                           th:field="*{mode}"
-                           th:value="${domainsList.mode.WHITELIST}">Whitelist</input>
-                </div>
-                <p th:if="${#fields.hasErrors('mode')}" th:errors="*{mode}">Error</p>
+                <p>Is this list active?
+                    <input type="checkbox" name="isActive" th:field="*{isActive}"/>
+                </p>
                 <p><button type="submit">Save</button></p>
             </form>
         </div>
 
         <div>
-            Add domain:
+            Add word:
             <label>
-                <input type="text" class="domain"/>
+                <input type="text" class="word"/>
             </label>
-            <div class="domainErrors"></div>
-            <button type="submit" class="addDomain">Add</button>
+            <button type="submit" class="addWord">Add</button>
         </div>
 
-        <div id="domainsList">
+        <div id="wordsList">
             <table>
                 <thead>
                 <tr>
-                    <th>Domain</th>
+                    <th>Word</th>
                 </tr>
                 <tr></tr>
                 </thead>
                 <tbody>
-                <tr th:each="item : ${domainsList.getDomainList()}">
-                    <td class="domain" th:text="${item}">Empty</td>
-                    <td><button class="removedomain" th:value="${item}">Remove</button></td>
-                    <td><button class="editdomain" th:value="${item}">Edit</button></td>
+                <tr th:each="item : ${words.getWordsList()}">
+                    <td class="word" th:text="${item}">Empty</td>
+                    <td><button class="removeWord" th:value="${item}">Remove</button></td>
+                    <td><button class="editWord" th:value="${item}">Edit</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -69,6 +59,6 @@
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-<script src="/domainsList.js"></script>
+<script src="/js/words.js"></script>
 </body>
 </html>

@@ -1,16 +1,13 @@
 $(document).on('click', '.removedomain', function (e) {
     e.preventDefault();
-    var listName = $('#listName').val();
+    var listId = $('#listId').val();
+    var url = "/domains/list/"+listId+"/edit"
     var domain = $(this).val();
-    var data = {
-        "listName" : listName,
-        "domain" : domain
-    };
     $.ajax({
         type: 'DELETE',
-        url: '/lists/list/edit',
+        url: url,
         contentType: "application/json",
-        data: JSON.stringify(data)
+        data: domain
     }).done(function(result){
         location.reload();
         //TODO
@@ -21,17 +18,14 @@ $(document).on('click', '.removedomain', function (e) {
 $(document).on('click', '.addDomain', function (e) {
     e.preventDefault();
     var input = $(this).parent().find(".domain");
-    var listName = $('#listName').val();
+    var listId = $('#listId').val();
+    var url = "/domains/list/"+listId+"/edit"
     var domain = input.val();
-    var data = {
-      "listName" : listName,
-      "domain" : domain
-    };
     $.ajax({
         type: 'POST',
-        url: '/lists/list/edit',
+        url: url,
         contentType: "application/json",
-        data: JSON.stringify(data)
+        data: domain
     }).done(function(result){
         location.reload();
         //TODO
@@ -56,17 +50,17 @@ $(document).on('click', '.applyEdit', function (e) {
     var td = tr.find(".domain");
     var newDomain = td.find(".newDomain").val();
     var oldDomain = td.find(".oldDomain").val();
-    var listName = $('#listName').val();
+    var listId = $('#listId').val();
+    var url = "/domains/list/"+listId+"/edit"
     var data = {
-        "listName" : listName,
-        "oldDomain" : oldDomain,
-        "newDomain" : newDomain
+        "oldValue" : oldDomain,
+        "newValue" : newDomain
     };
     $.ajax({
         type:'PUT',
-        url:'/lists/list/edit',
+        url: url,
         contentType: "application/json",
-        data:JSON.stringify(data)
+        data: JSON.stringify(data)
     }).done(function(result){
         location.reload();
         //TODO show result

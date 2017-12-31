@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import trol.model.DomainsListOld;
-import trol.model.DomainsList.DomainsListUpdate;
+import trol.model.ListUpdateOld;
 import trol.service.DomainsService;
 import javax.validation.Valid;
 
@@ -45,8 +45,8 @@ public class BlackListController {
     }
 
     @RequestMapping(value = {"/blacklist"}, method = RequestMethod.PUT)
-    public String put(@RequestBody DomainsListUpdate update){
-        domainsService.replaceDomain(update.getOldDomain(),update.getNewDomain());
+    public String put(@RequestBody ListUpdateOld update){
+        domainsService.replaceDomain(update.getOldValue(),update.getNewValue());
         return "index";
     }
 }

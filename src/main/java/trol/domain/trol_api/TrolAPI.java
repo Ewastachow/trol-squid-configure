@@ -4,7 +4,7 @@ import trol.domain.squid.SquidConf;
 import trol.domain.trol_api.domain.DomainsFile;
 import trol.domain.trol_api.domain.Mode;
 import trol.domain.trol_api.header.Headers;
-import trol.domain.trol_api.header.TransmisionType;
+import trol.domain.trol_api.header.TransmissionType;
 import trol.domain.trol_api.user.User;
 import trol.domain.trol_api.word.WordsFile;
 
@@ -71,12 +71,12 @@ public class TrolAPI {
         return null;
     }
 
-    public boolean changeHeaderBlockedMode(TransmisionType mode, boolean block) {
+    public boolean changeHeaderBlockedMode(TransmissionType mode, boolean block) {
         //TODO: Implement
         return false;
     }
 
-    public boolean changeHeaderTime(TransmisionType mode, LocalTime newTimeBegin, LocalTime newTimeEnd) {
+    public boolean changeHeaderTime(TransmissionType mode, LocalTime newTimeBegin, LocalTime newTimeEnd) {
         //TODO: Implement
         return false;
     }
@@ -110,7 +110,7 @@ public class TrolAPI {
     }
 
     // ###################### Users #############################
-    // ###################### Words #############################
+    // ###################### words #############################
 
     public List<WordsFile> getWordsFileList(){
         // Zwraca Listę plików które przechowują blokowane słowa
@@ -153,6 +153,6 @@ public class TrolAPI {
         return false;
     }
 
-    // ###################### Words #############################
+    // ###################### words #############################
 
 }

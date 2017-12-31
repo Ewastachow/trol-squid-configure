@@ -8,16 +8,14 @@
     <div class="row">
         <div class="box col-md-6 col-md-offset-3">
             <h2>Add new domains list:</h2>
-                <form th:action="@{/lists/add}" th:object="${domainsList}" method="post">
-                    <p>List name: <input type="text" th:field="*{name}" /></p>
-                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
+                <form th:action="@{/domains/add}" th:object="${domainsList}" method="post">
+                    <p>List name: <input type="text" th:field="*{info.name}" /></p>
                     <p>Is this list timed?
-                        <input type="checkbox" name="isTimed" th:field="*{isTimed}"/>
+                        <input type="checkbox" name="isTimed" th:field="*{info.isTimed}"/>
                     </p>
-                    <p>Start time: <input type="time" th:field="*{timeBegin}"/></p>
-                    <p>End time: <input type="time" th:field="*{timeEnd}"/></p>
+                    <p>Start time: <input type="time" th:field="*{info.timeBegin}"/></p>
+                    <p>End time: <input type="time" th:field="*{info.timeEnd}"/></p>
                     <div class="input-group">
-                        <input type="radio" name="mode" checked="checked" th:value="${domainsList.mode.INACTIVE}">Not active</input>
                         <input type="radio" name="mode" th:value="${domainsList.mode.BLACKLIST}">Blacklist</input>
                         <input type="radio" name="mode" th:value="${domainsList.mode.WHITELIST}">Whitelist</input>
                     </div>

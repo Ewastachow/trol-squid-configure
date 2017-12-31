@@ -1,14 +1,12 @@
-package trol.model.AccessControlList;
-
-import trol.model.DomainsList.DomainsList;
+package trol.model.domains;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccessControlList {
+public class Domains {
     private List<DomainsList> domainsLists;
 
-    public AccessControlList(){
+    public Domains(){
         domainsLists = new ArrayList<>();
     }
 

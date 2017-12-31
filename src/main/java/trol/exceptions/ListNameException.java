@@ -1,4 +1,4 @@
-package trol.exceptions.AccessControlLIst;
+package trol.exceptions;
 
 public class ListNameException extends Exception {
     public ListNameException() { super(); }

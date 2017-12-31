@@ -1,4 +1,4 @@
-package trol.controller;
+package trol.controller.domains;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,43 +7,43 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import trol.model.DomainsList.DomainsList;
-import trol.service.AccessControlList.AccessControlListService;
+import trol.model.domains.DomainsList;
+import trol.service.domains.DomainsService;
 
 import javax.validation.Valid;
 
 @Controller
-public class AccessControlListController {
+public class DomainsController {
     @Autowired
-    AccessControlListService accessControlListService;
+    DomainsService domainsService;
 
-    @GetMapping(value = "/lists")
-    public ModelAndView getAccessControlList(){
+    @GetMapping(value = "/domains")
+    public ModelAndView getDomains(){
         ModelAndView model = new ModelAndView();
-        model.setViewName("/AccessControlList/list");
+        model.setViewName("/domains/domains");
         model.addObject(
-                "accessControlList",
-                accessControlListService.getAccessControlList()
+                "domains",
+                domainsService.getDomains()
         );
         return model;
     }
 
-    @GetMapping(value = "/lists/add")
+    @GetMapping(value = "/domains/add")
     public String getNewDomainsListForm(Model model){
         model.addAttribute("domainsList",new DomainsList());
-        return "form";
+        return "/domains/form";
     }
 
-    @PostMapping(value = "/lists/add")
+    @PostMapping(value = "/domains/add")
     public String addNewDomainsList(@Valid DomainsList domainsList, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            return "form";
+            return "/domains/form";
         }
         try {
-            accessControlListService.addDomainsList(domainsList);
+            domainsService.addDomainsList(domainsList);
         } catch (Exception e) {
             //return "error";
         }
-        return "redirect:/lists/list/"+domainsList.getName();
+        return "redirect:/domains/list/"+domainsList.getInfo().getId();
     }
 }

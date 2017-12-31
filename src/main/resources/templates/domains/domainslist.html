@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Black list</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="box col-md-6 col-md-offset-3">
+            <h2>Edit domains list:</h2>
+            <input type="hidden" id="listName" th:value="${domainsList.getInfo().getName()}"/>
+            <input type="hidden" id="listId" th:value="${domainsList.getInfo().getId()}"/>
+            <form action="#"
+                  th:action="@{/domains/list/}+${domainsList.getInfo().getId()}"
+                  th:object="${domainsList}" method="post">
+                <p>List name: <input type="text" th:field="*{info.name}" /></p>
+                <p th:if="${#fields.hasErrors('info.name')}" th:errors="*{info.name}">Error</p>
+                <p>Is this list timed?
+                    <input type="checkbox" name="isTimed" th:field="*{info.isTimed}"/>
+                </p>
+                <p>Start time: <input type="time" th:field="*{info.timeBegin}"/></p>
+                <p>End time: <input type="time" th:field="*{info.timeEnd}"/></p>
+                <div class="input-group">
+                    <input type="radio" name="mode"
+                           th:field="*{mode}"
+                           th:value="${domainsList.mode.BLACKLIST}">Blacklist</input>
+                    <input type="radio" name="mode"
+                           th:field="*{mode}"
+                           th:value="${domainsList.mode.WHITELIST}">Whitelist</input>
+                </div>
+                <p th:if="${#fields.hasErrors('mode')}" th:errors="*{mode}">Error</p>
+                <p><button type="submit">Save</button></p>
+            </form>
+        </div>
+
+        <div>
+            Add domain:
+            <label>
+                <input type="text" class="domain"/>
+            </label>
+            <div class="domainErrors"></div>
+            <button type="submit" class="addDomain">Add</button>
+        </div>
+
+        <div id="domainsList">
+            <table>
+                <thead>
+                <tr>
+                    <th>Domain</th>
+                </tr>
+                <tr></tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${domainsList.getDomainList()}">
+                    <td class="domain" th:text="${item}">Empty</td>
+                    <td><button class="removedomain" th:value="${item}">Remove</button></td>
+                    <td><button class="editdomain" th:value="${item}">Edit</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="/js/domains/domainsList.js"></script>
+</body>
+</html>
