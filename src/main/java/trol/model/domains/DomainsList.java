@@ -3,9 +3,6 @@ package trol.model.domains;
 import trol.domain.trol_api.domain.Mode;
 import trol.model.ListInfo;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 

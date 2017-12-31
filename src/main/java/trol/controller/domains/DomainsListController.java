@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import trol.exceptions.DomainsListUpdateException;
 import trol.model.Update;
-import trol.model.domains.DomainInList;
 import trol.model.domains.DomainsList;
 import trol.model.UpdateResult;
 import trol.service.domains.DomainsService;

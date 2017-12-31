@@ -110,7 +110,7 @@ public class TrolAPI {
     }
 
     // ###################### Users #############################
-    // ###################### words #############################
+    // ###################### Words #############################
 
     public List<WordsFile> getWordsFileList(){
         // Zwraca Listę plików które przechowują blokowane słowa
@@ -153,6 +153,6 @@ public class TrolAPI {
         return false;
     }
 
-    // ###################### words #############################
+    // ###################### Words #############################
 
 }
