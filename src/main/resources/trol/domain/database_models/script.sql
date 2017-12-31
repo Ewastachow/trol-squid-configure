@@ -11,7 +11,8 @@ CREATE TABLE domains_lists (
 CREATE TABLE domains (
   id_domain INTEGER PRIMARY KEY,
   domain_string VARCHAR(30) NOT NULL,
-  id_domains_list INTEGER NOT NULL REFERENCES domains_lists
+  id_domains_list INTEGER NOT NULL,
+  FOREIGN KEY (id_domains_list) REFERENCES domains_lists(id_domains_list)
 );
 
 CREATE TABLE transmission_types (
@@ -26,7 +27,8 @@ CREATE TABLE transmission_types (
 CREATE TABLE headers (
   id_header INTEGER PRIMARY KEY,
   header_string VARCHAR(30) NOT NULL,
-  id_transmission_type INTEGER NOT NULL REFERENCES transmission_types
+  id_transmission_type INTEGER NOT NULL,
+  FOREIGN KEY (id_transmission_type) REFERENCES transmission_types(id_transmission_type)
 );
 
 CREATE TABLE words_lists (
@@ -41,7 +43,8 @@ CREATE TABLE words_lists (
 CREATE TABLE words (
   id_word INTEGER PRIMARY KEY,
   word_string VARCHAR(30) NOT NULL,
-  id_words_list INTEGER NOT NULL REFERENCES words_lists
+  id_words_list INTEGER NOT NULL,
+  FOREIGN KEY (id_words_list) REFERENCES words_lists(id_words_list)
 );
 
 CREATE TABLE user (

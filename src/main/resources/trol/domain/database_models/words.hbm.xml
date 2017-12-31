@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="trol.domain.database_models.Words" table="words">
+    <class name="trol.domain.database_models.WordsEntity" table="words">
         <id name="idWord" column="id_word">
             <generator class="native"/>
         </id>

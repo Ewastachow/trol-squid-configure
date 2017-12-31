@@ -4,35 +4,23 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.driver_class">org.sqlite.JDBC</property>
-        <property name="connection.url">jdbc:sqlite:proxy.db</property>
-        <property name="hibernate.connection.username"></property>
-        <property name="hibernate.connection.password"></property>
-        <property name="hibernate.dialect">org.hibernate.dialect.SQLiteDialect</property>
-        <property name="hibernate.show_sql">true</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://mysql.agh.edu.pl:3306/estacho1</property>
+        <property name="hibernate.connection.username">estacho1</property>
+        <property name="hibernate.connection.password">4o43gQXTmgHeocFD</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
-
-        <property name="hibernate.hbm2ddl.auto">update</property>
-        <mapping class="trol.domain.database_models.Words"/>
+        <!--<property name="hibernate.hbm2ddl.auto">update</property>-->
+        <mapping class="trol.domain.database_models.WordsEntity"/>
         <!--<mapping resource="trol/domain/database_models/words.hbm.xml"/>-->
-        <mapping class="trol.domain.database_models.WordsLists"/>
-        <!--<mapping resource="trol/domain/database_models/WordsLists.hbm.xml"/>-->
+        <mapping class="trol.domain.database_models.WordsListsEntity"/>
+        <mapping class="trol.domain.database_models.DomainsEntity"/>
+        <mapping class="trol.domain.database_models.DomainsListsEntity"/>
+        <mapping class="trol.domain.database_models.UserEntity"/>
+        <mapping class="trol.domain.database_models.HeadersEntity"/>
+        <mapping class="trol.domain.database_models.TransmissionTypesEntity"/>
         <!--<mapping class="DataSchema.CopiesEntity"/>-->
         <!--<mapping resource="DataSchema/CopiesEntity.hbm.xml"/>-->
-        <!--<mapping class="DataSchema.EmployeeEntity"/>-->
-        <!--<mapping resource="DataSchema/EmployeeEntity.hbm.xml"/>-->
-        <!--<mapping class="DataSchema.NotificationsEntity"/>-->
-        <!--<mapping resource="DataSchema/NotificationsEntity.hbm.xml"/>-->
-        <!--<mapping resource="DataSchema/ReadersEntity.hbm.xml"/>-->
-        <!--<mapping class="DataSchema.ReadersEntity"/>-->
-        <!--<mapping class="DataSchema.ReservedEntity"/>-->
-        <!--<mapping resource="DataSchema/ReservedEntity.hbm.xml"/>-->
-        <!--<mapping resource="DataSchema/BooksEntity.hbm.xml"/>-->
-        <!--<mapping resource="DataSchema/BooksEntity.hbm.xml"/>-->
-        <!--<mapping resource="DataSchema/BooksEntity.hbm.xml"/>-->
-        <!--<mapping resource="DataSchema/BooksEntity.hbm.xml"/>-->
-        <!-- <property name="connection.username"/> -->
-        <!-- <property name="connection.password"/> -->
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
