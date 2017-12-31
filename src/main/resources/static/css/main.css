@@ -16,6 +16,6 @@ body{
     padding-top: 30px;
 }
 
-.jumbo, .login{
+.jumbo, .login, .domains, .domainsform, .domainslist, .wordsform, .words, .wordslist{
     padding-top: 80px;
 }
