@@ -1,11 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <div th:replace="fragments/header :: header-css"/>
 </head>
 <body>
+
+<div th:replace="fragments/header :: header"/>
 
     <div class="container jumbo">
         <div class="row">
@@ -28,5 +28,8 @@
         </div>
     </div>
     </div>
+
+    <div th:replace="fragments/footer :: footer"/>
+
 </body>
 </html>
