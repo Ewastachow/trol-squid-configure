@@ -17,15 +17,17 @@
                 <a class="navbar-brand" href="/" ><img src="/css/trolsmall.png" width="45" height="45" class="d-inline-block align-top" alt=""/> Trol</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-nav-demo"> <!-- Zwijanie menu przy zmianie rozmiaru okna (ale nie ma ikonki - wszystko po prostu znika -->
-                <ul class="nav navbar-nav">
-                    <li><a href="/domains">Domains</a></li>
-                    <li><a href="/words">Words</a></li>
-                    <li><a href="/headers">Headers</a></li>
-                    <li><a href="/users">Users</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Sign Out</a></li>
-                </ul>
+                <div sec:authorize="isAuthenticated()">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/domains">Domains</a></li>
+                        <li><a href="/words">Words</a></li>
+                        <li><a href="/headers">Headers</a></li>
+                        <li><a href="/users">Users</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a th:href="@{/logout}">Sign Out</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
