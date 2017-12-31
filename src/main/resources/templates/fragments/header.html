@@ -13,12 +13,6 @@
     <nav class="navbar navbar-light navbar-fixed-top" style="background-color: #eee;">
         <div class="container">
             <div class="navbar-header">
-                <!--            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">		&lt;!&ndash; data-target pokazuje co ma się rozwijać &ndash;&gt;
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>			&lt;!&ndash; Ten cały button to ikonka "hamburger" &ndash;&gt;
-                                <span class="icon-bar"></span>			&lt;!&ndash; pojawiająca się po zwinięciu menu &ndash;&gt;
-                                <span class="icon-bar"></span>
-                            </button>-->
                 <a class="navbar-brand" href="/" ><img src="/css/trolsmall.png" width="45" height="45" class="d-inline-block align-top" alt=""/> Trol</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-nav-demo"> <!-- Zwijanie menu przy zmianie rozmiaru okna (ale nie ma ikonki - wszystko po prostu znika -->
@@ -27,11 +21,6 @@
                     <li><a href="/words">Words</a></li>
                     <li><a href="/headers">Headers</a></li>
                     <li><a href="/users">Users</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Sign Up</a></li>
-                    <li><a href="#">Login</a></li>
-                    <a th:href="@{/logout}">Sign Out</a>
                 </ul>
             </div>
         </div>
