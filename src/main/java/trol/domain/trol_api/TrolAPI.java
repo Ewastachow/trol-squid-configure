@@ -158,5 +158,14 @@ public class TrolAPI {
         return false;
     }
     //###################### Words #############################
+    //###################### SAVE  #############################
+
+    public boolean saveConfiguration(){
+        //TODO zapis z bazy do plików
+        //TODO reset squida i dansguardiana
+        return false;
+    }
+
+    //###################### SAVE  #############################
 
 }
