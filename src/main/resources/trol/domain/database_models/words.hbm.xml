@@ -5,10 +5,10 @@
 <hibernate-mapping>
 
     <class name="trol.domain.database_models.Words" table="words">
-        <id name="idWord" column="idWord">
+        <id name="idWord" column="id_word">
             <generator class="native"/>
         </id>
-        <property name="wordString" column="wordString"/>
-        <many-to-one name="idWordsList" column="idWordsList"/>
+        <property name="wordString" column="word_string"/>
+        <many-to-one name="idWordsList" column="id_words_list"/>
     </class>
 </hibernate-mapping>
