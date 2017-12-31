@@ -26,12 +26,13 @@ body{
 
 .btn-xlarge {
     padding: 80px 93.7px;
-    font-size: 22px; /*change this to your desired size*/
+    font-size: 22px;
+    color: white;
     line-height: normal;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
-    background-color: darkgrey;
+    background-color: #ad9fac;
 }
 
 
