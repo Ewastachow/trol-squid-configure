@@ -1,64 +1,53 @@
 package trol.domain.trol_api;
 
-import trol.domain.squid.SquidConf;
-import trol.domain.trol_api.domain.DomainsFile;
-import trol.domain.trol_api.domain.Mode;
-import trol.domain.trol_api.header.Headers;
-import trol.domain.trol_api.header.TransmisionType;
-import trol.domain.trol_api.user.User;
-import trol.domain.trol_api.word.WordsFile;
+import trol.domain.database_models.*;
 
-import java.time.LocalTime;
+import java.sql.Time;
 import java.util.List;
 
 public class TrolAPI {
-    private SquidConf squidConf;
-
-    public TrolAPI() {
-//        squidConf = new SquidConf();
-
-    }
 
     //###################### DOMAINS #############################
 
-    public List<DomainsFile> getDomainsFileList(){
+    public List<DomainsListsEntity> getDomainsListsList(){
         // Zwraca Listę plików które przechowują zapisane domany możliwe do blokowania
         //TODO: Implement
         return null;
     }
 
-    public DomainsFile getDomainsListFromFile(String domainListName){
+    public DomainsListsEntity getDomainsList(int domainsListIp){
         //TODO: Implement
         // Zwraca informacje o danej liście domen, czas w jakim jest blokowana ( lub czy wg jest blokowana czasowo), tryb jej blokowania itp
         return null;
     }
 
-    public boolean createNewDomainsList(String domainListName){
+    public boolean createNewDomainsList(String domainsListName){
         //TODO: Impement
         return false;
     }
 
-    public boolean createNewDomainInList(String domainListName, String domainName){
+    public boolean createNewDomainInDomainsList(int domainsListIp, String domainString){
         //TODO: Implement
         return false;
     }
 
-    public boolean deleteDomainFromList(String domainListName, String domainName){
+    public boolean deleteDomainFromDomainsList(int domainsListIp, int domainId){
         //TODO: Implement
         return false;
     }
 
-    public boolean deleteDomainsList(String domainListName){
+    public boolean deleteDomainsList(int domainsListIp){
         //TODO: Implement
         return false;
     }
 
-    public boolean changeModeInDomainList(String domainListName, Mode newMode){
+    public boolean changeDomainsListMode(int domainsListIp, Mode newMode){
+        //TODO need to change isActive & isBlack
         //TODO: Implement
         return false;
     }
 
-    public boolean changeTimeInDomainList(String domainListName, LocalTime newTimeBegin, LocalTime newTimeEnd){
+    public boolean changeTimeInDomainsList(int domainsListIp, Time newTimeBegin, Time newTimeEnd){
         //TODO: Implement
         return false;
     }
@@ -66,59 +55,75 @@ public class TrolAPI {
     //###################### DOMAINS #############################
     //###################### Headers #############################
 
-    public List<Headers> getHeadersList() {
+    public List<TransmissionTypesEntity> getHeadersList() {
         //TODO: Implement
         return null;
     }
 
-    public boolean changeHeaderBlockedMode(TransmisionType mode, boolean block) {
+    public boolean changeHeaderActivityMode(TransmissionTypesEntity transmisionType, boolean isActive) {
         //TODO: Implement
         return false;
     }
 
-    public boolean changeHeaderTime(TransmisionType mode, LocalTime newTimeBegin, LocalTime newTimeEnd) {
+    public boolean changeHeaderTime(TransmissionTypesEntity transmisionType, Time newTimeBegin, Time newTimeEnd) {
         //TODO: Implement
         return false;
     }
 
     //###################### Headers #############################
-    // ###################### Users #############################
+    //###################### Users #############################
 
-    public List<User> getUsersList() {
+    public List<UserEntity> getUsersList() {
         //TODO: Implement
         return null;
     }
 
-    public boolean createUser(String address){
+    public boolean createUser(String addressIp){
         //TODO: Implement
         return false;
     }
 
-    public boolean deleteUser(String address){
+    public boolean deleteUser(int userId){
         //TODO: Implement
         return false;
     }
 
-    public boolean changeUserBlockedMode(String address, boolean block) {
+    public boolean changeUserActivityMode(int userId, boolean isActive) {
         //TODO: Implement
         return false;
     }
 
-    public boolean changeUserTime(String address, LocalTime newTimeBegin, LocalTime newTimeEnd) {
+    public boolean changeUserTime(int userId, Time newTimeBegin, Time newTimeEnd) {
         //TODO: Implement
         return false;
     }
 
-    // ###################### Users #############################
-    // ###################### Words #############################
+    public boolean setUserDurationMode(int userId, int durationTime){
+        //TODO: Implement - used na 0 ; has duration na true
+        //TODO moze zmieniac booleany i wywolywac changeUserDurationTime
+        return false;
+    }
 
-    public List<WordsFile> getWordsFileList(){
+    public boolean removeUserDurationMode(int userId){
+        //TODO ustawia hasDuration na false
+        return false;
+    }
+
+    public boolean changeUserDurationTime(int userId, int durationTime){
+        //TODO
+        return false;
+    }
+
+    //###################### Users #############################
+    //###################### Words #############################
+
+    public List<WordsListsEntity> getWordsListsList(){
         // Zwraca Listę plików które przechowują blokowane słowa
         //TODO: Implement
         return null;
     }
 
-    public WordsFile getWordsListFromWordsFile(String wordsListName){
+    public List<WordsEntity> getWordsListFromWordsFile(int wordsListId){
         //TODO: Implement
         return null;
     }
@@ -128,31 +133,30 @@ public class TrolAPI {
         return false;
     }
 
-    public boolean createWordInList(String wordsListName, String word){
+    public boolean createWordInList(int wordsListId, String word){
         //TODO: Implement
         return false;
     }
 
-    public boolean deleteWordFromList(String wordsListName, String word){
+    public boolean deleteWordFromList(int wordsListId, int wordId){
         //TODO: Implement
         return false;
     }
 
-    public boolean deleteWordsList(String wordsListName){
+    public boolean deleteWordsList(int wordsListId){
         //TODO: Implement
         return false;
     }
 
-    public boolean changeBlockModeInWordsList(String wordsListName, boolean block){
+    public boolean changeWordsListActivityMode(int wordsListId, boolean isActive){
         //TODO: Implement
         return false;
     }
 
-    public boolean changeTimeInWordsList(String wordsListName, LocalTime newTimeBegin, LocalTime newTimeEnd){
+    public boolean changeTimeInWordsList(int wordsListId, Time newTimeBegin, Time newTimeEnd){
         //TODO: Implement
         return false;
     }
-
-    // ###################### Words #############################
+    //###################### Words #############################
 
 }
