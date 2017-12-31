@@ -10,6 +10,7 @@ public class DomainsEntity {
     private int idDomainsList;
 
     @Id
+    @GeneratedValue
     @Column(name = "id_domain")
     public int getIdDomain() {
         return idDomain;

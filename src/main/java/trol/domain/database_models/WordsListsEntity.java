@@ -14,6 +14,7 @@ public class WordsListsEntity {
     private Time timeEnd;
 
     @Id
+    @GeneratedValue
     @Column(name = "id_words_list")
     public int getIdWordsList() {
         return idWordsList;

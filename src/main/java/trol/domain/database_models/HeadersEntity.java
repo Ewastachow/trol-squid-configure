@@ -10,6 +10,7 @@ public class HeadersEntity {
     private int idTransmissionType;
 
     @Id
+    @GeneratedValue
     @Column(name = "id_header")
     public int getIdHeader() {
         return idHeader;

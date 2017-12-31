@@ -15,6 +15,7 @@ public class DomainsListsEntity {
     private Time timeEnd;
 
     @Id
+    @GeneratedValue
     @Column(name = "id_domains_list")
     public int getIdDomainsList() {
         return idDomainsList;

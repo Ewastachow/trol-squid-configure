@@ -17,6 +17,7 @@ public class UserEntity {
     private Integer usedTime;
 
     @Id
+    @GeneratedValue
     @Column(name = "id_user")
     public int getIdUser() {
         return idUser;

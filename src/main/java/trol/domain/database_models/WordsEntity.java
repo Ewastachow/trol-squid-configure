@@ -10,6 +10,7 @@ public class WordsEntity {
     private int idWordsList;
 
     @Id
+    @GeneratedValue
     @Column(name = "id_word")
     public int getIdWord() {
         return idWord;

@@ -14,6 +14,7 @@ public class TransmissionTypesEntity {
     private Time timeEnd;
 
     @Id
+    @GeneratedValue
     @Column(name = "id_transmission_type")
     public int getIdTransmissionType() {
         return idTransmissionType;
