@@ -10,6 +10,7 @@ import trol.domain.trol_api.model.*;
 import trol.domain.util.HibernateUtil;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,7 +137,10 @@ public class TrolAPI {
         session.getTransaction().commit();
     }
 
-    public void changeDomainsListTime(int domainsListId, Time newTimeBegin, Time newTimeEnd) throws UnsuccessfulModificationException {
+    public void changeDomainsListTime(int domainsListId, LocalTime newLocalTimeBegin, LocalTime newLocalTimeEnd) throws UnsuccessfulModificationException {
+        Time newTimeBegin = Time.valueOf(newLocalTimeBegin);
+        Time newTimeEnd = Time.valueOf(newLocalTimeEnd);
+
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -191,7 +195,10 @@ public class TrolAPI {
         session.getTransaction().commit();
     }
 
-    public void changeTransmissionTypeTime(int transmisionTypeId, Time newTimeBegin, Time newTimeEnd) throws UnsuccessfulModificationException {
+    public void changeTransmissionTypeTime(int transmisionTypeId, LocalTime newLocalTimeBegin, LocalTime newLocalTimeEnd) throws UnsuccessfulModificationException {
+        Time newTimeBegin = Time.valueOf(newLocalTimeBegin);
+        Time newTimeEnd = Time.valueOf(newLocalTimeEnd);
+
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -286,7 +293,10 @@ public class TrolAPI {
         session.getTransaction().commit();
     }
 
-    public void changeUserTime(int userId, Time newTimeBegin, Time newTimeEnd) throws UnsuccessfulModificationException {
+    public void changeUserTime(int userId, LocalTime newLocalTimeBegin, LocalTime newLocalTimeEnd) throws UnsuccessfulModificationException {
+        Time newTimeBegin = Time.valueOf(newLocalTimeBegin);
+        Time newTimeEnd = Time.valueOf(newLocalTimeEnd);
+
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -457,7 +467,10 @@ public class TrolAPI {
         session.getTransaction().commit();
     }
 
-    public void changeTimeInWordsList(int wordsListId, Time newTimeBegin, Time newTimeEnd) throws UnsuccessfulModificationException {
+    public void changeTimeInWordsList(int wordsListId, LocalTime newLocalTimeBegin, LocalTime newLocalTimeEnd) throws UnsuccessfulModificationException {
+        Time newTimeBegin = Time.valueOf(newLocalTimeBegin);
+        Time newTimeEnd = Time.valueOf(newLocalTimeEnd);
+
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
