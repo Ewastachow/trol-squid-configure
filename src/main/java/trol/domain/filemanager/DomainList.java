@@ -22,4 +22,8 @@ public class DomainList {
     public void saveFile(){
         //TODO Implement
     }
+
+//    private String verifyDomain(String domain){
+//        if(domain.g)
+//    }
 }

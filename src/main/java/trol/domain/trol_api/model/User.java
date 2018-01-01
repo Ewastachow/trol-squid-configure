@@ -3,6 +3,7 @@ package trol.domain.trol_api.model;
 import trol.domain.database_models.UserEntity;
 
 import java.sql.Time;
+import java.time.LocalTime;
 
 public class User {
 
@@ -10,8 +11,8 @@ public class User {
     private String userIp;
     private byte isActive;
     private byte isTimed;
-    private Time timeBegin;
-    private Time timeEnd;
+    private LocalTime timeBegin;
+    private LocalTime timeEnd;
     private byte hasDuration;
     private Integer durationInterval;
     private Integer usedTime;
@@ -21,8 +22,8 @@ public class User {
         userIp = entity.getUserIp();
         isActive = entity.getIsActive();
         isTimed = entity.getIsTimed();
-        timeBegin = entity.getTimeBegin();
-        timeEnd = entity.getTimeEnd();
+        timeBegin = entity.getTimeBegin().toLocalTime();
+        timeEnd = entity.getTimeEnd().toLocalTime();
         hasDuration = entity.getHasDuration();
         durationInterval = entity.getDurationInterval();
         usedTime = entity.getUsedTime();
@@ -44,11 +45,11 @@ public class User {
         return isTimed;
     }
 
-    public Time getTimeBegin() {
+    public LocalTime getTimeBegin() {
         return timeBegin;
     }
 
-    public Time getTimeEnd() {
+    public LocalTime getTimeEnd() {
         return timeEnd;
     }
 
