@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import trol.domain.database_models.WordsEntity;
 import trol.domain.database_models.WordsListsEntity;
 import trol.domain.trol_api.TrolAPI;
+import trol.domain.trol_api.exception.UnsuccessfulDeletException;
+import trol.domain.trol_api.exception.UnsuccessfulModificationException;
 import trol.domain.trol_api.model.Word;
 import trol.domain.trol_api.model.WordsList;
 import trol.domain.util.HibernateUtil;
@@ -38,7 +40,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        foo4();
+        try {
+            foo4();
+        } catch (UnsuccessfulModificationException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void foo1(){
@@ -111,7 +117,7 @@ public class Main {
         HibernateUtil.getSessionFactory().close();
     }
 
-    public static void foo3(){
+    public static void foo3() throws UnsuccessfulModificationException {
         TrolAPI trolAPI = new TrolAPI();
         trolAPI.createNewWordsList("Wrzosowisko");
 
@@ -134,9 +140,9 @@ public class Main {
         int idWordsList = ((WordsListsEntity)session.createQuery("FROM WordsListsEntity WHERE wordsListName = :name").setParameter("name",name).list().get(0)).getIdWordsList();
         session.getTransaction().commit();
 
-        boolean res = trolAPI.changeWordsListActivityMode(idWordsList, true);
+        trolAPI.changeWordsListActivityMode(idWordsList, true);
 
-        stringBuilder.append(res);
+//        stringBuilder.append(res);
         stringBuilder.append("\n");
         stringBuilder.append(" $$$$$$ LISTS $$$$$$ :  ");
         for(WordsList i : wordsListsEntityList){
@@ -155,7 +161,7 @@ public class Main {
         HibernateUtil.getSessionFactory().close();
     }
 
-    public static void foo4(){
+    public static void foo4() throws UnsuccessfulModificationException {
         TrolAPI trolAPI = new TrolAPI();
         int idWordsList = trolAPI.createNewWordsList("Opoka");
 
@@ -165,14 +171,11 @@ public class Main {
 //        int idWordsList = ((WordsListsEntity)session.createQuery("FROM WordsListsEntity WHERE wordsListName = :name").setParameter("name",name).list().get(0)).getIdWordsList();
 //        session.getTransaction().commit();
 
-        boolean res1 = trolAPI.changeWordsListActivityMode(idWordsList, true);
-        boolean res2 = trolAPI.changeTimeInWordsList(idWordsList, Time.valueOf(LocalTime.of(11,20)), Time.valueOf(LocalTime.of(21,02)));
+        trolAPI.changeWordsListActivityMode(idWordsList, true);
+        trolAPI.changeTimeInWordsList(idWordsList, Time.valueOf(LocalTime.of(11,20)), Time.valueOf(LocalTime.of(21,02)));
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n\n\n\n");
-        stringBuilder.append(res1);
-        stringBuilder.append("\n");
-        stringBuilder.append(res2);
         stringBuilder.append("\n");
 
         List<WordsList> wordsListsEntityList = trolAPI.getWordsListsList();
@@ -185,7 +188,7 @@ public class Main {
         HibernateUtil.getSessionFactory().close();
     }
 
-    public static void foo5(){
+    public static void foo5() throws UnsuccessfulDeletException {
         TrolAPI trolAPI = new TrolAPI();
 //        trolAPI.createNewWordsList("LamaApla4");
 //        trolAPI.createNewWordsList("Alpaka4");
@@ -200,13 +203,13 @@ public class Main {
 //        trolAPI.addWordToWordsList(idWordsList, "Oma");
 //        trolAPI.addWordToWordsList(idWordsList,"asas");
 
-        boolean res1 = trolAPI.deleteWordsList(idWordsList);
+        trolAPI.deleteWordsList(idWordsList);
 //        boolean res2 = trolAPI.deleteWordsList(1);
 
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n\n\n\n");
-        stringBuilder.append(res1);
+//        stringBuilder.append(res1);
         stringBuilder.append("\n");
 //        stringBuilder.append(res2);
         stringBuilder.append("\n");
