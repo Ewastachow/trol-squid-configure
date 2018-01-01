@@ -3,6 +3,7 @@ package trol.domain.trol_api.model;
 import trol.domain.database_models.TransmissionTypesEntity;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,8 +12,8 @@ public class TransmissionType {
     private String transmissionTypeName;
     private byte isActive;
     private byte isTimed;
-    private Time timeBegin;
-    private Time timeEnd;
+    private LocalTime timeBegin;
+    private LocalTime timeEnd;
     private Set<Header> headersSet;
 
     public TransmissionType(TransmissionTypesEntity entity) {
@@ -21,8 +22,8 @@ public class TransmissionType {
         transmissionTypeName = entity.getTransmissionTypeName();
         isActive = entity.getIsActive();
         isTimed = entity.getIsTimed();
-        timeBegin = entity.getTimeBegin();
-        timeEnd = entity.getTimeEnd();
+        timeBegin = entity.getTimeBegin().toLocalTime();
+        timeEnd = entity.getTimeEnd().toLocalTime();
         entity.getHeadersEntitySet().forEach(e -> headersSet.add(new Header(e)));
     }
 
@@ -42,11 +43,11 @@ public class TransmissionType {
         return isTimed;
     }
 
-    public Time getTimeBegin() {
+    public LocalTime getTimeBegin() {
         return timeBegin;
     }
 
-    public Time getTimeEnd() {
+    public LocalTime getTimeEnd() {
         return timeEnd;
     }
 
