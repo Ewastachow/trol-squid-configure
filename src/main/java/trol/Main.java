@@ -1,13 +1,12 @@
 package trol;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import trol.domain.database_models.WordsEntity;
 import trol.domain.database_models.WordsListsEntity;
+import trol.domain.trol_api.TrolAPI;
+import trol.domain.trol_api.model.Word;
+import trol.domain.trol_api.model.WordsList;
 import trol.domain.util.HibernateUtil;
-import trol.terminal_interface.App;
 
 import java.util.List;
 
@@ -17,27 +16,15 @@ public class Main {
     public static void printWords() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-
         List<WordsEntity> wordsEntityList = session.createQuery("FROM WordsEntity").list();
         wordsEntityList.forEach(e ->
             System.out.printf(e.getWordString()));
-
-
-//        List<Autor> autorzy = session.createQuery("from Autor").list();
-//        for(Autor a : autorzy) {
-//            System.out.println(a.getId() + "\t" + a.getImie() + "\t" + a.getNazwisko() + "\tksiazki:");
-//            for(Ksiazka k : a.getKsiazki()) {
-//                System.out.println("\t" + k.getId() + "\t" + k.getTytul());
-//            }
-//        }
-
         session.getTransaction().commit();
     }
 
     public static void printWordsLists() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-
         List<WordsListsEntity> wordsListsEntityList = session.createQuery("FROM WordsListsEntity ").list();
         wordsListsEntityList.forEach(e -> {
             System.out.println(e.getWordsListName() + " &&&&&&&&&&& ");
@@ -45,33 +32,16 @@ public class Main {
                 System.out.print(ee.getWordString() + " @@@ ");
             });
         });
-
-//        List<Autor> autorzy = session.createQuery("from Autor").list();
-//        for(Autor a : autorzy) {
-//            System.out.println(a.getId() + "\t" + a.getImie() + "\t" + a.getNazwisko() + "\tksiazki:");
-//            for(Ksiazka k : a.getKsiazki()) {
-//                System.out.println("\t" + k.getId() + "\t" + k.getTytul());
-//            }
-//        }
         session.getTransaction().commit();
     }
 
     public static void main(String[] args) {
-//        SessionFactory sessionFactory;
-//        sessionFactory = new Configuration()
-//                .configure() // configures settings from hibernate.cfg.xml
-//                .buildSessionFactory();
-//        Session session = sessionFactory.openSession();
-//        session.beginTransaction();
+        foo2();
+    }
 
-
+    public static void foo1(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-
-//        Autor autor = new Autor();
-//        autor.setImie("Henryk");
-//        autor.setNazwisko("Sienkiewicz");
-//        session.save(autor);
 
         WordsListsEntity wordsListsEntity = new WordsListsEntity();
         wordsListsEntity.setIsActive((byte) 0);
@@ -89,16 +59,6 @@ public class Main {
         wordsEntity2.setIdWordsList(wordsListsEntity);
         session.save(wordsEntity2);
 
-
-
-
-
-//
-//        Ksiazka ksiazka = new Ksiazka();
-//        ksiazka.setTytul("W pustyni i w puszczy");
-//        ksiazka.setAutor(autor);
-//        session.save(ksiazka);
-
         session.getTransaction().commit();
 
         System.out.println("Test Hibernate 02");
@@ -106,9 +66,46 @@ public class Main {
         System.out.println("\nWords:");
         printWordsLists();
 
-//        System.out.println("\nKsiazki:");
-//        printKsiazki();
         session.close();
+        HibernateUtil.getSessionFactory().close();
+    }
+
+    public static void foo2(){
+        TrolAPI trolAPI = new TrolAPI();
+        trolAPI.createNewWordsList("Onomatopeja");
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        String name = "Onomatopeja";
+        int idWordsList = ((WordsListsEntity)session.createQuery("FROM WordsListsEntity WHERE wordsListName = :name").setParameter("name",name).list().get(0)).getIdWordsList();
+        session.getTransaction().commit();
+
+        trolAPI.addWordToWordsList(idWordsList, "Word1");
+        trolAPI.addWordToWordsList(idWordsList, "Word2");
+        trolAPI.addWordToWordsList(idWordsList, "Word3");
+        trolAPI.addWordToWordsList(idWordsList, "Word4");
+        trolAPI.addWordToWordsList(idWordsList, "Word5");
+
+        List<WordsList> wordsListsEntityList = trolAPI.getWordsListsList();
+        WordsList wordsListsEntity = trolAPI.getWordsList(idWordsList);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n\n\n\n");
+        stringBuilder.append(" $$$$$$ LISTS $$$$$$ :  ");
+        for(WordsList i : wordsListsEntityList){
+            stringBuilder.append(i.getWordsListName());
+            stringBuilder.append(" @@ ");
+        }
+        stringBuilder.append("\n");
+        stringBuilder.append(" ****** WORDS IN ONOMATOPEJA ****** :  ");
+        for(Word i : wordsListsEntity.getWordsSet()){
+            stringBuilder.append(i.getWordString());
+            stringBuilder.append("------");
+        }
+        stringBuilder.append("\n\n\n\n");
+
+        System.out.printf(stringBuilder.toString());
+
         HibernateUtil.getSessionFactory().close();
     }
 }

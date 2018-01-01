@@ -2,62 +2,91 @@ package trol.domain.trol_api;
 
 import org.hibernate.Session;
 import trol.domain.database_models.*;
+import trol.domain.trol_api.model.*;
 import trol.domain.util.HibernateUtil;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TrolAPI {
 
 //###################### DOMAINS #############################
 
-    public List<DomainsListsEntity> getDomainsListsList(){
-        // Zwraca Listę plików które przechowują zapisane domany możliwe do blokowania
-        //TODO: Check
-
+    public List<DomainsList> getDomainsListsList(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         List<DomainsListsEntity> domainsListsEntityList = session.createQuery("FROM DomainsListsEntity").list();
+        List<DomainsList> result = new ArrayList<>();
+        domainsListsEntityList.forEach(e -> result.add(new DomainsList(e)));
 
         session.getTransaction().commit();
-        return domainsListsEntityList;
+        return result;
     }
 
     //INFO @Dzieniu DomainsListsEntity zawiera w sb pole Set<Domains> - wystarczy wywołac getDomainsEntitySet()
-    public DomainsListsEntity getDomainsList(int domainsListIp){
-        //TODO: Implement
-        // Zwraca informacje o danej liście domen, czas w jakim jest blokowana ( lub czy wg jest blokowana czasowo), tryb jej blokowania itp
-        return null;
+    public DomainsList getDomainsList(int domainsListId){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        List<DomainsListsEntity> domainsListsEntityList = session.createQuery("FROM DomainsListsEntity WHERE idDomainsList = :domainsListId").setParameter("domainsListId",domainsListId).list();
+        DomainsList result = new DomainsList(domainsListsEntityList.get(0));
+
+        session.getTransaction().commit();
+        return result;
     }
 
     public boolean createNewDomainsList(String domainsListName){
-        //TODO: Impement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        DomainsListsEntity domainsListsEntity = new DomainsListsEntity();
+        domainsListsEntity.setDomainsListName(domainsListName);
+        domainsListsEntity.setIsActive((byte) 0);
+        domainsListsEntity.setIsBlack((byte) 1);
+        domainsListsEntity.setIsTimed((byte) 0);
+        session.save(domainsListsEntity);
+
+        session.getTransaction().commit();
+        //TODO zrobic void i rzucac wyjatek
+        return true;
     }
 
-    public boolean createNewDomainInDomainsList(int domainsListIp, String domainString){
+    public boolean addDomainToDomainsList(int domainsListId, String domainString){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        List<DomainsListsEntity> domainsListsEntityList = session.createQuery("FROM DomainsListsEntity WHERE idDomainsList = :domainsListId").setParameter("domainsListId",domainsListId).list();
+        DomainsListsEntity domainsListsEntity = domainsListsEntityList.get(0);
+
+        DomainsEntity domainsEntity = new DomainsEntity();
+        domainsEntity.setDomainString(domainString);
+        domainsEntity.setIdDomainsList(domainsListsEntity);
+        session.save(domainsEntity);
+
+        session.getTransaction().commit();
+        //TODO zrobic void i rzucac wyjatek
+        return true;
+    }
+
+    public boolean deleteDomainFromDomainsList(int domainsListId, int domainId){
         //TODO: Implement
         return false;
     }
 
-    public boolean deleteDomainFromDomainsList(int domainsListIp, int domainId){
+    public boolean deleteDomainsList(int domainsListId){
         //TODO: Implement
         return false;
     }
 
-    public boolean deleteDomainsList(int domainsListIp){
-        //TODO: Implement
-        return false;
-    }
-
-    public boolean changeDomainsListMode(int domainsListIp, Mode newMode){
+    public boolean changeDomainsListMode(int domainsListId, Mode newMode){
         //TODO need to change isActive & isBlack
         //TODO: Implement
         return false;
     }
 
-    public boolean changeTimeInDomainsList(int domainsListIp, Time newTimeBegin, Time newTimeEnd){
+    public boolean changeTimeInDomainsList(int domainsListId, Time newTimeBegin, Time newTimeEnd){
         //TODO: Implement
         return false;
     }
@@ -66,24 +95,35 @@ public class TrolAPI {
 
 //###################### Headers #############################
 
-    public List<TransmissionTypesEntity> getHeadersList() {
-        //TODO: Check
-
+    public List<TransmissionType> getTransmissionTypeList() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         List<TransmissionTypesEntity> transmissionTypesEntityList = session.createQuery("FROM TransmissionTypesEntity ").list();
+        List<TransmissionType> result = new ArrayList<>();
+        transmissionTypesEntityList.forEach(e -> result.add(new TransmissionType(e)));
 
         session.getTransaction().commit();
-        return transmissionTypesEntityList;
+        return result;
     }
 
-    public boolean changeHeaderActivityMode(TransmissionTypesEntity transmisionType, boolean isActive) {
+    public TransmissionType getTransmissionType(int transmisionTypeId){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        List<TransmissionTypesEntity> transmissionTypesEntityList = session.createQuery("FROM TransmissionTypesEntity WHERE idTransmissionType = :transmisionTypeId").setParameter("transmisionTypeId",transmisionTypeId).list();
+        TransmissionType result = new TransmissionType(transmissionTypesEntityList.get(0));
+
+        session.getTransaction().commit();
+        return result;
+    }
+
+    public boolean changeTransmissionTypeActivityMode(int transmisionTypeId, boolean isActive) {
         //TODO: Implement
         return false;
     }
 
-    public boolean changeHeaderTime(TransmissionTypesEntity transmisionType, Time newTimeBegin, Time newTimeEnd) {
+    public boolean changeTransmissionTypeTime(int transmisionTypeId, Time newTimeBegin, Time newTimeEnd) {
         //TODO: Implement
         return false;
     }
@@ -92,21 +132,43 @@ public class TrolAPI {
 
 //###################### Users #############################
 
-    public List<UserEntity> getUsersList() {
-        //TODO: Check
-
+    public List<User> getUsersList() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         List<UserEntity> userEntityList = session.createQuery("FROM UserEntity ").list();
+        List<User> result = new ArrayList<>();
+        userEntityList.forEach(e -> result.add(new User(e)));
 
         session.getTransaction().commit();
-        return userEntityList;
+        return result;
+    }
+
+    public User getUser(int userId){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        List<UserEntity> userEntityList = session.createQuery("FROM UserEntity WHERE idUser = :userId").setParameter("userId",userId).list();
+        User result = new User(userEntityList.get(0));
+
+        session.getTransaction().commit();
+        return result;
     }
 
     public boolean createUser(String addressIp){
-        //TODO: Implement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUserIp(addressIp);
+        userEntity.setIsActive((byte) 0);
+        userEntity.setIsTimed((byte) 0);
+        userEntity.setHasDuration((byte) 0);
+        session.save(userEntity);
+
+        session.getTransaction().commit();
+        //TODO zrobic void i rzucac wyjatek
+        return true;
     }
 
     public boolean deleteUser(int userId){
@@ -144,32 +206,64 @@ public class TrolAPI {
 
 //###################### Words #############################
 
-    public List<WordsListsEntity> getWordsListsList(){
-        //TODO: Check
-
+    public List<WordsList> getWordsListsList(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         List<WordsListsEntity> wordsListsEntityList = session.createQuery("FROM WordsListsEntity ").list();
+        List<WordsList> result = new ArrayList<>();
+        wordsListsEntityList.forEach(e -> result.add(new WordsList(e)));
 
         session.getTransaction().commit();
-        return wordsListsEntityList;
+//        HibernateUtil.getSessionFactory().close();
+        return result;
     }
 
     //INFO @Dzieniu WordsListsEntity zawiera w sb pole Set<Words> - wystarczy wywołac getWordsEntitySet()
-    public WordsListsEntity getWordsList(int wordsListId){
-        //TODO: Implement
-        return null;
+    public WordsList getWordsList(int wordsListId){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        List<WordsListsEntity> wordsListsEntityList = session.createQuery("FROM WordsListsEntity WHERE idWordsList = :wordsListId").setParameter("wordsListId",wordsListId).list();
+        WordsList result = new WordsList(wordsListsEntityList.get(0));
+
+        session.getTransaction().commit();
+//        HibernateUtil.getSessionFactory().close();
+        return result;
     }
 
     public boolean createNewWordsList(String wordsListName){
-        //TODO: Impement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        WordsListsEntity wordsListsEntity = new WordsListsEntity();
+        wordsListsEntity.setWordsListName(wordsListName);
+        wordsListsEntity.setIsActive((byte) 0);
+        wordsListsEntity.setIsTimed((byte) 0);
+        session.save(wordsListsEntity);
+
+        session.getTransaction().commit();
+//        HibernateUtil.getSessionFactory().close();
+        //TODO zrobic void i rzucac wyjatek
+        return true;
     }
 
-    public boolean createWordInList(int wordsListId, String word){
-        //TODO: Implement
-        return false;
+    public boolean addWordToWordsList(int wordsListId, String word){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        List<WordsListsEntity> wordsListsEntityList = session.createQuery("FROM WordsListsEntity WHERE idWordsList = :wordsListId").setParameter("wordsListId",wordsListId).list();
+        WordsListsEntity wordsListsEntity = wordsListsEntityList.get(0);
+
+        WordsEntity wordsEntity = new WordsEntity();
+        wordsEntity.setWordString(word);
+        wordsEntity.setIdWordsList(wordsListsEntity);
+        session.save(wordsEntity);
+
+        session.getTransaction().commit();
+//        HibernateUtil.getSessionFactory().close();
+        //TODO zrobic void i rzucac wyjatek
+        return true;
     }
 
     public boolean deleteWordFromList(int wordsListId, int wordId){
