@@ -3,6 +3,8 @@ package trol.domain.trol_api;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import trol.domain.database_models.*;
+import trol.domain.trol_api.exception.UnsuccessfulDeletException;
+import trol.domain.trol_api.exception.UnsuccessfulModificationException;
 import trol.domain.trol_api.model.*;
 import trol.domain.util.HibernateUtil;
 
@@ -11,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrolAPI {
+
+    //Metody CREATE i ADD zwracaja ID tworzonego obiektu
 
 //###################### DOMAINS #############################
 
@@ -38,40 +42,35 @@ public class TrolAPI {
         return result;
     }
 
-    public boolean createNewDomainsList(String domainsListName){
+    public int createNewDomainsList(String domainsListName){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-
         DomainsListsEntity domainsListsEntity = new DomainsListsEntity();
         domainsListsEntity.setDomainsListName(domainsListName);
         domainsListsEntity.setIsActive((byte) 0);
         domainsListsEntity.setIsBlack((byte) 1);
         domainsListsEntity.setIsTimed((byte) 0);
         session.save(domainsListsEntity);
-
+        int domainsListId = domainsListsEntity.getIdDomainsList();
         session.getTransaction().commit();
-        //TODO zrobic void i rzucac wyjatek
-        return true;
+        return domainsListId;
     }
 
-    public boolean addDomainToDomainsList(int domainsListId, String domainString){
+    public int addDomainToDomainsList(int domainsListId, String domainString){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-
         List<DomainsListsEntity> domainsListsEntityList = session.createQuery("FROM DomainsListsEntity WHERE idDomainsList = :domainsListId").setParameter("domainsListId",domainsListId).list();
         DomainsListsEntity domainsListsEntity = domainsListsEntityList.get(0);
-
         DomainsEntity domainsEntity = new DomainsEntity();
         domainsEntity.setDomainString(domainString);
         domainsEntity.setIdDomainsList(domainsListsEntity);
         session.save(domainsEntity);
-
+        int domainId = domainsEntity.getIdDomain();
         session.getTransaction().commit();
-        //TODO zrobic void i rzucac wyjatek
-        return true;
+        return domainId;
     }
 
-    public boolean deleteDomain(int domainId){
+    public void deleteDomain(int domainId) throws UnsuccessfulDeletException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -79,12 +78,11 @@ public class TrolAPI {
         Query query = session.createQuery(st);
         query.setParameter("domainId",domainId);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulDeletException("TrolAPI delete exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean deleteDomainsList(int domainsListId){
+    public void deleteDomainsList(int domainsListId) throws UnsuccessfulDeletException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -92,12 +90,11 @@ public class TrolAPI {
         Query query = session.createQuery(st);
         query.setParameter("domainsListId",domainsListId);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulDeletException("TrolAPI delete exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeDomainsListMode(int domainsListId, Mode newMode){
+    public void changeDomainsListMode(int domainsListId, Mode newMode) throws UnsuccessfulModificationException {
         //TODO Test
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -119,12 +116,11 @@ public class TrolAPI {
             query.setParameter("blacktivity",blacktivity);
         }
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeDomainsListTimedMode(int domainsListId, boolean isTimed){
+    public void changeDomainsListTimedMode(int domainsListId, boolean isTimed) throws UnsuccessfulModificationException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -134,12 +130,11 @@ public class TrolAPI {
         query.setParameter("domainsListId",domainsListId);
         query.setParameter("timed", timed);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeDomainsListTime(int domainsListId, Time newTimeBegin, Time newTimeEnd){
+    public void changeDomainsListTime(int domainsListId, Time newTimeBegin, Time newTimeEnd) throws UnsuccessfulModificationException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -149,9 +144,8 @@ public class TrolAPI {
         query.setParameter("newTimeBegin",newTimeBegin);
         query.setParameter("newTimeEnd",newTimeEnd);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
 //###################### DOMAINS #############################
@@ -181,7 +175,7 @@ public class TrolAPI {
         return result;
     }
 
-    public boolean changeTransmissionTypeActivityMode(int transmisionTypeId, boolean isActive) {
+    public void changeTransmissionTypeActivityMode(int transmisionTypeId, boolean isActive) throws UnsuccessfulModificationException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -191,12 +185,11 @@ public class TrolAPI {
         query.setParameter("transmisionTypeId",transmisionTypeId);
         query.setParameter("activity", activity);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeTransmissionTypeTime(int transmisionTypeId, Time newTimeBegin, Time newTimeEnd) {
+    public void changeTransmissionTypeTime(int transmisionTypeId, Time newTimeBegin, Time newTimeEnd) throws UnsuccessfulModificationException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -206,9 +199,8 @@ public class TrolAPI {
         query.setParameter("newTimeBegin",newTimeBegin);
         query.setParameter("newTimeEnd",newTimeEnd);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
 //###################### Headers #############################
@@ -238,23 +230,21 @@ public class TrolAPI {
         return result;
     }
 
-    public boolean createUser(String addressIp){
+    public int createUser(String addressIp){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-
         UserEntity userEntity = new UserEntity();
         userEntity.setUserIp(addressIp);
         userEntity.setIsActive((byte) 0);
         userEntity.setIsTimed((byte) 0);
         userEntity.setHasDuration((byte) 0);
         session.save(userEntity);
-
+        int userId = userEntity.getIdUser();
         session.getTransaction().commit();
-        //TODO zrobic void i rzucac wyjatek
-        return true;
+        return userId;
     }
 
-    public boolean deleteUser(int userId){
+    public void deleteUser(int userId) throws UnsuccessfulDeletException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -262,12 +252,11 @@ public class TrolAPI {
         Query query = session.createQuery(st);
         query.setParameter("userId",userId);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulDeletException("TrolAPI delete exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeUserActivityMode(int userId, boolean isActive) {
+    public void changeUserActivityMode(int userId, boolean isActive) throws UnsuccessfulModificationException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -277,12 +266,11 @@ public class TrolAPI {
         query.setParameter("userId",userId);
         query.setParameter("activity", activity);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeUserTimedMode(int userId, boolean isTimed){
+    public void changeUserTimedMode(int userId, boolean isTimed) throws UnsuccessfulModificationException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -292,12 +280,11 @@ public class TrolAPI {
         query.setParameter("userId",userId);
         query.setParameter("timed", timed);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeUserTime(int userId, Time newTimeBegin, Time newTimeEnd) {
+    public void changeUserTime(int userId, Time newTimeBegin, Time newTimeEnd) throws UnsuccessfulModificationException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -307,12 +294,11 @@ public class TrolAPI {
         query.setParameter("newTimeBegin",newTimeBegin);
         query.setParameter("newTimeEnd",newTimeEnd);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeUserDurationMode(int userId, boolean hasDuration){
+    public void changeUserDurationMode(int userId, boolean hasDuration) throws UnsuccessfulModificationException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -322,12 +308,11 @@ public class TrolAPI {
         query.setParameter("userId",userId);
         query.setParameter("activity", activity);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeUserDurationTime(int userId, int durationTime){
+    public void changeUserDurationTime(int userId, int durationTime) throws UnsuccessfulModificationException {
         //TODO Test
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -337,12 +322,11 @@ public class TrolAPI {
         query.setParameter("userId",userId);
         query.setParameter("durationTime", durationTime);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeUserUsedTime(int userId, int usedTime){
+    public void changeUserUsedTime(int userId, int usedTime) throws UnsuccessfulModificationException {
         //TODO Test
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -352,9 +336,8 @@ public class TrolAPI {
         query.setParameter("userId",userId);
         query.setParameter("usedTime", usedTime);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
 //###################### Users #############################
@@ -387,21 +370,22 @@ public class TrolAPI {
         return result;
     }
 
-    public boolean createNewWordsList(String wordsListName){
+    public int createNewWordsList(String wordsListName){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         WordsListsEntity wordsListsEntity = new WordsListsEntity();
         wordsListsEntity.setWordsListName(wordsListName);
         session.save(wordsListsEntity);
+        int wordsListId = wordsListsEntity.getIdWordsList();
 
         session.getTransaction().commit();
 //        HibernateUtil.getSessionFactory().close();
         //TODO zrobic void i rzucac wyjatek
-        return true;
+        return wordsListId;
     }
 
-    public boolean addWordToWordsList(int wordsListId, String word){
+    public int addWordToWordsList(int wordsListId, String word){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -412,14 +396,14 @@ public class TrolAPI {
         wordsEntity.setWordString(word);
         wordsEntity.setIdWordsList(wordsListsEntity);
         session.save(wordsEntity);
-
+        int wordId = wordsEntity.getIdWord();
         session.getTransaction().commit();
 //        HibernateUtil.getSessionFactory().close();
         //TODO zrobic void i rzucac wyjatek
-        return true;
+        return wordId;
     }
 
-    public boolean deleteWord(int wordId){
+    public void deleteWord(int wordId) throws UnsuccessfulDeletException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -427,12 +411,11 @@ public class TrolAPI {
         Query query = session.createQuery(st);
         query.setParameter("wordId",wordId);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulDeletException("TrolAPI delete exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean deleteWordsList(int wordsListId){
+    public void deleteWordsList(int wordsListId) throws UnsuccessfulDeletException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -440,12 +423,11 @@ public class TrolAPI {
         Query query = session.createQuery(st);
         query.setParameter("wordsListId",wordsListId);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulDeletException("TrolAPI delete exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeWordsListActivityMode(int wordsListId, boolean isActive){
+    public void changeWordsListActivityMode(int wordsListId, boolean isActive) throws UnsuccessfulModificationException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -455,12 +437,11 @@ public class TrolAPI {
         query.setParameter("wordsListId",wordsListId);
         query.setParameter("activity", activity);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeWordsListTimedMode(int wordsListId, boolean isTimed){
+    public void changeWordsListTimedMode(int wordsListId, boolean isTimed) throws UnsuccessfulModificationException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -470,12 +451,11 @@ public class TrolAPI {
         query.setParameter("wordsListId",wordsListId);
         query.setParameter("timed", timed);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 
-    public boolean changeTimeInWordsList(int wordsListId, Time newTimeBegin, Time newTimeEnd){
+    public void changeTimeInWordsList(int wordsListId, Time newTimeBegin, Time newTimeEnd) throws UnsuccessfulModificationException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -485,9 +465,8 @@ public class TrolAPI {
         query.setParameter("newTimeBegin",newTimeBegin);
         query.setParameter("newTimeEnd",newTimeEnd);
         int result = query.executeUpdate();
-
+        if(result!=1) throw new UnsuccessfulModificationException("TrolAPI modification exception");
         session.getTransaction().commit();
-        return result == 1;
     }
 //###################### Words #############################
 

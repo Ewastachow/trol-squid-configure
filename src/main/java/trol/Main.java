@@ -38,7 +38,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        foo5();
+        foo4();
     }
 
     public static void foo1(){
@@ -157,13 +157,13 @@ public class Main {
 
     public static void foo4(){
         TrolAPI trolAPI = new TrolAPI();
-        trolAPI.createNewWordsList("Opoka");
+        int idWordsList = trolAPI.createNewWordsList("Opoka");
 
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        String name = "Opoka";
-        int idWordsList = ((WordsListsEntity)session.createQuery("FROM WordsListsEntity WHERE wordsListName = :name").setParameter("name",name).list().get(0)).getIdWordsList();
-        session.getTransaction().commit();
+//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//        session.beginTransaction();
+//        String name = "Opoka";
+//        int idWordsList = ((WordsListsEntity)session.createQuery("FROM WordsListsEntity WHERE wordsListName = :name").setParameter("name",name).list().get(0)).getIdWordsList();
+//        session.getTransaction().commit();
 
         boolean res1 = trolAPI.changeWordsListActivityMode(idWordsList, true);
         boolean res2 = trolAPI.changeTimeInWordsList(idWordsList, Time.valueOf(LocalTime.of(11,20)), Time.valueOf(LocalTime.of(21,02)));
