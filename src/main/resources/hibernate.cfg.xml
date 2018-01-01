@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://mysql.agh.edu.pl:3306/estacho1</property>
+        <property name="hibernate.connection.username">estacho1</property>
+        <property name="hibernate.connection.password">4o43gQXTmgHeocFD</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="current_session_context_class">thread</property>
+
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="trol.domain.database_models.WordsEntity"/>
+        <mapping resource="trol/domain/database_models/WordsEntity.hbm.xml"/>
+        <mapping class="trol.domain.database_models.WordsListsEntity"/>
+        <mapping resource="trol/domain/database_models/WordsListsEntity.hbm.xml"/>
+        <mapping class="trol.domain.database_models.DomainsEntity"/>
+        <mapping resource="trol/domain/database_models/DomainsEntity.hbm.xml"/>
+        <mapping class="trol.domain.database_models.DomainsListsEntity"/>
+        <mapping resource="trol/domain/database_models/DomainsListsEntity.hbm.xml"/>
+        <mapping class="trol.domain.database_models.UserEntity"/>
+        <mapping resource="trol/domain/database_models/UserEntity.hbm.xml"/>
+        <mapping class="trol.domain.database_models.HeadersEntity"/>
+        <mapping resource="trol/domain/database_models/HeadersEntity.hbm.xml"/>
+        <mapping class="trol.domain.database_models.TransmissionTypesEntity"/>
+        <mapping resource="trol/domain/database_models/TransmissionTypesEntity.hbm.xml"/>
+        <!--<mapping class="DataSchema.CopiesEntity"/>-->
+        <!--<mapping resource="DataSchema/CopiesEntity.hbm.xml"/>-->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

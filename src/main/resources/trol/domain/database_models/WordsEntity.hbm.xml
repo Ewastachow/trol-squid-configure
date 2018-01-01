@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="trol.domain.database_models.WordsEntity" table="words" schema="estacho1">
+        <id name="idWord" column="id_word">
+            <generator class="native"/>
+        </id>
+        <property name="wordString" column="word_string"/>
+        <many-to-one name="idWordsList" column="id_words_list"/>
+    </class>
+</hibernate-mapping>

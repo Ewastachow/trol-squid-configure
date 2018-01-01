@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="trol.domain.database_models.DomainsListsEntity" table="domains_lists" schema="estacho1">
+        <id name="idDomainsList" column="id_domains_list">
+            <generator class="native"/>
+        </id>
+        <property name="domainsListName" column="domains_list_name"/>
+        <property name="isActive" column="is_active"/>
+        <property name="isBlack" column="is_black"/>
+        <property name="isTimed" column="is_timed"/>
+        <property name="timeBegin" column="time_begin"/>
+        <property name="timeEnd" column="time_end"/>
+        <set name="domainsEntitySet" table="domains" inverse="true">
+            <key column="id_domains_list"/>
+            <one-to-many class="trol.domain.database_models.DomainsEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>
