@@ -14,7 +14,7 @@ CREATE TABLE domains (
   domain_string VARCHAR(30) NOT NULL,
   id_domains_list INTEGER NOT NULL,
   PRIMARY KEY (id_domain),
-  FOREIGN KEY (id_domains_list) REFERENCES domains_lists(id_domains_list)
+  FOREIGN KEY (id_domains_list) REFERENCES domains_lists(id_domains_list) ON DELETE CASCADE
 );
 
 CREATE TABLE transmission_types (
@@ -32,7 +32,7 @@ CREATE TABLE headers (
   header_string VARCHAR(30) NOT NULL,
   id_transmission_type INTEGER NOT NULL,
   PRIMARY KEY (id_header),
-  FOREIGN KEY (id_transmission_type) REFERENCES transmission_types(id_transmission_type)
+  FOREIGN KEY (id_transmission_type) REFERENCES transmission_types(id_transmission_type) ON DELETE CASCADE
 );
 
 CREATE TABLE words_lists (
@@ -50,7 +50,7 @@ CREATE TABLE words (
   word_string VARCHAR(30) NOT NULL,
   id_words_list INTEGER NOT NULL,
   PRIMARY KEY (id_word),
-  FOREIGN KEY (id_words_list) REFERENCES words_lists(id_words_list)
+  FOREIGN KEY (id_words_list) REFERENCES words_lists(id_words_list) ON DELETE CASCADE
 );
 
 CREATE TABLE user (

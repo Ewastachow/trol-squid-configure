@@ -38,7 +38,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        foo4();
+        foo5();
     }
 
     public static void foo1(){
@@ -183,6 +183,44 @@ public class Main {
         System.out.printf(stringBuilder.toString());
 
         HibernateUtil.getSessionFactory().close();
+    }
+
+    public static void foo5(){
+        TrolAPI trolAPI = new TrolAPI();
+//        trolAPI.createNewWordsList("LamaApla4");
+//        trolAPI.createNewWordsList("Alpaka4");
+//        trolAPI.createNewWordsList("Oppppp4");
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        String name = "Alpaka4";
+        int idWordsList = ((WordsListsEntity)session.createQuery("FROM WordsListsEntity WHERE wordsListName = :name").setParameter("name",name).list().get(0)).getIdWordsList();
+        session.getTransaction().commit();
+
+//        trolAPI.addWordToWordsList(idWordsList, "Oma");
+//        trolAPI.addWordToWordsList(idWordsList,"asas");
+
+        boolean res1 = trolAPI.deleteWordsList(idWordsList);
+//        boolean res2 = trolAPI.deleteWordsList(1);
+
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n\n\n\n");
+        stringBuilder.append(res1);
+        stringBuilder.append("\n");
+//        stringBuilder.append(res2);
+        stringBuilder.append("\n");
+
+        List<WordsList> wordsListsEntityList = trolAPI.getWordsListsList();
+        stringBuilder.append(" $$$$$$ LISTS $$$$$$ :  ");
+        wordsListsEntityList.forEach(e -> stringBuilder.append(generateWordsListString(e)));
+        stringBuilder.append("\n\n\n\n");
+
+        System.out.printf(stringBuilder.toString());
+
+        HibernateUtil.getSessionFactory().close();
+
+
     }
 
     public static String generateWordsListString(WordsList wl){

@@ -71,14 +71,30 @@ public class TrolAPI {
         return true;
     }
 
-    public boolean deleteDomainFromDomainsList(int domainsListId, int domainId){
-        //TODO: Implement
-        return false;
+    public boolean deleteDomain(int domainId){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        String st = "DELETE DomainsEntity WHERE idDomain = :domainId";
+        Query query = session.createQuery(st);
+        query.setParameter("domainId",domainId);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
     public boolean deleteDomainsList(int domainsListId){
-        //TODO: Implement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        String st = "DELETE DomainsListsEntity WHERE idDomainsList = :domainsListId";
+        Query query = session.createQuery(st);
+        query.setParameter("domainsListId",domainsListId);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
     public boolean changeDomainsListMode(int domainsListId, Mode newMode){
@@ -239,8 +255,16 @@ public class TrolAPI {
     }
 
     public boolean deleteUser(int userId){
-        //TODO: Implement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        String st = "DELETE UserEntity WHERE idUser = :userId";
+        Query query = session.createQuery(st);
+        query.setParameter("userId",userId);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
     public boolean changeUserActivityMode(int userId, boolean isActive) {
@@ -395,14 +419,30 @@ public class TrolAPI {
         return true;
     }
 
-    public boolean deleteWordFromWordsList(int wordsListId, int wordId){
-        //TODO: Implement
-        return false;
+    public boolean deleteWord(int wordId){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        String st = "DELETE WordsEntity WHERE idWord = :wordId";
+        Query query = session.createQuery(st);
+        query.setParameter("wordId",wordId);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
     public boolean deleteWordsList(int wordsListId){
-        //TODO: Implement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        String st = "DELETE WordsListsEntity WHERE idWordsList = :wordsListId";
+        Query query = session.createQuery(st);
+        query.setParameter("wordsListId",wordsListId);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
     public boolean changeWordsListActivityMode(int wordsListId, boolean isActive){
