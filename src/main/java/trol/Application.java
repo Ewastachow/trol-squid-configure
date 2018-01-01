@@ -11,6 +11,8 @@ import java.util.Arrays;
 @SpringBootApplication
 public class Application {
 
+    //TODO: CZyli tutaj gdzieś odpaliłbym sobie ten mój wątek, ktory będzie obsługiwał czytanie logów
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

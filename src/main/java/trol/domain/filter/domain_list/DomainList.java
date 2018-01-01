@@ -101,35 +101,5 @@ public class DomainList implements Cloneable{
         if(!Files.exists(path, LinkOption.NOFOLLOW_LINKS))
             Files.createFile(path);
     }
-
-//    //Bo nie mamy jeszcze katalogu na testy xd
-//    public static void main(String[] args) {
-//        String testFilePath = "plik.txt";
-//        DomainList d = new DomainList(testFilePath);
-//        d.addDomain("dupmLings");
-//        d.addDomain("cyceRon");
-//        d.addDomain(".correct.domain.cyceRon");
-//        d.addDomain(".123.143.532.134");
-//
-//        DomainList d2 = null;
-//        try {
-//            d2 = (DomainList) d.clone();
-//        } catch (CloneNotSupportedException e) {
-//            e.printStackTrace();
-//        }
-//        d.removeDomain(".123.143.532.134");
-//
-//        System.out.println(d2.toString());
-//        System.out.println(d.toString());
-//
-//        File f = new File(testFilePath);
-//        if(f.exists() && !f.isDirectory()) {
-//            try {
-//                d.toFile();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 }
 
