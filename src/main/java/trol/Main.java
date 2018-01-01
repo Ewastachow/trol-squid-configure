@@ -8,6 +8,8 @@ import trol.domain.trol_api.model.Word;
 import trol.domain.trol_api.model.WordsList;
 import trol.domain.util.HibernateUtil;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Main {
@@ -36,7 +38,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        foo3();
+        foo4();
     }
 
     public static void foo1(){
@@ -151,5 +153,53 @@ public class Main {
         //Wypisuje zle, ale stan zmienia Oo
 
         HibernateUtil.getSessionFactory().close();
+    }
+
+    public static void foo4(){
+        TrolAPI trolAPI = new TrolAPI();
+        trolAPI.createNewWordsList("Opoka");
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        String name = "Opoka";
+        int idWordsList = ((WordsListsEntity)session.createQuery("FROM WordsListsEntity WHERE wordsListName = :name").setParameter("name",name).list().get(0)).getIdWordsList();
+        session.getTransaction().commit();
+
+        boolean res1 = trolAPI.changeWordsListActivityMode(idWordsList, true);
+        boolean res2 = trolAPI.changeTimeInWordsList(idWordsList, Time.valueOf(LocalTime.of(11,20)), Time.valueOf(LocalTime.of(21,02)));
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n\n\n\n");
+        stringBuilder.append(res1);
+        stringBuilder.append("\n");
+        stringBuilder.append(res2);
+        stringBuilder.append("\n");
+
+        List<WordsList> wordsListsEntityList = trolAPI.getWordsListsList();
+        stringBuilder.append(" $$$$$$ LISTS $$$$$$ :  ");
+        wordsListsEntityList.forEach(e -> stringBuilder.append(generateWordsListString(e)));
+        stringBuilder.append("\n\n\n\n");
+
+        System.out.printf(stringBuilder.toString());
+
+        HibernateUtil.getSessionFactory().close();
+    }
+
+    public static String generateWordsListString(WordsList wl){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+        sb.append("$$$$    ");
+        sb.append(wl.getWordsListName());
+        sb.append(" @ ");
+        sb.append(wl.getIsActive());
+        sb.append(" @ ");
+        sb.append(wl.getIsTimed());
+        sb.append(" @ ");
+        sb.append(wl.getTimeBegin());
+        sb.append(" @ ");
+        sb.append(wl.getTimeEnd());
+        sb.append("   $$$$");
+        sb.append("\n");
+        return sb.toString();
     }
 }

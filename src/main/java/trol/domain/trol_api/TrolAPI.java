@@ -82,14 +82,60 @@ public class TrolAPI {
     }
 
     public boolean changeDomainsListMode(int domainsListId, Mode newMode){
-        //TODO need to change isActive & isBlack
-        //TODO: Implement
-        return false;
+        //TODO Test
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        String st;
+        Query query;
+        if (newMode.equals(Mode.INACTIVE)){
+            byte activity = (byte)0;
+            st = "UPDATE DomainsListsEntity SET isActive = :activity WHERE idDomainsList = :domainsListId";
+            query = session.createQuery(st);
+            query.setParameter("domainsListId",domainsListId);
+            query.setParameter("activity", activity);
+        }else{
+            byte activity = (byte)1;
+            byte blacktivity = (newMode.equals(Mode.BLACKLIST) ? (byte)1 : (byte)0);
+            st = "UPDATE DomainsListsEntity SET isActive = :activity, isBlack = :blacktivity WHERE idDomainsList = :domainsListId";
+            query = session.createQuery(st);
+            query.setParameter("domainsListId",domainsListId);
+            query.setParameter("activity", activity);
+            query.setParameter("blacktivity",blacktivity);
+        }
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
+    }
+
+    public boolean changeDomainsListTimedMode(int domainsListId, boolean isTimed){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        byte timed = isTimed ? (byte)1 : (byte)0;
+        String st = "UPDATE DomainsListsEntity SET isTimed = :timed WHERE idDomainsList = :domainsListId";
+        Query query = session.createQuery(st);
+        query.setParameter("domainsListId",domainsListId);
+        query.setParameter("timed", timed);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
     public boolean changeDomainsListTime(int domainsListId, Time newTimeBegin, Time newTimeEnd){
-        //TODO: Implement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        String st = "UPDATE DomainsListsEntity SET timeBegin = :newTimeBegin, timeEnd = :newTimeEnd WHERE idDomainsList = :domainsListId";
+        Query query = session.createQuery(st);
+        query.setParameter("domainsListId",domainsListId);
+        query.setParameter("newTimeBegin",newTimeBegin);
+        query.setParameter("newTimeEnd",newTimeEnd);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
 //###################### DOMAINS #############################
@@ -120,13 +166,33 @@ public class TrolAPI {
     }
 
     public boolean changeTransmissionTypeActivityMode(int transmisionTypeId, boolean isActive) {
-        //TODO: Implement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        byte activity = isActive ? (byte)1 : (byte)0;
+        String st = "UPDATE TransmissionTypesEntity SET isActive = :activity WHERE idTransmissionType = :transmisionTypeId";
+        Query query = session.createQuery(st);
+        query.setParameter("transmisionTypeId",transmisionTypeId);
+        query.setParameter("activity", activity);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
     public boolean changeTransmissionTypeTime(int transmisionTypeId, Time newTimeBegin, Time newTimeEnd) {
-        //TODO: Implement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        String st = "UPDATE TransmissionTypesEntity SET timeBegin = :newTimeBegin, timeEnd = :newTimeEnd WHERE idTransmissionType = :transmisionTypeId";
+        Query query = session.createQuery(st);
+        query.setParameter("transmisionTypeId",transmisionTypeId);
+        query.setParameter("newTimeBegin",newTimeBegin);
+        query.setParameter("newTimeEnd",newTimeEnd);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
 //###################### Headers #############################
@@ -178,30 +244,93 @@ public class TrolAPI {
     }
 
     public boolean changeUserActivityMode(int userId, boolean isActive) {
-        //TODO: Implement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        byte activity = isActive ? (byte)1 : (byte)0;
+        String st = "UPDATE UserEntity SET isActive = :activity WHERE idUser = :userId";
+        Query query = session.createQuery(st);
+        query.setParameter("userId",userId);
+        query.setParameter("activity", activity);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
-    public boolean changeUserTimed(int userId, boolean isTimed){
-        //TODO: Implement, jesli
-        return false;
+    public boolean changeUserTimedMode(int userId, boolean isTimed){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        byte timed = isTimed ? (byte)1 : (byte)0;
+        String st = "UPDATE UserEntity SET isTimed = :timed WHERE idUser = :userId";
+        Query query = session.createQuery(st);
+        query.setParameter("userId",userId);
+        query.setParameter("timed", timed);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
     public boolean changeUserTime(int userId, Time newTimeBegin, Time newTimeEnd) {
-        //TODO: Implement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        String st = "UPDATE UserEntity SET timeBegin = :newTimeBegin, timeEnd = :newTimeEnd WHERE idUser = :userId";
+        Query query = session.createQuery(st);
+        query.setParameter("userId",userId);
+        query.setParameter("newTimeBegin",newTimeBegin);
+        query.setParameter("newTimeEnd",newTimeEnd);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
     public boolean changeUserDurationMode(int userId, boolean hasDuration){
-        //TODO: Implement - used na 0 ; has duration na true
-        //TODO moze zmieniac booleany i wywolywac changeUserDurationTime
-        //TODO jesli duration jest null to musimy ustawic
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        byte activity = hasDuration ? (byte)1 : (byte)0;
+        String st = "UPDATE UserEntity SET hasDuration = :activity WHERE idUser = :userId";
+        Query query = session.createQuery(st);
+        query.setParameter("userId",userId);
+        query.setParameter("activity", activity);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
     public boolean changeUserDurationTime(int userId, int durationTime){
-        //TODO
-        return false;
+        //TODO Test
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        String st = "UPDATE UserEntity SET durationInterval = :durationTime WHERE idUser = :userId";
+        Query query = session.createQuery(st);
+        query.setParameter("userId",userId);
+        query.setParameter("durationTime", durationTime);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
+    }
+
+    public boolean changeUserUsedTime(int userId, int usedTime){
+        //TODO Test
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        String st = "UPDATE UserEntity SET usedTime = :usedTime WHERE idUser = :userId";
+        Query query = session.createQuery(st);
+        query.setParameter("userId",userId);
+        query.setParameter("usedTime", usedTime);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
 //###################### Users #############################
@@ -281,7 +410,8 @@ public class TrolAPI {
         session.beginTransaction();
 
         byte activity = isActive ? (byte)1 : (byte)0;
-        Query query = session.createQuery("UPDATE WordsListsEntity SET isActive = :activity WHERE idWordsList = :wordsListId");
+        String statement = "UPDATE WordsListsEntity SET isActive = :activity WHERE idWordsList = :wordsListId";
+        Query query = session.createQuery(statement);
         query.setParameter("wordsListId",wordsListId);
         query.setParameter("activity", activity);
         int result = query.executeUpdate();
@@ -290,13 +420,27 @@ public class TrolAPI {
         return result == 1;
     }
 
+    public boolean changeWordsListTimedMode(int wordsListId, boolean isTimed){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
 
+        byte timed = isTimed ? (byte)1 : (byte)0;
+        String st = "UPDATE WordsListsEntity SET isTimed = :timed WHERE idWordsList = :wordsListId";
+        Query query = session.createQuery(st);
+        query.setParameter("wordsListId",wordsListId);
+        query.setParameter("timed", timed);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
+    }
 
     public boolean changeTimeInWordsList(int wordsListId, Time newTimeBegin, Time newTimeEnd){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
-        Query query = session.createQuery("UPDATE WordsListsEntity SET timeBegin = :newTimeBegin, timeEnd = :newTimeEnd WHERE idWordsList = :wordsListId");
+        String statement = "UPDATE WordsListsEntity SET timeBegin = :newTimeBegin, timeEnd = :newTimeEnd WHERE idWordsList = :wordsListId";
+        Query query = session.createQuery(statement);
         query.setParameter("wordsListId",wordsListId);
         query.setParameter("newTimeBegin",newTimeBegin);
         query.setParameter("newTimeEnd",newTimeEnd);
