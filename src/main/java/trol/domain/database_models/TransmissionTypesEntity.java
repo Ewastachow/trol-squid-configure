@@ -3,6 +3,7 @@ package trol.domain.database_models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,6 +21,13 @@ public class TransmissionTypesEntity implements Serializable {
     private Time timeEnd;
 
     private Set<HeadersEntity> headersEntitySet = new HashSet<>();
+
+    public TransmissionTypesEntity() {
+        isActive = 0;
+        isTimed = 0;
+        timeBegin = Time.valueOf(LocalTime.of(12,0));
+        timeEnd = Time.valueOf(LocalTime.of(13,0));
+    }
 
     public Set<HeadersEntity> getHeadersEntitySet() {
         return headersEntitySet;
@@ -51,7 +59,7 @@ public class TransmissionTypesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "is_active")
+    @Column(name = "is_active", nullable = false, columnDefinition = "BOOLEAN FALSE")
     public byte getIsActive() {
         return isActive;
     }
@@ -61,7 +69,7 @@ public class TransmissionTypesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "is_timed")
+    @Column(name = "is_timed", nullable = false, columnDefinition = "BOOLEAN FALSE")
     public byte getIsTimed() {
         return isTimed;
     }
@@ -71,7 +79,7 @@ public class TransmissionTypesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "time_begin")
+    @Column(name = "time_begin", nullable = false, columnDefinition = "TIME DEFAULT '12:00'")
     public Time getTimeBegin() {
         return timeBegin;
     }
@@ -81,7 +89,7 @@ public class TransmissionTypesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "time_end")
+    @Column(name = "time_end", nullable = false, columnDefinition = "TIME DEFAULT '13:00'")
     public Time getTimeEnd() {
         return timeEnd;
     }

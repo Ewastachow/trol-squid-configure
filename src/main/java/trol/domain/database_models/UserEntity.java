@@ -3,6 +3,7 @@ package trol.domain.database_models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Time;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "user", schema = "estacho1")
@@ -19,6 +20,17 @@ public class UserEntity implements Serializable {
     private byte hasDuration;
     private Integer durationInterval;
     private Integer usedTime;
+
+
+    public UserEntity() {
+        isActive = 0;
+        isTimed = 0;
+        timeBegin = Time.valueOf(LocalTime.of(12,0));
+        timeEnd = Time.valueOf(LocalTime.of(13,0));
+        hasDuration = 0;
+        durationInterval = 60;
+        usedTime = 0;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +54,7 @@ public class UserEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "is_active")
+    @Column(name = "is_active", nullable = false, columnDefinition = "BOOLEAN FALSE")
     public byte getIsActive() {
         return isActive;
     }
@@ -52,7 +64,7 @@ public class UserEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "is_timed")
+    @Column(name = "is_timed", nullable = false, columnDefinition = "BOOLEAN FALSE")
     public byte getIsTimed() {
         return isTimed;
     }
@@ -62,7 +74,7 @@ public class UserEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "time_begin")
+    @Column(name = "time_begin", nullable = false, columnDefinition = "TIME DEFAULT '12:00'")
     public Time getTimeBegin() {
         return timeBegin;
     }
@@ -72,7 +84,7 @@ public class UserEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "time_end")
+    @Column(name = "time_end", nullable = false, columnDefinition = "TIME DEFAULT '13:00'")
     public Time getTimeEnd() {
         return timeEnd;
     }
@@ -82,7 +94,7 @@ public class UserEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "has_duration")
+    @Column(name = "has_duration", nullable = false, columnDefinition = "BOOLEAN FALSE")
     public byte getHasDuration() {
         return hasDuration;
     }
@@ -92,7 +104,7 @@ public class UserEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "duration_interval")
+    @Column(name = "duration_interval", nullable = false, columnDefinition = "INTEGER 60")
     public Integer getDurationInterval() {
         return durationInterval;
     }
@@ -102,7 +114,7 @@ public class UserEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "used_time")
+    @Column(name = "used_time", nullable = false, columnDefinition = "INTEGER 0")
     public Integer getUsedTime() {
         return usedTime;
     }

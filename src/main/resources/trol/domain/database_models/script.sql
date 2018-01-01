@@ -4,8 +4,8 @@ CREATE TABLE domains_lists (
   is_active BOOLEAN NOT NULL DEFAULT FALSE,
   is_black BOOLEAN NOT NULL DEFAULT TRUE,
   is_timed BOOLEAN NOT NULL DEFAULT FALSE,
-  time_begin TIME,
-  time_end TIME,
+  time_begin TIME NOT NULL DEFAULT '12:00',
+  time_end TIME NOT NULL DEFAULT '13:00',
   PRIMARY KEY (id_domains_list)
 );
 
@@ -22,8 +22,8 @@ CREATE TABLE transmission_types (
   transmission_type_name VARCHAR(30) NOT NULL,
   is_active BOOLEAN NOT NULL DEFAULT FALSE,
   is_timed BOOLEAN NOT NULL DEFAULT FALSE,
-  time_begin TIME,
-  time_end TIME,
+  time_begin TIME NOT NULL DEFAULT '12:00',
+  time_end TIME NOT NULL DEFAULT '13:00',
   PRIMARY KEY (id_transmission_type)
 );
 
@@ -40,8 +40,8 @@ CREATE TABLE words_lists (
   words_list_name VARCHAR(30) NOT NULL,
   is_active BOOLEAN NOT NULL DEFAULT FALSE,
   is_timed BOOLEAN NOT NULL DEFAULT FALSE,
-  time_begin TIME,
-  time_end TIME,
+  time_begin TIME NOT NULL DEFAULT '12:00',
+  time_end TIME NOT NULL DEFAULT '13:00',
   PRIMARY KEY (id_words_list)
 );
 
@@ -58,11 +58,11 @@ CREATE TABLE user (
   user_ip VARCHAR(30) NOT NULL,
   is_active BOOLEAN NOT NULL DEFAULT FALSE,
   is_timed BOOLEAN NOT NULL DEFAULT FALSE,
-  time_begin TIME,
-  time_end TIME,
+  time_begin TIME NOT NULL DEFAULT '12:00',
+  time_end TIME NOT NULL DEFAULT '13:00',
   has_duration BOOLEAN NOT NULL DEFAULT FALSE,
-  duration_interval INTEGER,
-  used_time INTEGER,
+  duration_interval INTEGER NOT NULL DEFAULT 60,
+  used_time INTEGER NOT NULL DEFAULT 0,
   PRIMARY KEY (id_user)
 );
 

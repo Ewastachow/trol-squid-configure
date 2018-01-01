@@ -1,6 +1,7 @@
 package trol.domain.trol_api;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import trol.domain.database_models.*;
 import trol.domain.trol_api.model.*;
 import trol.domain.util.HibernateUtil;
@@ -86,7 +87,7 @@ public class TrolAPI {
         return false;
     }
 
-    public boolean changeTimeInDomainsList(int domainsListId, Time newTimeBegin, Time newTimeEnd){
+    public boolean changeDomainsListTime(int domainsListId, Time newTimeBegin, Time newTimeEnd){
         //TODO: Implement
         return false;
     }
@@ -181,19 +182,20 @@ public class TrolAPI {
         return false;
     }
 
+    public boolean changeUserTimed(int userId, boolean isTimed){
+        //TODO: Implement, jesli
+        return false;
+    }
+
     public boolean changeUserTime(int userId, Time newTimeBegin, Time newTimeEnd) {
         //TODO: Implement
         return false;
     }
 
-    public boolean setUserDurationMode(int userId, int durationTime){
+    public boolean changeUserDurationMode(int userId, boolean hasDuration){
         //TODO: Implement - used na 0 ; has duration na true
         //TODO moze zmieniac booleany i wywolywac changeUserDurationTime
-        return false;
-    }
-
-    public boolean removeUserDurationMode(int userId){
-        //TODO ustawia hasDuration na false
+        //TODO jesli duration jest null to musimy ustawic
         return false;
     }
 
@@ -238,8 +240,6 @@ public class TrolAPI {
 
         WordsListsEntity wordsListsEntity = new WordsListsEntity();
         wordsListsEntity.setWordsListName(wordsListName);
-        wordsListsEntity.setIsActive((byte) 0);
-        wordsListsEntity.setIsTimed((byte) 0);
         session.save(wordsListsEntity);
 
         session.getTransaction().commit();
@@ -266,7 +266,7 @@ public class TrolAPI {
         return true;
     }
 
-    public boolean deleteWordFromList(int wordsListId, int wordId){
+    public boolean deleteWordFromWordsList(int wordsListId, int wordId){
         //TODO: Implement
         return false;
     }
@@ -277,13 +277,33 @@ public class TrolAPI {
     }
 
     public boolean changeWordsListActivityMode(int wordsListId, boolean isActive){
-        //TODO: Implement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        byte activity = isActive ? (byte)1 : (byte)0;
+        Query query = session.createQuery("UPDATE WordsListsEntity SET isActive = :activity WHERE idWordsList = :wordsListId");
+        query.setParameter("wordsListId",wordsListId);
+        query.setParameter("activity", activity);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 
+
+
     public boolean changeTimeInWordsList(int wordsListId, Time newTimeBegin, Time newTimeEnd){
-        //TODO: Implement
-        return false;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("UPDATE WordsListsEntity SET timeBegin = :newTimeBegin, timeEnd = :newTimeEnd WHERE idWordsList = :wordsListId");
+        query.setParameter("wordsListId",wordsListId);
+        query.setParameter("newTimeBegin",newTimeBegin);
+        query.setParameter("newTimeEnd",newTimeEnd);
+        int result = query.executeUpdate();
+
+        session.getTransaction().commit();
+        return result == 1;
     }
 //###################### Words #############################
 

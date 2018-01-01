@@ -36,7 +36,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        foo2();
+        foo3();
     }
 
     public static void foo1(){
@@ -105,6 +105,50 @@ public class Main {
         stringBuilder.append("\n\n\n\n");
 
         System.out.printf(stringBuilder.toString());
+
+        HibernateUtil.getSessionFactory().close();
+    }
+
+    public static void foo3(){
+        TrolAPI trolAPI = new TrolAPI();
+        trolAPI.createNewWordsList("Wrzosowisko");
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n\n\n\n");
+        List<WordsList> wordsListsEntityList = trolAPI.getWordsListsList();
+        stringBuilder.append(" $$$$$$ LISTS $$$$$$ :  ");
+        for(WordsList i : wordsListsEntityList){
+            stringBuilder.append(i.getWordsListName());
+            stringBuilder.append(" ");
+            stringBuilder.append(i.getIsActive());
+            stringBuilder.append(" @@ ");
+        }
+        stringBuilder.append("\n");
+
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        String name = "Wrzosowisko";
+        int idWordsList = ((WordsListsEntity)session.createQuery("FROM WordsListsEntity WHERE wordsListName = :name").setParameter("name",name).list().get(0)).getIdWordsList();
+        session.getTransaction().commit();
+
+        boolean res = trolAPI.changeWordsListActivityMode(idWordsList, true);
+
+        stringBuilder.append(res);
+        stringBuilder.append("\n");
+        stringBuilder.append(" $$$$$$ LISTS $$$$$$ :  ");
+        for(WordsList i : wordsListsEntityList){
+            stringBuilder.append(i.getWordsListName());
+            stringBuilder.append("  ");
+            stringBuilder.append(i.getIsActive());
+            stringBuilder.append(" @@ ");
+        }
+        stringBuilder.append("\n");
+
+        stringBuilder.append("\n\n\n\n");
+
+        System.out.printf(stringBuilder.toString());
+        //Wypisuje zle, ale stan zmienia Oo
 
         HibernateUtil.getSessionFactory().close();
     }
