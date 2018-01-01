@@ -14,7 +14,7 @@ public class PhrasesList {
     private WordsList wordsList;
 
     public PhrasesList(WordsList wordsList) {
-        path = Paths.get(FilePaths.WORDS_LISTS_PATH+wordsList.getWordsListName());
+        path = Paths.get(FilePaths.PHRASE_LISTS_PATH +wordsList.getWordsListName());
         this.wordsList = wordsList;
     }
 
