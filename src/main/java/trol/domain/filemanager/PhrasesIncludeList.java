@@ -25,7 +25,10 @@ public class PhrasesIncludeList {
 
     public void saveFile() throws IOException {
         List<String> wordsFile = new ArrayList<>();
-        wordsListList.forEach(e -> wordsFile.add(".Include<"+FilePaths.WORDS_LISTS_PATH+e.getWordsListName()+">"));
+        wordsListList.forEach(e -> {
+            if(e.getIsActive()==1)
+                wordsFile.add(".Include<"+FilePaths.WORDS_LISTS_PATH+e.getWordsListName()+">");
+        });
         FileHelper.saveStringListAsFile(path,wordsFile);
     }
 }
