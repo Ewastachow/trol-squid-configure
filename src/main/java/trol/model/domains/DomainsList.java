@@ -1,6 +1,6 @@
 package trol.model.domains;
 
-import trol.domain.trol_api.domain.Mode;
+import trol.domain.trol_api.model.Mode;
 import trol.model.ListInfo;
 
 import java.util.ArrayList;
