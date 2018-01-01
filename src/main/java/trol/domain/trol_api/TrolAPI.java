@@ -2,6 +2,7 @@ package trol.domain.trol_api;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 import trol.domain.database_models.*;
 import trol.domain.trol_api.exception.UnsuccessfulDeletException;
 import trol.domain.trol_api.exception.UnsuccessfulModificationException;
@@ -12,6 +13,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class TrolAPI {
 
     //Metody CREATE i ADD zwracaja ID tworzonego obiektu

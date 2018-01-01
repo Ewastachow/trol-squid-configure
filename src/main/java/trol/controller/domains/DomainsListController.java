@@ -10,14 +10,12 @@ import trol.model.Update;
 import trol.model.domains.DomainsList;
 import trol.model.UpdateResult;
 import trol.service.domains.DomainsService;
-import trol.service.domains.DomainsListService;
 
 import javax.validation.Valid;
 
 @Controller
 public class DomainsListController {
-    @Autowired
-    private DomainsListService domainsListService;
+
     @Autowired
     private DomainsService domainsService;
 

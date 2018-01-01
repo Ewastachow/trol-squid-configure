@@ -17,6 +17,10 @@ public class DomainsList {
     private Time timeEnd;
     private Set<Domain> domainsSet;
 
+    public DomainsList() {
+        timeBegin = new Time();
+    }
+
     public DomainsList(DomainsListsEntity entity) {
         domainsSet = new HashSet<>();
         idDomainsList = entity.getIdDomainsList();
