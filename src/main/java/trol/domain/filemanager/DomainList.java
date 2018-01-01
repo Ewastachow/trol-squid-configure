@@ -4,6 +4,8 @@ import trol.domain.trol_api.model.DomainsList;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DomainList {
     Path path;
@@ -20,10 +22,7 @@ public class DomainList {
     }
 
     public void saveFile(){
+
         //TODO Implement
     }
-
-//    private String verifyDomain(String domain){
-//        if(domain.g)
-//    }
 }

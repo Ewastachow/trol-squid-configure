@@ -13,10 +13,6 @@ public class PhrasesList {
     private Path path;
     private WordsList wordsList;
 
-    public void setPath(Path path) {
-        this.path = path;
-    }
-
     public PhrasesList(WordsList wordsList) {
         path = Paths.get(FilePaths.WORDS_LISTS_PATH+wordsList.getWordsListName());
         this.wordsList = wordsList;

@@ -7,6 +7,7 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 public class FileHelper {
@@ -105,5 +106,17 @@ public class FileHelper {
             return includeLine.substring(9,includeLine.length()-1);
         else
             return null;
+    }
+
+    private String verifyDomain(String domain){
+        Pattern pattern = Pattern.compile("^\\.[a-zA-Z0-9\\.]+[a-zA-Z0-9]$");
+        if(pattern.matcher(domain).matches())
+            return domain;
+        else
+            return "."+domain;
+    }
+
+    public static String removeWhiteChars(String string){
+        return string.replaceAll("\\s+","");
     }
 }
