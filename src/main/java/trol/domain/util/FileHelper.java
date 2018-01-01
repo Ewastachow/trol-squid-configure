@@ -108,7 +108,7 @@ public class FileHelper {
             return null;
     }
 
-    private String verifyDomain(String domain){
+    public static String verifyDomain(String domain){
         Pattern pattern = Pattern.compile("^\\.[a-zA-Z0-9\\.]+[a-zA-Z0-9]$");
         if(pattern.matcher(domain).matches())
             return domain;

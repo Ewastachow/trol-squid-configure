@@ -24,9 +24,9 @@ public class PhrasesList {
     }
 
     public void saveFile() throws IOException {
-        List<String> phrasesList = new ArrayList<>();
-        wordsList.getWordsSet().forEach(e -> phrasesList.add(wordLine(e.getWordString())));
-        FileHelper.saveStringListAsFile(path,phrasesList);
+        List<String> phrasesFile = new ArrayList<>();
+        wordsList.getWordsSet().forEach(e -> phrasesFile.add(wordLine(e.getWordString())));
+        FileHelper.saveStringListAsFile(path,phrasesFile);
     }
 
     private String wordLine(String word){

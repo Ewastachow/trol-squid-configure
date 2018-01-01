@@ -1,9 +1,12 @@
 package trol.domain.filemanager;
 
 import trol.domain.trol_api.model.WordsList;
+import trol.domain.util.FileHelper;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PhrasesIncludeList {
@@ -20,7 +23,9 @@ public class PhrasesIncludeList {
         this.wordsListList = wordsListList;
     }
 
-    public void saveFile(){
-        //TODO Implement
+    public void saveFile() throws IOException {
+        List<String> wordsFile = new ArrayList<>();
+        wordsListList.forEach(e -> wordsFile.add(".Include<"+FilePaths.WORDS_LISTS_PATH+e.getWordsListName()+">"));
+        FileHelper.saveStringListAsFile(path,wordsFile);
     }
 }
