@@ -1,25 +1,15 @@
 package trol.service.domains;
 
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import trol.dao.domains.DomainsDAO;
 import trol.dao.domains.DomainsListDAO;
-import trol.domain.trol_api.TrolAPI;
 import trol.domain.trol_api.exception.UnsuccessfulDeletException;
 import trol.domain.trol_api.exception.UnsuccessfulModificationException;
 import trol.domain.trol_api.model.Domain;
 import trol.domain.trol_api.model.DomainsList;
-import trol.domain.trol_api.model.Mode;
-import trol.domain.util.HibernateUtil;
 
-import javax.transaction.Transactional;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.List;
 
 @Service("domainsService")

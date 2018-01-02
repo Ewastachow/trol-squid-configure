@@ -5,8 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import trol.domain.trol_api.exception.UnsuccessfulDeletException;
 import trol.domain.trol_api.model.DomainsList;
 import trol.service.domains.DomainsService;
 
@@ -45,5 +47,15 @@ public class DomainsController {
             //return "error";
         }
         return "redirect:/domains/list/"+domainsList.getIdDomainsList();
+    }
+
+    @GetMapping(value = "domains/delete/{id}")
+    public String deleteDomainsList(@PathVariable("id") int id){
+        try {
+            domainsService.deleteDomainsList(id);
+        } catch (UnsuccessfulDeletException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/domains";
     }
 }

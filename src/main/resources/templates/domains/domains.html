@@ -19,6 +19,10 @@
                         <th>List name</th>
                         <th>Active</th>
                         <th>Timed</th>
+                        <th>Start time</th>
+                        <th>End time</th>
+                        <th>Mode</th>
+                        <th></th>
                         <th></th>
                     </tr>
                     </thead>
@@ -33,7 +37,22 @@
                             <span th:if="${item.isTimed}" class="glyphicon glyphicon-ok-circle"></span>
                             <span th:unless="${item.isTimed}" class="glyphicon glyphicon-remove-circle"></span>
                         </td>
-                        <td><a th:href="@{/domains/list/}+${item.getIdDomainsList()}" class="btn" role="button">Edit</a></td>
+                        <td th:text="${item.timeBegin}"></td>
+                        <td th:text="${item.timeEnd}"></td>
+                        <td th:if="${item.isBlack}">
+                            Blacklist
+                        </td>
+                        <td th:unless="${item.isBlack}">
+                            Whitelist
+                        </td>
+                        <td>
+                            <a th:href="@{/domains/list/}+${item.getIdDomainsList()}"
+                               class="btn" role="button">Edit</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/domains/delete/}+${item.getIdDomainsList()}"
+                               class="btn btn-danger" role="button">Delete</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
