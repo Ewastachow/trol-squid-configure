@@ -7,15 +7,26 @@ public class Domain {
     private String domainString;
     private int idDomainsList;
 
-    public Domain(int idDomainsList ,String domainString){
-        this.domainString = domainString;
-        this.idDomainsList = idDomainsList;
+    public Domain(){
+
     }
 
     public Domain(DomainsEntity entity) {
         idDomain = entity.getIdDomain();
         domainString = entity.getDomainString();
         idDomainsList = entity.getIdDomainsList().getIdDomainsList();
+    }
+
+    public void setDomainString(String domainString) {
+        this.domainString = domainString;
+    }
+
+    public void setIdDomainsList(int idDomainsList) {
+        this.idDomainsList = idDomainsList;
+    }
+
+    public void setIdDomain(int idDomain) {
+        this.idDomain = idDomain;
     }
 
     public int getIdDomain() {

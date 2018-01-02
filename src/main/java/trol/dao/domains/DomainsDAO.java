@@ -5,6 +5,6 @@ import trol.domain.trol_api.model.Domain;
 public interface DomainsDAO {
     Domain getDomain(int domainId);
     int addDomain(Domain domain);
-    void deleteDomain(int domainId);
+    void deleteDomain(Domain domain);
     void updateDomain(Domain domain);
 }

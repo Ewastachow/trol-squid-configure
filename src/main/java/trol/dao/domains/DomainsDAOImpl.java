@@ -33,10 +33,13 @@ public class DomainsDAOImpl implements DomainsDAO {
     }
 
     @Override
-    public void deleteDomain(int domainId) {
-        entityManager.remove(
-                entityManager.find(DomainsEntity.class,domainId)
-        );
+    public void deleteDomain(Domain domain) {
+        //TODO fix
+        DomainsListsEntity listsEntity = entityManager.find(DomainsListsEntity.class,domain.getIdDomainsList());
+        DomainsEntity domainsEntity = entityManager.find(DomainsEntity.class,domain.getIdDomain());
+        listsEntity.getDomainsEntitySet().remove(domainsEntity);
+        domainsEntity.setIdDomainsList(null);
+        entityManager.remove(domainsEntity);
     }
 
     @Override

@@ -17,5 +17,5 @@ public interface DomainsService {
     Domain getDomain(int domainId);
     int addDomainToDomainsList(Domain domain);
     void updateDomainInList(Domain domain) throws UnsuccessfulModificationException;
-    void deleteDomain(int domainId) throws UnsuccessfulDeletException;
+    void deleteDomain(Domain domain) throws UnsuccessfulDeletException;
 }

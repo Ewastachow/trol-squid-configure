@@ -64,7 +64,7 @@ public class DomainsServiceImpl implements DomainsService {
     }
 
     @Override
-    public void deleteDomain(int domainId) throws UnsuccessfulDeletException {
-        domainsDAO.deleteDomain(domainId);
+    public void deleteDomain(Domain domain) throws UnsuccessfulDeletException {
+        domainsDAO.deleteDomain(domain);
     }
 }

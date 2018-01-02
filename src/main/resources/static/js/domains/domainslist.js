@@ -1,13 +1,14 @@
 $(document).on('click', '.removedomain', function (e) {
     e.preventDefault();
     var listId = $('#listId').val();
-    var url = "/domains/list/"+listId+"/edit"
+    var tr = $(this).parent().parent();
+    var domainId = tr.find(".id").val();
+    var url = "/domains/list/"+listId+"/edit/"+domainId;
     var domain = $(this).val();
     $.ajax({
         type: 'DELETE',
         url: url,
         contentType: "application/json",
-        data: domain
     }).done(function(result){
         location.reload();
         //TODO
@@ -34,33 +35,33 @@ $(document).on('click', '.addDomain', function (e) {
 
 $(document).on('click', '.editdomain', function (e) {
     var tr = $(this).parent().parent();
-    var td = $(this).parent().parent().find(".domain");
-    var domain = td.text();
-    var newDomain = "<input type='text' class='newDomain' value='"+domain+"'/>";
-    var oldDomain = "<input type='hidden' class='oldDomain' value='"+domain+"'/>";
-    var applyEdit = "<td><button class='applyEdit'>Apply</button></td>";
-    var cancelEdit = "<td><button class='cancelEdit'>Cancel</button></td>";
-    tr.html(
-        '<td class="domain">'+newDomain+oldDomain+'</td>'+applyEdit+cancelEdit
+    var domainDiv = tr.find(".domain");
+    var domain = domainDiv.text();
+    domainDiv.html(
+        "<input type='text' class='newDomain' value='"+domain+"'/>"
+    );
+    var remove = tr.find(".removedomain");
+    var edit = tr.find(".editdomain");
+
+    edit.parent().html(
+        "<button class='btn btn-success applyEdit'>Apply</button>")
+    ;
+    remove.parent().html(
+        "<button class='btn btn-warning cancelEdit'>Cancel</button>"
     );
 });
 
 $(document).on('click', '.applyEdit', function (e) {
     var tr = $(this).parent().parent();
-    var td = tr.find(".domain");
-    var newDomain = td.find(".newDomain").val();
-    var oldDomain = td.find(".oldDomain").val();
+    var newDomain = tr.find(".newDomain").val();
+    var domainId = tr.find(".id").val();
     var listId = $('#listId').val();
-    var url = "/domains/list/"+listId+"/edit"
-    var data = {
-        "oldValue" : oldDomain,
-        "newValue" : newDomain
-    };
+    var url = "/domains/list/"+listId+"/edit/"+domainId;
     $.ajax({
         type:'PUT',
         url: url,
         contentType: "application/json",
-        data: JSON.stringify(data)
+        data: newDomain
     }).done(function(result){
         location.reload();
         //TODO show result
@@ -69,13 +70,19 @@ $(document).on('click', '.applyEdit', function (e) {
 
 $(document).on('click', '.cancelEdit', function (e) {
     var tr = $(this).parent().parent();
-    var td = $(this).parent().parent().find(".oldDomain");
-    var domain = td.val();
-    var newDomain = '<td class="domain">'+domain+'</td>';
-    var removeDomain = '<td><button class="removedomain" value='+domain+'>Remove</button></td>';
-    var editDomain = '<td><button class="editdomain" value='+domain+'>Edit</button></td>';
-    tr.html(
-        newDomain+removeDomain+editDomain
+    var oldDomain = tr.find(".oldDomain").val();
+    var domainDiv = tr.find(".domain");
+    domainDiv.html(
+        oldDomain
+    );
+    var cancel = tr.find(".cancelEdit");
+    var apply = tr.find(".applyEdit");
+
+    cancel.parent().html(
+        "<button class='btn btn-danger removedomain'>Remove</button>"
+    );
+    apply.parent().html(
+        "<button class='btn btn-default editdomain'>Edit</button>"
     );
 });
 
