@@ -7,6 +7,11 @@ public class Domain {
     private String domainString;
     private int idDomainsList;
 
+    public Domain(int idDomainsList ,String domainString){
+        this.domainString = domainString;
+        this.idDomainsList = idDomainsList;
+    }
+
     public Domain(DomainsEntity entity) {
         idDomain = entity.getIdDomain();
         domainString = entity.getDomainString();

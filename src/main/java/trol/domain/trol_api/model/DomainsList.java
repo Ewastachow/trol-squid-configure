@@ -39,6 +39,10 @@ public class DomainsList {
         entity.getDomainsEntitySet().forEach(e -> domainsSet.add(new Domain(e)));
     }
 
+    public void setIdDomainsList(int idDomainsList) {
+        this.idDomainsList = idDomainsList;
+    }
+
     public void setDomainsListName(String domainsListName) {
         this.domainsListName = domainsListName;
     }

@@ -17,18 +17,18 @@ public class HibernateUtil{
 
     static
     {
-        try {
-            //Configuration configuration = new Configuration().configure();
-            serviceRegistry = new
-                    StandardServiceRegistryBuilder().configure("hibernate.cfg.xml")
-                    .build();
-            Metadata metadata = new MetadataSources(serviceRegistry)
-                    .getMetadataBuilder().build();
-            sessionFactory = metadata.getSessionFactoryBuilder().build();
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
+//        try {
+//            //Configuration configuration = new Configuration().configure();
+//            serviceRegistry = new
+//                    StandardServiceRegistryBuilder().configure("hibernate.cfg.xml")
+//                    .build();
+//            Metadata metadata = new MetadataSources(serviceRegistry)
+//                    .getMetadataBuilder().build();
+//            sessionFactory = metadata.getSessionFactoryBuilder().build();
+//        } catch (Exception e) {
+//            // TODO: handle exception
+//            e.printStackTrace();
+//        }
     }
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
