@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Words</title>
+    <div th:replace="fragments/header :: header-css"/></head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container-fluid wordslist">
+    <div class="row">
+        <div class="box col-md-6 col-md-offset-3">
+            <h2>Edit words list:</h2>
+            <input type="hidden" id="listName" th:value="${words.getName()}"/>
+            <form action="#" th:action="@{/words/list/}+${words.getName()}" th:object="${words}" method="post">
+                <p>List name: <input type="text" th:field="*{name}" /></p>
+                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
+                <p>Is this list timed?
+                    <input type="checkbox" name="isTimed" th:field="*{isTimed}"/>
+                </p>
+                <p>Start time: <input type="time" th:field="*{timeBegin}"/></p>
+                <p>End time: <input type="time" th:field="*{timeEnd}"/></p>
+                <p>Is this list active?
+                    <input type="checkbox" name="isActive" th:field="*{isActive}"/>
+                </p>
+                <p><button type="submit">Save</button></p>
+            </form>
+        </div>
+
+        <div>
+            Add word:
+            <label>
+                <input type="text" class="word"/>
+            </label>
+            <button type="submit" class="addWord">Add</button>
+        </div>
+
+        <div id="wordsList">
+            <table>
+                <thead>
+                <tr>
+                    <th>Word</th>
+                </tr>
+                <tr></tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${words.getWordsList()}">
+                    <td class="word" th:text="${item}">Empty</td>
+                    <td><button class="removeWord" th:value="${item}">Remove</button></td>
+                    <td><button class="editWord" th:value="${item}">Edit</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+<script src="/js/words/words.js"></script>
+
+</body>
+</html>

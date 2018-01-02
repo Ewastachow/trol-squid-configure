@@ -12,4 +12,9 @@ public class MainController {
         ModelAndView model = new ModelAndView("index");
         return model;
     }
+
+    @RequestMapping("/login")
+    String login(){
+        return "/login";
+    }
 }

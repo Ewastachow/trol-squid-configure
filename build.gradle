@@ -42,7 +42,9 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-jetty")
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-//    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-security")
+
+    compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4")
 
     // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.12.Final'

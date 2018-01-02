@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <div th:fragment="header-css">
+        <!-- this is header-css -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    </div>
+</head>
+<body>
+<div th:fragment="header">
+    <!-- this is header -->
+    <nav class="navbar navbar-light navbar-fixed-top" style="background-color: #eee;">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/" ><img src="/css/trolsmall.png" width="45" height="45" class="d-inline-block align-top" alt=""/> Trol</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-nav-demo"> <!-- Zwijanie menu przy zmianie rozmiaru okna (ale nie ma ikonki - wszystko po prostu znika -->
+                <div sec:authorize="isAuthenticated()">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/domains">Domains</a></li>
+                        <li><a href="/words">Words</a></li>
+                        <li><a href="/headers">Headers</a></li>
+                        <li><a href="/users">Users</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a th:href="@{/logout}">Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+</body>
+</html>

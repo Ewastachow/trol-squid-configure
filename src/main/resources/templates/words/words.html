@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Black list</title>
+    <div th:replace="fragments/header :: header-css"/></head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container-fluid words">
+    <div class="row">
+        <div class="box col-md-6 col-md-offset-3">
+            <h2>Words List</h2>
+            <a th:href="@{/words/add}" class="btn" role="button">Add</a>
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>List name</th>
+                    </tr>
+                    <tr></tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${words.getWordsList()}">
+                        <td class="domain" th:text="${item.getName()}">Empty</td>
+                        <td><a th:href="@{/words/list/}+${item.getName()}" class="btn" role="button">Edit</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

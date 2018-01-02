@@ -10,8 +10,8 @@ import java.util.Set;
 public class WordsList {
     private int idWordsList;
     private String wordsListName;
-    private byte isActive;
-    private byte isTimed;
+    private boolean isActive;
+    private boolean isTimed;
     private LocalTime timeBegin;
     private LocalTime timeEnd;
     private Set<Word> wordsSet;
@@ -20,8 +20,8 @@ public class WordsList {
         wordsSet = new HashSet<>();
         idWordsList = entity.getIdWordsList();
         wordsListName = entity.getWordsListName();
-        isActive = entity.getIsActive();
-        isTimed = entity.getIsTimed();
+        isActive = entity.getIsActive() == 1;
+        isTimed = entity.getIsTimed() == 1;
         timeBegin = entity.getTimeBegin().toLocalTime();
         timeEnd = entity.getTimeEnd().toLocalTime();
         entity.getWordsEntitySet().forEach(e -> wordsSet.add(new Word(e)));
@@ -35,11 +35,11 @@ public class WordsList {
         return wordsListName;
     }
 
-    public byte getIsActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public byte getIsTimed() {
+    public boolean getIsTimed() {
         return isTimed;
     }
 
