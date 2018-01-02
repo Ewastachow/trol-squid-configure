@@ -1,3 +1,4 @@
+/* Domains.html */
 .domains-inside{
     background-color: #c9e4f2;
     color: #31708f;
@@ -9,7 +10,37 @@
     -moz-border-radius: 15px;
 }
 
-tbody>tr {
-    border: 2px solid #eee;
+#domains-table{
+    background-color: #eeeeee;
+    border: 1px solid #cccfcf;
+    text-align: center;
 }
 
+table-bordered {
+    border: 2px solid #c9e4f2;
+}
+
+.thead{
+    background-color: #cccfcf;
+}
+
+.th {
+    text-align: center;
+}
+
+#center>th{
+    vertical-align: top;
+}
+
+/* Form.html */
+
+.domainsform{
+    background-color: white;
+}
+
+
+
+
+
+
+/* Domainslist.html */
