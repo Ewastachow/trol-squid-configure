@@ -33,8 +33,9 @@ public class WordsEntity implements Serializable {
         this.wordString = wordString;
     }
 
-    @Basic
-    @Column(name = "id_words_list")
+    @ManyToOne
+    @JoinColumn(name="id_words_list", nullable=false)
+    //@Column(name = "id_words_list")
     public WordsListsEntity getIdWordsList() {
         return idWordsList;
     }

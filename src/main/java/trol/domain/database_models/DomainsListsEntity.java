@@ -31,6 +31,12 @@ public class DomainsListsEntity  implements Serializable {
         timeEnd = Time.valueOf(LocalTime.of(13,0));
     }
 
+    public DomainsListsEntity(String domainsListName){
+        this();
+        this.domainsListName=domainsListName;
+    }
+
+    @OneToMany(mappedBy="idDomainsList")
     public Set<DomainsEntity> getDomainsEntitySet() {
         return domainsEntitySet;
     }
