@@ -1,0 +1,13 @@
+.login{
+    min-height: 100%;
+}
+
+.login-inside{
+    color: #eeeeee;
+    margin: 2% 15% 5% 15%;
+    padding-bottom: 2%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+}
