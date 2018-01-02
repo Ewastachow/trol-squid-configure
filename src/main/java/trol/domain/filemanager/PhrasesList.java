@@ -14,8 +14,8 @@ public class PhrasesList {
     private WordsList wordsList;
 
     public PhrasesList(WordsList wordsList) {
-        path = Paths.get(FilePaths.PHRASE_LISTS_PATH +wordsList.getWordsListName());
         this.wordsList = wordsList;
+        path = Paths.get(FilePaths.PHRASE_LISTS_PATH+wordsList.getWordsListName());
     }
 
     public PhrasesList(Path path, WordsList wordsList) {
@@ -24,9 +24,15 @@ public class PhrasesList {
     }
 
     public void saveFile() throws IOException {
+        if(!wordsList.getIsActive()) return;
+        FileHelper.saveStringListAsFile(path,generateFileListstring());
+    }
+
+    public List<String> generateFileListstring(){
         List<String> phrasesFile = new ArrayList<>();
+        phrasesFile.add(FileHelper.dansguardianTimeControlLine(wordsList.getTimeBegin(), wordsList.getTimeEnd()));
         wordsList.getWordsSet().forEach(e -> phrasesFile.add(wordLine(e.getWordString())));
-        FileHelper.saveStringListAsFile(path,phrasesFile);
+        return phrasesFile;
     }
 
     private String wordLine(String word){

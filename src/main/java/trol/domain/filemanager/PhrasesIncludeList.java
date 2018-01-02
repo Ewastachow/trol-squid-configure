@@ -24,11 +24,15 @@ public class PhrasesIncludeList {
     }
 
     public void saveFile() throws IOException {
+        FileHelper.saveStringListAsFile(path, generateFileListstring());
+    }
+
+    public List<String> generateFileListstring(){
         List<String> wordsFile = new ArrayList<>();
         wordsListList.forEach(e -> {
-            if(e.getIsActive()==1)
-                wordsFile.add(".Include<"+FilePaths.PHRASE_LISTS_PATH +e.getWordsListName()+">");
+            if (e.getIsActive())
+                wordsFile.add(".Include<" + FilePaths.PHRASE_LISTS_PATH + e.getWordsListName() + ">");
         });
-        FileHelper.saveStringListAsFile(path,wordsFile);
+        return wordsFile;
     }
 }
