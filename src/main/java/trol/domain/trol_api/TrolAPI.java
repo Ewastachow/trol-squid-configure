@@ -2,6 +2,7 @@ package trol.domain.trol_api;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 import trol.domain.database_models.*;
 import trol.domain.filemanager.FileController;
 import trol.domain.filemanager.PhrasesList;
@@ -12,11 +13,13 @@ import trol.domain.util.FileHelper;
 import trol.domain.util.HibernateUtil;
 
 import java.io.IOException;
+import javax.transaction.Transactional;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class TrolAPI {
 
     //Metody CREATE i ADD zwracaja ID tworzonego obiektu

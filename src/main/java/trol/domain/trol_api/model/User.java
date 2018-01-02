@@ -9,22 +9,22 @@ public class User {
 
     private int idUser;
     private String userIp;
-    private byte isActive;
-    private byte isTimed;
+    private boolean isActive;
+    private boolean isTimed;
     private LocalTime timeBegin;
     private LocalTime timeEnd;
-    private byte hasDuration;
+    private boolean hasDuration;
     private Integer durationInterval;
     private Integer usedTime;
 
     public User(UserEntity entity) {
         idUser = entity.getIdUser();
         userIp = entity.getUserIp();
-        isActive = entity.getIsActive();
-        isTimed = entity.getIsTimed();
+        isActive = entity.getIsActive() == 1;
+        isTimed = entity.getIsTimed() == 1;
         timeBegin = entity.getTimeBegin().toLocalTime();
         timeEnd = entity.getTimeEnd().toLocalTime();
-        hasDuration = entity.getHasDuration();
+        hasDuration = entity.getHasDuration() == 1;
         durationInterval = entity.getDurationInterval();
         usedTime = entity.getUsedTime();
     }
@@ -37,11 +37,11 @@ public class User {
         return userIp;
     }
 
-    public byte getIsActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public byte getIsTimed() {
+    public boolean getIsTimed() {
         return isTimed;
     }
 
@@ -53,7 +53,7 @@ public class User {
         return timeEnd;
     }
 
-    public byte getHasDuration() {
+    public boolean getHasDuration() {
         return hasDuration;
     }
 

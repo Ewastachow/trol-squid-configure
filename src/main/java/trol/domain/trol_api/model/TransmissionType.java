@@ -10,8 +10,8 @@ import java.util.Set;
 public class TransmissionType {
     private int idTransmissionType;
     private String transmissionTypeName;
-    private byte isActive;
-    private byte isTimed;
+    private boolean isActive;
+    private boolean isTimed;
     private LocalTime timeBegin;
     private LocalTime timeEnd;
     private Set<Header> headersSet;
@@ -20,8 +20,8 @@ public class TransmissionType {
         headersSet = new HashSet<>();
         idTransmissionType = entity.getIdTransmissionType();
         transmissionTypeName = entity.getTransmissionTypeName();
-        isActive = entity.getIsActive();
-        isTimed = entity.getIsTimed();
+        isActive = entity.getIsActive() == 1;
+        isTimed = entity.getIsTimed() == 1;
         timeBegin = entity.getTimeBegin().toLocalTime();
         timeEnd = entity.getTimeEnd().toLocalTime();
         entity.getHeadersEntitySet().forEach(e -> headersSet.add(new Header(e)));
@@ -35,11 +35,11 @@ public class TransmissionType {
         return transmissionTypeName;
     }
 
-    public byte getIsActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public byte getIsTimed() {
+    public boolean getIsTimed() {
         return isTimed;
     }
 
