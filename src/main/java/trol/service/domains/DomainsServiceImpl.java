@@ -1,31 +1,21 @@
 package trol.service.domains;
 
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import trol.dao.domains.DomainsDAO;
+import trol.dao.domains.DomainDAO;
 import trol.dao.domains.DomainsListDAO;
-import trol.domain.trol_api.TrolAPI;
 import trol.domain.trol_api.exception.UnsuccessfulDeletException;
 import trol.domain.trol_api.exception.UnsuccessfulModificationException;
 import trol.domain.trol_api.model.Domain;
 import trol.domain.trol_api.model.DomainsList;
-import trol.domain.trol_api.model.Mode;
-import trol.domain.util.HibernateUtil;
 
-import javax.transaction.Transactional;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.List;
 
 @Service("domainsService")
 public class DomainsServiceImpl implements DomainsService {
     @Autowired
-    private DomainsDAO domainsDAO;
+    private DomainDAO domainDAO;
 
     @Autowired
     private DomainsListDAO domainsListDAO;
@@ -60,21 +50,21 @@ public class DomainsServiceImpl implements DomainsService {
 
     @Override
     public Domain getDomain(int domainId) {
-        return domainsDAO.getDomain(domainId);
+        return domainDAO.getDomain(domainId);
     }
 
     @Override
     public int addDomainToDomainsList(Domain domain) {
-        return domainsDAO.addDomain(domain);
+        return domainDAO.addDomain(domain);
     }
 
     @Override
     public void updateDomainInList(Domain domain) throws UnsuccessfulModificationException {
-        domainsDAO.updateDomain(domain);
+        domainDAO.updateDomain(domain);
     }
 
     @Override
-    public void deleteDomain(int domainId) throws UnsuccessfulDeletException {
-        domainsDAO.deleteDomain(domainId);
+    public void deleteDomain(Domain domain) throws UnsuccessfulDeletException {
+        domainDAO.deleteDomain(domain);
     }
 }

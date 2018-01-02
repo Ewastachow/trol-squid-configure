@@ -5,10 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import trol.model.words.Words;
-import trol.service.words.WordsListService;
+import trol.domain.trol_api.model.WordsList;
+import trol.service.words.WordsService;
 
 import javax.validation.Valid;
 
@@ -16,34 +17,46 @@ import javax.validation.Valid;
 public class WordsListController {
 
     @Autowired
-    private WordsListService wordsListService;
+    WordsService wordsService;
 
     @GetMapping(value = "/words")
-    public ModelAndView getWordsList(){
+    public ModelAndView getWords(){
         ModelAndView model = new ModelAndView();
-        model.setViewName("/words/list");
-        model.addObject("words",wordsListService.getWordsList());
+        model.setViewName("/words/words");
+        model.addObject(
+                "words",
+                wordsService.getWordsLists()
+        );
         return model;
     }
 
     @GetMapping(value = "/words/add")
-    public String getNewWordsForm(Model model){
-        model.addAttribute("words",new Words());
+    public String getNewWordsListForm(Model model){
+        model.addAttribute("wordsList",new WordsList());
         return "/words/form";
     }
 
     @PostMapping(value = "/words/add")
-    public String addNewWords(@Valid Words words, BindingResult bindingResult){
+    public String addNewWordsList(@Valid WordsList wordsList, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return "/words/form";
         }
         try {
-            wordsListService.addWords(words);
+            wordsService.addWordsList(wordsList);
         } catch (Exception e) {
             //return "error";
         }
-        return "redirect:/words/list/"+words.getName();
+        return "redirect:/words/list/"+wordsList.getIdWordsList();
     }
 
+    @GetMapping(value = "words/delete/{id}")
+    public String deleteWordsList(@PathVariable("id") int id){
+        try {
+            wordsService.deleteWordsList(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/words";
+    }
 
 }

@@ -46,14 +46,19 @@ public class DomainsListController {
             //bindingResult.addError(new ObjectError(""));
             return "/domains/domainslist";
         }
-        return "redirect:/domains/list/"+domainsList.getIdDomainsList();
+        return "redirect:/domains";
     }
 
     @DeleteMapping(value = "/domains/list/{id}/edit/{domainId}")
-    public @ResponseBody UpdateResult deleteDomainFromList(@PathVariable("domainId") int domainId){
+    public @ResponseBody UpdateResult deleteDomainFromList(
+            @PathVariable("id") int listId,
+            @PathVariable("domainId") int domainId){
         UpdateResult result = new UpdateResult();
         try {
-            domainsService.deleteDomain(domainId);
+            Domain domain = new Domain();
+            domain.setIdDomain(domainId);
+            domain.setIdDomainsList(listId);
+            domainsService.deleteDomain(domain);
             result.success();
         } catch (Exception e) {
             result.setMessage(e.getMessage());
@@ -67,8 +72,10 @@ public class DomainsListController {
                                                          @PathVariable("domainId") int domainId){
         UpdateResult result = new UpdateResult();
         try {
-            domainsService.updateDomainInList(
-                    new Domain(domainId, domainString));
+            Domain domain = new Domain();
+            domain.setIdDomain(domainId);
+            domain.setDomainString(domainString);
+            domainsService.updateDomainInList(domain);
             result.success();
         } catch (Exception e) {
             result.setMessage(e.getMessage());
@@ -77,13 +84,15 @@ public class DomainsListController {
         return result;
     }
 
-    @PostMapping(value = "/domains/list/{id}/edit/{domainId}")
+    @PostMapping(value = "/domains/list/{id}/edit")
     public @ResponseBody UpdateResult addDomainToList(@RequestBody String domainString,
-                                                      @PathVariable("domainId") int domainId){
+                                                      @PathVariable("id") int listId){
         UpdateResult updateResult = new UpdateResult();
         try {
-            domainsService.addDomainToDomainsList(
-                    new Domain(domainId, domainString));
+            Domain domain = new Domain();
+            domain.setDomainString(domainString);
+            domain.setIdDomainsList(listId);
+            domainsService.addDomainToDomainsList(domain);
             updateResult.success();
         } catch (Exception e) {
             updateResult.setMessage(e.getMessage());

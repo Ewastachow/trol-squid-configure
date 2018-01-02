@@ -1,10 +1,21 @@
 package trol.service.words;
 
-import trol.model.words.Words;
+import trol.domain.trol_api.exception.UnsuccessfulDeletException;
+import trol.domain.trol_api.exception.UnsuccessfulModificationException;
+import trol.domain.trol_api.model.Word;
+import trol.domain.trol_api.model.WordsList;
+
+import java.util.List;
 
 public interface WordsService {
-    void editListHeader(Words newList) throws RuntimeException;
-    void editWordInList(String listName, String oldWord, String newWord) throws Exception;
-    void deleteWordInList(String listName, String word) throws Exception;
-    void addWordToList(String listName, String word) throws Exception;
+    List<WordsList> getWordsLists();
+    WordsList getWordsList(int wordsListId);
+    int addWordsList(WordsList wordsList) throws UnsuccessfulModificationException;
+    void updateWordsListProperties(WordsList wordsList) throws UnsuccessfulModificationException;
+    void deleteWordsList(int wordsListId) throws UnsuccessfulDeletException;
+
+    Word getWord(int wordId);
+    int addWordToWordsList(Word word);
+    void updateWordInList(Word word) throws UnsuccessfulModificationException;
+    void deleteWord(Word word) throws UnsuccessfulDeletException;
 }
