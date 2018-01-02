@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import trol.domain.trol_api.exception.UnsuccessfulModificationException;
+import trol.domain.trol_api.model.Domain;
 import trol.domain.trol_api.model.DomainsList;
 import trol.domain.trol_api.model.Mode;
 import trol.model.UpdateResult;
@@ -28,13 +29,14 @@ public class DomainsListController {
             model.addObject("domainsList",list);
             model.setViewName("/domains/domainslist");
         } catch (Exception e) {
+            e.printStackTrace();
             model = new ModelAndView("redirect:/error.html");
         }
         return model;
     }
 
     @PostMapping(value = "/domains/list/{id}")
-    public String editListHeader(@Valid DomainsList domainsList, BindingResult bindingResult){
+    public String editListProperties(@Valid DomainsList domainsList, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return "/domains/domainslist";
         }
@@ -65,7 +67,8 @@ public class DomainsListController {
                                                          @PathVariable("domainId") int domainId){
         UpdateResult result = new UpdateResult();
         try {
-            domainsService.changeDomainInList(domainId,domainString);
+            domainsService.updateDomainInList(
+                    new Domain(domainId, domainString));
             result.success();
         } catch (Exception e) {
             result.setMessage(e.getMessage());
@@ -79,7 +82,8 @@ public class DomainsListController {
                                                       @PathVariable("domainId") int domainId){
         UpdateResult updateResult = new UpdateResult();
         try {
-            domainsService.addDomainToDomainsList(domainId, domainString);
+            domainsService.addDomainToDomainsList(
+                    new Domain(domainId, domainString));
             updateResult.success();
         } catch (Exception e) {
             updateResult.setMessage(e.getMessage());

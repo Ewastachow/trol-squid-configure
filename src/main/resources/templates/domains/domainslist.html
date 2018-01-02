@@ -15,6 +15,7 @@
             <form action="#"
                   th:action="@{/domains/list/}+${domainsList.getIdDomainsList()}"
                   th:object="${domainsList}" method="post">
+                <input type="hidden" th:field="*{idDomainsList}"/>
                 <p>List name: <input type="text" th:field="*{domainsListName}" /></p>
                 <p th:if="${#fields.hasErrors('domainsListName')}" th:errors="*{domainsListName}">Error</p>
                 <p>Is this list timed?
