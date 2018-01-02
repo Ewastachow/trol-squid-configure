@@ -16,6 +16,14 @@ public class WordsList {
     private LocalTime timeEnd;
     private Set<Word> wordsSet;
 
+    public WordsList() {
+        isActive = false;
+        isTimed = false;
+        timeBegin = LocalTime.MIN;
+        timeEnd = LocalTime.MAX;
+        wordsSet = new HashSet<>();
+    }
+
     public WordsList(WordsListsEntity entity) {
         wordsSet = new HashSet<>();
         idWordsList = entity.getIdWordsList();
@@ -25,6 +33,10 @@ public class WordsList {
         timeBegin = entity.getTimeBegin().toLocalTime();
         timeEnd = entity.getTimeEnd().toLocalTime();
         entity.getWordsEntitySet().forEach(e -> wordsSet.add(new Word(e)));
+    }
+
+    public void setIdWordsList(int idWordsList) {
+        this.idWordsList = idWordsList;
     }
 
     public int getIdWordsList() {

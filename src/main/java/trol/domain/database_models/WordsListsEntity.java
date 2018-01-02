@@ -29,6 +29,11 @@ public class WordsListsEntity implements Serializable {
         timeEnd = Time.valueOf(LocalTime.of(13,0));
     }
 
+    public WordsListsEntity(String wordsListName) {
+        this();
+        this.wordsListName = wordsListName;
+    }
+
     @OneToMany(mappedBy="idWordsList", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<WordsEntity> getWordsEntitySet() {
         return wordsEntitySet;

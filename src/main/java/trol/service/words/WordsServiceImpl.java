@@ -2,6 +2,12 @@ package trol.service.words;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import trol.dao.words.WordDAO;
+import trol.dao.words.WordsListDAO;
+import trol.domain.trol_api.exception.UnsuccessfulDeletException;
+import trol.domain.trol_api.exception.UnsuccessfulModificationException;
+import trol.domain.trol_api.model.Word;
+import trol.domain.trol_api.model.WordsList;
 import trol.exceptions.DomainsListUpdateException;
 import trol.model.words.Words;
 
@@ -10,57 +16,56 @@ import java.util.List;
 @Service("wordsService")
 public class WordsServiceImpl implements WordsService {
     @Autowired
-    private WordsListService wordsListService;
+    private WordDAO wordDAO;
+
+    @Autowired
+    private WordsListDAO wordsListDAO;
 
     @Override
-    public void editListHeader(Words newList) throws RuntimeException {
-        try {
-            Words oldList = wordsListService.getWords(newList.getName());
-            List<Words> wordsLists = wordsListService
-                    .getWordsList()
-                    .getWordsList();
-            wordsLists.set(
-                    wordsLists.indexOf(oldList),
-                    newList
-            );
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+    public List<WordsList> getWordsLists() {
+        return wordsListDAO.getAllWordsLists();
     }
 
     @Override
-    public void editWordInList(String listName, String oldWord, String newWord) throws Exception {
-        try {
-            Words list = wordsListService.getWords(listName);
-            list.getWordsList()
-                    .set(
-                            list.getWordsList().indexOf(oldWord),
-                            newWord
-                    );
-        } catch (Exception e) {
-            throw new DomainsListUpdateException();
-        }
+    public WordsList getWordsList(int wordsListId) {
+        return wordsListDAO.getWordsList(wordsListId);
     }
 
     @Override
-    public void deleteWordInList(String listName, String word) throws DomainsListUpdateException {
-        try {
-            wordsListService.getWords(listName)
-                    .getWordsList()
-                    .remove(word);
-        } catch (Exception e) {
-            throw new DomainsListUpdateException();
-        }
+    public int addWordsList(WordsList wordsList) throws UnsuccessfulModificationException {
+        int id = wordsListDAO.addWordsList(wordsList.getWordsListName());
+        wordsList.setIdWordsList(id);
+        wordsListDAO.updateWordsListProperties(wordsList);
+        return id;
     }
 
     @Override
-    public void addWordToList(String listName, String word) throws DomainsListUpdateException {
-        try {
-            wordsListService.getWords(listName)
-                    .getWordsList()
-                    .add(word);
-        } catch (Exception e) {
-            throw new DomainsListUpdateException();
-        }
+    public void updateWordsListProperties(WordsList wordsList) throws UnsuccessfulModificationException {
+        wordsListDAO.updateWordsListProperties(wordsList);
+    }
+
+    @Override
+    public void deleteWordsList(int wordsListId) throws UnsuccessfulDeletException {
+        wordsListDAO.deleteWordsList(wordsListId);
+    }
+
+    @Override
+    public Word getWord(int wordId) {
+        return wordDAO.getWord(wordId);
+    }
+
+    @Override
+    public int addWordToWordsList(Word word) {
+        return wordDAO.addWord(word);
+    }
+
+    @Override
+    public void updateWordInList(Word word) throws UnsuccessfulModificationException {
+        wordDAO.updateWord(word);
+    }
+
+    @Override
+    public void deleteWord(Word word) throws UnsuccessfulDeletException {
+        wordDAO.deleteWord(word);
     }
 }
