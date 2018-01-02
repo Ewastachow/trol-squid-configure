@@ -13,6 +13,15 @@ public class DomainsEntity  implements Serializable {
     private String domainString;
     private DomainsListsEntity idDomainsList;
 
+    public DomainsEntity(){
+
+    }
+
+    public DomainsEntity(DomainsListsEntity idDomainsList, String domainString){
+        this.domainString = domainString;
+        this.idDomainsList = idDomainsList;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_domain")
@@ -54,8 +63,9 @@ public class DomainsEntity  implements Serializable {
         return result;
     }
 
-    @Basic
-    @Column(name = "id_domains_list")
+    @ManyToOne
+    @JoinColumn(name="id_domains_list", nullable=false)
+    //@Column(name = "id_domains_list")
     public DomainsListsEntity getIdDomainsList() {
         return idDomainsList;
     }

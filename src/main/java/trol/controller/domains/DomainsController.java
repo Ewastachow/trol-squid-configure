@@ -23,7 +23,7 @@ public class DomainsController {
         model.setViewName("/domains/domains");
         model.addObject(
                 "domains",
-                domainsService.getDomainsListsList()
+                domainsService.getDomainsLists()
         );
         return model;
     }
@@ -40,7 +40,7 @@ public class DomainsController {
             return "/domains/form";
         }
         try {
-            domainsService.createNewDomainsList(domainsList);
+            domainsService.addDomainsList(domainsList);
         } catch (Exception e) {
             //return "error";
         }

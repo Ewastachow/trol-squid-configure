@@ -54,8 +54,9 @@ public class HeadersEntity implements Serializable {
         return result;
     }
 
-    @Basic
-    @Column(name = "id_transmission_type")
+    @ManyToOne
+    @JoinColumn(name="id_transmission_type", nullable=false)
+    //@Column(name = "id_transmission_type")
     public TransmissionTypesEntity getIdTransmissionType() {
         return idTransmissionType;
     }

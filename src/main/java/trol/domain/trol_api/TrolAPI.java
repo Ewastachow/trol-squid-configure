@@ -1,7 +1,7 @@
 package trol.domain.trol_api;
 
 import org.hibernate.Session;
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import trol.domain.database_models.*;
 import trol.domain.filemanager.FileController;
