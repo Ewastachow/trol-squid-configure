@@ -44,6 +44,6 @@ public class DomainsController {
         } catch (Exception e) {
             //return "error";
         }
-        return "redirect:/domains/list/"+domainsList.getInfo().getId();
+        return "redirect:/domains/list/"+domainsList.getIdDomainsList();
     }
 }

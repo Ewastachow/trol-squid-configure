@@ -13,17 +13,27 @@
             <h2>Domains List</h2>
             <a th:href="@{/domains/add}" class="btn" role="button">Add</a>
             <div>
-                <table>
-                    <thead>
+                <table class="table">
+                    <thead class="thead-inverse">
                     <tr>
                         <th>List name</th>
+                        <th>Active</th>
+                        <th>Timed</th>
+                        <th></th>
                     </tr>
-                    <tr></tr>
                     </thead>
                     <tbody>
-                    <tr th:each="item : ${domains.getDomainsLists()}">
-                        <td class="domain" th:text="${item.getInfo().getName()}">Empty</td>
-                        <td><a th:href="@{/domains/list/}+${item.getInfo().getId()}" class="btn" role="button">Edit</a></td>
+                    <tr th:each="item : ${domains}">
+                        <td class="domain" th:text="${item.getDomainsListName()}">Empty</td>
+                        <td>
+                            <span th:if="${item.isActive}" class="glyphicon glyphicon-ok-circle"></span>
+                            <span th:unless="${item.isActive}" class="glyphicon glyphicon-remove-circle"></span>
+                        </td>
+                        <td>
+                            <span th:if="${item.isTimed}" class="glyphicon glyphicon-ok-circle"></span>
+                            <span th:unless="${item.isTimed}" class="glyphicon glyphicon-remove-circle"></span>
+                        </td>
+                        <td><a th:href="@{/domains/list/}+${item.getIdDomainsList()}" class="btn" role="button">Edit</a></td>
                     </tr>
                     </tbody>
                 </table>

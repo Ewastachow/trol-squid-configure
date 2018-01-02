@@ -9,6 +9,7 @@ import trol.domain.trol_api.exception.UnsuccessfulModificationException;
 import trol.domain.trol_api.model.*;
 import trol.domain.util.HibernateUtil;
 
+import javax.transaction.Transactional;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
