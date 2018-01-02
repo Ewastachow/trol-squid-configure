@@ -7,7 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import trol.model.domains.DomainsList;
+import trol.domain.trol_api.model.DomainsList;
 import trol.service.domains.DomainsService;
 
 import javax.validation.Valid;
@@ -23,7 +23,7 @@ public class DomainsController {
         model.setViewName("/domains/domains");
         model.addObject(
                 "domains",
-                domainsService.getDomains()
+                domainsService.getDomainsListsList()
         );
         return model;
     }
@@ -40,10 +40,10 @@ public class DomainsController {
             return "/domains/form";
         }
         try {
-            domainsService.addDomainsList(domainsList);
+            domainsService.createNewDomainsList(domainsList);
         } catch (Exception e) {
             //return "error";
         }
-        return "redirect:/domains/list/"+domainsList.getInfo().getId();
+        return "redirect:/domains/list/"+domainsList.getIdDomainsList();
     }
 }

@@ -3,6 +3,7 @@ package trol;
 import org.hibernate.Session;
 import trol.domain.database_models.WordsEntity;
 import trol.domain.database_models.WordsListsEntity;
+import trol.domain.filemanager.PhrasesList;
 import trol.domain.trol_api.TrolAPI;
 import trol.domain.trol_api.exception.UnsuccessfulDeletException;
 import trol.domain.trol_api.exception.UnsuccessfulModificationException;
@@ -10,6 +11,8 @@ import trol.domain.trol_api.model.Word;
 import trol.domain.trol_api.model.WordsList;
 import trol.domain.util.HibernateUtil;
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.List;
@@ -45,6 +48,7 @@ public class Main {
         } catch (UnsuccessfulModificationException e) {
             e.printStackTrace();
         }
+//        foo6();
     }
 
     public static void foo1(){
@@ -172,7 +176,7 @@ public class Main {
 //        session.getTransaction().commit();
 
         trolAPI.changeWordsListActivityMode(idWordsList, true);
-        trolAPI.changeTimeInWordsList(idWordsList, Time.valueOf(LocalTime.of(11,20)), Time.valueOf(LocalTime.of(21,02)));
+        trolAPI.changeTimeInWordsList(idWordsList, LocalTime.of(11,20), LocalTime.of(21,02));
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n\n\n\n");
@@ -223,6 +227,26 @@ public class Main {
 
         HibernateUtil.getSessionFactory().close();
 
+
+    }
+
+    public static void foo6(){
+//        TrolAPI trolAPI = new TrolAPI();
+//        int idPhrasesListTest = trolAPI.createNewWordsList("PhrasesListTest");
+//        trolAPI.addWordToWordsList(idPhrasesListTest,"olga");
+//        trolAPI.addWordToWordsList(idPhrasesListTest," olga ");
+//        trolAPI.addWordToWordsList(idPhrasesListTest,"oddlga");
+//        trolAPI.addWordToWordsList(idPhrasesListTest,"olssga");
+//        trolAPI.addWordToWordsList(idPhrasesListTest,"olgaaa");
+//
+//        WordsList wordsList = trolAPI.getWordsList(idPhrasesListTest);
+//        PhrasesList phrasesList = new PhrasesList(wordsList);
+////        phrasesList.setPath(Paths.get("C:\\Users\\yevvy\\Documents\\AGH\\Projects\\IO\\trol-squid-configure\\src\\main\\resources\\trol.domain.filemanager\\phraselists\\lama"));
+//        try {
+//            phrasesList.saveFile();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
