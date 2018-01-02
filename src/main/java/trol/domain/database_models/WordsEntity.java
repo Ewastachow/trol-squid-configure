@@ -13,6 +13,9 @@ public class WordsEntity implements Serializable {
     private String wordString;
     private WordsListsEntity idWordsList;
 
+    public WordsEntity() {
+    }
+
     public WordsEntity(String wordString, WordsListsEntity idWordsList) {
         this.wordString = wordString;
         this.idWordsList = idWordsList;
