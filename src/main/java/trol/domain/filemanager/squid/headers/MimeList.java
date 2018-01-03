@@ -1,4 +1,4 @@
-package trol.domain.filemanager.headers;
+package trol.domain.filemanager.squid.headers;
 
 import trol.domain.filemanager.FilePaths;
 import trol.domain.trol_api.model.TransmissionType;
@@ -7,7 +7,6 @@ import trol.domain.util.FileHelper;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MimeList {
