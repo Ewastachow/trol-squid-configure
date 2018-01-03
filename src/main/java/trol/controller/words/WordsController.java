@@ -2,6 +2,7 @@ package trol.controller.words;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,6 +10,7 @@ import trol.domain.trol_api.exception.UnsuccessfulModificationException;
 import trol.domain.trol_api.model.Word;
 import trol.domain.trol_api.model.WordsList;
 import trol.model.UpdateResult;
+import trol.model.words.Words;
 import trol.service.words.WordsService;
 
 import javax.validation.Valid;
@@ -26,6 +28,7 @@ public class WordsController {
             model = new ModelAndView();
             model.addObject("wordsList",list);
             model.setViewName("/words/wordslist");
+            model.addObject("newword", new Word());
         } catch (Exception e) {
             e.printStackTrace();
             model = new ModelAndView("redirect:/error.html");
@@ -34,7 +37,15 @@ public class WordsController {
     }
 
     @PostMapping(value = "/words/list/{id}")
-    public String editListProperties(@Valid WordsList wordsList, BindingResult bindingResult){
+    public String editListProperties(@Valid @ModelAttribute("wordsList") WordsList wordsList,
+                BindingResult bindingResult, Model model, @PathVariable("id") int id
+        ){
+        WordsList list = wordsService.getWordsList(id);
+        wordsList.setWordsSet(list.getWordsSet());
+        model.addAttribute(
+                "newword",
+                new Word()
+        );
         if (bindingResult.hasErrors()){
             return "/words/wordslist";
         }
@@ -83,19 +94,17 @@ public class WordsController {
     }
 
     @PostMapping(value = "/words/list/{id}/edit")
-    public @ResponseBody UpdateResult addWordToList(@RequestBody String wordString,
-                                                    @PathVariable("id") int listId){
-        UpdateResult updateResult = new UpdateResult();
-        try {
-            Word word = new Word();
-            word.setWordString(wordString);
-            word.setIdWordsList(listId);
-            wordsService.addWordToWordsList(word);
-            updateResult.success();
-        } catch (Exception e) {
-            updateResult.setMessage(e.getMessage());
-            updateResult.fail();
+    public String addWordToList(
+            @Valid @ModelAttribute("newword") Word newword, BindingResult bindingResult,
+            Model model, @PathVariable("id") int listId
+            ){
+        WordsList wordsList = wordsService.getWordsList(listId);
+        model.addAttribute("wordsList",wordsList);
+        if (bindingResult.hasErrors()){
+            return "/words/wordslist";
         }
-        return updateResult;
+        newword.setIdWordsList(listId);
+        wordsService.addWordToWordsList(newword);
+        return "redirect:/words/list/"+listId;
     }
 }

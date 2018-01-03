@@ -1,15 +1,31 @@
 package trol.dao.users;
 
+import org.springframework.stereotype.Repository;
 import trol.domain.database_models.UserEntity;
 import trol.domain.trol_api.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.sql.Time;
+import java.util.List;
+import java.util.stream.Collectors;
 
+@Transactional
+@Repository
 public class UserDAOImpl implements UserDAO {
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Override
+    public List<User> getAllUsers() {
+        String queryString = "FROM UserEntity";
+        List<UserEntity> entities = entityManager.createQuery(queryString).getResultList();
+        List<User> result = entities.stream()
+                .map(e -> new User(e))
+                .collect(Collectors.toList());
+        return result;
+    }
 
     @Override
     public User getUser(int userId) {
@@ -33,8 +49,9 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void deleteUser(User user) {
-
+    public void deleteUser(int userId) {
+        UserEntity entity = entityManager.find(UserEntity.class,userId);
+        entityManager.remove(entity);
     }
 
     @Override

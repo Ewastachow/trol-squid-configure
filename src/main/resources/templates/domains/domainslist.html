@@ -25,11 +25,14 @@
         <div class="box col-md-6 col-md-offset-3" id="domainsList">
             <div id="add-domain">
                 Add domain:
-                <label>
-                    <input type="text" class="domain"/>
-                </label>
-                <div id="adderror"></div>
-                <button type="submit" class="addDomain-btn btn btn-success">Add</button>
+                <form action="#" th:action="@{/domains/list/{id}/edit(id = ${domainsList.getIdDomainsList()})}"
+                      th:object="${newdomain}" method="post">
+                    <input type="text" th:field="*{domainString}" id="domainString"/>
+                    <input type="hidden" th:field="*{idDomainsList}" id="idDomainsList"/>
+                    <div th:if="${#fields.hasErrors('domainString')}"
+                         th:errors="*{domainString}" class="alert alert-danger"></div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
             </div>
             <table class="table table-bordered" id="domains-table">
                 <thead class="thead">

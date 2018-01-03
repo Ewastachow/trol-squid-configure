@@ -1,7 +1,9 @@
 package trol.controller.domains;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,6 @@ import trol.validation.TrolDomain;
 
 import javax.validation.Valid;
 
-@Validated
 @Controller
 public class DomainsListController {
 
@@ -31,6 +32,10 @@ public class DomainsListController {
             model = new ModelAndView();
             model.addObject("domainsList",list);
             model.setViewName("/domains/domainslist");
+            model.addObject(
+                    "newdomain",
+                    new Domain()
+            );
         } catch (Exception e) {
             e.printStackTrace();
             model = new ModelAndView("redirect:/error.html");
@@ -39,7 +44,14 @@ public class DomainsListController {
     }
 
     @PostMapping(value = "/domains/list/{id}")
-    public String editListProperties(@Valid DomainsList domainsList, BindingResult bindingResult){
+    public String editListProperties(@Valid @ModelAttribute("domainsList") DomainsList domainsList,
+                                     BindingResult bindingResult, Model model, @PathVariable("id") int id){
+        DomainsList list = domainsService.getDomainsList(id);
+        domainsList.setDomainsSet(list.getDomainsSet());
+        model.addAttribute(
+                "newdomain",
+                new Domain()
+        );
         if (bindingResult.hasErrors()){
             return "/domains/domainslist";
         }
@@ -87,20 +99,38 @@ public class DomainsListController {
         return result;
     }
 
-    @PostMapping(value = "/domains/list/{id}/edit")
-    public @ResponseBody UpdateResult addDomainToList(@TrolDomain @RequestBody String domainString,
-                                                      @PathVariable("id") int listId){
-        UpdateResult updateResult = new UpdateResult();
-        try {
-            Domain domain = new Domain();
-            domain.setDomainString(domainString);
-            domain.setIdDomainsList(listId);
-            domainsService.addDomainToDomainsList(domain);
-            updateResult.success();
-        } catch (Exception e) {
-            updateResult.setMessage(e.getMessage());
-            updateResult.fail();
+    @PutMapping(value = "/domains/list/{id}/editt/{domainId}")
+    public String updateDomain(
+            @Valid @ModelAttribute("newdomain") Domain newdomain, BindingResult bindingResult,
+            Model model, @PathVariable("id") int listId, @PathVariable("domainId") int domainId
+    ){
+        DomainsList list = domainsService.getDomainsList(listId);
+        model.addAttribute("domainsList",list);
+        if (bindingResult.hasErrors()){
+            return "/domains/domainslist";
         }
-        return updateResult;
+        newdomain.setIdDomainsList(listId);
+        newdomain.setIdDomain(domainId);
+        try {
+            domainsService.updateDomainInList(newdomain);
+        } catch (UnsuccessfulModificationException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/domains/list/"+listId;
+    }
+
+    @PostMapping(value = "/domains/list/{id}/edit")
+    public String addDomain(
+            @Valid @ModelAttribute("newdomain") Domain newdomain, BindingResult bindingResult,
+            Model model, @PathVariable("id") int listId
+    ){
+        DomainsList list = domainsService.getDomainsList(listId);
+        model.addAttribute("domainsList",list);
+        if (bindingResult.hasErrors()){
+            return "/domains/domainslist";
+        }
+        newdomain.setIdDomainsList(listId);
+        domainsService.addDomainToDomainsList(newdomain);
+        return "redirect:/domains/list/"+listId;
     }
 }

@@ -11,6 +11,9 @@ public class TrolDomainValidator implements ConstraintValidator<TrolDomain,Strin
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return value.matches("^[a-zA-Z0-9\\.]+[a-zA-Z0-9]$");
+        if (value!= null) {
+            return value.matches("^[a-zA-Z0-9\\.]+[a-zA-Z0-9]$");
+        }
+        return false;
     }
 }
