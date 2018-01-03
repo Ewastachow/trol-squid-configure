@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import trol.domain.filemanager.FileController;
+import trol.domain.filemanager.SaveState;
 
 @Controller
 public class MainController {
@@ -31,6 +32,11 @@ public class MainController {
     @ResponseStatus(HttpStatus.OK)
     public void saveConfiguration(){
         fileController.saveConfiguration();
-        System.out.println("dostalem clicka stan:"+ fileController.getState());
+    }
+
+    @GetMapping("/save/state")
+    @ResponseStatus(HttpStatus.OK)
+    public void getSaveState(){
+        SaveState saveState = fileController.getState();
     }
 }
