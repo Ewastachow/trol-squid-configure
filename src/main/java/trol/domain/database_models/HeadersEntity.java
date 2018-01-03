@@ -13,6 +13,11 @@ public class HeadersEntity implements Serializable {
     private String headerString;
     private TransmissionTypesEntity idTransmissionType;
 
+    public HeadersEntity(String headerString, TransmissionTypesEntity idTransmissionType) {
+        this.headerString = headerString;
+        this.idTransmissionType = idTransmissionType;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_header")

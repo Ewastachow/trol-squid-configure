@@ -3,6 +3,7 @@ package trol.controller.domains;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import trol.domain.trol_api.exception.UnsuccessfulModificationException;
@@ -11,9 +12,11 @@ import trol.domain.trol_api.model.DomainsList;
 import trol.domain.trol_api.model.Mode;
 import trol.model.UpdateResult;
 import trol.service.domains.DomainsService;
+import trol.validation.TrolDomain;
 
 import javax.validation.Valid;
 
+@Validated
 @Controller
 public class DomainsListController {
 
@@ -85,7 +88,7 @@ public class DomainsListController {
     }
 
     @PostMapping(value = "/domains/list/{id}/edit")
-    public @ResponseBody UpdateResult addDomainToList(@RequestBody String domainString,
+    public @ResponseBody UpdateResult addDomainToList(@TrolDomain @RequestBody String domainString,
                                                       @PathVariable("id") int listId){
         UpdateResult updateResult = new UpdateResult();
         try {

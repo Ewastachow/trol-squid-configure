@@ -29,6 +29,11 @@ public class TransmissionTypesEntity implements Serializable {
         timeEnd = Time.valueOf(LocalTime.of(13,0));
     }
 
+    public TransmissionTypesEntity(String transmissionTypeName) {
+        this();
+        this.transmissionTypeName = transmissionTypeName;
+    }
+
     @OneToMany(mappedBy="idTransmissionType", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<HeadersEntity> getHeadersEntitySet() {
         return headersEntitySet;
