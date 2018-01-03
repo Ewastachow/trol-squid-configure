@@ -36,6 +36,14 @@ table-bordered {
     vertical-align: middle;
 }
 
+.glyphicon-ok{
+    color: green;
+}
+
+.glyphicon-remove{
+    color: red;
+}
+
 /* Form.html */
 .adding-form-inside{
     background-color: #c9e4f2;
