@@ -6,6 +6,7 @@ import java.sql.Time;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class DomainsList {
 
@@ -28,7 +29,7 @@ public class DomainsList {
     }
 
     public DomainsList(DomainsListsEntity entity) {
-        domainsSet = new HashSet<>();
+        domainsSet = new TreeSet<>();
         idDomainsList = entity.getIdDomainsList();
         domainsListName = entity.getDomainsListName();
         isActive = entity.getIsActive() == 1;
