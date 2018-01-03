@@ -1,10 +1,6 @@
 package trol.domain.log;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
-import trol.dao.users.UserDAO;
-import trol.dao.users.UserDAOImpl;
-import trol.domain.filemanager.FileController;
 import trol.domain.util.FileHelper;
 import trol.domain.terminal.TerminalExecute;
 
@@ -18,11 +14,6 @@ public class LogsReader {
     public LogState getState() {
         return state;
     }
-
-    @Autowired
-    private FileController fileController;
-    @Autowired
-    private UserDAO userDAO;
 
     private BlockTimeManager timeManager;
     private TerminalExecute term;
@@ -48,6 +39,13 @@ public class LogsReader {
      */
     @Async
     public void checkUsersLogs() throws IOException, InterruptedException {
+        if (state.equals(LogState.BUSY)){
+            System.out.println("nie przerywac, pracuje");
+            return;
+        }
+        System.out.println("zaczynam prace "+ this);
+        state = LogState.BUSY;
+
         if(timeManager.nextDay()) {
             updateNextDay();
         }
@@ -55,7 +53,8 @@ public class LogsReader {
             updateUsersReadyToBlock();
         }
 
-        fileController.saveConfiguration();
+        System.out.println("koncze prace "+ this);
+        state = LogState.FREE;
     }
 
     private void updateNextDay() throws IOException, InterruptedException {
