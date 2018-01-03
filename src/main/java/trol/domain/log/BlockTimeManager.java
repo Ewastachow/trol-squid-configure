@@ -1,17 +1,22 @@
 package trol.domain.log;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import trol.dao.users.UserDAOImpl;
+import trol.domain.trol_api.model.User;
+
 import java.time.LocalTime;
 import java.util.List;
 
 public class BlockTimeManager {
-    private String timesPath;
-    private List<String> users;
+
+    @Autowired
+    private UserDAOImpl userDAO;
+
     private LocalTime lastUpdateTimestamp;
 
-    BlockTimeManager(String timesPath, List<String> users) {
-        this.timesPath = timesPath;
-        this.users = users;
-        lastUpdateTimestamp =  LocalTime.now();
+    BlockTimeManager(UserDAOImpl userDAO) {
+        this.userDAO = userDAO;
+        lastUpdateTimestamp = LocalTime.now();
     }
 
     /**
@@ -22,15 +27,26 @@ public class BlockTimeManager {
         return lastUpdateTimestamp.isAfter(LocalTime.now());
     }
 
+    public void updateUserTime(String userIp, Integer time) {
+        users = userDAO.getUsersList();
 
-    public boolean addTime(int seconds, String user) {
-        //TODO: ma dopisać do pliku i jeżeli przekroczy użytkownikowi jego blokadę czasową,
-        //TODO: to myk myk zwraca true i w ten sposób przekazuje że użytkownika trzeba zablokować
-        return false;
+        for(User u : users) {
+            if(userIp.equals(u.getUserIp())) {
+                if(u.getHasDuration()) {
+                    u.addUsedTime(time);
+                    userDAO.updateUser(u);
+                }
+                break;
+            }
+        }
     }
 
-
     public void clearWastedTime() {
-        //TODO: Wywoływana domyślnie o 00:00 chodzi o wyzerowanie wasted timeu w pliku
+        users = userDAO.getUsersList();
+
+        for(User u : users) {
+            u.setUsedTime(0);
+            userDAO.updateUser(u);
+        }
     }
 }

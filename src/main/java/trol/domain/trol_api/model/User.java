@@ -64,4 +64,8 @@ public class User {
     public Integer getUsedTime() {
         return usedTime;
     }
+
+    public void addUsedTime(Integer usedTime) { this.usedTime += usedTime; }
+
+    public void setUsedTime(Integer usedTime) {this.usedTime = usedTime; }
 }
