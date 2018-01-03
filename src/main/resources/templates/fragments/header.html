@@ -25,9 +25,9 @@
                         <li><a href="/users">Users</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><button class="btn btn-primary saveconfig btn-md btn-navbar"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save configuration</button></li>
+                        <li><a class="btn btn-info saveconfig" id="save-config"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save configuration</a></li>
                         <!--<li><a class="btn btn-warning" th:href="@{/save}">Save configuration</a></li>-->
-                        <li><button class="btn btn-warning btn-md btn-navbar" th:href="@{/logout}"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</button></li>
+                        <li><a class="btn btn-primary" id="signout" th:href="@{/logout}"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
                     </ul>
                 </div>
             </div>
