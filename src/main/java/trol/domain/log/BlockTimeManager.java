@@ -28,7 +28,7 @@ public class BlockTimeManager {
     }
 
     public void updateUserTime(String userIp, Integer time) {
-        users = userDAO.getUsersList();
+        List<User> users = userDAO.getAllUsers();
 
         for(User u : users) {
             if(userIp.equals(u.getUserIp())) {
@@ -36,13 +36,12 @@ public class BlockTimeManager {
                     u.addUsedTime(time);
                     userDAO.updateUser(u);
                 }
-                break;
             }
         }
     }
 
     public void clearWastedTime() {
-        users = userDAO.getUsersList();
+        List<User> users = userDAO.getAllUsers();
 
         for(User u : users) {
             u.setUsedTime(0);

@@ -82,6 +82,8 @@ public class User implements Comparable<User> {
         this.usedTime = usedTime;
     }
 
+    public void addUsedTime(Integer usedTime) { this.usedTime += usedTime; }
+
     public int getIdUser() {
         return idUser;
     }
