@@ -6,10 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.util.Arrays;
 
 @SpringBootApplication
+@EnableAsync
 public class Application extends WebMvcAutoConfiguration {
 
     //TODO: CZyli tutaj gdzieś odpaliłbym sobie ten mój wątek, ktory będzie obsługiwał czytanie logów

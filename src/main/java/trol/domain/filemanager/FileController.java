@@ -3,9 +3,6 @@ package trol.domain.filemanager;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import trol.domain.filemanager.trash.DomainList;
-import trol.domain.filemanager.words.PhrasesIncludeList;
-import trol.domain.filemanager.words.PhrasesList;
 import trol.domain.trol_api.model.DomainsList;
 import trol.domain.trol_api.model.WordsList;
 
@@ -38,6 +35,7 @@ public class FileController {
         System.out.println("koncze prace "+ this);
         state = 0;
     }
+
 
     private void saveWordsListsToFile(List<WordsList> wordsListList){
         wordsListList.forEach(e -> {
