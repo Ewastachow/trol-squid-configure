@@ -7,7 +7,7 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container-fluid domainslist">
+<div class="container-fluid wordslist">
     <div class="words-edit-inside">
         <div class="row">
             <div class="box col-md-6 col-md-offset-3">
@@ -34,23 +34,23 @@
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                 </div>
-                <table class="table table-bordered" id="domains-table">
+                <table class="table table-bordered" id="words-table">
                     <thead class="thead">
                     <tr id="top">
-                        <th class="th">Domain</th>
+                        <th class="th">Word</th>
                         <th class="th"></th>
                         <th class="th"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="item : ${wordsList.getDomainsSet()}">
+                    <tr th:each="item : ${wordsList.getWordsSet()}">
                         <td>
-                            <div th:text="${item.domainString}" class="domain"></div>
+                            <div th:text="${item.wordString}" class="word"></div>
                         </td>
-                        <td><button class="btn btn-default editdomain">Edit</button></td>
-                        <td><button class="btn btn-danger removedomain">Remove</button></td>
-                        <input type="hidden" class="id" th:value="${item.idDomain}"/>
-                        <input type="hidden" class="oldDomain" th:value="${item.domainString}"/>
+                        <td><button class="btn btn-default editword">Edit</button></td>
+                        <td><button class="btn btn-danger removeword">Remove</button></td>
+                        <input type="hidden" class="id" th:value="${item.idWord}"/>
+                        <input type="hidden" class="oldWord" th:value="${item.wordString}"/>
                     </tr>
                     </tbody>
                 </table>
@@ -60,7 +60,7 @@
 </div>
 
 <div th:replace="fragments/footer :: footer"/>
-<script src="/js/domains/wordslist.js"></script>
+<script src="/js/words/wordslist.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+</head>
+<body>
+<div th:fragment="form">
+    <input type="hidden" th:field="*{idWordsList}"/>
+    <div class="form-group">
+        <label for="name">List name:</label>
+        <input type="text" class="form-control" th:field="*{wordsListName}" id="name"/>
+        <div th:if="${#fields.hasErrors('wordsListName')}"
+             th:errors="*{wordsListName}" class="alert alert-danger"></div>
+    </div>
+    <div class="form-check">
+        <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" th:field="*{isActive}"/>
+            Is this list active?
+        </label>
+    </div>
+    <div class="form-check">
+        <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" th:field="*{isTimed}"/>
+            Is this list timed?
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="timebegin">Start time:</label>
+        <input type="time" class="form-control" th:field="*{timeBegin}" id="timebegin"/>
+    </div>
+    <div class="form-group">
+        <label for="timeend">End time:</label>
+        <input type="time" class="form-control" th:field="*{timeEnd}" id="timeend"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</div>
+
+</body>
+</html>

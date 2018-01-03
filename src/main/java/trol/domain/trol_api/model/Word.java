@@ -1,10 +1,12 @@
 package trol.domain.trol_api.model;
 
+import org.hibernate.validator.constraints.Length;
 import trol.domain.database_models.WordsEntity;
 
 public class Word implements Comparable<Word>{
 
     private int idWord;
+    @Length(min=1, max=50)
     private String wordString;
     private int idWordsList;
 

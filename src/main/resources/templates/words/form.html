@@ -1,28 +1,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Words list</title>
-    <div th:replace="fragments/header :: header-css"/></head>
+    <link rel="stylesheet" type="text/css" href="/css/domains.css" />
+    <div th:replace="fragments/header :: header-css"/>
+</head>
 <body>
 
 <div th:replace="fragments/header :: header"/>
-
-<div class="container-fluid wordsform">
-    <div class="row">
-        <div class="box col-md-6 col-md-offset-3">
-            <h2>Add new words list:</h2>
-            <form th:action="@{/words/add}" th:object="${words}" method="post">
-                <p>List name: <input type="text" th:field="*{name}" /></p>
-                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
-                <p>Is this list timed?
-                    <input type="checkbox" name="isTimed" th:field="*{isTimed}"/>
-                </p>
-                <p>Start time: <input type="time" th:field="*{timeBegin}"/></p>
-                <p>End time: <input type="time" th:field="*{timeEnd}"/></p>
-                <p>Is this list active?
-                    <input type="checkbox" name="isActive" th:field="*{isActive}"/>
-                </p>
-                <p><button type="submit">Add</button></p>
-            </form>
+<!--Adding form-->
+<div class="container-fluid domainsform">
+    <div class="adding-form-inside">
+        <div class="row">
+            <div class="box col-md-6 col-md-offset-3">
+                <h2>Add new words list:</h2>
+                <form th:action="@{/words/add}" th:object="${wordsList}" method="post">
+                    <div th:replace="fragments/wordsform :: form"/>
+                </form>
+            </div>
         </div>
     </div>
 </div>

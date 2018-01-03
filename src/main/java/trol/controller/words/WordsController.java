@@ -28,6 +28,7 @@ public class WordsController {
             model = new ModelAndView();
             model.addObject("wordsList",list);
             model.setViewName("/words/wordslist");
+            model.addObject("newword", new Word());
         } catch (Exception e) {
             e.printStackTrace();
             model = new ModelAndView("redirect:/error.html");
@@ -43,7 +44,7 @@ public class WordsController {
         wordsList.setWordsSet(list.getWordsSet());
         model.addAttribute(
                 "newword",
-                new Words()
+                new Word()
         );
         if (bindingResult.hasErrors()){
             return "/words/wordslist";
