@@ -1,6 +1,7 @@
 package trol.domain.filemanager;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import trol.domain.trol_api.model.DomainsList;
 import trol.domain.trol_api.model.WordsList;
@@ -13,13 +14,14 @@ import java.util.List;
 @Scope("singleton")
 public class FileController {
 
-    private int state = 0;
+    private volatile int state = 0;
 
     public int getState() {
         return state;
     }
 
-    public synchronized void saveConfiguration(){
+    @Async
+    public void saveConfiguration(){
         if (state == 1){
             System.out.println("nie przerywac, pracuje");
             return;
@@ -33,6 +35,7 @@ public class FileController {
         System.out.println("koncze prace "+ this);
         state = 0;
     }
+
 
     private void saveWordsListsToFile(List<WordsList> wordsListList){
         wordsListList.forEach(e -> {
