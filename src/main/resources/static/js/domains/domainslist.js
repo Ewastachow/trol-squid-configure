@@ -32,10 +32,12 @@ $(document).on('click', '.addDomain', function (e) {
         contentType: "application/json",
         data: domain
     }).done(function(result){
+        console.log(result);
         console.log(result.message);
         location.reload();
         //TODO
     }).fail(function (xhr, status, error) {
+        console.log(xhr);
         var response = JSON.parse(xhr.responseText);
         var error = response.error[0];
         $("#adderror").html(getErrorInfo(error));
@@ -72,6 +74,7 @@ $(document).on('click', '.applyEdit', function (e) {
         contentType: "application/json",
         data: newDomain
     }).done(function(result){
+        console.log(result);
         location.reload();
     }).fail(function (xhr, status, error) {
         var response = JSON.parse(xhr.responseText);

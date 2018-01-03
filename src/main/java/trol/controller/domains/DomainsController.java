@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import trol.domain.trol_api.exception.UnsuccessfulDeletException;
+import trol.domain.trol_api.model.Domain;
 import trol.domain.trol_api.model.DomainsList;
 import trol.service.domains.DomainsService;
 

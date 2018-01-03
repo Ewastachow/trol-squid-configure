@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import trol.domain.trol_api.model.User;
 import trol.service.users.UsersService;
 
+import javax.validation.Valid;
+
 @Controller
 public class UserController {
     @Autowired
@@ -27,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/users/user/{id}")
-    public String updateUser(User user, BindingResult bindingResult){
+    public String updateUser(@Valid User user, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return "/users/user";
         }

@@ -1,9 +1,11 @@
 package trol.domain.trol_api.model;
 
 import trol.domain.database_models.DomainsEntity;
+import trol.validation.TrolDomain;
 
 public class Domain implements Comparable<Domain>{
     private int idDomain;
+    @TrolDomain
     private String domainString;
     private int idDomainsList;
 
