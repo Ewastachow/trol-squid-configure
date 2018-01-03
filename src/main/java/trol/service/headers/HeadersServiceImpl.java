@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class HeadersServiceImpl implements HeadersService {
     @Autowired
-    TransmissionTypeDAO transmissionTypeDAO;
+    private TransmissionTypeDAO transmissionTypeDAO;
 
     @Override
     public List<TransmissionType> getAllTransmissionTypes() {
