@@ -99,4 +99,8 @@ public class DomainsList {
     public Set<Domain> getDomainsSet() {
         return domainsSet;
     }
+
+    public void setDomainsSet(Set<Domain> domainsSet) {
+        this.domainsSet = domainsSet;
+    }
 }
