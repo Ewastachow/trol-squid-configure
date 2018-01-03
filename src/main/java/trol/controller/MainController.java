@@ -28,9 +28,9 @@ public class MainController {
     }
 
     @GetMapping("/save")
-    public String saveConfiguration(){
+    @ResponseStatus(HttpStatus.OK)
+    public void saveConfiguration(){
         fileController.saveConfiguration();
-        System.out.println("dostalem clicka "+ fileController.getState());
-        return "redirect:/";
+        System.out.println("dostalem clicka stan:"+ fileController.getState());
     }
 }
