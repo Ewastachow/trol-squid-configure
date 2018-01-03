@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+</head>
+<body>
+<div th:fragment="form">
+    <input type="hidden" th:field="*{idUser}"/>
+    <div class="form-group">
+        <label for="name">User ip:</label>
+        <input type="text" class="form-control" th:field="*{userIp}" id="name"/>
+        <div th:if="${#fields.hasErrors('userIp')}" th:errors="*{userIp}" class="alert alert-danger"></div>
+    </div>
+    <div class="form-check">
+        <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" th:field="*{isActive}"/>
+            Activate blocking?
+        </label>
+    </div>
+    <div class="form-check">
+        <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" th:field="*{isTimed}"/>
+            Is blocking time limited?
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="timebegin">Start time:</label>
+        <input type="time" class="form-control" th:field="*{timeBegin}" id="timebegin"/>
+    </div>
+    <div class="form-group">
+        <label for="timeend">End time:</label>
+        <input type="time" class="form-control" th:field="*{timeEnd}" id="timeend"/>
+    </div>
+    <div class="form-check">
+        <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" th:field="*{hasDuration}"/>
+            Is browsing duration limited?
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="duration">Browsing time limit:</label>
+        <input type="number" class="form-control" th:field="*{durationInterval}" id="duration"/>
+        <div th:if="${#fields.hasErrors('durationInterval')}"
+             th:errors="*{durationInterval}"
+             class="alert alert-danger"></div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</div>
+
+</body>
+</html>

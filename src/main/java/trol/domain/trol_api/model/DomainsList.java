@@ -1,16 +1,16 @@
 package trol.domain.trol_api.model;
 
+import org.hibernate.validator.constraints.Length;
 import trol.domain.database_models.DomainsListsEntity;
 
-import java.sql.Time;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class DomainsList {
 
     private int idDomainsList;
+    @Length(min = 1, max = 100, message = "Length must between 1 and 100")
     private String domainsListName;
     private boolean isActive;
     private boolean isBlack;
@@ -25,7 +25,7 @@ public class DomainsList {
         isTimed = false;
         timeBegin = LocalTime.MIN;
         timeEnd = LocalTime.MAX;
-        domainsSet = new HashSet<>();
+        domainsSet = new TreeSet<>();
     }
 
     public DomainsList(DomainsListsEntity entity) {
@@ -98,5 +98,9 @@ public class DomainsList {
 
     public Set<Domain> getDomainsSet() {
         return domainsSet;
+    }
+
+    public void setDomainsSet(Set<Domain> domainsSet) {
+        this.domainsSet = domainsSet;
     }
 }

@@ -2,7 +2,7 @@ package trol.domain.trol_api.model;
 
 import trol.domain.database_models.HeadersEntity;
 
-public class Header {
+public class Header implements Comparable<Header>{
     private int idHeader;
     private String headerString;
     private int idTransmissionType;
@@ -23,5 +23,10 @@ public class Header {
 
     public int getIdTransmissionType() {
         return idTransmissionType;
+    }
+
+    @Override
+    public int compareTo(Header o) {
+        return idHeader - o.idHeader;
     }
 }

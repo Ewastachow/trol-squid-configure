@@ -1,14 +1,17 @@
 package trol.domain.trol_api.model;
 
+import org.hibernate.validator.constraints.Length;
 import trol.domain.database_models.WordsListsEntity;
 
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class WordsList {
     private int idWordsList;
+    @Length(min = 1, max = 100, message = "Length must between 1 and 100")
     private String wordsListName;
     private boolean isActive;
     private boolean isTimed;
@@ -21,11 +24,11 @@ public class WordsList {
         isTimed = false;
         timeBegin = LocalTime.MIN;
         timeEnd = LocalTime.MAX;
-        wordsSet = new HashSet<>();
+        wordsSet = new TreeSet<>();
     }
 
     public WordsList(WordsListsEntity entity) {
-        wordsSet = new HashSet<>();
+        wordsSet = new TreeSet<>();
         idWordsList = entity.getIdWordsList();
         wordsListName = entity.getWordsListName();
         isActive = entity.getIsActive() == 1;
@@ -33,6 +36,30 @@ public class WordsList {
         timeBegin = entity.getTimeBegin().toLocalTime();
         timeEnd = entity.getTimeEnd().toLocalTime();
         entity.getWordsEntitySet().forEach(e -> wordsSet.add(new Word(e)));
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public void setIsTimed(boolean isTimed) {
+        this.isTimed = isTimed;
+    }
+
+    public void setWordsListName(String wordsListName) {
+        this.wordsListName = wordsListName;
+    }
+
+    public void setTimeBegin(LocalTime timeBegin) {
+        this.timeBegin = timeBegin;
+    }
+
+    public void setTimeEnd(LocalTime timeEnd) {
+        this.timeEnd = timeEnd;
+    }
+
+    public void setWordsSet(Set<Word> wordsSet) {
+        this.wordsSet = wordsSet;
     }
 
     public void setIdWordsList(int idWordsList) {
@@ -66,4 +93,6 @@ public class WordsList {
     public Set<Word> getWordsSet() {
         return wordsSet;
     }
+
+
 }
