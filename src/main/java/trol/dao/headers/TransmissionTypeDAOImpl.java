@@ -51,7 +51,7 @@ public class TransmissionTypeDAOImpl implements TransmissionTypeDAO {
         TransmissionTypesEntity entity = entityManager.find(
                 TransmissionTypesEntity.class,
                 transmissionType.getIdTransmissionType());
-        entity.setTransmissionTypeName(transmissionType.getTransmissionTypeName());
+        //entity.setTransmissionTypeName(transmissionType.getTransmissionTypeName());
         entity.setIsActive(transmissionType.getIsActive() ? (byte) 1 : (byte) 0);
         entity.setIsTimed(transmissionType.getIsTimed() ? (byte) 1 : (byte) 0);
         entity.setTimeBegin(Time.valueOf(transmissionType.getTimeBegin()));

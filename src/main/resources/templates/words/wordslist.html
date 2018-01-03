@@ -43,7 +43,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="item : ${wordsList.getWordsSet()}">
+                    <tr th:if="${wordsList.getWordsSet().empty}">
+                        <td id="empty" colspan="3">List is empty</td>
+                    </tr>
+                    <tr th:if="${!wordsList.getWordsSet().empty}" th:each="item : ${wordsList.getWordsSet()}">
                         <td>
                             <div th:text="${item.wordString}" class="word"></div>
                         </td>

@@ -10,7 +10,7 @@ import java.util.TreeSet;
 
 public class TransmissionType {
     private int idTransmissionType;
-    @Length(min = 1, max = 100, message = "Length must between 1 and 100")
+    //@Length(min = 1, max = 100, message = "Length must between 1 and 100")
     private String transmissionTypeName;
     private boolean isActive;
     private boolean isTimed;
