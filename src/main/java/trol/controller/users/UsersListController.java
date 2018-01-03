@@ -45,7 +45,7 @@ public class UsersListController {
         } catch (Exception e) {
             //return "error";
         }
-        return "redirect:/users/user/"+user.getIdUser();
+        return "redirect:/users";
     }
 
     @GetMapping(value = "users/delete/{id}")

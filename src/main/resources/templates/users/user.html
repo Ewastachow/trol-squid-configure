@@ -1,19 +1,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Users</title>
+    <title>User details</title>
     <link rel="stylesheet" type="text/css" href="/css/users.css" />
-    <div th:replace="fragments/header :: header-css"/>
-</head>
+    <div th:replace="fragments/header :: header-css"/></head>
 <body>
 
 <div th:replace="fragments/header :: header"/>
-<!--Adding form-->
-<div class="container-fluid domainsform">
-    <div class="adding-form-inside">
+
+<div class="container-fluid domainslist">
+    <div class="users-edit-inside">
         <div class="row">
             <div class="box col-md-6 col-md-offset-3">
-                <h2>Block user:</h2>
-                <form th:action="@{/users/add}" th:object="${user}" method="post">
+                <h2>Edit user:</h2>
+                <form action="#"
+                      th:action="@{/users/user/}+${user.getIdUser()}"
+                      th:object="${user}" method="post">
                     <div th:replace="fragments/userform :: form"/>
                 </form>
             </div>
