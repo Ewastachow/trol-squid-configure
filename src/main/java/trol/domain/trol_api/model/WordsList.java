@@ -3,6 +3,7 @@ package trol.domain.trol_api.model;
 import org.hibernate.validator.constraints.Length;
 import trol.domain.database_models.WordsListsEntity;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -15,7 +16,9 @@ public class WordsList {
     private String wordsListName;
     private boolean isActive;
     private boolean isTimed;
+    @NotNull(message = "Must not be null")
     private LocalTime timeBegin;
+    @NotNull(message = "Must not be null")
     private LocalTime timeEnd;
     private Set<Word> wordsSet;
 

@@ -3,6 +3,7 @@ package trol.domain.trol_api.model;
 import org.hibernate.validator.constraints.Length;
 import trol.domain.database_models.TransmissionTypesEntity;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 import java.util.Set;
 import java.util.TreeSet;
@@ -13,7 +14,9 @@ public class TransmissionType {
     private String transmissionTypeName;
     private boolean isActive;
     private boolean isTimed;
+    @NotNull(message = "Must not be null")
     private LocalTime timeBegin;
+    @NotNull(message = "Must not be null")
     private LocalTime timeEnd;
     private Set<Header> headersSet;
 
