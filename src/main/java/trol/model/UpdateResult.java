@@ -24,6 +24,11 @@ public class UpdateResult {
         success=false;
     }
 
+    public void fail(String message){
+        success = false;
+        this.message = message;
+    }
+
     public void success(){
         success=true;
     }
