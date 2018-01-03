@@ -1,23 +1,29 @@
 package trol.service.headers;
 
-import trol.domain.trol_api.header.TransmissionType;
-import trol.model.headers.Headers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import trol.dao.headers.TransmissionTypeDAO;
+import trol.domain.trol_api.model.TransmissionType;
 
 import java.util.List;
 
+@Service
 public class HeadersServiceImpl implements HeadersService {
+    @Autowired
+    private TransmissionTypeDAO transmissionTypeDAO;
+
     @Override
-    public List<Headers> getAllHeadersTypes() {
-        return null;
+    public List<TransmissionType> getAllTransmissionTypes() {
+        return transmissionTypeDAO.getAllTransmissionTypes();
     }
 
     @Override
-    public void updateHeaders(Headers headers) throws Exception {
-
+    public TransmissionType getTransmissionType(int transmissionTypeId) {
+        return transmissionTypeDAO.getTransmissionType(transmissionTypeId);
     }
 
     @Override
-    public Headers getHeaders(long id) throws Exception {
-        return null;
+    public void updateTransmissionType(TransmissionType transmissionType) throws Exception {
+        transmissionTypeDAO.updateTransmissionTypeProperties(transmissionType);
     }
 }

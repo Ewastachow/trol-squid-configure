@@ -28,7 +28,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="item : ${domains}">
+                    <tr th:if="${domains.empty}">
+                        <td id="empty" colspan="8">List is empty</td>
+                    </tr>
+                    <tr th:if="${!domains.empty}" th:each="item : ${domains}">
                         <td class="domain" th:text="${item.getDomainsListName()}">Empty</td>
                         <td>
                             <span th:if="${item.isActive}" class="glyphicon glyphicon-ok"></span>
