@@ -24,12 +24,16 @@ table-bordered {
     background-color: #cccfcf;
 }
 
-#center>th{
+#top>th{
     vertical-align: top;
 }
 
 .th {
     text-align: center;
+}
+
+#domains-table>tbody>tr>td, #domains-table>tbody>tr>th, #domains-table>tfoot>tr>td, #domains-table>tfoot>tr>th, #domains-table>thead>tr>td, #domains-table>thead>tr>th{
+    vertical-align: middle;
 }
 
 /* Form.html */
@@ -71,6 +75,21 @@ table-bordered {
     padding-right: 15px;
     padding-left: 15px;
 }
+
+#add-domain{
+    margin: 2% 15% 5% 15%;
+    padding: 3% 3%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    font-weight: 700;
+}
+
+
+
+
+
 
 
 

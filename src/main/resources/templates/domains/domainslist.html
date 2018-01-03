@@ -23,20 +23,20 @@
     </div>
     <div class="row">
         <div class="box col-md-6 col-md-offset-3" id="domainsList">
-            <div>
+            <div id="add-domain">
                 Add domain:
                 <label>
                     <input type="text" class="domain"/>
                 </label>
                 <div id="adderror"></div>
-                <button type="submit" class="addDomain">Add</button>
+                <button type="submit" class="addDomain-btn btn btn-success">Add</button>
             </div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Domain</th>
-                    <th></th>
-                    <th></th>
+            <table class="table table-bordered" id="domains-table">
+                <thead class="thead">
+                <tr id="top">
+                    <th class="th">Domain</th>
+                    <th class="th"></th>
+                    <th class="th"></th>
                 </tr>
                 </thead>
                 <tbody>
