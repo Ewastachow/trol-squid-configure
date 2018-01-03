@@ -4,9 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 
 public class FileHelper {
@@ -105,5 +108,31 @@ public class FileHelper {
             return includeLine.substring(9,includeLine.length()-1);
         else
             return null;
+    }
+
+    public static String verifyDomain(String domain){
+        Pattern pattern = Pattern.compile("^\\.[a-zA-Z0-9\\.]+[a-zA-Z0-9]$");
+        if(pattern.matcher(domain).matches())
+            return domain;
+        else
+            return "."+domain;
+    }
+
+    public static String removeWhiteChars(String string){
+        return string.replaceAll("\\s+","");
+    }
+
+    public static String dansguardianTimeControlLine(LocalTime beginTime, LocalTime endTime){
+        StringBuilder sb = new StringBuilder();
+        sb.append("#time: ");
+        sb.append(beginTime.getHour());
+        sb.append(" ");
+        sb.append(beginTime.getMinute());
+        sb.append(" ");
+        sb.append(endTime.getHour());
+        sb.append(" ");
+        sb.append(endTime.getMinute());
+        sb.append(" 0123456");
+        return sb.toString();
     }
 }
