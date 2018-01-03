@@ -9,6 +9,7 @@
     <div class="form-group">
         <label for="name">User ip:</label>
         <input type="text" class="form-control" th:field="*{userIp}" id="name"/>
+        <div th:if="${#fields.hasErrors('userIp')}" th:errors="*{userIp}" class="alert alert-danger"></div>
     </div>
     <div class="form-check">
         <label class="form-check-label">
@@ -39,6 +40,9 @@
     <div class="form-group">
         <label for="duration">Browsing time limit:</label>
         <input type="number" class="form-control" th:field="*{durationInterval}" id="duration"/>
+        <div th:if="${#fields.hasErrors('durationInterval')}"
+             th:errors="*{durationInterval}"
+             class="alert alert-danger"></div>
     </div>
 
 

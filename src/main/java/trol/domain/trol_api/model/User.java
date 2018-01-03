@@ -2,20 +2,23 @@ package trol.domain.trol_api.model;
 
 import org.hibernate.validator.constraints.Length;
 import trol.domain.database_models.UserEntity;
+import trol.validation.IPv4;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Time;
 import java.time.LocalTime;
 
 public class User implements Comparable<User> {
 
     private int idUser;
-    @Length(min = 1)
+    @IPv4
     private String userIp;
     private boolean isActive;
     private boolean isTimed;
     private LocalTime timeBegin;
     private LocalTime timeEnd;
     private boolean hasDuration;
+    @NotNull(message = "May not be null")
     private Integer durationInterval;
     private Integer usedTime;
 

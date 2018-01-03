@@ -1,63 +1,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Words</title>
-    <div th:replace="fragments/header :: header-css"/></head>
+    <title>Words list</title>
+    <link rel="stylesheet" type="text/css" href="/css/words.css" />
+    <div th:replace="fragments/header :: header-css"/>
+</head>
 <body>
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container-fluid wordslist">
-    <div class="row">
-        <div class="box col-md-6 col-md-offset-3">
-            <h2>Edit words list:</h2>
-            <input type="hidden" id="listName" th:value="${words.getName()}"/>
-            <form action="#" th:action="@{/words/list/}+${words.getName()}" th:object="${words}" method="post">
-                <p>List name: <input type="text" th:field="*{name}" /></p>
-                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
-                <p>Is this list timed?
-                    <input type="checkbox" name="isTimed" th:field="*{isTimed}"/>
-                </p>
-                <p>Start time: <input type="time" th:field="*{timeBegin}"/></p>
-                <p>End time: <input type="time" th:field="*{timeEnd}"/></p>
-                <p>Is this list active?
-                    <input type="checkbox" name="isActive" th:field="*{isActive}"/>
-                </p>
-                <p><button type="submit">Save</button></p>
-            </form>
+<div class="container-fluid domains">
+    <div class="words-inside">
+        <div class="row">
+            <div class="box col-md-6 col-md-offset-3">
+                <h2>Words List</h2>
+                <div>
+                    <table class="table table-bordered" id="words-table">
+                        <thead class="thead">
+                        <tr id="top">
+                            <th class="th">List name</th>
+                            <th class="th">Active</th>
+                            <th class="th">Timed</th>
+                            <th class="th">Start time</th>
+                            <th class="th">End time</th>
+                            <th class="th"></th>
+                            <th class="th"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item : ${words}">
+                            <td class="word" th:text="${item.getWordsListName()}">Empty</td>
+                            <td>
+                                <span th:if="${item.isActive}" class="glyphicon glyphicon-ok"></span>
+                                <span th:unless="${item.isActive}" class="glyphicon glyphicon-remove"></span>
+                            </td>
+                            <td>
+                                <span th:if="${item.isTimed}" class="glyphicon glyphicon-ok"></span>
+                                <span th:unless="${item.isTimed}" class="glyphicon glyphicon-remove"></span>
+                            </td>
+                            <td th:text="${item.timeBegin}"></td>
+                            <td th:text="${item.timeEnd}"></td>
+                            <td>
+                                <a th:href="@{/words/list/}+${item.getIdWordsList()}"
+                                   class="btn btn-info" role="button">Edit</a>
+                            </td>
+                            <td>
+                                <a th:href="@{/words/delete/}+${item.getIdWordsList()}"
+                                   class="btn btn-danger" role="button">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--Add button-->
+                    <a th:href="@{/words/add}" class="btn btn-lg btn-success" role="button">Add</a>
+                </div>
+            </div>
         </div>
-
-        <div>
-            Add word:
-            <label>
-                <input type="text" class="word"/>
-            </label>
-            <button type="submit" class="addWord">Add</button>
-        </div>
-
-        <div id="wordsList">
-            <table>
-                <thead>
-                <tr>
-                    <th>Word</th>
-                </tr>
-                <tr></tr>
-                </thead>
-                <tbody>
-                <tr th:each="item : ${words.getWordsList()}">
-                    <td class="word" th:text="${item}">Empty</td>
-                    <td><button class="removeWord" th:value="${item}">Remove</button></td>
-                    <td><button class="editWord" th:value="${item}">Edit</button></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-
     </div>
 </div>
 
 <div th:replace="fragments/footer :: footer"/>
-<script src="/js/words/words.js"></script>
 
 </body>
 </html>

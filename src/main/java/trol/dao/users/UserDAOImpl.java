@@ -50,7 +50,8 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void deleteUser(int userId) {
-
+        UserEntity entity = entityManager.find(UserEntity.class,userId);
+        entityManager.remove(entity);
     }
 
     @Override

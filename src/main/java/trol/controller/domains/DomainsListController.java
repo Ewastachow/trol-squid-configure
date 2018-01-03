@@ -16,7 +16,6 @@ import trol.validation.TrolDomain;
 
 import javax.validation.Valid;
 
-@Validated
 @Controller
 public class DomainsListController {
 
@@ -31,6 +30,10 @@ public class DomainsListController {
             model = new ModelAndView();
             model.addObject("domainsList",list);
             model.setViewName("/domains/domainslist");
+            model.addObject(
+                    "newdomain",
+                    new Domain()
+            );
         } catch (Exception e) {
             e.printStackTrace();
             model = new ModelAndView("redirect:/error.html");
@@ -88,6 +91,18 @@ public class DomainsListController {
     }
 
     @PostMapping(value = "/domains/list/{id}/edit")
+    public ModelAndView addDomain(
+            @Valid Domain newdomain, BindingResult bindingResult, @PathVariable("id") int listId
+    ){
+        ModelAndView model = getDomainsList(listId);
+        if (!bindingResult.hasErrors()){
+            newdomain.setIdDomainsList(listId);
+            domainsService.addDomainToDomainsList(newdomain);
+        }
+        return model;
+    }
+
+    @PostMapping(value = "/domains/list/{id}/ediit")
     public @ResponseBody UpdateResult addDomainToList(@TrolDomain @RequestBody String domainString,
                                                       @PathVariable("id") int listId){
         UpdateResult updateResult = new UpdateResult();

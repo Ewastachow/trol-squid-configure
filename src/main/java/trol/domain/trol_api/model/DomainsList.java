@@ -1,5 +1,6 @@
 package trol.domain.trol_api.model;
 
+import org.hibernate.validator.constraints.Length;
 import trol.domain.database_models.DomainsListsEntity;
 
 import java.time.LocalTime;
@@ -9,6 +10,7 @@ import java.util.TreeSet;
 public class DomainsList {
 
     private int idDomainsList;
+    @Length(min = 1, max = 100, message = "Length must between 1 and 100")
     private String domainsListName;
     private boolean isActive;
     private boolean isBlack;
