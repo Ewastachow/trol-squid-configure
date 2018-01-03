@@ -14,8 +14,7 @@ public class BlockTimeManager {
 
     private LocalTime lastUpdateTimestamp;
 
-    BlockTimeManager(UserDAOImpl userDAO) {
-        this.userDAO = userDAO;
+    BlockTimeManager() {
         lastUpdateTimestamp = LocalTime.now();
     }
 

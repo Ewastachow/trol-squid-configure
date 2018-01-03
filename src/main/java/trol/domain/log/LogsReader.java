@@ -2,6 +2,7 @@ package trol.domain.log;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import trol.dao.users.UserDAO;
 import trol.dao.users.UserDAOImpl;
 import trol.domain.filemanager.FileController;
 import trol.domain.util.FileHelper;
@@ -21,7 +22,7 @@ public class LogsReader {
     @Autowired
     private FileController fileController;
     @Autowired
-    private UserDAOImpl userDAO;
+    private UserDAO userDAO;
 
     private BlockTimeManager timeManager;
     private TerminalExecute term;
@@ -35,7 +36,7 @@ public class LogsReader {
     LogsReader(String accessLogPath, TerminalExecute term) {
         this.term = term;
         this.accessLogPath = accessLogPath;
-        timeManager = new BlockTimeManager(userDAO);
+        timeManager = new BlockTimeManager();
         lastLine = 0;
     }
 
