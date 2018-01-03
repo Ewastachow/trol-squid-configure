@@ -2,7 +2,7 @@ package trol.domain.trol_api.model;
 
 import trol.domain.database_models.DomainsEntity;
 
-public class Domain {
+public class Domain implements Comparable<Domain>{
     private int idDomain;
     private String domainString;
     private int idDomainsList;
@@ -39,5 +39,10 @@ public class Domain {
 
     public int getIdDomainsList() {
         return idDomainsList;
+    }
+
+    @Override
+    public int compareTo(Domain o) {
+        return idDomain - o.idDomain;
     }
 }

@@ -24,12 +24,16 @@ table-bordered {
     background-color: #cccfcf;
 }
 
-#center>th{
+#top>th{
     vertical-align: top;
 }
 
 .th {
     text-align: center;
+}
+
+#domains-table>tbody>tr>td, #domains-table>tbody>tr>th, #domains-table>tfoot>tr>td, #domains-table>tfoot>tr>th, #domains-table>thead>tr>td, #domains-table>thead>tr>th{
+    vertical-align: middle;
 }
 
 /* Form.html */
@@ -51,7 +55,35 @@ table-bordered {
 .form-check-inline{
     display: inline-block;
     padding-right: 10%;
+}
 
+/* Domainslist.html */
+.domains-edit-inside{
+    background-color: #c9e4f2;
+    color: #31708f;
+    margin: 2% 15% 3% 15%;
+    padding-bottom: 2%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+}
+
+#domainsList{
+    width: 50%;
+    margin: 2% 15% 3% 25%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+#add-domain{
+    margin: 2% 15% 5% 15%;
+    padding: 3% 3%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    font-weight: 700;
 }
 
 
@@ -59,4 +91,5 @@ table-bordered {
 
 
 
-/* Domainslist.html */
+
+
