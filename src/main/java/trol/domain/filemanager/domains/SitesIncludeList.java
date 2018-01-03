@@ -19,41 +19,43 @@ public class SitesIncludeList {
         this.domainsListList = domainsListList;
         pathWhite = Paths.get(FilePaths.SITE_WHITE_INCLUDE_LIST_PATH);
         pathBlack = Paths.get(FilePaths.SITE_BLACK_INCLUDE_LIST_PATH);
-
     }
 
     public void saveFile() throws IOException {
-        FileHelper.saveStringListAsFile(pathBlack, generateBlackFileListstring());
+        List<String> blackListString = generateBlackFileListstring();
+        blackListString.addAll(generateBlackForWhiteListString());
+        FileHelper.saveStringListAsFile(pathBlack, blackListString);
         FileHelper.saveStringListAsFile(pathWhite, generateWhiteFileListstring());
     }
 
     public List<String> generateBlackFileListstring(){
         List<String> sitesFile = new ArrayList<>();
-//        domainsListList.forEach(e -> {
-//            if (e.getIsActive() && e.getIsBlack())
-//                sitesFile.add(".Include<" + FilePaths.PHRASE_LISTS_PATH + e.getDomainsListName() + ">");
-//        });
-        boolean isAnyWhite = false;
         for(DomainsList i: domainsListList){
             if (i.getIsActive() && i.getIsBlack())
-                sitesFile.add(wordLine(i.getDomainsListName()));
+                sitesFile.add(".Include<"+FilePaths.SITE_LISTS_PATH+i.getDomainsListName()+i.getIdDomainsList()+"-black>");
 
         }
-        if (isAnyWhite) sitesFile.add("**");
         return sitesFile;
     }
 
     public List<String> generateWhiteFileListstring(){
         List<String> sitesFile = new ArrayList<>();
         domainsListList.forEach(e -> {
-            if (e.getIsActive() && !e.getIsBlack())
-                sitesFile.add(wordLine(e.getDomainsListName()));
+            if (e.getIsActive() && !e.getIsBlack()){
+                sitesFile.add(".Include<"+FilePaths.SITE_LISTS_PATH+e.getDomainsListName()+e.getIdDomainsList()+"-white>");
+            }
         });
         return sitesFile;
     }
 
-    private String wordLine(String word){
-        return ".Include<"+FilePaths.SITE_LISTS_PATH+word+">";
+    public List<String> generateBlackForWhiteListString(){
+        List<String> sitesFile = new ArrayList<>();
+        domainsListList.forEach(e -> {
+            if (e.getIsActive() && !e.getIsBlack()){
+                sitesFile.add(".Include<"+FilePaths.SITE_LISTS_PATH+e.getDomainsListName()+e.getIdDomainsList()+"-black>");
+            }
+        });
+        return sitesFile;
     }
 
     //iteruje, jezeli wystepuje jakakolwiek white lista, to wpisuje **

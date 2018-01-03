@@ -19,11 +19,6 @@ public class PhrasesIncludeList {
         path = Paths.get(FilePaths.PHRASE_INCLUDE_LIST_PATH);
     }
 
-    public PhrasesIncludeList(Path path, List<WordsList> wordsListList) {
-        this.path = path;
-        this.wordsListList = wordsListList;
-    }
-
     public void saveFile() throws IOException {
         FileHelper.saveStringListAsFile(path, generateFileListstring());
     }
@@ -32,7 +27,7 @@ public class PhrasesIncludeList {
         List<String> wordsFile = new ArrayList<>();
         wordsListList.forEach(e -> {
             if (e.getIsActive())
-                wordsFile.add(".Include<" + FilePaths.PHRASE_LISTS_PATH + e.getWordsListName() + ">");
+                wordsFile.add(".Include<" + FilePaths.PHRASE_LISTS_PATH + e.getWordsListName() + e.getIdWordsList() + ">");
         });
         return wordsFile;
     }
