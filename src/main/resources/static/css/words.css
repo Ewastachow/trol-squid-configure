@@ -1,9 +1,5 @@
-.container-fluid {
-    padding-top: 80px;
-}
-
-/* userslist.html */
-.users-inside{
+/* Words.html */
+.words-inside{
     background-color: #c9e4f2;
     color: #31708f;
     margin: 2% 15% 3% 15%;
@@ -14,13 +10,12 @@
     -moz-border-radius: 15px;
 }
 
-#users-list{
+#words-inside-table{
     margin-left: 15%;
-    margin-right: 15%;
     width: 70%;
 }
 
-#users-table{
+#words-table{
     background-color: #eeeeee;
     border: 1px solid #cccfcf;
     text-align: center;
@@ -42,11 +37,11 @@ table-bordered {
     text-align: center;
 }
 
-#users-table>tbody>tr>td, #users-table>tbody>tr>th, #users-table>tfoot>tr>td, #users-table>tfoot>tr>th, #users-table>thead>tr>td, #users-table>thead>tr>th{
+#words-table>tbody>tr>td, #words-table>tbody>tr>th, #words-table>tfoot>tr>td, #words-table>tfoot>tr>th, #words-table>thead>tr>td, #words-table>thead>tr>th{
     vertical-align: middle;
 }
 
-/* userform.html */
+/* Form.html */
 .adding-form-inside{
     background-color: #c9e4f2;
     color: #31708f;
@@ -67,8 +62,8 @@ table-bordered {
     padding-right: 10%;
 }
 
-/* user.html */
-.users-edit-inside{
+/* Wordslist.html */
+.words-edit-inside{
     background-color: #c9e4f2;
     color: #31708f;
     margin: 2% 15% 3% 15%;
@@ -79,15 +74,14 @@ table-bordered {
     -moz-border-radius: 15px;
 }
 
-/*
-#domainsList{
+#wordsList{
     width: 50%;
     margin: 2% 15% 3% 25%;
     padding-right: 15px;
     padding-left: 15px;
 }
 
-#add-domain{
+#add-word{
     margin: 2% 15% 5% 15%;
     padding: 3% 3%;
     border: 3px solid #eeeeee;
@@ -96,7 +90,6 @@ table-bordered {
     -moz-border-radius: 15px;
     font-weight: 700;
 }
-*/
 
 
 
