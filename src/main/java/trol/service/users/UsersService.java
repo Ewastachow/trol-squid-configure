@@ -1,13 +1,13 @@
-package trol.dao.users;
+package trol.service.users;
 
 import trol.domain.trol_api.model.User;
 
 import java.util.List;
 
-public interface UserDAO {
-    List<User> getAllUsers();
+public interface UsersService {
+    List<User> getUsersList();
     User getUser(int userId);
     int addUser(User user);
-    void deleteUser(int userId);
     void updateUser(User user);
+    void deleteUser(int userId);
 }

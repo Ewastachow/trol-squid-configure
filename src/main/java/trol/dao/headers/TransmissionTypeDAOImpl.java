@@ -1,14 +1,18 @@
 package trol.dao.headers;
 
+import org.springframework.stereotype.Repository;
 import trol.domain.database_models.TransmissionTypesEntity;
 import trol.domain.trol_api.model.TransmissionType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.sql.Time;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional
+@Repository
 public class TransmissionTypeDAOImpl implements TransmissionTypeDAO {
     @PersistenceContext
     private EntityManager entityManager;
