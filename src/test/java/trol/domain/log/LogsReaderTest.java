@@ -2,6 +2,7 @@ package trol.domain.log;
 
 
 import org.junit.Test;
+import trol.domain.terminal.TerminalExecute;
 
 import java.io.IOException;
 
@@ -11,6 +12,6 @@ public class LogsReaderTest {
 
     @Test
     public void checkUsersLogs() {
-        //TODO: Implement all
+        fail("TODO Implement");
     }
 }

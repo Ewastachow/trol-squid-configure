@@ -3,6 +3,9 @@ package trol.domain.filemanager;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import trol.domain.filemanager.trash.DomainList;
+import trol.domain.filemanager.words.PhrasesIncludeList;
+import trol.domain.filemanager.words.PhrasesList;
 import trol.domain.trol_api.model.DomainsList;
 import trol.domain.trol_api.model.WordsList;
 
@@ -14,26 +17,26 @@ import java.util.List;
 @Scope("singleton")
 public class FileController {
 
-    private volatile int state = 0;
+    private volatile SaveState state = SaveState.FREE;
 
-    public int getState() {
+    public SaveState getState() {
         return state;
     }
 
     @Async
     public void saveConfiguration(){
-        if (state == 1){
+        if (state.equals(SaveState.BUSY)){
             System.out.println("nie przerywac, pracuje");
             return;
         }
         System.out.println("zaczynam prace "+ this);
-        state = 1;
+        state = SaveState.BUSY;
         LocalTime now = LocalTime.now().plusSeconds(10);
         while (LocalTime.now().isBefore(now)){
             //System.out.println(LocalTime.now());
         }
         System.out.println("koncze prace "+ this);
-        state = 0;
+        state = SaveState.FREE;
     }
 
 

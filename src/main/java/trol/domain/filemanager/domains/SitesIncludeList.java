@@ -1,5 +1,6 @@
-package trol.domain.filemanager;
+package trol.domain.filemanager.domains;
 
+import trol.domain.filemanager.FilePaths;
 import trol.domain.trol_api.model.DomainsList;
 import trol.domain.util.FileHelper;
 
