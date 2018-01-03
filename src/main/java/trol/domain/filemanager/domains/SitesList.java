@@ -31,6 +31,7 @@ public class SitesList {
         FileHelper.saveStringListAsFile(path,generateFileListString());
     }
 
+
     public List<String> generateFileListString(){
         List<String> sitesFile = new ArrayList<>();
         sitesFile.add(FileHelper.dansguardianTimeControlLine(domainsList.getTimeBegin(), domainsList.getTimeEnd()));
