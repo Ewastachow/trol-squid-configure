@@ -2,9 +2,7 @@ package trol.domain.trol_api.model;
 
 import trol.domain.database_models.DomainsListsEntity;
 
-import java.sql.Time;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -25,7 +23,7 @@ public class DomainsList {
         isTimed = false;
         timeBegin = LocalTime.MIN;
         timeEnd = LocalTime.MAX;
-        domainsSet = new HashSet<>();
+        domainsSet = new TreeSet<>();
     }
 
     public DomainsList(DomainsListsEntity entity) {

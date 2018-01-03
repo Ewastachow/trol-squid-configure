@@ -2,10 +2,9 @@ package trol.domain.trol_api.model;
 
 import trol.domain.database_models.TransmissionTypesEntity;
 
-import java.sql.Time;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class TransmissionType {
     private int idTransmissionType;
@@ -17,7 +16,7 @@ public class TransmissionType {
     private Set<Header> headersSet;
 
     public TransmissionType(TransmissionTypesEntity entity) {
-        headersSet = new HashSet<>();
+        headersSet = new TreeSet<>();
         idTransmissionType = entity.getIdTransmissionType();
         transmissionTypeName = entity.getTransmissionTypeName();
         isActive = entity.getIsActive() == 1;

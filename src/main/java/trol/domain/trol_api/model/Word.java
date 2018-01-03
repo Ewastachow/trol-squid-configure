@@ -2,7 +2,7 @@ package trol.domain.trol_api.model;
 
 import trol.domain.database_models.WordsEntity;
 
-public class Word {
+public class Word implements Comparable<Word>{
 
     private int idWord;
     private String wordString;
@@ -39,5 +39,10 @@ public class Word {
 
     public int getIdWordsList() {
         return idWordsList;
+    }
+
+    @Override
+    public int compareTo(Word o) {
+        return idWord - o.idWord;
     }
 }

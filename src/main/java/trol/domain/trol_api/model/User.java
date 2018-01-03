@@ -1,13 +1,15 @@
 package trol.domain.trol_api.model;
 
+import org.hibernate.validator.constraints.Length;
 import trol.domain.database_models.UserEntity;
 
 import java.sql.Time;
 import java.time.LocalTime;
 
-public class User {
+public class User implements Comparable<User> {
 
     private int idUser;
+    @Length(min = 1)
     private String userIp;
     private boolean isActive;
     private boolean isTimed;
@@ -16,6 +18,18 @@ public class User {
     private boolean hasDuration;
     private Integer durationInterval;
     private Integer usedTime;
+
+    public User() {
+        isActive = false;
+        isTimed = false;
+        timeBegin = LocalTime.MIN;
+        timeEnd = LocalTime.MAX;
+        userIp = "";
+        hasDuration = false;
+        durationInterval = new Integer(0);
+        usedTime = new Integer(0);
+
+    }
 
     public User(UserEntity entity) {
         idUser = entity.getIdUser();
@@ -27,6 +41,42 @@ public class User {
         hasDuration = entity.getHasDuration() == 1;
         durationInterval = entity.getDurationInterval();
         usedTime = entity.getUsedTime();
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public void setUserIp(String userIp) {
+        this.userIp = userIp;
+    }
+
+    public void setTimeBegin(LocalTime timeBegin) {
+        this.timeBegin = timeBegin;
+    }
+
+    public void setTimeEnd(LocalTime timeEnd) {
+        this.timeEnd = timeEnd;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public void setIsTimed(boolean isTimed) {
+        this.isTimed = isTimed;
+    }
+
+    public void setHasDuration(boolean hasDuration) {
+        this.hasDuration = hasDuration;
+    }
+
+    public void setDurationInterval(Integer durationInterval) {
+        this.durationInterval = durationInterval;
+    }
+
+    public void setUsedTime(Integer usedTime) {
+        this.usedTime = usedTime;
     }
 
     public int getIdUser() {
@@ -63,5 +113,10 @@ public class User {
 
     public Integer getUsedTime() {
         return usedTime;
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return idUser - o.idUser;
     }
 }
