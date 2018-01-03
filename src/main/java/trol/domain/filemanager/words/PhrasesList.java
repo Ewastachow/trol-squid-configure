@@ -16,12 +16,7 @@ public class PhrasesList {
 
     public PhrasesList(WordsList wordsList) {
         this.wordsList = wordsList;
-        path = Paths.get(FilePaths.PHRASE_LISTS_PATH+wordsList.getWordsListName());
-    }
-
-    public PhrasesList(Path path, WordsList wordsList) {
-        this.path = path;
-        this.wordsList = wordsList;
+        path = Paths.get(FilePaths.PHRASE_LISTS_PATH+wordsList.getWordsListName() + wordsList.getIdWordsList());
     }
 
     public void saveFile() throws IOException {

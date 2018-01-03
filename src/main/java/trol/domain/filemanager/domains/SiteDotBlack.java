@@ -10,36 +10,24 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SitesList {
+public class SiteDotBlack {
     private Path path;
     private DomainsList domainsList;
 
-    public SitesList(DomainsList domainsList) {
+    public SiteDotBlack(DomainsList domainsList) {
         this.domainsList = domainsList;
-
-        path = (domainsList.getIsBlack()) ?
-                Paths.get(FilePaths.SITE_LISTS_PATH+domainsList.getDomainsListName()+domainsList.getIdDomainsList()+"-black") :
-                Paths.get(FilePaths.SITE_LISTS_PATH+domainsList.getDomainsListName()+domainsList.getIdDomainsList()+"-white");
+        path = Paths.get(FilePaths.SITE_LISTS_PATH+domainsList.getDomainsListName()+domainsList.getIdDomainsList()+"-black");
     }
 
     public void saveFile() throws IOException {
-        if(!domainsList.getIsActive()) return;
-        if(!domainsList.getIsBlack()){
-            SiteDotBlack siteDotBlack = new SiteDotBlack(domainsList);
-            siteDotBlack.saveFile();
-        }
+        if(!domainsList.getIsActive() || domainsList.getIsBlack()) return;
         FileHelper.saveStringListAsFile(path,generateFileListString());
     }
-
 
     public List<String> generateFileListString(){
         List<String> sitesFile = new ArrayList<>();
         sitesFile.add(FileHelper.dansguardianTimeControlLine(domainsList.getTimeBegin(), domainsList.getTimeEnd()));
-        domainsList.getDomainsSet().forEach(e -> sitesFile.add(e.getDomainString()));
+        sitesFile.add("**");
         return sitesFile;
     }
-
-//    public List<String>
-
-
 }
