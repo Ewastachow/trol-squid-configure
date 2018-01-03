@@ -1,6 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Black list</title>
+    <title>Domains list</title>
+    <link rel="stylesheet" type="text/css" href="/css/domains.css" />
     <div th:replace="fragments/header :: header-css"/>
     </head>
 <body>
@@ -8,18 +9,22 @@
 <div th:replace="fragments/header :: header"/>
 
 <div class="container-fluid domains">
+    <div class="domains-inside">
     <div class="row">
         <div class="box col-md-6 col-md-offset-3">
             <h2>Domains List</h2>
-            <a th:href="@{/domains/add}" class="btn" role="button">Add</a>
             <div>
-                <table class="table">
-                    <thead class="thead-inverse">
-                    <tr>
-                        <th>List name</th>
-                        <th>Active</th>
-                        <th>Timed</th>
-                        <th></th>
+                <table class="table table-bordered" id="domains-table">
+                    <thead class="thead">
+                    <tr id="center">
+                        <th class="th">List name</th>
+                        <th class="th">Active</th>
+                        <th class="th">Timed</th>
+                        <th class="th">Start time</th>
+                        <th class="th">End time</th>
+                        <th class="th">Mode</th>
+                        <th class="th"></th>
+                        <th class="th"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,12 +38,30 @@
                             <span th:if="${item.isTimed}" class="glyphicon glyphicon-ok-circle"></span>
                             <span th:unless="${item.isTimed}" class="glyphicon glyphicon-remove-circle"></span>
                         </td>
-                        <td><a th:href="@{/domains/list/}+${item.getIdDomainsList()}" class="btn" role="button">Edit</a></td>
+                        <td th:text="${item.timeBegin}"></td>
+                        <td th:text="${item.timeEnd}"></td>
+                        <td th:if="${item.isBlack}">
+                            Blacklist
+                        </td>
+                        <td th:unless="${item.isBlack}">
+                            Whitelist
+                        </td>
+                        <td>
+                            <a th:href="@{/domains/list/}+${item.getIdDomainsList()}"
+                               class="btn btn-info" role="button">Edit</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/domains/delete/}+${item.getIdDomainsList()}"
+                               class="btn btn-danger" role="button">Delete</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
+                <!--Add button-->
+                <a th:href="@{/domains/add}" class="btn btn-lg btn-success" role="button">Add</a>
             </div>
         </div>
+    </div>
     </div>
 </div>
 

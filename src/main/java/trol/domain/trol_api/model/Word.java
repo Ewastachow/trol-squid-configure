@@ -8,10 +8,25 @@ public class Word {
     private String wordString;
     private int idWordsList;
 
+    public Word() {
+    }
+
     public Word(WordsEntity entity) {
         idWord = entity.getIdWord();
         wordString = entity.getWordString();
         idWordsList = entity.getIdWordsList().getIdWordsList();
+    }
+
+    public void setIdWord(int idWord) {
+        this.idWord = idWord;
+    }
+
+    public void setWordString(String wordString) {
+        this.wordString = wordString;
+    }
+
+    public void setIdWordsList(int idWordsList) {
+        this.idWordsList = idWordsList;
     }
 
     public int getIdWord() {

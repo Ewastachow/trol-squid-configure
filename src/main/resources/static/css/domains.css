@@ -1,0 +1,62 @@
+/* Domains.html */
+.domains-inside{
+    background-color: #c9e4f2;
+    color: #31708f;
+    margin: 2% 15% 3% 15%;
+    padding-bottom: 2%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+}
+
+#domains-table{
+    background-color: #eeeeee;
+    border: 1px solid #cccfcf;
+    text-align: center;
+}
+
+table-bordered {
+    border: 2px solid #c9e4f2;
+}
+
+.thead{
+    background-color: #cccfcf;
+}
+
+#center>th{
+    vertical-align: top;
+}
+
+.th {
+    text-align: center;
+}
+
+/* Form.html */
+.adding-form-inside{
+    background-color: #c9e4f2;
+    color: #31708f;
+    margin: 2% 15% 3% 15%;
+    padding-bottom: 2%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+}
+
+#mode{
+    display: block;
+}
+
+.form-check-inline{
+    display: inline-block;
+    padding-right: 10%;
+
+}
+
+
+
+
+
+
+/* Domainslist.html */

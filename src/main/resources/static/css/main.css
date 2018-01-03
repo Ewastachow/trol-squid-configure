@@ -1,7 +1,8 @@
-body{
+html, body{
     background: #1D976C;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    min-height: 100%;
 }
 
 .navbar-brand {
@@ -27,12 +28,18 @@ body{
 .btn-xlarge {
     padding: 80px 93.7px;
     font-size: 22px;
-    color: white;
+/*  color: white;
+    background-color: #ad9fac; !*Fioletowy*!*/
     line-height: normal;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
-    background-color: #ad9fac;
+    background-color: #c9e4f2; /*Jasnoniebieski*/
+    color: #31708f;
+}
+
+.container-all{
+    margin-bottom: 3%;
 }
 
 

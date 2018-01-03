@@ -8,7 +8,11 @@ import java.util.List;
 
 public class FileController {
 
-    public static void saveWordsListsToFile(List<WordsList> wordsListList){
+    public static void saveConfiguration(){
+
+    }
+
+    private void saveWordsListsToFile(List<WordsList> wordsListList){
         wordsListList.forEach(e -> {
             PhrasesList phrasesList = new PhrasesList(e);
             //TODO zucic wyjatek
@@ -20,7 +24,7 @@ public class FileController {
         });
     }
 
-    public static void saveWordsIncludeListToFile(List<WordsList> wordsListList){
+    private void saveWordsIncludeListToFile(List<WordsList> wordsListList){
         PhrasesIncludeList phrasesIncludeList = new PhrasesIncludeList(wordsListList);
         try {
             phrasesIncludeList.saveFile();
@@ -30,7 +34,7 @@ public class FileController {
         }
     }
 
-    public static void saveDomainsBlocadeFile(List<DomainsList> domainsListList){
+    private void saveDomainsBlocadeFile(List<DomainsList> domainsListList){
         domainsListList.forEach(e -> {
             DomainList domainList = new DomainList(e);
             try {

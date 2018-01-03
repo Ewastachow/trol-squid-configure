@@ -36,7 +36,7 @@ public class DomainsListsEntity  implements Serializable {
         this.domainsListName=domainsListName;
     }
 
-    @OneToMany(mappedBy="idDomainsList")
+    @OneToMany(mappedBy="idDomainsList", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<DomainsEntity> getDomainsEntitySet() {
         return domainsEntitySet;
     }
