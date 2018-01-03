@@ -27,7 +27,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="item : ${words}">
+                        <tr th:if="${words.empty}">
+                            <td id="empty" colspan="7">List is empty</td>
+                        </tr>
+                        <tr th:if="${!words.empty}" th:each="item : ${words}">
                             <td class="word" th:text="${item.getWordsListName()}">Empty</td>
                             <td>
                                 <span th:if="${item.isActive}" class="glyphicon glyphicon-ok"></span>

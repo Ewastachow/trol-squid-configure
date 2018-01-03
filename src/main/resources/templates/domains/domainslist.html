@@ -43,7 +43,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="item : ${domainsList.getDomainsSet()}">
+                <tr th:if="${domainsList.getDomainsSet().empty}">
+                    <td id="empty" colspan="3">List is empty</td>
+                </tr>
+                <tr th:if="${!domainsList.getDomainsSet().empty}" th:each="item : ${domainsList.getDomainsSet()}">
                     <td>
                         <div th:text="${item.domainString}" class="domain"></div>
                     </td>

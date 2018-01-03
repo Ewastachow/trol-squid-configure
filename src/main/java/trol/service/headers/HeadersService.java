@@ -1,11 +1,13 @@
 package trol.service.headers;
 
-import trol.model.headers.Headers;
+
+
+import trol.domain.trol_api.model.TransmissionType;
 
 import java.util.List;
 
 public interface HeadersService {
-    List<Headers> getAllHeadersTypes();
-    void updateHeaders(Headers headers) throws Exception;
-    Headers getHeaders(long id) throws Exception;
+    List<TransmissionType> getAllTransmissionTypes();
+    TransmissionType getTransmissionType(int transmissionTypeId);
+    void updateTransmissionType(TransmissionType transmissionType) throws Exception;
 }
