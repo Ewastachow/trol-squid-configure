@@ -4,16 +4,11 @@ import org.hibernate.Session;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import trol.domain.database_models.*;
-import trol.domain.filemanager.FileController;
-import trol.domain.filemanager.PhrasesList;
 import trol.domain.trol_api.exception.UnsuccessfulDeletException;
 import trol.domain.trol_api.exception.UnsuccessfulModificationException;
 import trol.domain.trol_api.model.*;
-import trol.domain.util.FileHelper;
 import trol.domain.util.HibernateUtil;
 
-import java.io.IOException;
-import javax.transaction.Transactional;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package trol.domain.filemanager;
+package trol.domain.filemanager.trash;
 
 import java.nio.file.Path;
 

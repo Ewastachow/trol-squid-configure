@@ -1,5 +1,6 @@
-package trol.domain.filemanager;
+package trol.domain.filemanager.words;
 
+import trol.domain.filemanager.FilePaths;
 import trol.domain.trol_api.model.WordsList;
 import trol.domain.util.FileHelper;
 

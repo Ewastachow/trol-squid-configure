@@ -3,7 +3,6 @@ package trol;
 import org.hibernate.Session;
 import trol.domain.database_models.WordsEntity;
 import trol.domain.database_models.WordsListsEntity;
-import trol.domain.filemanager.PhrasesList;
 import trol.domain.trol_api.TrolAPI;
 import trol.domain.trol_api.exception.UnsuccessfulDeletException;
 import trol.domain.trol_api.exception.UnsuccessfulModificationException;
@@ -11,9 +10,6 @@ import trol.domain.trol_api.model.Word;
 import trol.domain.trol_api.model.WordsList;
 import trol.domain.util.HibernateUtil;
 
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.List;
 
