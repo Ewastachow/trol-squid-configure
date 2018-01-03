@@ -5,7 +5,7 @@ import trol.domain.database_models.UserEntity;
 import java.sql.Time;
 import java.time.LocalTime;
 
-public class User {
+public class User implements Comparable<User> {
 
     private int idUser;
     private String userIp;
@@ -16,6 +16,18 @@ public class User {
     private boolean hasDuration;
     private Integer durationInterval;
     private Integer usedTime;
+
+    public User() {
+        isActive = false;
+        isTimed = false;
+        timeBegin = LocalTime.MIN;
+        timeEnd = LocalTime.MAX;
+        userIp = "";
+        hasDuration = false;
+        durationInterval = new Integer(0);
+        usedTime = new Integer(0);
+
+    }
 
     public User(UserEntity entity) {
         idUser = entity.getIdUser();
@@ -63,5 +75,10 @@ public class User {
 
     public Integer getUsedTime() {
         return usedTime;
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return idUser - o.idUser;
     }
 }

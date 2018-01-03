@@ -6,6 +6,7 @@ import java.sql.Time;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class WordsList {
     private int idWordsList;
@@ -21,11 +22,11 @@ public class WordsList {
         isTimed = false;
         timeBegin = LocalTime.MIN;
         timeEnd = LocalTime.MAX;
-        wordsSet = new HashSet<>();
+        wordsSet = new TreeSet<>();
     }
 
     public WordsList(WordsListsEntity entity) {
-        wordsSet = new HashSet<>();
+        wordsSet = new TreeSet<>();
         idWordsList = entity.getIdWordsList();
         wordsListName = entity.getWordsListName();
         isActive = entity.getIsActive() == 1;
