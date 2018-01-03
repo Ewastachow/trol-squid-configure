@@ -1,9 +1,15 @@
 package trol.domain.filemanager;
 
 import trol.domain.trol_api.model.DomainsList;
+import trol.domain.util.FileHelper;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DomainList {
     Path path;
@@ -19,11 +25,9 @@ public class DomainList {
         this.domainsList = domainsList;
     }
 
-    public void saveFile(){
-        //TODO Implement
+    public void saveFile() throws IOException {
+        List<String> domainsFile = new ArrayList<>();
+        domainsList.getDomainsSet().forEach(e -> domainsFile.add(e.getDomainString()));
+        FileHelper.saveStringListAsFile(path,domainsFile);
     }
-
-//    private String verifyDomain(String domain){
-//        if(domain.g)
-//    }
 }

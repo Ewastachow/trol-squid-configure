@@ -4,11 +4,15 @@ import org.hibernate.Session;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import trol.domain.database_models.*;
+import trol.domain.filemanager.FileController;
+import trol.domain.filemanager.PhrasesList;
 import trol.domain.trol_api.exception.UnsuccessfulDeletException;
 import trol.domain.trol_api.exception.UnsuccessfulModificationException;
 import trol.domain.trol_api.model.*;
+import trol.domain.util.FileHelper;
 import trol.domain.util.HibernateUtil;
 
+import java.io.IOException;
 import javax.transaction.Transactional;
 import java.sql.Time;
 import java.time.LocalTime;
@@ -61,6 +65,8 @@ public class TrolAPI {
     }
 
     public int addDomainToDomainsList(int domainsListId, String domainString){
+        //TODO Validacja domainString, jesli niepoprawne to wywalic wyjatek
+//        domainString = FileHelper.verifyDomain(FileHelper.removeWhiteChars(domainString));
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         List<DomainsListsEntity> domainsListsEntityList = session.createQuery("FROM DomainsListsEntity WHERE idDomainsList = :domainsListId").setParameter("domainsListId",domainsListId).list();
@@ -241,6 +247,7 @@ public class TrolAPI {
     }
 
     public int createUser(String addressIp){
+        //TODO Validacja addressIp, jesli niepoprawne to wywalic wyjatek
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         UserEntity userEntity = new UserEntity();
@@ -489,7 +496,15 @@ public class TrolAPI {
 //###################### SAVE  #############################
 
     public boolean saveConfiguration(){
-        //TODO zapis z bazy do plików
+//        List<WordsList> wordsListList = getWordsListsList();
+//        FileController.saveWordsListsToFile(wordsListList);
+//        FileController.saveWordsIncludeListToFile(wordsListList);
+//
+//        List<DomainsList> domainsListList = getDomainsListsList();
+//        FileController.saveDomainsBlocadeFile(domainsListList);
+
+        //TODO zapis squida do pliku
+
         //TODO reset squida i dansguardiana
         return false;
     }
