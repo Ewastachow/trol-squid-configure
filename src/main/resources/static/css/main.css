@@ -17,7 +17,7 @@ html, body{
     padding-top: 30px;
 }
 
-.jumbo, .login, .domains, .domainsform, .domainslist, .wordsform, .words, .wordslist{
+.jumbo, .login, .domains, .domainsform, .domainslist, .wordsform, .words, .wordslist, .users, .usersform, .userslist{
     padding-top: 80px;
 }
 
@@ -42,8 +42,16 @@ html, body{
     margin-bottom: 3%;
 }
 
-.btn-navbar{
-    margin-left: 1%;
-    margin-right: 1%;
+#signout, #save-config{
+    margin: 1% 2%;
+}
+
+
+.glyphicon-ok{
+    color: green;
+}
+
+.glyphicon-remove{
+    color: red;
 }
 

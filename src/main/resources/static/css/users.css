@@ -1,5 +1,9 @@
-/* Domains.html */
-.domains-inside{
+.container-fluid {
+    padding-top: 80px;
+}
+
+/* userslist.html */
+.users-inside{
     background-color: #c9e4f2;
     color: #31708f;
     margin: 2% 15% 3% 15%;
@@ -10,12 +14,11 @@
     -moz-border-radius: 15px;
 }
 
-#domains-inside-table{
-    margin-left: 15%;
-    width: 70%;
+#users-list{
+    margin-left: 16%;
 }
 
-#domains-table{
+#users-table{
     background-color: #eeeeee;
     border: 1px solid #cccfcf;
     text-align: center;
@@ -37,11 +40,11 @@ table-bordered {
     text-align: center;
 }
 
-#domains-table>tbody>tr>td, #domains-table>tbody>tr>th, #domains-table>tfoot>tr>td, #domains-table>tfoot>tr>th, #domains-table>thead>tr>td, #domains-table>thead>tr>th{
+#users-table>tbody>tr>td, #users-table>tbody>tr>th, #users-table>tfoot>tr>td, #users-table>tfoot>tr>th, #users-table>thead>tr>td, #users-table>thead>tr>th{
     vertical-align: middle;
 }
 
-/* Form.html */
+/* userform.html */
 .adding-form-inside{
     background-color: #c9e4f2;
     color: #31708f;
@@ -62,8 +65,8 @@ table-bordered {
     padding-right: 10%;
 }
 
-/* Domainslist.html */
-.domains-edit-inside{
+/* user.html */
+.users-edit-inside{
     background-color: #c9e4f2;
     color: #31708f;
     margin: 2% 15% 3% 15%;
@@ -74,6 +77,7 @@ table-bordered {
     -moz-border-radius: 15px;
 }
 
+/*
 #domainsList{
     width: 50%;
     margin: 2% 15% 3% 25%;
@@ -90,6 +94,7 @@ table-bordered {
     -moz-border-radius: 15px;
     font-weight: 700;
 }
+*/
 
 
 
