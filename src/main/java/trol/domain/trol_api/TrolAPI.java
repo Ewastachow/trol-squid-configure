@@ -496,12 +496,12 @@ public class TrolAPI {
 //###################### SAVE  #############################
 
     public boolean saveConfiguration(){
-        List<WordsList> wordsListList = getWordsListsList();
-        FileController.saveWordsListsToFile(wordsListList);
-        FileController.saveWordsIncludeListToFile(wordsListList);
-
-        List<DomainsList> domainsListList = getDomainsListsList();
-        FileController.saveDomainsBlocadeFile(domainsListList);
+//        List<WordsList> wordsListList = getWordsListsList();
+//        FileController.saveWordsListsToFile(wordsListList);
+//        FileController.saveWordsIncludeListToFile(wordsListList);
+//
+//        List<DomainsList> domainsListList = getDomainsListsList();
+//        FileController.saveDomainsBlocadeFile(domainsListList);
 
         //TODO zapis squida do pliku
 
