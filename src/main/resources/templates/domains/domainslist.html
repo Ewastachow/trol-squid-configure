@@ -22,13 +22,13 @@
         </div>
     </div>
     <div class="row">
-        <div id="domainsList">
+        <div class="box col-md-6 col-md-offset-3" id="domainsList">
             <div>
                 Add domain:
                 <label>
                     <input type="text" class="domain"/>
                 </label>
-                <div class="domainErrors"></div>
+                <div id="adderror"></div>
                 <button type="submit" class="addDomain">Add</button>
             </div>
             <table class="table">
@@ -57,7 +57,7 @@
 </div>
 
 <div th:replace="fragments/footer :: footer"/>
-<script src="/js/domains/domainsList.js"></script>
+<script src="/js/domains/domainslist.js"></script>
 
 </body>
 </html>

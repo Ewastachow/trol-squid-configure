@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public class DomainsDAOImpl implements DomainsDAO {
+public class DomainDAOImpl implements DomainDAO {
     @PersistenceContext
     private EntityManager entityManager;
 

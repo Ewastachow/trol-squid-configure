@@ -3,7 +3,7 @@ package trol.service.domains;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import trol.dao.domains.DomainsDAO;
+import trol.dao.domains.DomainDAO;
 import trol.dao.domains.DomainsListDAO;
 import trol.domain.trol_api.exception.UnsuccessfulDeletException;
 import trol.domain.trol_api.exception.UnsuccessfulModificationException;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service("domainsService")
 public class DomainsServiceImpl implements DomainsService {
     @Autowired
-    private DomainsDAO domainsDAO;
+    private DomainDAO domainDAO;
 
     @Autowired
     private DomainsListDAO domainsListDAO;
@@ -50,21 +50,21 @@ public class DomainsServiceImpl implements DomainsService {
 
     @Override
     public Domain getDomain(int domainId) {
-        return domainsDAO.getDomain(domainId);
+        return domainDAO.getDomain(domainId);
     }
 
     @Override
     public int addDomainToDomainsList(Domain domain) {
-        return domainsDAO.addDomain(domain);
+        return domainDAO.addDomain(domain);
     }
 
     @Override
     public void updateDomainInList(Domain domain) throws UnsuccessfulModificationException {
-        domainsDAO.updateDomain(domain);
+        domainDAO.updateDomain(domain);
     }
 
     @Override
     public void deleteDomain(Domain domain) throws UnsuccessfulDeletException {
-        domainsDAO.deleteDomain(domain);
+        domainDAO.deleteDomain(domain);
     }
 }

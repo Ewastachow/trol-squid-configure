@@ -5,11 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import trol.model.ListUpdateOld;
+import trol.domain.trol_api.exception.UnsuccessfulModificationException;
+import trol.domain.trol_api.model.Word;
+import trol.domain.trol_api.model.WordsList;
 import trol.model.UpdateResult;
-import trol.model.words.WordInList;
-import trol.model.words.Words;
-import trol.service.words.WordsListService;
 import trol.service.words.WordsService;
 
 import javax.validation.Valid;
@@ -19,41 +18,45 @@ public class WordsController {
     @Autowired
     private WordsService wordsService;
 
-    @Autowired
-    private WordsListService wordsListService;
-
-    @GetMapping(value = "/words/list/{listName}")
-    public ModelAndView getWordsList(@PathVariable String listName){
+    @GetMapping(value = "/words/list/{id}")
+    public ModelAndView getWordsList(@PathVariable("id") int id){
         ModelAndView model;
         try {
-            Words words = wordsListService.getWords(listName);
+            WordsList list = wordsService.getWordsList(id);
             model = new ModelAndView();
-            model.addObject("words",words);
-            model.setViewName("/words/words");
+            model.addObject("wordsList",list);
+            model.setViewName("/words/wordslist");
         } catch (Exception e) {
+            e.printStackTrace();
             model = new ModelAndView("redirect:/error.html");
         }
         return model;
     }
 
-    @PostMapping(value = "/words/list/{listName}")
-    public String editWordsListHeader(@Valid Words words, BindingResult bindingResult){
+    @PostMapping(value = "/words/list/{id}")
+    public String editListProperties(@Valid WordsList wordsList, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            return "words";
+            return "/words/wordslist";
         }
-        wordsService.editListHeader(words);
-        return "redirect:/words/list/"+words.getName();
+        try {
+            wordsService.updateWordsListProperties(wordsList);
+        } catch (UnsuccessfulModificationException e) {
+            //bindingResult.addError(new ObjectError(""));
+            return "/words/wordslist";
+        }
+        return "redirect:/words";
     }
 
-    @DeleteMapping(value = "/words/list/edit")
-    public @ResponseBody
-    UpdateResult deleteWordFromList(@RequestBody WordInList wordInList){
+    @DeleteMapping(value = "/words/list/{id}/edit/{wordId}")
+    public @ResponseBody UpdateResult deleteWordFromList(
+            @PathVariable("id") int listId,
+            @PathVariable("wordId") int wordId){
         UpdateResult result = new UpdateResult();
         try {
-            wordsService.deleteWordInList(
-                    wordInList.getListName(),
-                    wordInList.getWord()
-            );
+            Word word = new Word();
+            word.setIdWord(wordId);
+            word.setIdWordsList(listId);
+            wordsService.deleteWord(word);
             result.success();
         } catch (Exception e) {
             result.setMessage(e.getMessage());
@@ -62,15 +65,15 @@ public class WordsController {
         return result;
     }
 
-    @PutMapping(value = "/words/list/edit")
-    public @ResponseBody UpdateResult updateWordInList(@RequestBody ListUpdateOld update){
+    @PutMapping(value = "/words/list/{id}/edit/{wordId}")
+    public @ResponseBody UpdateResult updateWordInList(@RequestBody String wordString,
+                                                       @PathVariable("wordId") int wordId){
         UpdateResult result = new UpdateResult();
         try {
-            wordsService.editWordInList(
-                    update.getListName(),
-                    update.getOldValue(),
-                    update.getNewValue()
-            );
+            Word word = new Word();
+            word.setIdWord(wordId);
+            word.setWordString(wordString);
+            wordsService.updateWordInList(word);
             result.success();
         } catch (Exception e) {
             result.setMessage(e.getMessage());
@@ -79,19 +82,15 @@ public class WordsController {
         return result;
     }
 
-    @PostMapping(value = "/words/list/edit")
-    public @ResponseBody UpdateResult addDomainToList(@RequestBody @Valid WordInList wordInList, BindingResult bindingResult){
+    @PostMapping(value = "/words/list/{id}/edit")
+    public @ResponseBody UpdateResult addWordToList(@RequestBody String wordString,
+                                                    @PathVariable("id") int listId){
         UpdateResult updateResult = new UpdateResult();
-        if (bindingResult.hasErrors()){
-            updateResult.fail();
-            updateResult.setMessage("Error");
-            return updateResult;
-        }
         try {
-            wordsService.addWordToList(
-                    wordInList.getListName(),
-                    wordInList.getWord()
-            );
+            Word word = new Word();
+            word.setWordString(wordString);
+            word.setIdWordsList(listId);
+            wordsService.addWordToWordsList(word);
             updateResult.success();
         } catch (Exception e) {
             updateResult.setMessage(e.getMessage());

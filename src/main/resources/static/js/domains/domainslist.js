@@ -1,3 +1,7 @@
+function getErrorInfo(message) {
+    return "<div class='alert alert-danger'>"+ message +"</div>";
+}
+
 $(document).on('click', '.removedomain', function (e) {
     e.preventDefault();
     var listId = $('#listId').val();
@@ -28,8 +32,13 @@ $(document).on('click', '.addDomain', function (e) {
         contentType: "application/json",
         data: domain
     }).done(function(result){
+        console.log(result.message);
         location.reload();
         //TODO
+    }).fail(function (xhr, status, error) {
+        var response = JSON.parse(xhr.responseText);
+        var error = response.error[0];
+        $("#adderror").html(getErrorInfo(error));
     });
 });
 
@@ -64,7 +73,10 @@ $(document).on('click', '.applyEdit', function (e) {
         data: newDomain
     }).done(function(result){
         location.reload();
-        //TODO show result
+    }).fail(function (xhr, status, error) {
+        var response = JSON.parse(xhr.responseText);
+        var error = response.error[0];
+        //$("#adderror").html(getErrorInfo(error));
     });
 });
 
