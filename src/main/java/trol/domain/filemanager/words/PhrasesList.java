@@ -16,12 +16,7 @@ public class PhrasesList {
 
     public PhrasesList(WordsList wordsList) {
         this.wordsList = wordsList;
-        path = Paths.get(FilePaths.PHRASE_LISTS_PATH+wordsList.getWordsListName());
-    }
-
-    public PhrasesList(Path path, WordsList wordsList) {
-        this.path = path;
-        this.wordsList = wordsList;
+        path = Paths.get(FilePaths.PHRASE_LISTS_PATH+wordsList.getWordsListName() + wordsList.getIdWordsList());
     }
 
     public void saveFile() throws IOException {
@@ -31,7 +26,8 @@ public class PhrasesList {
 
     public List<String> generateFileListstring(){
         List<String> phrasesFile = new ArrayList<>();
-        phrasesFile.add(FileHelper.dansguardianTimeControlLine(wordsList.getTimeBegin(), wordsList.getTimeEnd()));
+        if(wordsList.getIsTimed())
+            phrasesFile.add(FileHelper.dansguardianTimeControlLine(wordsList.getTimeBegin(), wordsList.getTimeEnd()));
         wordsList.getWordsSet().forEach(e -> phrasesFile.add(wordLine(e.getWordString())));
         return phrasesFile;
     }

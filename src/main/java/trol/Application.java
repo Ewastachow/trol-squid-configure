@@ -7,14 +7,14 @@ import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Arrays;
 
 @SpringBootApplication
 @EnableAsync
+@EnableScheduling
 public class Application extends WebMvcAutoConfiguration {
-
-    //TODO: CZyli tutaj gdzieś odpaliłbym sobie ten mój wątek, ktory będzie obsługiwał czytanie logów
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
