@@ -11,8 +11,12 @@
 <div class="container-fluid domains">
     <div class="words-inside">
         <div class="row">
-            <div class="box col-md-6 col-md-offset-3">
-                <h2>Words List</h2>
+            <div class="box col-md-6 col-md-offset-3" id="main-table">
+                <div id="words-title">
+                    <h2>Words List
+                        <a th:href="@{/words/add}" class="btn btn-lg btn-success" role="button">Add</a>
+                    </h2>
+                </div>
                 <div>
                     <table class="table table-bordered" id="words-table">
                         <thead class="thead">
@@ -53,8 +57,6 @@
                         </tr>
                         </tbody>
                     </table>
-                    <!--Add button-->
-                    <a th:href="@{/words/add}" class="btn btn-lg btn-success" role="button">Add</a>
                 </div>
             </div>
         </div>
