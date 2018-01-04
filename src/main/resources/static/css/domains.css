@@ -20,9 +20,9 @@
     overflow: hidden;
 }
 #domains-title>h2>a.btn, #domains-title>h2>button{
-    float: right;
-    margin-bottom: 1%;
-    margin-left: 1%;
+    float: right;   !important;
+    margin-bottom: 1%;  !important;
+    margin-left: 1%;    !important;
 }
 
 #domains-table{
