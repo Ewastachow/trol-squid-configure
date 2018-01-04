@@ -20,6 +20,14 @@ public class TransmissionType {
     private LocalTime timeEnd;
     private Set<Header> headersSet;
 
+    public TransmissionType() {
+        isActive = false;
+        isTimed = false;
+        timeBegin = LocalTime.MIN;
+        timeEnd = LocalTime.MAX;
+        headersSet = new TreeSet<>();
+    }
+
     public TransmissionType(TransmissionTypesEntity entity) {
         headersSet = new TreeSet<>();
         idTransmissionType = entity.getIdTransmissionType();
