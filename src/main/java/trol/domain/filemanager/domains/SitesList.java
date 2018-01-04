@@ -16,20 +16,31 @@ public class SitesList {
 
     public SitesList(DomainsList domainsList) {
         this.domainsList = domainsList;
-        path = Paths.get(FilePaths.SITE_LISTS_PATH+domainsList.getDomainsListName());
+
+        path = (domainsList.getIsBlack()) ?
+                Paths.get(FilePaths.SITE_LISTS_PATH+domainsList.getDomainsListName()+domainsList.getIdDomainsList()+"-black") :
+                Paths.get(FilePaths.SITE_LISTS_PATH+domainsList.getDomainsListName()+domainsList.getIdDomainsList()+"-white");
     }
 
     public void saveFile() throws IOException {
         if(!domainsList.getIsActive()) return;
-        FileHelper.saveStringListAsFile(path,generateFileListstring());
+        if(!domainsList.getIsBlack()){
+            SiteDotBlack siteDotBlack = new SiteDotBlack(domainsList);
+            siteDotBlack.saveFile();
+        }
+        FileHelper.saveStringListAsFile(path,generateFileListString());
     }
 
-    public List<String> generateFileListstring(){
+
+    public List<String> generateFileListString(){
         List<String> sitesFile = new ArrayList<>();
-        sitesFile.add(FileHelper.dansguardianTimeControlLine(domainsList.getTimeBegin(), domainsList.getTimeEnd()));
+        if(domainsList.getIsTimed())
+            sitesFile.add(FileHelper.dansguardianTimeControlLine(domainsList.getTimeBegin(), domainsList.getTimeEnd()));
         domainsList.getDomainsSet().forEach(e -> sitesFile.add(e.getDomainString()));
         return sitesFile;
     }
+
+//    public List<String>
 
 
 }

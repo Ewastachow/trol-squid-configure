@@ -7,6 +7,9 @@ public class Header implements Comparable<Header>{
     private String headerString;
     private int idTransmissionType;
 
+    public Header() {
+    }
+
     public Header(HeadersEntity entity) {
         idHeader = entity.getIdHeader();
         headerString = entity.getHeaderString();

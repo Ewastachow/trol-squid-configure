@@ -39,12 +39,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        try {
-            foo4();
-        } catch (UnsuccessfulModificationException e) {
-            e.printStackTrace();
-        }
-//        foo6();
+//        try {
+//            foo4();
+//        } catch (UnsuccessfulModificationException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static void foo1(){
