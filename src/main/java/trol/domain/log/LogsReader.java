@@ -33,9 +33,8 @@ public class LogsReader {
 
     /**
      * Should be called in equal intervals by other thread or deamon,
-     * reads squid logs and update users usedTime using UserDAO
-     * @throws UnknownHostException When users list is invalid.
-     * @throws IOException problems with logs or block times file
+     * reads squid logs and update users Used Time using UserDAO
+     * @throws IOException problems with log file
      */
     @Async
     public void checkUsersLogs() throws IOException, InterruptedException {
@@ -58,7 +57,7 @@ public class LogsReader {
     }
 
     private void updateNextDay() throws IOException, InterruptedException {
-        timeManager.clearWastedTime();
+        timeManager.clearUsedTime();
         lastLine = 0;
         term.executeCommand("squid -k rotate");
     }

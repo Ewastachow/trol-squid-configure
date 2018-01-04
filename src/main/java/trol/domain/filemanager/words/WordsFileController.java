@@ -7,7 +7,7 @@ import java.util.List;
 
 public class WordsFileController {
 
-    public static void saveDomainsFile(List<WordsList> wordsListList) throws IOException {
+    public static void saveWordsFile(List<WordsList> wordsListList) throws IOException {
         PhrasesIncludeList phrasesIncludeList = new PhrasesIncludeList(wordsListList);
         phrasesIncludeList.saveFile();
         for(WordsList i: wordsListList){
