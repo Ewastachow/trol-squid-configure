@@ -24,7 +24,7 @@ public class DomainsList {
 
     public DomainsList() {
         isActive = false;
-        isBlack = false;
+        isBlack = true;
         isTimed = false;
         timeBegin = LocalTime.MIN;
         timeEnd = LocalTime.MAX;

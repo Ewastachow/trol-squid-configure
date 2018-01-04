@@ -7,6 +7,7 @@ import trol.domain.trol_api.model.Domain;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 @Transactional
@@ -35,10 +36,13 @@ public class DomainDAOImpl implements DomainDAO {
     @Override
     public void deleteDomain(Domain domain) {
         //TODO fix
+        //String queryString = "DELETE DomainsEntity WHERE idDomain = :domainId";
+        //Query query = entityManager.createQuery(queryString);
+        //query.setParameter("domainId",domain.getIdDomain());
+        //query.executeUpdate();
         DomainsListsEntity listsEntity = entityManager.find(DomainsListsEntity.class,domain.getIdDomainsList());
         DomainsEntity domainsEntity = entityManager.find(DomainsEntity.class,domain.getIdDomain());
         listsEntity.getDomainsEntitySet().remove(domainsEntity);
-        domainsEntity.setIdDomainsList(null);
         entityManager.remove(domainsEntity);
     }
 

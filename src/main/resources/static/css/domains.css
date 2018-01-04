@@ -19,10 +19,10 @@
     display: inline;
     overflow: hidden;
 }
-#domains-title>h2>a.btn{
-    float: right;
-    margin-bottom: 1%;
-    margin-left: 1%;
+#domains-title>h2>a.btn, #domains-title>h2>button{
+    float: right;   !important;
+    margin-bottom: 1%;  !important;
+    margin-left: 1%;    !important;
 }
 
 #domains-table{

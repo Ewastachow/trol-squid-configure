@@ -17,14 +17,15 @@
 #users-list{
     margin-left: 15%;
     margin-right: 15%;
-    width: 70%;
+    width: 75%;
 }
 
 #users-title{
     display: inline;
     overflow: hidden;
 }
-#users-title>h2>a.btn{
+
+#users-title>h2>a.btn, #users-title>h2>button{
     float: right;
     margin-bottom: 1%;
     margin-left: 1%;

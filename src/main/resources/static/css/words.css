@@ -23,7 +23,7 @@
     display: inline;
     overflow: hidden;
 }
-#words-title>h2>a.btn{
+#words-title>h2>a.btn, #words-title>h2>button{
     float: right;
     margin-bottom: 1%;
     margin-left: 1%;
