@@ -13,6 +13,9 @@ public class HeadersEntity implements Serializable {
     private String headerString;
     private TransmissionTypesEntity idTransmissionType;
 
+    public HeadersEntity() {
+    }
+
     public HeadersEntity(String headerString, TransmissionTypesEntity idTransmissionType) {
         this.headerString = headerString;
         this.idTransmissionType = idTransmissionType;

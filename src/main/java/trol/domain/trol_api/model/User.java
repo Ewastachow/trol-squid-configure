@@ -1,12 +1,10 @@
 package trol.domain.trol_api.model;
 
-import org.hibernate.validator.constraints.Length;
 import trol.domain.database_models.UserEntity;
 import trol.validation.IPv4;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.sql.Time;
 import java.time.LocalTime;
 
 public class User implements Comparable<User> {

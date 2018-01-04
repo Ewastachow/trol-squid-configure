@@ -11,6 +11,7 @@ import trol.dao.words.WordsListDAO;
 import trol.domain.filemanager.domains.DomainsFileController;
 import trol.domain.filemanager.squid.SquidFileController;
 import trol.domain.filemanager.words.WordsFileController;
+import trol.domain.terminal.TerminalExecute;
 
 import java.io.IOException;
 
@@ -49,7 +50,25 @@ public class FileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        TerminalExecute terminalExecute = new TerminalExecute();
+        String outputSquid = null;
+        try {
+            outputSquid = terminalExecute.executeCommand("systemctl restart squid.service");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.printf(outputSquid);
+        String outputDans = null;
+        try {
+            outputDans = terminalExecute.executeCommand("systemctl restart dansguardian.service");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.printf(outputDans);
         System.out.println("koncze prace " + this);
         state = SaveState.FREE;
     }
