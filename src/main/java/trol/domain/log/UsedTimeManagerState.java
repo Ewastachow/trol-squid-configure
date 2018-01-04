@@ -1,5 +1,5 @@
 package trol.domain.log;
 
-public enum LogState {
+public enum UsedTimeManagerState {
     FREE, BUSY
 }
