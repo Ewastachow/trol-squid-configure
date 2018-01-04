@@ -1,57 +1,49 @@
 package trol.domain.filemanager.squid;
 
 import trol.domain.filemanager.FilePaths;
+import trol.domain.filemanager.squid.headers.MimeList;
+import trol.domain.filemanager.squid.users.IPList;
 import trol.domain.trol_api.model.TransmissionType;
 import trol.domain.trol_api.model.User;
 import trol.domain.util.FileHelper;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SquidFileController {
-    Path path;
-    List<User> userList;
-    List<TransmissionType> transmissionTypeList;
 
-    public SquidFileController(List<User> userList, List<TransmissionType> transmissionTypeList) {
-        path = Paths.get(FilePaths.SQUID_CONFIGURE_PATH);
-        this.userList = userList;
-        this.transmissionTypeList = transmissionTypeList;
-    }
-
-    public void save() throws IOException {
+    public static void saveUsersAndHeadersFile(List<User> userList, List<TransmissionType> transmissionTypeList) throws IOException {
         List<String> squidConfContent = new ArrayList<>();
         squidConfContent.addAll(createHeaderOfFile());
-        squidConfContent.addAll(createHeadersPartOfFile());
-        squidConfContent.addAll(createUsersPartOfFile());
+        squidConfContent.addAll(createHeadersPartOfFile(transmissionTypeList));
+        squidConfContent.addAll(createUsersPartOfFile(userList));
         squidConfContent.addAll(createFooterOfFile());
-        FileHelper.saveStringListAsFile(path,squidConfContent);
+        FileHelper.saveStringListAsFile(Paths.get(FilePaths.SQUID_CONFIGURE_PATH),squidConfContent);
     }
 
-    private List<String> createHeaderOfFile(){
+    private static List<String> createHeaderOfFile() throws IOException {
         List<String> header = new ArrayList<>();
-        //TODO Góra pliku
+        header.addAll(FileHelper.createLineListFromFile(FilePaths.SQUID_HEADER_CONFIGURATION_PATH));
         return header;
     }
 
-    private List<String> createFooterOfFile(){
+    private static List<String> createFooterOfFile() throws IOException {
         List<String> footer = new ArrayList<>();
-        //TODO Dół pliku
+        footer.addAll(FileHelper.createLineListFromFile(FilePaths.SQUID_FOOTER_CONFIGURATION_PATH));
         return footer;
     }
 
-    private List<String> createHeadersPartOfFile(){
+    private static List<String> createHeadersPartOfFile(List<TransmissionType> transmissionTypeList) throws IOException {
         List<String> headersPartList = new ArrayList<>();
-        //TODO Dół pliku
+        headersPartList.addAll(MimeList.createHeadersListString(transmissionTypeList));
         return headersPartList;
     }
 
-    private List<String> createUsersPartOfFile(){
+    private static List<String> createUsersPartOfFile(List<User> userList){
         List<String> usersPartList = new ArrayList<>();
-        //TODO Dół pliku
+        usersPartList.addAll(IPList.createIpsListString(userList));
         return usersPartList;
     }
 }

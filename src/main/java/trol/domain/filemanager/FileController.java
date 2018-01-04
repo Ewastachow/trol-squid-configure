@@ -9,19 +9,10 @@ import trol.dao.headers.TransmissionTypeDAO;
 import trol.dao.users.UserDAO;
 import trol.dao.words.WordsListDAO;
 import trol.domain.filemanager.domains.DomainsFileController;
-import trol.domain.filemanager.domains.SitesIncludeList;
-import trol.domain.filemanager.domains.SitesList;
-import trol.domain.filemanager.trash.DomainList;
-import trol.domain.filemanager.words.PhrasesIncludeList;
-import trol.domain.filemanager.words.PhrasesList;
+import trol.domain.filemanager.squid.SquidFileController;
 import trol.domain.filemanager.words.WordsFileController;
-import trol.domain.trol_api.model.DomainsList;
-import trol.domain.trol_api.model.TransmissionType;
-import trol.domain.trol_api.model.WordsList;
 
 import java.io.IOException;
-import java.time.LocalTime;
-import java.util.List;
 
 @Component
 @Scope("singleton")
@@ -53,7 +44,8 @@ public class FileController {
 
         try {
             DomainsFileController.saveDomainsFile(domainsListDAO.getAllDomainsLists());
-            WordsFileController.saveDomainsFile(wordsListDAO.getAllWordsLists());
+            WordsFileController.saveWordsFile(wordsListDAO.getAllWordsLists());
+            SquidFileController.saveUsersAndHeadersFile(userDAO.getAllUsers(),transmissionTypeDAO.getAllTransmissionTypes());
         } catch (IOException e) {
             e.printStackTrace();
         }

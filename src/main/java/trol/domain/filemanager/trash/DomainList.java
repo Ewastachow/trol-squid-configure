@@ -18,7 +18,7 @@ public class DomainList {
 
     public DomainList(DomainsList domainsList) {
         this.domainsList = domainsList;
-        path = Paths.get(FilePaths.DOMAINS_LISTS_PATH+domainsList.getDomainsListName()+".acl");
+//        path = Paths.get(FilePaths.DOMAINS_LISTS_PATH+domainsList.getDomainsListName()+".acl");
     }
 
     public DomainList(Path path, DomainsList domainsList) {
