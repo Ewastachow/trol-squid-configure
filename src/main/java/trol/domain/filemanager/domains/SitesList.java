@@ -34,7 +34,8 @@ public class SitesList {
 
     public List<String> generateFileListString(){
         List<String> sitesFile = new ArrayList<>();
-        sitesFile.add(FileHelper.dansguardianTimeControlLine(domainsList.getTimeBegin(), domainsList.getTimeEnd()));
+        if(domainsList.getIsTimed())
+            sitesFile.add(FileHelper.dansguardianTimeControlLine(domainsList.getTimeBegin(), domainsList.getTimeEnd()));
         domainsList.getDomainsSet().forEach(e -> sitesFile.add(e.getDomainString()));
         return sitesFile;
     }

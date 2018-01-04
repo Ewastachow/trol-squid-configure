@@ -26,7 +26,8 @@ public class PhrasesList {
 
     public List<String> generateFileListstring(){
         List<String> phrasesFile = new ArrayList<>();
-        phrasesFile.add(FileHelper.dansguardianTimeControlLine(wordsList.getTimeBegin(), wordsList.getTimeEnd()));
+        if(wordsList.getIsTimed())
+            phrasesFile.add(FileHelper.dansguardianTimeControlLine(wordsList.getTimeBegin(), wordsList.getTimeEnd()));
         wordsList.getWordsSet().forEach(e -> phrasesFile.add(wordLine(e.getWordString())));
         return phrasesFile;
     }

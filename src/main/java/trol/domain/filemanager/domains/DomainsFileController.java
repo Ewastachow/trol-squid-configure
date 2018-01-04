@@ -1,12 +1,5 @@
 package trol.domain.filemanager.domains;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import trol.dao.domains.DomainDAO;
-import trol.dao.domains.DomainDAOImpl;
-import trol.dao.domains.DomainsListDAO;
-import trol.dao.domains.DomainsListDAOImpl;
-import trol.domain.filemanager.trash.DomainList;
 import trol.domain.trol_api.model.DomainsList;
 
 import java.io.IOException;
