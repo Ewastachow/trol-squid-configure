@@ -50,25 +50,34 @@ public class FileController {
             MimesFileController.saveWordsFile(transmissionTypeDAO.getAllTransmissionTypes());
             SquidFileController.saveUsersAndHeadersFile(userDAO.getAllUsers(),transmissionTypeDAO.getAllTransmissionTypes());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.printf("Blad zapisu");
+        }
+        finally {
+            state = SaveState.FREE;
         }
         TerminalExecute terminalExecute = new TerminalExecute();
         String outputSquid = null;
         try {
             outputSquid = terminalExecute.executeCommand("systemctl restart squid.service");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.printf("Blad restartu");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.printf("Blad restartu");
+        }
+        finally {
+            state = SaveState.FREE;
         }
         System.out.printf(outputSquid);
         String outputDans = null;
         try {
             outputDans = terminalExecute.executeCommand("systemctl restart dansguardian.service");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.printf("Blad restartu");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.printf("Blad restartu");
+        }
+        finally {
+            state = SaveState.FREE;
         }
         System.out.printf(outputDans);
         System.out.println("koncze prace " + this);

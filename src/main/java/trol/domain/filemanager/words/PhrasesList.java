@@ -16,7 +16,7 @@ public class PhrasesList {
 
     public PhrasesList(WordsList wordsList) {
         this.wordsList = wordsList;
-        path = Paths.get(FilePaths.PHRASE_LISTS_PATH+wordsList.getWordsListName() + wordsList.getIdWordsList());
+        path = Paths.get(FilePaths.PHRASE_LISTS_PATH+wordsList.getWordsListName().toLowerCase() + wordsList.getIdWordsList());
     }
 
     public void saveFile() throws IOException {
@@ -33,6 +33,6 @@ public class PhrasesList {
     }
 
     private String wordLine(String word){
-        return "<"+ word +"><1>";
-    }
+        return "<"+ word +">";
+    } 
 }

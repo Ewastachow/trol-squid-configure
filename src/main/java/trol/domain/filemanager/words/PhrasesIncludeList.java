@@ -27,7 +27,7 @@ public class PhrasesIncludeList {
         List<String> wordsFile = new ArrayList<>();
         wordsListList.forEach(e -> {
             if (e.getIsActive())
-                wordsFile.add(".Include<" + FilePaths.PHRASE_LISTS_PATH + e.getWordsListName() + e.getIdWordsList() + ">");
+                wordsFile.add(".Include<" + FilePaths.PHRASE_LISTS_PATH + e.getWordsListName().toLowerCase() + e.getIdWordsList() + ">");
         });
         return wordsFile;
     }
