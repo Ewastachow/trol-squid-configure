@@ -43,6 +43,9 @@ public class WordsListDAOImpl implements WordsListDAO {
     @Override
     public void deleteWordsList(int wordsListId) {
         //TODO
+        WordsListsEntity entity = entityManager.find(WordsListsEntity.class,wordsListId);
+        entity.getWordsEntitySet().clear();
+        entityManager.remove(entity);
     }
 
     @Override

@@ -1,16 +1,18 @@
-$(document).on('click', '.removeWord', function (e) {
+function getErrorInfo(message) {
+    return "<div class='alert alert-danger'>"+ message +"</div>";
+}
+
+$(document).on('click', '.removeword', function (e) {
     e.preventDefault();
-    var listName = $('#listName').val();
+    var listId = $('#listId').val();
+    var tr = $(this).parent().parent();
+    var wordId = tr.find(".id").val();
+    var url = "/words/list/"+listId+"/edit/"+wordId;
     var word = $(this).val();
-    var data = {
-        "listName" : listName,
-        "word" : word
-    };
     $.ajax({
         type: 'DELETE',
-        url: '/words/list/edit',
+        url: url,
         contentType: "application/json",
-        data: JSON.stringify(data)
     }).done(function(result){
         location.reload();
         //TODO
@@ -21,67 +23,81 @@ $(document).on('click', '.removeWord', function (e) {
 $(document).on('click', '.addWord', function (e) {
     e.preventDefault();
     var input = $(this).parent().find(".word");
-    var listName = $('#listName').val();
+    var listId = $('#listId').val();
+    var url = "/words/list/"+listId+"/edit"
     var word = input.val();
-    var data = {
-        "listName" : listName,
-        "word" : word
-    };
     $.ajax({
         type: 'POST',
-        url: '/words/list/edit',
+        url: url,
         contentType: "application/json",
-        data: JSON.stringify(data)
+        data: word
     }).done(function(result){
+        console.log(result);
+        console.log(result.message);
         location.reload();
         //TODO
+    }).fail(function (xhr, status, error) {
+        console.log(xhr);
+        var response = JSON.parse(xhr.responseText);
+        var error = response.error[0];
+        $("#adderror").html(getErrorInfo(error));
     });
 });
 
-$(document).on('click', '.editWord', function (e) {
+$(document).on('click', '.editword', function (e) {
     var tr = $(this).parent().parent();
-    var td = $(this).parent().parent().find(".word");
-    var word = td.text();
-    var newValue = "<input type='text' class='newValue' value='"+word+"'/>";
-    var oldValue = "<input type='hidden' class='oldValue' value='"+word+"'/>";
-    var applyEdit = "<td><button class='applyEdit'>Apply</button></td>";
-    var cancelEdit = "<td><button class='cancelEdit'>Cancel</button></td>";
-    tr.html(
-        '<td class="word">'+newValue+oldValue+'</td>'+applyEdit+cancelEdit
+    var wordDiv = tr.find(".word");
+    var word = wordDiv.text();
+    wordDiv.html(
+        "<input type='text' class='newWord' value='"+word+"'/>"
+    );
+    var remove = tr.find(".removeword");
+    var edit = tr.find(".editword");
+
+    edit.parent().html(
+        "<button class='btn btn-success applyEdit'>Apply</button>")
+    ;
+    remove.parent().html(
+        "<button class='btn btn-warning cancelEdit'>Cancel</button>"
     );
 });
 
 $(document).on('click', '.applyEdit', function (e) {
     var tr = $(this).parent().parent();
-    var td = tr.find(".word");
-    var newValue = td.find(".newValue").val();
-    var oldValue = td.find(".oldValue").val();
-    var listName = $('#listName').val();
-    var data = {
-        "listName" : listName,
-        "oldValue" : oldValue,
-        "newValue" : newValue
-    };
+    var newWord = tr.find(".newWord").val();
+    var wordId = tr.find(".id").val();
+    var listId = $('#listId').val();
+    var url = "/words/list/"+listId+"/edit/"+wordId;
     $.ajax({
         type:'PUT',
-        url:'/words/list/edit',
+        url: url,
         contentType: "application/json",
-        data:JSON.stringify(data)
+        data: newWord
     }).done(function(result){
+        console.log(result);
         location.reload();
-        //TODO show result
+    }).fail(function (xhr, status, error) {
+        var response = JSON.parse(xhr.responseText);
+        var error = response.error[0];
+        //$("#adderror").html(getErrorInfo(error));
     });
 });
 
 $(document).on('click', '.cancelEdit', function (e) {
     var tr = $(this).parent().parent();
-    var td = $(this).parent().parent().find(".oldValue");
-    var word = td.val();
-    var newValue = '<td class="word">'+word+'</td>';
-    var removeDomain = '<td><button class="removeWord" value='+word+'>Remove</button></td>';
-    var editWord = '<td><button class="editWord" value='+word+'>Edit</button></td>';
-    tr.html(
-        newValue+removeDomain+editWord
+    var oldWord = tr.find(".oldWord").val();
+    var wordDiv = tr.find(".word");
+    wordDiv.html(
+        oldWord
+    );
+    var cancel = tr.find(".cancelEdit");
+    var apply = tr.find(".applyEdit");
+
+    cancel.parent().html(
+        "<button class='btn btn-danger removeword'>Remove</button>"
+    );
+    apply.parent().html(
+        "<button class='btn btn-default editword'>Edit</button>"
     );
 });
 
