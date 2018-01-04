@@ -1,11 +1,8 @@
 package trol;
 
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import trol.domain.database_models.WordsEntity;
 import trol.domain.database_models.WordsListsEntity;
-import trol.domain.filemanager.FC;
-import trol.domain.filemanager.FileController;
 import trol.domain.trol_api.TrolAPI;
 import trol.domain.trol_api.exception.UnsuccessfulDeletException;
 import trol.domain.trol_api.exception.UnsuccessfulModificationException;
@@ -13,7 +10,6 @@ import trol.domain.trol_api.model.Word;
 import trol.domain.trol_api.model.WordsList;
 import trol.domain.util.HibernateUtil;
 
-import java.io.IOException;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -48,7 +44,6 @@ public class Main {
 //        } catch (UnsuccessfulModificationException e) {
 //            e.printStackTrace();
 //        }
-        foo7();
     }
 
     public static void foo1(){
@@ -266,14 +261,5 @@ public class Main {
         sb.append("   $$$$");
         sb.append("\n");
         return sb.toString();
-    }
-
-    public static void foo7(){
-        FC fc = new FC();
-        try {
-            fc.saveConfiguration();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
