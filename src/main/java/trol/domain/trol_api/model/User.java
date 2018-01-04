@@ -81,10 +81,22 @@ public class User implements Comparable<User> {
     }
 
     public void setUsedTime(Integer usedTime) {
-        this.usedTime = usedTime;
+        if(usedTime > durationInterval)
+            this.usedTime = durationInterval;
+        else if(usedTime < 0)
+            this.usedTime = 0;
+        else
+            this.usedTime = usedTime;
     }
 
-    public void addUsedTime(Integer usedTime) { this.usedTime += usedTime; }
+    public void addUsedTime(Integer usedTime) {
+        if(this.usedTime + usedTime > durationInterval)
+            this.usedTime = durationInterval;
+        else if(this.usedTime + usedTime < 0)
+            this.usedTime = 0;
+        else
+            this.usedTime += usedTime;
+    }
 
     public int getIdUser() {
         return idUser;

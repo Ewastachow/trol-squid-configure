@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import trol.dao.users.UserDAO;
 import trol.domain.filemanager.FileController;
+import trol.domain.filemanager.FilePaths;
 import trol.domain.trol_api.model.User;
 import trol.domain.util.FileHelper;
 import trol.domain.terminal.TerminalExecute;
@@ -40,7 +41,7 @@ public class UsedTimeManager {
     }
 
     UsedTimeManager() {
-        this("/var/log/squid/trolUserTimes.log", new TerminalExecute());
+        this(FilePaths.SQUID_TROL_USER_TIME_LOG, new TerminalExecute());
     }
 
     UsedTimeManager(String accessLogPath, TerminalExecute term) {
@@ -105,9 +106,9 @@ public class UsedTimeManager {
     private void parseLine(Map<String,Integer> usersSeconds, String line) {
         String user = line.split("[\t ]+")[0];
         if(usersSeconds.containsKey(user))
-            usersSeconds.put(user,usersSeconds.get(user)+10);
+            usersSeconds.put(user,usersSeconds.get(user)+1);
         else
-            usersSeconds.put(user,10);
+            usersSeconds.put(user,1);
     }
 
     /**
@@ -140,8 +141,9 @@ public class UsedTimeManager {
                 if(userIp.equals(u.getUserIp())) {
                     log.info("User found in base", dateFormat.format(new Date()));
                     if(u.getHasDuration() &&
-                            lastUpdateInRange(u.getTimeBegin(),u.getTimeEnd())) {
-                        u.addUsedTime(time/60);
+                            lastUpdateInRange(u.getTimeBegin(),u.getTimeEnd())
+                            && u.getDurationInterval() > u.getUsedTime()) {
+                        u.addUsedTime(time/60+1);
                         userDAO.updateUser(u);
                         updated = true;
                         log.info("User updated.", dateFormat.format(new Date()));
