@@ -64,7 +64,7 @@ public class DomainsEntity  implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name="id_domains_list", nullable=false)
+    @JoinColumn(name="id_domains_list")
     //@Column(name = "id_domains_list")
     public DomainsListsEntity getIdDomainsList() {
         return idDomainsList;
