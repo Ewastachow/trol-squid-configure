@@ -19,7 +19,7 @@
     display: inline;
     overflow: hidden;
 }
-#domains-title>h2>a.btn{
+#domains-title>h2>a.btn, #domains-title>h2>button{
     float: right;
     margin-bottom: 1%;
     margin-left: 1%;

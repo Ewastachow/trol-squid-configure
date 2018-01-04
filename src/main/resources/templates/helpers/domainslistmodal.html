@@ -5,11 +5,9 @@
 </head>
 <body>
 <div th:fragment="modal">
-    <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#helpModal">Help</button>
 
     <!-- Modal -->
-    <div id="helpModal" class="modal fade" role="dialog">
+    <div id="helpModalDomains" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -20,26 +18,26 @@
                 </div>
                 <div class="modal-body">
                     <p>This list contains collections of domains blocked for every user.
-                        Each collection could be limited in time and could have one of two modes.
+                        Each collection could be limited during time and could have one of two modes.
                     </p>
                     <p>Columns explanations:</p>
-                    <p><strong>List name</strong> - text field containing name of list specified by user.
+                    <p style="text-align: center"><strong>List name</strong> - text field containing name of list specified by user.
                         Name should describe list's contents like 'Social networking websites', 'Games' etc.
                     </p>
-                    <p><strong>Active</strong> - boolean value indicating if list is currently being used by
+                    <p style="text-align: center"><strong>Active</strong> - boolean value indicating if list is currently being used by
                         blocking system. If list is active, it's domains are prohibited.
                     </p>
-                    <p><strong>Timed</strong> - boolean value indicating if list is active only in specified time.
+                    <p style="text-align: center"><strong>Timed</strong> - boolean value indicating if list is active only in specified time.
                         If true, domains are blocked in time period specified by <em>Start time</em> and
                         <em>End time</em>.
                     </p>
-                    <p><strong>Start time</strong> - beginning of time period when domains are blocked if <em>Timed</em>
+                    <p style="text-align: center"><strong>Start time</strong> - beginning of time period when domains are blocked if <em>Timed</em>
                         is true.
                     </p>
-                    <p><strong>End time</strong> - end of time period when domains are blocked if <em>Timed</em>
+                    <p style="text-align: center"><strong>End time</strong> - end of time period when domains are blocked if <em>Timed</em>
                         is true.
                     </p>
-                    <p><strong>Mode</strong> - it describes how blocking system is treating domains list.
+                    <p style="text-align: center"><strong>Mode</strong> - it describes the way blocking system treats domains list.
                         <em>Blacklist</em> means that specified domains are blocked, <em>Whitelist</em>
                         means that domains are permitted.
                     </p>
