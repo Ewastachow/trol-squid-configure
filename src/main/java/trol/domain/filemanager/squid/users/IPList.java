@@ -21,7 +21,7 @@ public class IPList {
         String time = (user.getIsTimed()) ? user.getTimeBegin().getHour()+":"+user.getTimeBegin().getMinute()+"-"+
                 user.getTimeEnd().getHour()+":"+user.getTimeEnd().getMinute() : "";
         ipListString.add("acl "+nameAndId+" myip "+user.getUserIp());
-        if(user.getIsTimed()){
+        if(user.getIsTimed() || ((user.getHasDuration()) && (user.getDurationInterval() > user.getUsedTime()))){
             ipListString.add("acl "+nameAndId+"Time time MTWHF "+time);
             ipListString.add("http_access allow "+nameAndId+" "+nameAndId+"Time");
             ipListString.add("http_access deny "+nameAndId);

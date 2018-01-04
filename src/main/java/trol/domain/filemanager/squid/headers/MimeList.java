@@ -28,21 +28,25 @@ public class MimeList {
                 tt.getTimeEnd().getHour()+":"+tt.getTimeEnd().getMinute() : "";
         for(Header i: tt.getHeadersSet()){
             transmissionTypeListString.add("acl "+nameAndId+
-                    "Req"+i.getIdHeader()+" req_mime_type -i ^" + i.getHeaderString());
+                    "Req"+i.getIdHeader()+" req_mime_type -i ^" + i.getHeaderString()+"$");
             transmissionTypeListString.add("acl "+nameAndId+
-                    "Rep"+i.getIdHeader()+" rep_mime_type -i ^" + i.getHeaderString());
+                    "Req"+i.getIdHeader()+" req_mime_type -i " + i.getHeaderString()+"");
+            transmissionTypeListString.add("acl "+nameAndId+
+                    "Rep"+i.getIdHeader()+" rep_mime_type -i ^" + i.getHeaderString()+"$");
+            transmissionTypeListString.add("acl "+nameAndId+
+                    "Rep"+i.getIdHeader()+" rep_mime_type -i " + i.getHeaderString()+"");
         }
         if(tt.getIsTimed())
             transmissionTypeListString.add("acl "+nameAndId+"Time time MTWHF "+time);
         for(Header i: tt.getHeadersSet()){
             if(tt.getIsTimed()){
                 //TODO co z tym all na końcu
-                transmissionTypeListString.add("http_access deny "+nameAndId+"Req"+i.getIdHeader()+" "+nameAndId+"Time");
-                transmissionTypeListString.add("http_reply_access deny "+nameAndId+"Rep"+i.getIdHeader()+" "+nameAndId+"Time");
+                transmissionTypeListString.add("http_access deny "+nameAndId+"Req"+i.getIdHeader()+" "+nameAndId+"Time all");
+                transmissionTypeListString.add("http_reply_access deny "+nameAndId+"Rep"+i.getIdHeader()+" "+nameAndId+"Time all");
                 //TODO te z allow tu
             }else {
-                transmissionTypeListString.add("http_access deny "+nameAndId+"Req"+i.getIdHeader()+"");
-                transmissionTypeListString.add("http_reply_access deny "+nameAndId+"Rep"+i.getIdHeader()+"");
+                transmissionTypeListString.add("http_access deny "+nameAndId+"Req"+i.getIdHeader()+" all");
+                transmissionTypeListString.add("http_reply_access deny "+nameAndId+"Rep"+i.getIdHeader()+" all");
                 //TODO te z allow tu
             }
         }
