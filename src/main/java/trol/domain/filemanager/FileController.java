@@ -9,6 +9,7 @@ import trol.dao.headers.TransmissionTypeDAO;
 import trol.dao.users.UserDAO;
 import trol.dao.words.WordsListDAO;
 import trol.domain.filemanager.domains.DomainsFileController;
+import trol.domain.filemanager.mimes.MimesFileController;
 import trol.domain.filemanager.squid.SquidFileController;
 import trol.domain.filemanager.words.WordsFileController;
 import trol.domain.terminal.TerminalExecute;
@@ -46,6 +47,7 @@ public class FileController {
         try {
             DomainsFileController.saveDomainsFile(domainsListDAO.getAllDomainsLists());
             WordsFileController.saveWordsFile(wordsListDAO.getAllWordsLists());
+            MimesFileController.saveWordsFile(transmissionTypeDAO.getAllTransmissionTypes());
             SquidFileController.saveUsersAndHeadersFile(userDAO.getAllUsers(),transmissionTypeDAO.getAllTransmissionTypes());
         } catch (IOException e) {
             e.printStackTrace();

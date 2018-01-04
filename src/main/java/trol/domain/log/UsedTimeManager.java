@@ -34,8 +34,8 @@ public class UsedTimeManager {
     private int lastLine;
     private LocalTime lastUpdateTimestamp;
 
-    private volatile LogState state = LogState.FREE;
-    public LogState getState() {
+    private volatile UsedTimeManagerState state = UsedTimeManagerState.FREE;
+    public UsedTimeManagerState getState() {
         return state;
     }
 
@@ -58,12 +58,12 @@ public class UsedTimeManager {
     @Scheduled(fixedDelay=60000)
     @Async
     public void checkUsersLogs() throws IOException, InterruptedException {
-        if (state.equals(LogState.BUSY)){
+        if (state.equals(UsedTimeManagerState.BUSY)){
             System.out.println("nie przerywac, pracuje");
             return;
         }
         System.out.println("zaczynam prace "+ this);
-        state = LogState.BUSY;
+        state = UsedTimeManagerState.BUSY;
 
         if(nextDay()) {
             log.info("Try to clear used times", dateFormat.format(new Date()));
@@ -75,7 +75,7 @@ public class UsedTimeManager {
         }
 
         System.out.println("koncze prace "+ this);
-        state = LogState.FREE;
+        state = UsedTimeManagerState.FREE;
     }
 
     private void updateNextDay() throws IOException, InterruptedException {

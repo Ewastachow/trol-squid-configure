@@ -33,6 +33,6 @@ public class PhrasesList {
     }
 
     private String wordLine(String word){
-        return "<"+word+">";
+        return "<"+ word +"><1>";
     }
 }
