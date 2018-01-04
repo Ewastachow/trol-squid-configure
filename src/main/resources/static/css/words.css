@@ -10,9 +10,23 @@
     -moz-border-radius: 15px;
 }
 
+#main-table {
+    width: 53%;
+}
+
 #words-inside-table{
     margin-left: 15%;
     width: 70%;
+}
+
+#words-title{
+    display: inline;
+    overflow: hidden;
+}
+#words-title>h2>a.btn{
+    float: right;
+    margin-bottom: 1%;
+    margin-left: 1%;
 }
 
 #words-table{

@@ -12,8 +12,12 @@
     <div class="domains-inside">
     <div class="row">
         <div class="box col-md-6 col-md-offset-3" id="domains-inside-table">
-            <h2>Domains List</h2>
-            <div>
+            <div id="domains-title">
+                <h2>Domains List
+                    <a th:href="@{/domains/add}" class="btn btn-lg btn-success" role="button">Add</a>
+                </h2>
+            </div>
+                <div>
                 <table class="table table-bordered" id="domains-table">
                     <thead class="thead">
                     <tr id="top">
@@ -60,8 +64,6 @@
                     </tr>
                     </tbody>
                 </table>
-                <!--Add button-->
-                <a th:href="@{/domains/add}" class="btn btn-lg btn-success" role="button">Add</a>
             </div>
         </div>
     </div>

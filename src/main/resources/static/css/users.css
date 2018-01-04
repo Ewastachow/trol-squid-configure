@@ -20,6 +20,16 @@
     width: 70%;
 }
 
+#users-title{
+    display: inline;
+    overflow: hidden;
+}
+#users-title>h2>a.btn{
+    float: right;
+    margin-bottom: 1%;
+    margin-left: 1%;
+}
+
 #users-table{
     background-color: #eeeeee;
     border: 1px solid #cccfcf;
