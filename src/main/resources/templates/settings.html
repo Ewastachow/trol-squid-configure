@@ -1,13 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>User Settings</title>
+    <link rel="stylesheet" type="text/css" href="/css/settings.css" />
     <div th:replace="fragments/header :: header-css"/>
 </head>
 <body>
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container settings">
+<div class="container-fluid settings">
     <div class="settings-inside">
         <div class="row">
             <div class="box col-md-6 col-md-offset-3">
@@ -31,8 +32,8 @@
                             <div th:if="${#fields.hasErrors('newPasswordSecond')}"
                                  th:errors="*{newPasswordSecond}" class="alert alert-danger"></div>
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Change Password"/>
+                        <div class="col-xs-6 col-sm-6 col-md-6" id="button-save">
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Save"/>
                         </div>
                     </form>
             </div>

@@ -10,6 +10,7 @@
     -moz-border-radius: 15px;
 }
 
+
 #domains-inside-table{
     margin-left: 15%;
     width: 70%;
@@ -51,7 +52,7 @@ table-bordered {
     vertical-align: middle;
 }
 
-/* Form.html */
+!* Form.html *!
 .adding-form-inside{
     background-color: #c9e4f2;
     color: #31708f;
@@ -72,7 +73,7 @@ table-bordered {
     padding-right: 10%;
 }
 
-/* Domainslist.html */
+!* Domainslist.html *!
 .domains-edit-inside{
     background-color: #c9e4f2;
     color: #31708f;
@@ -100,6 +101,7 @@ table-bordered {
     -moz-border-radius: 15px;
     font-weight: 700;
 }
+
 
 
 
