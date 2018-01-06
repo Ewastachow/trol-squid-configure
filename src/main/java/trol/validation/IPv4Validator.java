@@ -16,6 +16,6 @@ public class IPv4Validator implements ConstraintValidator<IPv4,String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return value.matches(IPADDRESS_PATTERN);
+        return value == null ? false : value.matches(IPADDRESS_PATTERN);
     }
 }
