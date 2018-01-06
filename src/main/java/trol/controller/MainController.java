@@ -9,16 +9,20 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import trol.dao.appusers.AppUsersDAO;
 import trol.domain.filemanager.FileController;
 import trol.domain.filemanager.SaveState;
 import trol.model.PasswordUpdate;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class MainController {
     @Autowired
     private FileController fileController;
+    @Autowired
+    private AppUsersDAO appUsersDAO;
 
     @RequestMapping("/")
      ModelAndView index(){
@@ -46,23 +50,27 @@ public class MainController {
 
     @GetMapping("/settings")
     public String getChangePasswordForm(Model model){
-        model.addAttribute("settings", new PasswordUpdate());
+        model.addAttribute("passwordUpdate", new PasswordUpdate());
         return "/settings";
     }
 
     @PostMapping("/settings")
-    public String changePassword(@Valid PasswordUpdate settings, BindingResult bindingResult){
+    public String changePassword(
+            @Valid PasswordUpdate passwordUpdate, BindingResult bindingResult, Principal principal){
         if (bindingResult.hasErrors()){
             return "/settings";
         }
-        if (settings.getNewPasswordFirst() != settings.getNewPasswordSecond()){
-            bindingResult.rejectValue("newPasswordSecond", "Passwords must be equal!");
+        if (!passwordUpdate.getNewPasswordFirst().equals(passwordUpdate.getNewPasswordSecond())){
+            bindingResult.rejectValue("newPasswordSecond", "err_not_equal" ,"Passwords must be equal!");
             return "/settings";
         }
-        if (settings.getOldPassword() != "admin"){
-            bindingResult.rejectValue("oldPassword", "Wrong password!");
+        String username = principal.getName();
+        String actualPassword = appUsersDAO.getAppUserByName(username).getPassword();
+        if (!passwordUpdate.getOldPassword().equals(actualPassword)){
+            bindingResult.rejectValue("oldPassword","err_bad_password" ,"Wrong password!");
             return "/settings";
         }
+        appUsersDAO.updateAppUserPassword(username, passwordUpdate.getNewPasswordFirst());
         return "redirect:/logout?changedpassword";
     }
 }

@@ -8,6 +8,12 @@ public class PasswordUpdate {
     private String newPasswordFirst;
     private String newPasswordSecond;
 
+    public PasswordUpdate() {
+        oldPassword="";
+        newPasswordFirst="";
+        newPasswordSecond="";
+    }
+
     public String getOldPassword() {
         return oldPassword;
     }
