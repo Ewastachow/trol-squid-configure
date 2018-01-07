@@ -83,6 +83,7 @@ public class UsedTimeManager {
         clearUsedTime();
         lastLine = 0;
         term.executeCommand("squid -k rotate");
+        log.info("Logi przeniesione", dateFormat.format(new Date()));
     }
 
     private void updateUsersReadyToBlock() throws IOException {
