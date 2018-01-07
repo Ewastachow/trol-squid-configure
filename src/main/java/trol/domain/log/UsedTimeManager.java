@@ -133,7 +133,7 @@ public class UsedTimeManager {
             List<User> users = userDAO.getAllUsers();
 
             lastUpdateTimestamp = LocalTime.now();
-            boolean updated = false;
+            boolean changeConfiguration = false;
 
             log.info("Try update user: "+userIp, dateFormat.format(new Date()));
 
@@ -145,13 +145,16 @@ public class UsedTimeManager {
                             && u.getDurationInterval() > u.getUsedTime()) {
                         u.addUsedTime(time/60+1);
                         userDAO.updateUser(u);
-                        updated = true;
                         log.info("User updated.", dateFormat.format(new Date()));
+                        if(u.getUsedTime() == u.getDurationInterval()) {
+                            log.info("User blocked.", dateFormat.format(new Date()));
+                            changeConfiguration = true;
+                        }
                     }
                 }
             }
 
-            if(updated)
+            if(changeConfiguration)
                 fileController.saveConfiguration();
 
         } catch (NullPointerException e) {
