@@ -1,4 +1,4 @@
-html, body{
+Shtml, body{
     background: #1D976C;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -17,7 +17,7 @@ html, body{
     padding-top: 30px;
 }
 
-.jumbo, .login, .domains, .domainsform, .domainslist, .wordsform, .words, .wordslist, .users, .usersform, .userslist{
+.jumbo, .login, .domains, .domainsform, .domainslist, .wordsform, .words, .wordslist, .users, .usersform, .userslist, .settings{
     padding-top: 80px;
 }
 
@@ -42,8 +42,14 @@ html, body{
     margin-bottom: 3%;
 }
 
-#signout, #save-config{
+#signout, #save-config, #user-settings{
     margin: 1% 2%;
+}
+
+.nav > li > a.btn-outline-info{
+    color: #269abc;
+    /*background-color: #31b0d5;*/
+    border-color: #269abc;
 }
 
 .nav > li > a.btn-info:hover {
@@ -56,6 +62,12 @@ html, body{
     color: #fff;
     background-color: #4886bb;
     border-color: #2e6da4;
+}
+
+.nav > li > a.btn-outline-info:hover {
+    color: #269abc;
+    /*background-color: #31b0d5;*/
+    border-color: #269abc;
 }
 
 .glyphicon-ok{

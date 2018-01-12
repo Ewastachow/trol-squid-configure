@@ -1,3 +1,25 @@
+CREATE  TABLE appusers (
+  id_appuser int(11) NOT NULL AUTO_INCREMENT,
+  username VARCHAR(45) NOT NULL ,
+  password VARCHAR(45) NOT NULL ,
+  enabled TINYINT NOT NULL DEFAULT 1 ,
+  PRIMARY KEY (id_appuser));
+
+CREATE TABLE authorities (
+  user_role_id int(11) NOT NULL AUTO_INCREMENT,
+  username varchar(45) NOT NULL,
+  role varchar(45) NOT NULL,
+  PRIMARY KEY (user_role_id),
+  UNIQUE KEY uni_username_role (role,username),
+  KEY fk_username_idx (username),
+  CONSTRAINT fk_username FOREIGN KEY (id_appuser) REFERENCES appusers (id_appuser));
+
+INSERT INTO appusers(username,password,enabled)
+VALUES ('admin','admin', true);
+
+INSERT INTO authorities (username, role)
+VALUES ('admin', 'ROLE_USER');
+
 CREATE TABLE domains_lists (
   id_domains_list INTEGER NOT NULL AUTO_INCREMENT,
   domains_list_name VARCHAR(30) NOT NULL,
