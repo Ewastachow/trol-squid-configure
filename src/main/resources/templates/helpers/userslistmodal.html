@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+</head>
+<body>
+<div th:fragment="modal">
+
+    <!-- Modal -->
+    <div id="helpModalDomains" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Blocked users list</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This list contains informations about subnetwork users,
+                        which will be used in blocking specified user.
+                    </p>
+                    <p>Columns explanations:</p>
+                    <p style="text-align: center"><strong>User ip</strong> - text field containing valid ip address of specified user.
+                    </p>
+                    <p style="text-align: center"><strong>Active</strong> - boolean value indicating if user could be possibly blocked.
+                    </p>
+                    <p style="text-align: center"><strong>Time allowed </strong> - boolean value indicating if list is active only in specified time.
+                        True means that user is not blocked in time period specified by <em>Start time</em>
+                        and <em>End time</em>.
+                    </p>
+                    <p style="text-align: center"><strong>Start time</strong> - beginning of time period when user is not being blocked while
+                        <em>Time allowed</em> is true.
+                    </p>
+                    <p style="text-align: center"><strong>End time</strong> - nd of time period when user is not being blocked while
+                        <em>Time allowed</em> is true.
+                    </p>
+                    <p style="text-align: center"><strong>Browsing time limited</strong> - boolean value indicating if values specified
+                        in <em>Used time</em> and <em>Duration</em> could lead to block user.
+                    </p>
+                    <p style="text-align: center"><strong>Duration </strong> - integer value specified how many minutes per time not
+                        blocked period may be used by the user before browsing time limited block.
+                    </p>
+                    <p style="text-align: center"><strong>Used time</strong> - integer value specified how many minutes per time not
+                        blocked period was wasted by user.
+                    </p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

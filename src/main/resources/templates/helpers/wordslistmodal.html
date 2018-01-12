@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+</head>
+<body>
+<div th:fragment="modal">
+
+    <!-- Modal -->
+    <div id="helpModalDomains" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Words list</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This list contains collections of words, which will be used in filtering process.
+                        Each collection could be limited during time.
+                    </p>
+                    <p>Columns explanations:</p>
+                    <p style="text-align: center"><strong>List name</strong> - text field containing name of list specified by user.
+                        Name should group all contained words in same context like 'Bad words' or 'Obscenities'.
+                    </p>
+                    <p style="text-align: center"><strong>Active</strong> - boolean value indicating if list i currently being used by filtering system.
+                        If list is active, contained words could lead to block website.
+                    </p>
+                    <p style="text-align: center"><strong>Timed</strong> - boolean value indicating if list is active only in specified time.
+                        True means that words from list are used in time period specified by
+                        <em>Start time</em> and <em>End time</em>.
+                    </p>
+                    <p style="text-align: center"><strong>Start time</strong> - beginning of time period when words list is being used in
+                        filtering process if <em>Timed</em> is true.
+                    </p>
+                    <p style="text-align: center"><strong>End time</strong> - end of time period when words list is being used in
+                        filtering process if <em>Timed</em> is true.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
