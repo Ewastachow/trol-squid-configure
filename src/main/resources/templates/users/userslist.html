@@ -14,7 +14,11 @@
             <div class="box col-md-6 col-md-offset-3" id="users-list">
                 <div id="users-title">
                     <h2>Blocked users list
-                        <a th:href="@{/users/add}" class="btn btn-lg btn-success" role="button">Add</a></h2>
+                        <a th:href="@{/users/add}" class="btn btn-lg btn-success" role="button">Add</a>
+                        <button type="button" class="btn btn-info btn-lg"
+                                data-toggle="modal" data-target="#helpModalUsers">Help</button>
+                    </h2>
+                    <div th:replace="helpers/userslistmodal :: modal"/>
                 </div>
                 <div>
                     <table class="table table-bordered" id="users-table">
