@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import trol.dao.users.UserDAO;
 import trol.domain.filemanager.FileController;
+import trol.domain.filemanager.FilePaths;
 import trol.domain.trol_api.model.User;
 import trol.domain.util.FileHelper;
 import trol.domain.terminal.TerminalExecute;
@@ -34,13 +35,13 @@ public class UsedTimeManager {
     private int lastLine;
     private LocalTime lastUpdateTimestamp;
 
-    private volatile LogState state = LogState.FREE;
-    public LogState getState() {
+    private volatile UsedTimeManagerState state = UsedTimeManagerState.FREE;
+    public UsedTimeManagerState getState() {
         return state;
     }
 
     UsedTimeManager() {
-        this("/var/log/squid/trolUserTimes.log", new TerminalExecute());
+        this(FilePaths.SQUID_TROL_USER_TIME_LOG, new TerminalExecute());
     }
 
     UsedTimeManager(String accessLogPath, TerminalExecute term) {
@@ -58,12 +59,12 @@ public class UsedTimeManager {
     @Scheduled(fixedDelay=60000)
     @Async
     public void checkUsersLogs() throws IOException, InterruptedException {
-        if (state.equals(LogState.BUSY)){
+        if (state.equals(UsedTimeManagerState.BUSY)){
             System.out.println("nie przerywac, pracuje");
             return;
         }
         System.out.println("zaczynam prace "+ this);
-        state = LogState.BUSY;
+        state = UsedTimeManagerState.BUSY;
 
         if(nextDay()) {
             log.info("Try to clear used times", dateFormat.format(new Date()));
@@ -75,13 +76,14 @@ public class UsedTimeManager {
         }
 
         System.out.println("koncze prace "+ this);
-        state = LogState.FREE;
+        state = UsedTimeManagerState.FREE;
     }
 
     private void updateNextDay() throws IOException, InterruptedException {
         clearUsedTime();
         lastLine = 0;
         term.executeCommand("squid -k rotate");
+        log.info("Logi przeniesione", dateFormat.format(new Date()));
     }
 
     private void updateUsersReadyToBlock() throws IOException {
@@ -105,9 +107,9 @@ public class UsedTimeManager {
     private void parseLine(Map<String,Integer> usersSeconds, String line) {
         String user = line.split("[\t ]+")[0];
         if(usersSeconds.containsKey(user))
-            usersSeconds.put(user,usersSeconds.get(user)+10);
+            usersSeconds.put(user,usersSeconds.get(user)+1);
         else
-            usersSeconds.put(user,10);
+            usersSeconds.put(user,1);
     }
 
     /**
@@ -132,7 +134,7 @@ public class UsedTimeManager {
             List<User> users = userDAO.getAllUsers();
 
             lastUpdateTimestamp = LocalTime.now();
-            boolean updated = false;
+            boolean changeConfiguration = false;
 
             log.info("Try update user: "+userIp, dateFormat.format(new Date()));
 
@@ -140,16 +142,20 @@ public class UsedTimeManager {
                 if(userIp.equals(u.getUserIp())) {
                     log.info("User found in base", dateFormat.format(new Date()));
                     if(u.getHasDuration() &&
-                            lastUpdateInRange(u.getTimeBegin(),u.getTimeEnd())) {
-                        u.addUsedTime(time/60);
+                            lastUpdateInRange(u.getTimeBegin(),u.getTimeEnd())
+                            && u.getDurationInterval() > u.getUsedTime()) {
+                        u.addUsedTime(time/60+1);
                         userDAO.updateUser(u);
-                        updated = true;
                         log.info("User updated.", dateFormat.format(new Date()));
+                        if(u.getUsedTime() == u.getDurationInterval()) {
+                            log.info("User blocked.", dateFormat.format(new Date()));
+                            changeConfiguration = true;
+                        }
                     }
                 }
             }
 
-            if(updated)
+            if(changeConfiguration)
                 fileController.saveConfiguration();
 
         } catch (NullPointerException e) {

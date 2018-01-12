@@ -10,7 +10,6 @@ import trol.domain.trol_api.exception.UnsuccessfulModificationException;
 import trol.domain.trol_api.model.Word;
 import trol.domain.trol_api.model.WordsList;
 import trol.model.UpdateResult;
-import trol.model.words.Words;
 import trol.service.words.WordsService;
 
 import javax.validation.Valid;
