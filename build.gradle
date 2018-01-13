@@ -63,6 +63,16 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
 
 
+// https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.8.1'
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version: '3.8.1'
+// https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-remote-driver
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version: '3.8.1'
+// https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '3.8.1'
+// https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: '3.8.1'
 
 
 }
