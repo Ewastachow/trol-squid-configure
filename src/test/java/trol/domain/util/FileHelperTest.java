@@ -169,7 +169,6 @@ public class FileHelperTest {
         Assert.assertEquals("to",l.get(1));
         Assert.assertEquals("test",l.get(2));
         Files.delete(p);
-
     }
 
     @Test
@@ -199,7 +198,30 @@ public class FileHelperTest {
     }
 
     @Test
-    public void readLastNLines() {
-        //TODO: implement
+    public void readLastNLines() throws IOException {
+        List<String> tokens = FileHelper.
+                readLastLinesSince("src/test/resources/trol.util/testReading",2);
+
+        Assert.assertEquals(1,tokens.size());
+        Assert.assertEquals("text",tokens.get(0));
+
+        tokens = FileHelper.
+                readLastLinesSince("src/test/resources/trol.util/testReading",3);
+
+        Assert.assertEquals(0,tokens.size());
+    }
+
+    @Test
+    public void fileGreaterThan() throws IOException {
+        Assert.assertEquals(true,FileHelper.
+                fileGreaterThan("src/test/resources/trol.util/testReading",2));
+        Assert.assertEquals(false,FileHelper.
+                fileGreaterThan("src/test/resources/trol.util/testReading",3));
+        Assert.assertEquals(true,FileHelper.
+                fileGreaterThan("src/test/resources/trol.util/testReading",-5));
+        Assert.assertEquals(true,FileHelper.
+                fileGreaterThan("src/test/resources/trol.util/testReading",0));
+        Assert.assertEquals(false,FileHelper.
+                fileGreaterThan("src/test/resources/trol.util/testReading",4));
     }
 }

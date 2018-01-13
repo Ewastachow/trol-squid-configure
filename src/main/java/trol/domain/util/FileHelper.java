@@ -14,6 +14,20 @@ import java.util.regex.Pattern;
 
 public class FileHelper {
 
+    public static boolean fileGreaterThan(String path, int N) throws IOException {
+        Path filePath = Paths.get(path);
+        List<String> result = new ArrayList<>();
+        BufferedReader reader = Files.newBufferedReader(filePath, Charset.forName("UTF-8"));
+        String line = "";
+        int counter = 0;
+
+        while ((line = reader.readLine()) != null)
+            ++counter;
+
+
+        return counter>N;
+    }
+
     public static List<String> readLastLinesSince(String path, int N) throws IOException {
         Path filePath = Paths.get(path);
         List<String> result = new ArrayList<>();

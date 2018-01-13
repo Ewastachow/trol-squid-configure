@@ -28,6 +28,7 @@ public class UsedTimeManager {
     @Autowired
     private UserDAO userDAO;
 
+    static final int minutesPeriod = 1;
     private static final Logger log = LoggerFactory.getLogger(UsedTimeManager.class);
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     private final TerminalExecute term;
@@ -41,7 +42,7 @@ public class UsedTimeManager {
     }
 
     UsedTimeManager() {
-        this(FilePaths.SQUID_TROL_USER_TIME_LOG, new TerminalExecute());
+        this(FilePaths.DANSGUARDIAN_ACCESS_LOGS, new TerminalExecute());
     }
 
     UsedTimeManager(String accessLogPath, TerminalExecute term) {
@@ -56,7 +57,7 @@ public class UsedTimeManager {
      * reads squid logs and update users Used Time using UserDAO
      * @throws IOException problems with log file
      */
-    @Scheduled(fixedDelay=60000)
+    @Scheduled(fixedDelay=60000*minutesPeriod)
     @Async
     public void checkUsersLogs() throws IOException, InterruptedException {
         if (state.equals(UsedTimeManagerState.BUSY)){
@@ -75,19 +76,24 @@ public class UsedTimeManager {
             updateUsersReadyToBlock();
         }
 
+        //TODO Znaleźć dobre miejsce na reset dansguardiana
+        fileController.saveConfiguration();
+
         System.out.println("koncze prace "+ this);
         state = UsedTimeManagerState.FREE;
     }
 
     private void updateNextDay() throws IOException, InterruptedException {
         clearUsedTime();
-        lastLine = 0;
-        term.executeCommand("squid -k rotate");
-        log.info("Logi przeniesione", dateFormat.format(new Date()));
+        log.info("Used Times cleared", dateFormat.format(new Date()));
     }
 
     private void updateUsersReadyToBlock() throws IOException {
         Map<String,Integer> usersSeconds = new HashMap<>();
+
+        /*check if dansguardian already rotated logs file*/
+        if(!FileHelper.fileGreaterThan(accessLogPath,lastLine))
+            lastLine = 0;
 
         List<String> newLines = FileHelper.readLastLinesSince(accessLogPath, lastLine);
         lastLine += newLines.size();
@@ -104,8 +110,13 @@ public class UsedTimeManager {
 
     }
 
+    /**
+     * Fourth parameter from split contains valid ip address in default Dansguardian
+     * access log file.
+     */
     private void parseLine(Map<String,Integer> usersSeconds, String line) {
-        String user = line.split("[\t ]+")[0];
+        String user = line.split("[\t ]+")[3];
+        System.out.println(user);
         if(usersSeconds.containsKey(user))
             usersSeconds.put(user,usersSeconds.get(user)+1);
         else
@@ -144,7 +155,7 @@ public class UsedTimeManager {
                     if(u.getHasDuration() &&
                             lastUpdateInRange(u.getTimeBegin(),u.getTimeEnd())
                             && u.getDurationInterval() > u.getUsedTime()) {
-                        u.addUsedTime(time/60+1);
+                        u.addUsedTime(1*minutesPeriod);
                         userDAO.updateUser(u);
                         log.info("User updated.", dateFormat.format(new Date()));
                         if(u.getUsedTime() == u.getDurationInterval()) {
