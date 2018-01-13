@@ -47,7 +47,7 @@ public class FileController {
         try {
             DomainsFileController.saveDomainsFile(domainsListDAO.getAllDomainsLists());
             WordsFileController.saveWordsFile(wordsListDAO.getAllWordsLists());
-            MimesFileController.saveWordsFile(transmissionTypeDAO.getAllTransmissionTypes());
+//            MimesFileController.saveWordsFile(transmissionTypeDAO.getAllTransmissionTypes());
             SquidFileController.saveUsersAndHeadersFile(userDAO.getAllUsers(),transmissionTypeDAO.getAllTransmissionTypes());
         } catch (IOException e) {
             System.out.printf("Blad zapisu");

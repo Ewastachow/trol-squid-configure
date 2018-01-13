@@ -20,7 +20,7 @@ public class IPList {
         String nameAndId = "User"+user.getIdUser()+"IP";
         String time = (user.getIsTimed()) ? user.getTimeBegin().getHour()+":"+user.getTimeBegin().getMinute()+"-"+
                 user.getTimeEnd().getHour()+":"+user.getTimeEnd().getMinute() : "";
-        ipListString.add("acl "+nameAndId+" myip "+user.getUserIp());
+        ipListString.add("acl "+nameAndId+" src "+user.getUserIp());
         if(user.getIsTimed() && !user.getHasDuration()){
             ipListString.add("acl "+nameAndId+"Time time MTWHF "+time);
             ipListString.add("http_access allow "+nameAndId+" "+nameAndId+"Time");
