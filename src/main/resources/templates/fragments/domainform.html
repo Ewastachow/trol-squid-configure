@@ -26,13 +26,13 @@
     </div>
     <div class="form-group">
         <label for="timebegin">Start time:</label>
-        <input type="text" class="form-control timepicker time ui-timepicker-input" th:field="*{timeBegin}" id="timebegin"/>
+        <input type="time" class="form-control" th:field="*{timeBegin}" id="timebegin"/>
         <div th:if="${#fields.hasErrors('timeBegin')}"
              th:errors="*{timeBegin}" class="alert alert-danger"></div>
     </div>
     <div class="form-group">
         <label for="timeend">End time:</label>
-        <input type="text" class="form-control timepicker time ui-timepicker-input" th:field="*{timeEnd}" id="timeend"/>
+        <input type="time" class="form-control" th:field="*{timeEnd}" id="timeend"/>
         <div th:if="${#fields.hasErrors('timeEnd')}"
              th:errors="*{timeEnd}" class="alert alert-danger"></div>
     </div>

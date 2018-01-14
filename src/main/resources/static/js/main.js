@@ -1,11 +1,3 @@
-var options = {
-    show2400 : true,
-    timeFormat : "H:i"
-};
-
-$('.timepicker').timepicker(options);
-
-
 $(document).on('click', '.saveconfig', function (e) {
     e.preventDefault();
     $.ajax({
