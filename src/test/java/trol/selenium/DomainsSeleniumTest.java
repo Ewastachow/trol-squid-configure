@@ -48,12 +48,16 @@ public class DomainsSeleniumTest {
         );
         addBtn.click();
 
+        WebElement timeInput = driver.findElementById("timebegin");
+        driver.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
+                timeInput,"value","12:30");
+
         assertTrue(driver.getCurrentUrl().contains("domains/add"));
     }
 
 
     @AfterClass
     public static void finish(){
-        driver.close();
+        //driver.close();
     }
 }
