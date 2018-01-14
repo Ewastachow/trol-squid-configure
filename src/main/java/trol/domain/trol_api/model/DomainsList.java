@@ -1,6 +1,7 @@
 package trol.domain.trol_api.model;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 import trol.domain.database_models.DomainsListsEntity;
 
 import javax.validation.constraints.NotNull;
@@ -17,8 +18,10 @@ public class DomainsList {
     private boolean isBlack;
     private boolean isTimed;
     @NotNull(message = "Must not be null")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime timeBegin;
     @NotNull(message = "Must not be null")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime timeEnd;
     private Set<Domain> domainsSet;
 
