@@ -69,14 +69,14 @@ public class DomainsSeleniumTest {
         WebElement addedDomain = driver.findElementByXPath("//*[@id=\"domains-table\"]/tbody/tr[1]/td[1]/div");
         WebElement domainsString = driver.findElementById("domainString");
         WebElement saveBtn = driver.findElementByXPath("//*[@id=\"add-domain\"]/form/button");
-        WebElement alertMessage = driver.findElementByXPath("//*[@id=\"add-domain\"]/form/div");
 
         domainsString.sendKeys("bad domain.pl");
         saveBtn.click();
 
         wait.until(ExpectedConditions.
                 visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"add-domain\"]/form/div")));
-        assertNotEquals("bad domain.pl",alertMessage.getText());
+        WebElement alertMessage = driver.findElementByXPath("//*[@id=\"add-domain\"]/form/div");
+        assertEquals("Invalid domain",alertMessage.getText());
     }
 
     @AfterClass

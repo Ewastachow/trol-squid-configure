@@ -212,16 +212,16 @@ public class FileHelperTest {
     }
 
     @Test
-    public void fileGreaterThan() throws IOException {
-        Assert.assertEquals(true,FileHelper.
-                fileGreaterThan("src/test/resources/trol.util/testReading",2));
-        Assert.assertEquals(false,FileHelper.
-                fileGreaterThan("src/test/resources/trol.util/testReading",3));
-        Assert.assertEquals(true,FileHelper.
-                fileGreaterThan("src/test/resources/trol.util/testReading",-5));
-        Assert.assertEquals(true,FileHelper.
-                fileGreaterThan("src/test/resources/trol.util/testReading",0));
-        Assert.assertEquals(false,FileHelper.
-                fileGreaterThan("src/test/resources/trol.util/testReading",4));
+    public void fileGreaterOrEqualThanTest() throws IOException {
+        Assert.assertTrue(FileHelper.
+                fileGreaterOrEqualThan("src/test/resources/trol.util/testReading",2));
+        Assert.assertTrue(FileHelper.
+                fileGreaterOrEqualThan("src/test/resources/trol.util/testReading",3));
+        Assert.assertTrue(FileHelper.
+                fileGreaterOrEqualThan("src/test/resources/trol.util/testReading",-5));
+        Assert.assertTrue(FileHelper.
+                fileGreaterOrEqualThan("src/test/resources/trol.util/testReading",0));
+        Assert.assertFalse(FileHelper.
+                fileGreaterOrEqualThan("src/test/resources/trol.util/testReading",4));
     }
 }
