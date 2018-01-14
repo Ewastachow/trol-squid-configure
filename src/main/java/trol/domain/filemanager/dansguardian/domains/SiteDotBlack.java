@@ -1,4 +1,4 @@
-package trol.domain.filemanager.domains;
+package trol.domain.filemanager.dansguardian.domains;
 
 import trol.domain.filemanager.FilePaths;
 import trol.domain.trol_api.model.DomainsList;
@@ -16,7 +16,7 @@ public class SiteDotBlack {
 
     public SiteDotBlack(DomainsList domainsList) {
         this.domainsList = domainsList;
-        path = Paths.get(FilePaths.SITE_LISTS_PATH+domainsList.getDomainsListName()+domainsList.getIdDomainsList()+"-black");
+        path = Paths.get(FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +domainsList.getDomainsListName()+domainsList.getIdDomainsList()+"-black");
     }
 
     public void saveFile() throws IOException {

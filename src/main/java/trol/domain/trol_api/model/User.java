@@ -89,13 +89,17 @@ public class User implements Comparable<User> {
             this.usedTime = usedTime;
     }
 
-    public void addUsedTime(Integer usedTime) {
-        if(this.usedTime + usedTime > durationInterval)
+    public boolean checkIfShouldBlock(Integer additionalUsedTime) {
+        return this.usedTime + additionalUsedTime >= this.durationInterval;
+    }
+
+    public void addUsedTime(Integer additionalUsedTime) {
+        if(this.usedTime + additionalUsedTime > durationInterval)
             this.usedTime = durationInterval;
-        else if(this.usedTime + usedTime < 0)
+        else if(this.usedTime + additionalUsedTime < 0)
             this.usedTime = 0;
         else
-            this.usedTime += usedTime;
+            this.usedTime += additionalUsedTime;
     }
 
     public int getIdUser() {

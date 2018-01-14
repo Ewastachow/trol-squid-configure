@@ -1,4 +1,4 @@
-package trol.domain.filemanager.domains;
+package trol.domain.filemanager.dansguardian.domains;
 
 import trol.domain.filemanager.FilePaths;
 import trol.domain.trol_api.model.DomainsList;
@@ -17,8 +17,8 @@ public class SitesIncludeList {
 
     public SitesIncludeList(List<DomainsList> domainsListList) {
         this.domainsListList = domainsListList;
-        pathWhite = Paths.get(FilePaths.SITE_WHITE_INCLUDE_LIST_PATH);
-        pathBlack = Paths.get(FilePaths.SITE_BLACK_INCLUDE_LIST_PATH);
+        pathWhite = Paths.get(FilePaths.DANSGUARDIAN_SITE_WHITE_INCLUDE_LIST_PATH);
+        pathBlack = Paths.get(FilePaths.DANSGUARDIAN_SITE_BLACK_INCLUDE_LIST_PATH);
     }
 
     public void saveFile() throws IOException {
@@ -32,7 +32,7 @@ public class SitesIncludeList {
         List<String> sitesFile = new ArrayList<>();
         for(DomainsList i: domainsListList){
             if (i.getIsActive() && i.getIsBlack())
-                sitesFile.add(".Include<"+FilePaths.SITE_LISTS_PATH+i.getDomainsListName()+i.getIdDomainsList()+"-black>");
+                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +i.getDomainsListName()+i.getIdDomainsList()+"-black>");
 
         }
         return sitesFile;
@@ -42,7 +42,7 @@ public class SitesIncludeList {
         List<String> sitesFile = new ArrayList<>();
         domainsListList.forEach(e -> {
             if (e.getIsActive() && !e.getIsBlack()){
-                sitesFile.add(".Include<"+FilePaths.SITE_LISTS_PATH+e.getDomainsListName()+e.getIdDomainsList()+"-white>");
+                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +e.getDomainsListName()+e.getIdDomainsList()+"-white>");
             }
         });
         return sitesFile;
@@ -52,7 +52,7 @@ public class SitesIncludeList {
         List<String> sitesFile = new ArrayList<>();
         domainsListList.forEach(e -> {
             if (e.getIsActive() && !e.getIsBlack()){
-                sitesFile.add(".Include<"+FilePaths.SITE_LISTS_PATH+e.getDomainsListName()+e.getIdDomainsList()+"-black>");
+                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +e.getDomainsListName()+e.getIdDomainsList()+"-black>");
             }
         });
         return sitesFile;

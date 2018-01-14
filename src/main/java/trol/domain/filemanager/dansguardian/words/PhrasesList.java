@@ -1,4 +1,4 @@
-package trol.domain.filemanager.words;
+package trol.domain.filemanager.dansguardian.words;
 
 import trol.domain.filemanager.FilePaths;
 import trol.domain.trol_api.model.WordsList;
@@ -16,7 +16,7 @@ public class PhrasesList {
 
     public PhrasesList(WordsList wordsList) {
         this.wordsList = wordsList;
-        path = Paths.get(FilePaths.PHRASE_LISTS_PATH+wordsList.getWordsListName().toLowerCase() + wordsList.getIdWordsList());
+        path = Paths.get(FilePaths.DANSGUARDIAN_PHRASE_LISTS_PATH +wordsList.getWordsListName().toLowerCase() + wordsList.getIdWordsList());
     }
 
     public void saveFile() throws IOException {

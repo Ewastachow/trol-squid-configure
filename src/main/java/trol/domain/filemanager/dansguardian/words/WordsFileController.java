@@ -1,4 +1,4 @@
-package trol.domain.filemanager.words;
+package trol.domain.filemanager.dansguardian.words;
 
 import trol.domain.trol_api.model.WordsList;
 
@@ -7,7 +7,7 @@ import java.util.List;
 
 public class WordsFileController {
 
-    public static void saveWordsFile(List<WordsList> wordsListList) throws IOException {
+    public static void saveFile(List<WordsList> wordsListList) throws IOException {
         PhrasesIncludeList phrasesIncludeList = new PhrasesIncludeList(wordsListList);
         phrasesIncludeList.saveFile();
         for(WordsList i: wordsListList){

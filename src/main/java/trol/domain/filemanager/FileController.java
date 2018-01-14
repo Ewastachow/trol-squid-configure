@@ -8,10 +8,10 @@ import trol.dao.domains.DomainsListDAO;
 import trol.dao.headers.TransmissionTypeDAO;
 import trol.dao.users.UserDAO;
 import trol.dao.words.WordsListDAO;
-import trol.domain.filemanager.domains.DomainsFileController;
-import trol.domain.filemanager.mimes.MimesFileController;
+import trol.domain.filemanager.dansguardian.domains.DomainsFileController;
+import trol.domain.filemanager.dansguardian.users.UsersFileController;
 import trol.domain.filemanager.squid.SquidFileController;
-import trol.domain.filemanager.words.WordsFileController;
+import trol.domain.filemanager.dansguardian.words.WordsFileController;
 import trol.domain.terminal.TerminalExecute;
 
 import java.io.IOException;
@@ -45,10 +45,12 @@ public class FileController {
         state = SaveState.BUSY;
 
         try {
-            DomainsFileController.saveDomainsFile(domainsListDAO.getAllDomainsLists());
-            WordsFileController.saveWordsFile(wordsListDAO.getAllWordsLists());
-            MimesFileController.saveWordsFile(transmissionTypeDAO.getAllTransmissionTypes());
-            SquidFileController.saveUsersAndHeadersFile(userDAO.getAllUsers(),transmissionTypeDAO.getAllTransmissionTypes());
+            DomainsFileController.saveFile(domainsListDAO.getAllDomainsLists());
+            WordsFileController.saveFile(wordsListDAO.getAllWordsLists());
+//            MimesFileController.saveFile(transmissionTypeDAO.getAllTransmissionTypes());
+            UsersFileController.saveFile(userDAO.getAllUsers());
+//            SquidFileController.saveUsersAndHeadersFile(userDAO.getAllUsers(),transmissionTypeDAO.getAllTransmissionTypes());
+            SquidFileController.saveHeaderSquidFile(transmissionTypeDAO.getAllTransmissionTypes());
         } catch (IOException e) {
             System.out.printf("Blad zapisu");
         }

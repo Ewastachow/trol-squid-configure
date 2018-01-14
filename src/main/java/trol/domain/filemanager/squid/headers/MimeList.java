@@ -28,27 +28,24 @@ public class MimeList {
                 tt.getTimeEnd().getHour()+":"+tt.getTimeEnd().getMinute() : "";
         for(Header i: tt.getHeadersSet()){
             transmissionTypeListString.add("acl "+nameAndId+
-                    "Req"+i.getIdHeader()+" req_mime_type -i ^" + i.getHeaderString()+"$");
+                    "Req"+" req_mime_type -i ^" + i.getHeaderString()+"$");
             transmissionTypeListString.add("acl "+nameAndId+
-                    "Req"+i.getIdHeader()+" req_mime_type -i " + i.getHeaderString()+"");
+                    "Req"+" req_mime_type -i " + i.getHeaderString()+"");
             transmissionTypeListString.add("acl "+nameAndId+
-                    "Rep"+i.getIdHeader()+" rep_mime_type -i ^" + i.getHeaderString()+"$");
+                    "Rep"+" rep_mime_type -i ^" + i.getHeaderString()+"$");
             transmissionTypeListString.add("acl "+nameAndId+
-                    "Rep"+i.getIdHeader()+" rep_mime_type -i " + i.getHeaderString()+"");
+                    "Rep"+" rep_mime_type -i " + i.getHeaderString()+"");
         }
-        if(tt.getIsTimed())
-            transmissionTypeListString.add("acl "+nameAndId+"Time time MTWHF "+time);
-        for(Header i: tt.getHeadersSet()){
-            if(tt.getIsTimed()){
-                //TODO co z tym all na końcu
-                transmissionTypeListString.add("http_access deny "+nameAndId+"Req"+i.getIdHeader()+" "+nameAndId+"Time all");
-                transmissionTypeListString.add("http_reply_access deny "+nameAndId+"Rep"+i.getIdHeader()+" "+nameAndId+"Time all");
-                //TODO te z allow tu
-            }else {
-                transmissionTypeListString.add("http_access deny "+nameAndId+"Req"+i.getIdHeader()+" all");
-                transmissionTypeListString.add("http_reply_access deny "+nameAndId+"Rep"+i.getIdHeader()+" all");
-                //TODO te z allow tu
-            }
+        if(tt.getIsTimed()){
+            //TODO Poprawić tworzenie godziny z 0:12 na 00:12
+            transmissionTypeListString.add("acl "+nameAndId+"Time time SMTWHFA "+time);
+            transmissionTypeListString.add("http_access deny "+nameAndId+"Req"+" "+nameAndId+"Time all");
+            transmissionTypeListString.add("http_reply_access deny "+nameAndId+"Rep"+" "+nameAndId+"Time all");
+            //TODO te z allow tu
+        }else {
+            transmissionTypeListString.add("http_access deny "+nameAndId+"Req"+" all");
+            transmissionTypeListString.add("http_reply_access deny "+nameAndId+"Rep"+" all");
+            //TODO te z allow tu
         }
         return transmissionTypeListString;
     }
