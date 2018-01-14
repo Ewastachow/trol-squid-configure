@@ -44,6 +44,7 @@ public class FileController {
         System.out.println("zaczynam prace " + this);
         state = SaveState.BUSY;
         try {
+
             DomainsFileController.saveFile(domainsListDAO.getAllDomainsLists());
             WordsFileController.saveFile(wordsListDAO.getAllWordsLists());
             UsersFileController.saveFile(userDAO.getAllUsers());
