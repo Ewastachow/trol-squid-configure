@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MimesFileController {
 
-    public static void saveWordsFile(List<TransmissionType> transmissionTypeList) throws IOException {
+    public static void saveFile(List<TransmissionType> transmissionTypeList) throws IOException {
         MimesList mimesList = new MimesList(transmissionTypeList);
         mimesList.saveFile();
     }

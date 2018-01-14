@@ -45,10 +45,10 @@ public class FileController {
         state = SaveState.BUSY;
 
         try {
-            DomainsFileController.saveDomainsFile(domainsListDAO.getAllDomainsLists());
-            WordsFileController.saveWordsFile(wordsListDAO.getAllWordsLists());
-//            MimesFileController.saveWordsFile(transmissionTypeDAO.getAllTransmissionTypes());
-            UsersFileController.saveUsersFile(userDAO.getAllUsers());
+            DomainsFileController.saveFile(domainsListDAO.getAllDomainsLists());
+            WordsFileController.saveFile(wordsListDAO.getAllWordsLists());
+//            MimesFileController.saveFile(transmissionTypeDAO.getAllTransmissionTypes());
+            UsersFileController.saveFile(userDAO.getAllUsers());
 //            SquidFileController.saveUsersAndHeadersFile(userDAO.getAllUsers(),transmissionTypeDAO.getAllTransmissionTypes());
             SquidFileController.saveHeaderSquidFile(transmissionTypeDAO.getAllTransmissionTypes());
         } catch (IOException e) {

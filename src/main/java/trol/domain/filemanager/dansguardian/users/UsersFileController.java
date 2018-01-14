@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class UsersFileController {
-    public static void saveUsersFile(List<User> userList) throws IOException {
+    public static void saveFile(List<User> userList) throws IOException {
         UsersList usersList = new UsersList(userList);
         usersList.saveFile();
     }

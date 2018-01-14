@@ -38,7 +38,7 @@ public class MimeList {
         }
         if(tt.getIsTimed()){
             //TODO Poprawić tworzenie godziny z 0:12 na 00:12
-            transmissionTypeListString.add("acl "+nameAndId+"Time time MTWHF "+time);
+            transmissionTypeListString.add("acl "+nameAndId+"Time time SMTWHFA "+time);
             transmissionTypeListString.add("http_access deny "+nameAndId+"Req"+" "+nameAndId+"Time all");
             transmissionTypeListString.add("http_reply_access deny "+nameAndId+"Rep"+" "+nameAndId+"Time all");
             //TODO te z allow tu
