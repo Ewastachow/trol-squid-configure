@@ -8,8 +8,6 @@ import trol.domain.trol_api.exception.UnsuccessfulDeletException;
 import trol.domain.trol_api.exception.UnsuccessfulModificationException;
 import trol.domain.trol_api.model.Word;
 import trol.domain.trol_api.model.WordsList;
-import trol.exceptions.DomainsListUpdateException;
-import trol.model.words.Words;
 
 import java.util.List;
 
