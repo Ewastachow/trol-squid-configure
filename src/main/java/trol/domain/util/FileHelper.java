@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class FileHelper {
 
-    public static boolean fileGreaterThan(String path, int N) throws IOException {
+    public static boolean fileGreaterOrEqualThan(String path, int N) throws IOException {
         Path filePath = Paths.get(path);
         List<String> result = new ArrayList<>();
         BufferedReader reader = Files.newBufferedReader(filePath, Charset.forName("UTF-8"));
@@ -25,7 +25,7 @@ public class FileHelper {
             ++counter;
 
 
-        return counter>N;
+        return counter>=N;
     }
 
     public static List<String> readLastLinesSince(String path, int N) throws IOException {

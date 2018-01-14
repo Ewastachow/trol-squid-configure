@@ -41,15 +41,15 @@ public class UsedTimeManager {
         return state;
     }
 
-    UsedTimeManager() {
-        this(FilePaths.DANSGUARDIAN_ACCESS_LOGS, new TerminalExecute());
-    }
-
     UsedTimeManager(String accessLogPath, TerminalExecute term) {
         this.term = term;
         this.accessLogPath = accessLogPath;
         lastLine = 0;
         lastUpdateTimestamp = LocalTime.now();
+    }
+
+    UsedTimeManager() {
+        this(FilePaths.DANSGUARDIAN_ACCESS_LOGS, new TerminalExecute());
     }
 
     /**
@@ -92,7 +92,7 @@ public class UsedTimeManager {
         Map<String,Integer> usersSeconds = new HashMap<>();
 
         /*check if dansguardian already rotated logs file*/
-        if(!FileHelper.fileGreaterThan(accessLogPath,lastLine))
+        if(!FileHelper.fileGreaterOrEqualThan(accessLogPath,lastLine))
             lastLine = 0;
 
         List<String> newLines = FileHelper.readLastLinesSince(accessLogPath, lastLine);
@@ -155,7 +155,12 @@ public class UsedTimeManager {
                     if(u.getHasDuration() &&
                             lastUpdateInRange(u.getTimeBegin(),u.getTimeEnd())
                             && u.getDurationInterval() > u.getUsedTime()) {
-                        u.addUsedTime(1*minutesPeriod);
+
+                        if(u.checkIfShouldBlock(1*minutesPeriod))
+                            u.setUsedTime(u.getDurationInterval());
+                        else
+                            u.addUsedTime(1*minutesPeriod);
+
                         userDAO.updateUser(u);
                         log.info("User updated.", dateFormat.format(new Date()));
                         if(u.getUsedTime() == u.getDurationInterval()) {
