@@ -1,8 +1,7 @@
-package trol.domain.filemanager.mimes;
+package trol.domain.filemanager.dansguardian.mimes;
 
 import trol.domain.filemanager.FilePaths;
 import trol.domain.trol_api.model.TransmissionType;
-import trol.domain.trol_api.model.WordsList;
 import trol.domain.util.FileHelper;
 
 import java.io.IOException;
@@ -18,7 +17,7 @@ public class MimesList {
 
     public MimesList(List<TransmissionType> wordsListList) {
         this.transmissionTypeList = wordsListList;
-        path = Paths.get(FilePaths.MIME_PATH);
+        path = Paths.get(FilePaths.DANSGUARDIAN_MIME_PATH);
     }
 
     public void saveFile() throws IOException {

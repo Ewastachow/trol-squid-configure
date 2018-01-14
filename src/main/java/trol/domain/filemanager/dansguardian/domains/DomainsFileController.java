@@ -1,4 +1,4 @@
-package trol.domain.filemanager.domains;
+package trol.domain.filemanager.dansguardian.domains;
 
 import trol.domain.trol_api.model.DomainsList;
 

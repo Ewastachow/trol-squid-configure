@@ -1,4 +1,4 @@
-package trol.domain.filemanager.words;
+package trol.domain.filemanager.dansguardian.words;
 
 import trol.domain.trol_api.model.WordsList;
 
