@@ -1,6 +1,7 @@
 package trol.domain.filemanager.squid;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,6 +18,7 @@ public class SquidFileControllerTest {
 
     @Test
     public void saveHeaderSquidFile() throws Exception {
+        Assert.assertEquals(true,true);
     }
 
 }
