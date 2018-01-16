@@ -79,6 +79,7 @@ public class DomainsFileControllerTest {
 //        Assert.assertEquals("Create one domainslist file",expectedFile,createdFile);
 //    }
 
+
     private DomainsList createDomainsList(int id, String name, boolean isActive, boolean isBlack, Set<Domain> set){
         DomainsList result = new DomainsList();
         result.setIdDomainsList(id);
