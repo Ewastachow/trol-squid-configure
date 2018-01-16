@@ -32,7 +32,7 @@ class SitesIncludeList {
         List<String> sitesFile = new ArrayList<>();
         for(DomainsList i: domainsListList){
             if (i.getIsActive() && i.getIsBlack())
-                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +i.getDomainsListName()+i.getIdDomainsList()+"-black>");
+                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +i.getDomainsListName().toLowerCase()+i.getIdDomainsList()+"-black>");
 
         }
         return sitesFile;
@@ -42,7 +42,7 @@ class SitesIncludeList {
         List<String> sitesFile = new ArrayList<>();
         domainsListList.forEach(e -> {
             if (e.getIsActive() && !e.getIsBlack()){
-                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +e.getDomainsListName()+e.getIdDomainsList()+"-white>");
+                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +e.getDomainsListName().toLowerCase()+e.getIdDomainsList()+"-white>");
             }
         });
         return sitesFile;
@@ -52,7 +52,7 @@ class SitesIncludeList {
         List<String> sitesFile = new ArrayList<>();
         domainsListList.forEach(e -> {
             if (e.getIsActive() && !e.getIsBlack()){
-                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +e.getDomainsListName()+e.getIdDomainsList()+"-black>");
+                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +e.getDomainsListName().toLowerCase()+e.getIdDomainsList()+"-black>");
             }
         });
         return sitesFile;

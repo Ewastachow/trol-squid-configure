@@ -11,10 +11,10 @@ import java.util.Comparator;
 public class FilePathsTest {
 
     public static void before(){
-        FilePaths.DANSGUARDIAN_LISTS_PATH = "src/test/resources/trol/domain/filemanager/";
-        FilePaths.SQUID_CONFIGURE_PATH = "src/test/resources/trol/domain/filemanager/squid.conf";
+        FilePaths.DANSGUARDIAN_LISTS_PATH = "src/test/resources/trol/domain/filemanager/test/";
+        FilePaths.SQUID_CONFIGURE_PATH = "src/test/resources/trol/domain/filemanager/test/squid.conf";
         try {
-            Files.createDirectories(Paths.get("src/test/resources/trol/domain/filemanager"));
+            Files.createDirectories(Paths.get("src/test/resources/trol/domain/filemanager/test"));
             Files.createDirectory(Paths.get(FilePaths.DANSGUARDIAN_LISTS_PATH+"phraselists"));
             Files.createDirectory(Paths.get(FilePaths.DANSGUARDIAN_LISTS_PATH+"blacklists"));
         } catch (IOException e) {
@@ -24,7 +24,7 @@ public class FilePathsTest {
 
     public static void after(){
         try {
-            Files.walk(Paths.get("src/test/resources/trol/domain/filemanager"), FileVisitOption.FOLLOW_LINKS)
+            Files.walk(Paths.get("src/test/resources/trol/domain/filemanager/test"), FileVisitOption.FOLLOW_LINKS)
                     .sorted(Comparator.reverseOrder())
                     .map(Path::toFile)
                     .peek(System.out::println)
@@ -33,7 +33,7 @@ public class FilePathsTest {
             e.printStackTrace();
         }
 //        try {
-//            Files.delete(Paths.get("src/test/resources/trol/domain/filemanager"));
+//            Files.delete(Paths.get("src/test/resources/trol/domain/filemanager/test"));
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }

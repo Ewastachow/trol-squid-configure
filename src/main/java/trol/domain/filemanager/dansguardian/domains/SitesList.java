@@ -18,8 +18,8 @@ class SitesList {
         this.domainsList = domainsList;
 
         path = (domainsList.getIsBlack()) ?
-                Paths.get(FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +domainsList.getDomainsListName()+domainsList.getIdDomainsList()+"-black") :
-                Paths.get(FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +domainsList.getDomainsListName()+domainsList.getIdDomainsList()+"-white");
+                Paths.get(FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +domainsList.getDomainsListName().toLowerCase()+domainsList.getIdDomainsList()+"-black") :
+                Paths.get(FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +domainsList.getDomainsListName().toLowerCase()+domainsList.getIdDomainsList()+"-white");
     }
 
     void saveFile() throws IOException {

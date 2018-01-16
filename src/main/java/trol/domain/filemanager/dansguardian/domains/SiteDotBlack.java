@@ -16,7 +16,7 @@ class SiteDotBlack {
 
     SiteDotBlack(DomainsList domainsList) {
         this.domainsList = domainsList;
-        path = Paths.get(FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +domainsList.getDomainsListName()+domainsList.getIdDomainsList()+"-black");
+        path = Paths.get(FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +domainsList.getDomainsListName().toLowerCase()+domainsList.getIdDomainsList()+"-black");
     }
 
     void saveFile() throws IOException {

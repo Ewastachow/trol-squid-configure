@@ -42,7 +42,7 @@ public class SquidFileControllerTest {
         List<String> createdFile = FileHelper.createLineListFromFile(FilePaths.SQUID_CONFIGURE_PATH);
         List<String> expectedFile = FileHelper.createLineListFromFile(FilePaths.SQUID_HEADER_CONFIGURATION_PATH);
         expectedFile.addAll(FileHelper.createLineListFromFile(FilePaths.SQUID_FOOTER_CONFIGURATION_PATH));
-        Assert.assertEquals("If file include only header file and footer file",createdFile,expectedFile);
+        Assert.assertEquals("If file include only header file and footer file",expectedFile,createdFile);
     }
 
 //    @Test
