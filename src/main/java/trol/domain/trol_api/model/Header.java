@@ -28,6 +28,18 @@ public class Header implements Comparable<Header>{
         return idTransmissionType;
     }
 
+    public void setIdHeader(int idHeader) {
+        this.idHeader = idHeader;
+    }
+
+    public void setHeaderString(String headerString) {
+        this.headerString = headerString;
+    }
+
+    public void setIdTransmissionType(int idTransmissionType) {
+        this.idTransmissionType = idTransmissionType;
+    }
+
     @Override
     public int compareTo(Header o) {
         return idHeader - o.idHeader;

@@ -11,16 +11,16 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersList {
+class UsersList {
     private Path path;
     private List<User> userList;
 
-    public UsersList(List<User> userList) {
+    UsersList(List<User> userList) {
         this.userList = userList;
         path = Paths.get(FilePaths.DANSGUARDIAN_USER_PATH);
     }
 
-    public void saveFile() throws IOException {
+    void saveFile() throws IOException {
         FileHelper.saveStringListAsFile(path, generateFileListString());
     }
 
@@ -37,13 +37,6 @@ public class UsersList {
         boolean isActive = u.getIsActive();
         boolean hasDurationTimeUsed = !u.getHasDuration() || (u.getDurationInterval() <= u.getUsedTime());
         boolean isNotInAllowedHours = !u.getIsTimed() || LocalTime.now().isAfter(u.getTimeEnd()) || LocalTime.now().isBefore(u.getTimeBegin());
-//        return u.getIsActive() &&
-//                (!u.getIsTimed() ||
-//                        (u.getIsTimed() &&
-//                                LocalTime.now().isBefore(u.getTimeBegin()) &&
-//                                LocalTime.now().isAfter(u.getTimeEnd())));
         return isActive && hasDurationTimeUsed && isNotInAllowedHours;
-        //TODO zweryfikować before i after
-        //TODO sprawdzać zużyty czsas
     }
 }

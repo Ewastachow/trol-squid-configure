@@ -10,20 +10,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhrasesIncludeList {
-    Path path;
-    List<WordsList> wordsListList;
+class PhrasesIncludeList {
+    private Path path;
+    private List<WordsList> wordsListList;
 
-    public PhrasesIncludeList(List<WordsList> wordsListList) {
+    PhrasesIncludeList(List<WordsList> wordsListList) {
         this.wordsListList = wordsListList;
         path = Paths.get(FilePaths.DANSGUARDIAN_PHRASE_INCLUDE_LIST_PATH);
     }
 
-    public void saveFile() throws IOException {
+    void saveFile() throws IOException {
         FileHelper.saveStringListAsFile(path, generateFileListstring());
     }
 
-    public List<String> generateFileListstring(){
+    private List<String> generateFileListstring(){
         List<String> wordsFile = new ArrayList<>();
         wordsListList.forEach(e -> {
             if (e.getIsActive())

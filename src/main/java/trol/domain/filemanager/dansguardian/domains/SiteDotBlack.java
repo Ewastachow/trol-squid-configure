@@ -10,21 +10,21 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SiteDotBlack {
+class SiteDotBlack {
     private Path path;
     private DomainsList domainsList;
 
-    public SiteDotBlack(DomainsList domainsList) {
+    SiteDotBlack(DomainsList domainsList) {
         this.domainsList = domainsList;
-        path = Paths.get(FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +domainsList.getDomainsListName()+domainsList.getIdDomainsList()+"-black");
+        path = Paths.get(FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +domainsList.getDomainsListName().toLowerCase()+domainsList.getIdDomainsList()+"-black");
     }
 
-    public void saveFile() throws IOException {
+    void saveFile() throws IOException {
         if(!domainsList.getIsActive() || domainsList.getIsBlack()) return;
         FileHelper.saveStringListAsFile(path,generateFileListString());
     }
 
-    public List<String> generateFileListString(){
+    private List<String> generateFileListString(){
         List<String> sitesFile = new ArrayList<>();
         sitesFile.add(FileHelper.dansguardianTimeControlLine(domainsList.getTimeBegin(), domainsList.getTimeEnd()));
         sitesFile.add("**");

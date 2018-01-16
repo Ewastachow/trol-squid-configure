@@ -28,7 +28,7 @@ public class DomainsSeleniumTest {
 
     @BeforeClass
     public static void init(){
-        System.setProperty("webdriver.chrome.driver", "C:\\selenium\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/opt/chromedriver/chromedriver");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }

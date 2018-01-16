@@ -10,21 +10,21 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhrasesList {
+class PhrasesList {
     private Path path;
     private WordsList wordsList;
 
-    public PhrasesList(WordsList wordsList) {
+    PhrasesList(WordsList wordsList) {
         this.wordsList = wordsList;
         path = Paths.get(FilePaths.DANSGUARDIAN_PHRASE_LISTS_PATH +wordsList.getWordsListName().toLowerCase() + wordsList.getIdWordsList());
     }
 
-    public void saveFile() throws IOException {
+    void saveFile() throws IOException {
         if(!wordsList.getIsActive()) return;
         FileHelper.saveStringListAsFile(path,generateFileListstring());
     }
 
-    public List<String> generateFileListstring(){
+    private List<String> generateFileListstring(){
         List<String> phrasesFile = new ArrayList<>();
         if(wordsList.getIsTimed())
             phrasesFile.add(FileHelper.dansguardianTimeControlLine(wordsList.getTimeBegin(), wordsList.getTimeEnd()));

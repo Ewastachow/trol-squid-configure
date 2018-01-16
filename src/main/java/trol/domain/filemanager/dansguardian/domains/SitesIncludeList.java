@@ -10,53 +10,52 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SitesIncludeList {
-    Path pathWhite;
-    Path pathBlack;
-    List<DomainsList> domainsListList;
+class SitesIncludeList {
+    private Path pathWhite;
+    private Path pathBlack;
+    private List<DomainsList> domainsListList;
 
-    public SitesIncludeList(List<DomainsList> domainsListList) {
+    SitesIncludeList(List<DomainsList> domainsListList) {
         this.domainsListList = domainsListList;
         pathWhite = Paths.get(FilePaths.DANSGUARDIAN_SITE_WHITE_INCLUDE_LIST_PATH);
         pathBlack = Paths.get(FilePaths.DANSGUARDIAN_SITE_BLACK_INCLUDE_LIST_PATH);
     }
 
-    public void saveFile() throws IOException {
+    void saveFile() throws IOException {
         List<String> blackListString = generateBlackFileListstring();
         blackListString.addAll(generateBlackForWhiteListString());
         FileHelper.saveStringListAsFile(pathBlack, blackListString);
         FileHelper.saveStringListAsFile(pathWhite, generateWhiteFileListstring());
     }
 
-    public List<String> generateBlackFileListstring(){
+    private List<String> generateBlackFileListstring(){
         List<String> sitesFile = new ArrayList<>();
         for(DomainsList i: domainsListList){
             if (i.getIsActive() && i.getIsBlack())
-                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +i.getDomainsListName()+i.getIdDomainsList()+"-black>");
+                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +i.getDomainsListName().toLowerCase()+i.getIdDomainsList()+"-black>");
 
         }
         return sitesFile;
     }
 
-    public List<String> generateWhiteFileListstring(){
+    private List<String> generateWhiteFileListstring(){
         List<String> sitesFile = new ArrayList<>();
         domainsListList.forEach(e -> {
             if (e.getIsActive() && !e.getIsBlack()){
-                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +e.getDomainsListName()+e.getIdDomainsList()+"-white>");
+                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +e.getDomainsListName().toLowerCase()+e.getIdDomainsList()+"-white>");
             }
         });
         return sitesFile;
     }
 
-    public List<String> generateBlackForWhiteListString(){
+    private List<String> generateBlackForWhiteListString(){
         List<String> sitesFile = new ArrayList<>();
         domainsListList.forEach(e -> {
             if (e.getIsActive() && !e.getIsBlack()){
-                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +e.getDomainsListName()+e.getIdDomainsList()+"-black>");
+                sitesFile.add(".Include<"+FilePaths.DANSGUARDIAN_SITE_LISTS_PATH +e.getDomainsListName().toLowerCase()+e.getIdDomainsList()+"-black>");
             }
         });
         return sitesFile;
     }
 
-    //iteruje, jezeli wystepuje jakakolwiek white lista, to wpisuje **
 }

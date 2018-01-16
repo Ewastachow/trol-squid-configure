@@ -7,6 +7,11 @@ import java.util.List;
 
 public class WordsFileController {
 
+    /**
+     * Creates Files for blocked phrases and include them into bannedphraselist in dansguardian configuration list
+     * @param wordsListList
+     * @throws IOException
+     */
     public static void saveFile(List<WordsList> wordsListList) throws IOException {
         PhrasesIncludeList phrasesIncludeList = new PhrasesIncludeList(wordsListList);
         phrasesIncludeList.saveFile();
