@@ -47,4 +47,5 @@ public class Domain implements Comparable<Domain>{
     public int compareTo(Domain o) {
         return idDomain - o.idDomain;
     }
+
 }
