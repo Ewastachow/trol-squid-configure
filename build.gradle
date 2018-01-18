@@ -76,3 +76,15 @@ dependencies {
 
 
 }
+
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Implementation',
+                'Implementation-Version': version,
+                'Main-Class': 'trol.Application'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

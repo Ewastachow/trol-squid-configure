@@ -1,18 +1,20 @@
 package trol.domain.filemanager.squid.headers;
 
-import trol.domain.filemanager.FilePaths;
 import trol.domain.trol_api.model.Header;
 import trol.domain.trol_api.model.TransmissionType;
-import trol.domain.util.FileHelper;
-
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MimeList {
 
+    /**
+     * Creates List with part of squid.conf file which is responsible for blocking headers
+     * @param transmissionTypeList
+     * @return List with file lines
+     * @throws IOException
+     */
     public static List<String> createHeadersListString(List<TransmissionType> transmissionTypeList) throws IOException {
         List<String> headersListString = new ArrayList<>();
         for(TransmissionType i: transmissionTypeList)
@@ -24,8 +26,7 @@ public class MimeList {
     private static List<String> createTransmissionTypeListString(TransmissionType tt){
         List<String> transmissionTypeListString = new ArrayList<>();
         String nameAndId = tt.getTransmissionTypeName()+tt.getIdTransmissionType();
-        String time = (tt.getIsTimed()) ? tt.getTimeBegin().getHour()+":"+tt.getTimeBegin().getMinute()+"-"+
-                tt.getTimeEnd().getHour()+":"+tt.getTimeEnd().getMinute() : "";
+        String time = (tt.getIsTimed()) ? createTimeString(tt.getTimeBegin(), tt.getTimeEnd()) : "";
         for(Header i: tt.getHeadersSet()){
             transmissionTypeListString.add("acl "+nameAndId+
                     "Req"+" req_mime_type -i ^" + i.getHeaderString()+"$");
@@ -37,17 +38,28 @@ public class MimeList {
                     "Rep"+" rep_mime_type -i " + i.getHeaderString()+"");
         }
         if(tt.getIsTimed()){
-            //TODO Poprawić tworzenie godziny z 0:12 na 00:12
             transmissionTypeListString.add("acl "+nameAndId+"Time time SMTWHFA "+time);
             transmissionTypeListString.add("http_access deny "+nameAndId+"Req"+" "+nameAndId+"Time all");
             transmissionTypeListString.add("http_reply_access deny "+nameAndId+"Rep"+" "+nameAndId+"Time all");
-            //TODO te z allow tu
+            transmissionTypeListString.add("http_access allow "+nameAndId+"Req"+" all");
+            transmissionTypeListString.add("http_reply_access allow "+nameAndId+"Rep"+" all");
         }else {
             transmissionTypeListString.add("http_access deny "+nameAndId+"Req"+" all");
             transmissionTypeListString.add("http_reply_access deny "+nameAndId+"Rep"+" all");
-            //TODO te z allow tu
         }
         return transmissionTypeListString;
+    }
+
+    private static String createTimeString(LocalTime beginTime, LocalTime endTime){
+        StringBuilder sb = new StringBuilder();
+        sb.append((beginTime.getHour() >= 10) ? beginTime.getHour() : ("0"+beginTime.getHour()));
+        sb.append(":");
+        sb.append((beginTime.getMinute() >= 10) ? beginTime.getMinute() : ("0"+beginTime.getMinute()));
+        sb.append("-");
+        sb.append((endTime.getHour() >= 10) ? endTime.getHour() : ("0"+endTime.getHour()));
+        sb.append(":");
+        sb.append((endTime.getMinute() >= 10) ? endTime.getMinute() : ("0"+endTime.getMinute()));
+        return sb.toString();
     }
 
 
