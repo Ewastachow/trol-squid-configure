@@ -2,7 +2,7 @@ package trol.dao.words;
 
 import org.springframework.stereotype.Repository;
 import trol.domain.database_models.WordsListsEntity;
-import trol.domain.trol_api.model.WordsList;
+import trol.model.WordsList;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

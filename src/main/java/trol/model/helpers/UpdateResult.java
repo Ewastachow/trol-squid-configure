@@ -1,4 +1,4 @@
-package trol.model;
+package trol.model.helpers;
 
 public class UpdateResult {
     private boolean success;

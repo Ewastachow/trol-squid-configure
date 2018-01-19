@@ -2,7 +2,7 @@ package trol.service.headers;
 
 
 
-import trol.domain.trol_api.model.TransmissionType;
+import trol.model.TransmissionType;
 
 import java.util.List;
 

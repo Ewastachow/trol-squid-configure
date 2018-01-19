@@ -6,10 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import trol.domain.trol_api.exception.UnsuccessfulModificationException;
-import trol.domain.trol_api.model.Word;
-import trol.domain.trol_api.model.WordsList;
-import trol.model.UpdateResult;
+import trol.model.Word;
+import trol.model.WordsList;
+import trol.model.helpers.UpdateResult;
 import trol.service.words.WordsService;
 
 import javax.validation.Valid;
@@ -48,12 +47,7 @@ public class WordsController {
         if (bindingResult.hasErrors()){
             return "/words/wordslist";
         }
-        try {
-            wordsService.updateWordsListProperties(wordsList);
-        } catch (UnsuccessfulModificationException e) {
-            //bindingResult.addError(new ObjectError(""));
-            return "/words/wordslist";
-        }
+        wordsService.updateWordsListProperties(wordsList);
         return "redirect:/words";
     }
 

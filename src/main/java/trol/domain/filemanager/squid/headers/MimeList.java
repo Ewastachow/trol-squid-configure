@@ -1,7 +1,8 @@
 package trol.domain.filemanager.squid.headers;
 
-import trol.domain.trol_api.model.Header;
-import trol.domain.trol_api.model.TransmissionType;
+import trol.model.Header;
+import trol.model.TransmissionType;
+
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;

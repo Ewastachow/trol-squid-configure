@@ -3,8 +3,7 @@ package trol.dao.headers;
 import org.springframework.stereotype.Repository;
 import trol.domain.database_models.HeadersEntity;
 import trol.domain.database_models.TransmissionTypesEntity;
-import trol.domain.trol_api.model.Header;
-import trol.domain.trol_api.model.TransmissionType;
+import trol.model.Header;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

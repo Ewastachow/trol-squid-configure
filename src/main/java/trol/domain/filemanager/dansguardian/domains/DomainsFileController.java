@@ -1,6 +1,6 @@
 package trol.domain.filemanager.dansguardian.domains;
 
-import trol.domain.trol_api.model.DomainsList;
+import trol.model.DomainsList;
 
 import java.io.IOException;
 import java.util.List;

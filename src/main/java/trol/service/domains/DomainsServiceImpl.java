@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import trol.dao.domains.DomainDAO;
 import trol.dao.domains.DomainsListDAO;
-import trol.domain.trol_api.exception.UnsuccessfulDeletException;
-import trol.domain.trol_api.exception.UnsuccessfulModificationException;
-import trol.domain.trol_api.model.Domain;
-import trol.domain.trol_api.model.DomainsList;
+import trol.model.Domain;
+import trol.model.DomainsList;
 
 import java.util.List;
 
@@ -31,7 +29,7 @@ public class DomainsServiceImpl implements DomainsService {
     }
 
     @Override
-    public int addDomainsList(DomainsList domainsList) throws UnsuccessfulModificationException {
+    public int addDomainsList(DomainsList domainsList){
         int id = domainsListDAO.addDomainsList(domainsList.getDomainsListName());
         domainsList.setIdDomainsList(id);
         domainsListDAO.updateDomainsListProperties(domainsList);
@@ -39,12 +37,12 @@ public class DomainsServiceImpl implements DomainsService {
     }
 
     @Override
-    public void updateDomainsListProperties(DomainsList domainsList) throws UnsuccessfulModificationException {
+    public void updateDomainsListProperties(DomainsList domainsList){
         domainsListDAO.updateDomainsListProperties(domainsList);
     }
 
     @Override
-    public void deleteDomainsList(int domainsListId) throws UnsuccessfulDeletException {
+    public void deleteDomainsList(int domainsListId){
         domainsListDAO.deleteDomainsList(domainsListId);
     }
 
@@ -59,12 +57,12 @@ public class DomainsServiceImpl implements DomainsService {
     }
 
     @Override
-    public void updateDomainInList(Domain domain) throws UnsuccessfulModificationException {
+    public void updateDomainInList(Domain domain){
         domainDAO.updateDomain(domain);
     }
 
     @Override
-    public void deleteDomain(Domain domain) throws UnsuccessfulDeletException {
+    public void deleteDomain(Domain domain){
         domainDAO.deleteDomain(domain);
     }
 }

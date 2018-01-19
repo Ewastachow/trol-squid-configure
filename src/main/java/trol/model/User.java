@@ -1,4 +1,4 @@
-package trol.domain.trol_api.model;
+package trol.model;
 
 import trol.domain.database_models.UserEntity;
 import trol.validation.IPv4;

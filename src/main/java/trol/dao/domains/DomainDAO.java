@@ -1,6 +1,6 @@
 package trol.dao.domains;
 
-import trol.domain.trol_api.model.Domain;
+import trol.model.Domain;
 
 public interface DomainDAO {
     Domain getDomain(int domainId);

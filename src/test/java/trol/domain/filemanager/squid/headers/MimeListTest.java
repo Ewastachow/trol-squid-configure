@@ -2,15 +2,13 @@ package trol.domain.filemanager.squid.headers;
 
 import org.junit.Assert;
 import org.junit.Test;
-import trol.domain.trol_api.model.Header;
-import trol.domain.trol_api.model.TransmissionType;
+import trol.model.Header;
+import trol.model.TransmissionType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
-import static org.junit.Assert.*;
 
 public class MimeListTest {
 

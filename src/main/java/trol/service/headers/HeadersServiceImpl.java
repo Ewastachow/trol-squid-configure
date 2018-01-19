@@ -3,7 +3,7 @@ package trol.service.headers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import trol.dao.headers.TransmissionTypeDAO;
-import trol.domain.trol_api.model.TransmissionType;
+import trol.model.TransmissionType;
 
 import java.util.List;
 

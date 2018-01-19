@@ -1,8 +1,8 @@
 package trol.domain.filemanager.dansguardian.domains;
 
 import trol.domain.filemanager.FilePaths;
-import trol.domain.trol_api.model.DomainsList;
 import trol.domain.util.FileHelper;
+import trol.model.DomainsList;
 
 import java.io.IOException;
 import java.nio.file.Path;

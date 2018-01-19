@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import trol.dao.words.WordDAO;
 import trol.dao.words.WordsListDAO;
-import trol.domain.trol_api.exception.UnsuccessfulDeletException;
-import trol.domain.trol_api.exception.UnsuccessfulModificationException;
-import trol.domain.trol_api.model.Word;
-import trol.domain.trol_api.model.WordsList;
+import trol.model.Word;
+import trol.model.WordsList;
 
 import java.util.List;
 
@@ -30,7 +28,7 @@ public class WordsServiceImpl implements WordsService {
     }
 
     @Override
-    public int addWordsList(WordsList wordsList) throws UnsuccessfulModificationException {
+    public int addWordsList(WordsList wordsList){
         int id = wordsListDAO.addWordsList(wordsList.getWordsListName());
         wordsList.setIdWordsList(id);
         wordsListDAO.updateWordsListProperties(wordsList);
@@ -38,12 +36,12 @@ public class WordsServiceImpl implements WordsService {
     }
 
     @Override
-    public void updateWordsListProperties(WordsList wordsList) throws UnsuccessfulModificationException {
+    public void updateWordsListProperties(WordsList wordsList){
         wordsListDAO.updateWordsListProperties(wordsList);
     }
 
     @Override
-    public void deleteWordsList(int wordsListId) throws UnsuccessfulDeletException {
+    public void deleteWordsList(int wordsListId){
         wordsListDAO.deleteWordsList(wordsListId);
     }
 
@@ -58,12 +56,12 @@ public class WordsServiceImpl implements WordsService {
     }
 
     @Override
-    public void updateWordInList(Word word) throws UnsuccessfulModificationException {
+    public void updateWordInList(Word word){
         wordDAO.updateWord(word);
     }
 
     @Override
-    public void deleteWord(Word word) throws UnsuccessfulDeletException {
+    public void deleteWord(Word word){
         wordDAO.deleteWord(word);
     }
 }

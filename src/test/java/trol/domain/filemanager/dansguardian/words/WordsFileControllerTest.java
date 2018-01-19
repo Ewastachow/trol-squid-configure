@@ -6,16 +6,14 @@ import org.junit.Before;
 import org.junit.Test;
 import trol.domain.filemanager.FilePaths;
 import trol.domain.filemanager.FilePathsTest;
-import trol.domain.trol_api.model.Word;
-import trol.domain.trol_api.model.WordsList;
+import trol.model.Word;
+import trol.model.WordsList;
 import trol.domain.util.FileHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
-import static org.junit.Assert.*;
 
 public class WordsFileControllerTest {
 

@@ -8,18 +8,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import trol.domain.trol_api.exception.UnsuccessfulDeletException;
-import trol.domain.trol_api.model.Domain;
-import trol.domain.trol_api.model.DomainsList;
+import trol.model.DomainsList;
 import trol.service.domains.DomainsService;
 
 import javax.validation.Valid;
 
+/**
+ * MVC controller for domains. Handles requests for list of all domains lists, list addition and deletion.
+ */
 @Controller
 public class DomainsController {
     @Autowired
-    DomainsService domainsService;
+    private DomainsService domainsService;
 
+    /**
+     * Returns list of all blocked domains lists.
+     * @return view with all blocked domains lists
+     */
     @GetMapping(value = "/domains")
     public ModelAndView getDomains(){
         ModelAndView model = new ModelAndView();
@@ -31,32 +36,40 @@ public class DomainsController {
         return model;
     }
 
+    /**
+     * Handles get mapping for domain list addition form.
+     * @param model model representing form data
+     * @return empty model and html view with form
+     */
     @GetMapping(value = "/domains/add")
     public String getNewDomainsListForm(Model model){
         model.addAttribute("domainsList",new DomainsList());
         return "/domains/form";
     }
 
+    /**
+     * Handles post mapping for domain list addition form.
+     * @param domainsList validated model class with data given by user
+     * @param bindingResult result of DomainsList validation
+     * @return redirect to list editing if addition was successful, or back to form with info about failure
+     */
     @PostMapping(value = "/domains/add")
     public String addNewDomainsList(@Valid DomainsList domainsList, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return "/domains/form";
         }
-        try {
-            domainsService.addDomainsList(domainsList);
-        } catch (Exception e) {
-            //return "error";
-        }
+        domainsService.addDomainsList(domainsList);
         return "redirect:/domains/list/"+domainsList.getIdDomainsList();
     }
 
+    /**
+     * Handles deletion of list selected by id
+     * @param id list identifier (from database)
+     * @return redirect to list of all domains
+     */
     @GetMapping(value = "domains/delete/{id}")
     public String deleteDomainsList(@PathVariable("id") int id){
-        try {
-            domainsService.deleteDomainsList(id);
-        } catch (UnsuccessfulDeletException e) {
-            e.printStackTrace();
-        }
+        domainsService.deleteDomainsList(id);
         return "redirect:/domains";
     }
 }

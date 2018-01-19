@@ -1,6 +1,6 @@
 package trol.service.users;
 
-import trol.domain.trol_api.model.User;
+import trol.model.User;
 
 import java.util.List;
 

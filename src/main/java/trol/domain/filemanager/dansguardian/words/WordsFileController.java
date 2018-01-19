@@ -1,6 +1,6 @@
 package trol.domain.filemanager.dansguardian.words;
 
-import trol.domain.trol_api.model.WordsList;
+import trol.model.WordsList;
 
 import java.io.IOException;
 import java.util.List;

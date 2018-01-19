@@ -10,8 +10,8 @@ import trol.dao.users.UserDAO;
 import trol.dao.words.WordsListDAO;
 import trol.domain.filemanager.dansguardian.domains.DomainsFileController;
 import trol.domain.filemanager.dansguardian.users.UsersFileController;
-import trol.domain.filemanager.squid.SquidFileController;
 import trol.domain.filemanager.dansguardian.words.WordsFileController;
+import trol.domain.filemanager.squid.SquidFileController;
 import trol.domain.terminal.TerminalExecute;
 
 import java.io.IOException;

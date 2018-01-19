@@ -1,6 +1,6 @@
 package trol.domain.filemanager.dansguardian.users;
 
-import trol.domain.trol_api.model.User;
+import trol.model.User;
 
 import java.io.IOException;
 import java.util.List;

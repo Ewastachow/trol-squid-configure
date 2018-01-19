@@ -1,6 +1,6 @@
 package trol.dao.words;
 
-import trol.domain.trol_api.model.WordsList;
+import trol.model.WordsList;
 
 import java.util.List;
 

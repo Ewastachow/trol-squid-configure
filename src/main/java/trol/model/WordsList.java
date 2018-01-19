@@ -1,12 +1,10 @@
-package trol.domain.trol_api.model;
+package trol.model;
 
 import org.hibernate.validator.constraints.Length;
 import trol.domain.database_models.WordsListsEntity;
 
 import javax.validation.constraints.NotNull;
-import java.sql.Time;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 

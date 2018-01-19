@@ -1,6 +1,6 @@
 package trol.dao.appusers;
 
-import trol.domain.trol_api.model.AppUser;
+import trol.model.AppUser;
 
 public interface AppUsersDAO {
     AppUser getAppUserByName(String name);
