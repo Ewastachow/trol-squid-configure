@@ -1,4 +1,4 @@
-package trol.model;
+package trol.model.helpers;
 
 import trol.validation.StrongPassword;
 

@@ -1,24 +1,25 @@
 package trol.domain.log;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import trol.dao.users.UserDAO;
 import trol.domain.filemanager.FileController;
 import trol.domain.filemanager.FilePaths;
-import trol.domain.trol_api.model.User;
-import trol.domain.util.FileHelper;
 import trol.domain.terminal.TerminalExecute;
+import trol.domain.util.FileHelper;
+import trol.model.User;
 
 import java.io.IOException;
-import java.util.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class UsedTimeManager {
@@ -61,10 +62,8 @@ public class UsedTimeManager {
     @Async
     public void checkUsersLogs() throws IOException, InterruptedException {
         if (state.equals(UsedTimeManagerState.BUSY)){
-            System.out.println("nie przerywac, pracuje");
             return;
         }
-        System.out.println("zaczynam prace "+ this);
         state = UsedTimeManagerState.BUSY;
 
         if(nextDay()) {

@@ -1,6 +1,6 @@
 package trol.dao.words;
 
-import trol.domain.trol_api.model.Word;
+import trol.model.Word;
 
 public interface WordDAO {
     Word getWord(int wordId);

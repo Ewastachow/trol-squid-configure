@@ -1,22 +1,25 @@
 package trol.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import trol.dao.appusers.AppUsersDAO;
 import trol.domain.filemanager.FileController;
 import trol.domain.filemanager.SaveState;
-import trol.model.PasswordUpdate;
+import trol.model.helpers.PasswordUpdate;
 
 import javax.validation.Valid;
 import java.security.Principal;
 
+/**
+ * Main controller class of application. Handles main page requests, login page,
+ * saving blocking settings and user account settings.
+ * Uses DAO for Users table to manage account settings.
+ * Uses FileController to flush data stored in database to blocking module in order to update blocking rules.
+ */
 @Controller
 public class MainController {
     @Autowired
@@ -24,14 +27,17 @@ public class MainController {
     @Autowired
     private AppUsersDAO appUsersDAO;
 
+    /**
+     * Handles request for main page of application. Returns appropriate view.
+     * @return index html view
+     */
     @RequestMapping("/")
-     ModelAndView index(){
-        ModelAndView model = new ModelAndView("index");
-        return model;
+     public String index(){
+        return "/index";
     }
 
     @RequestMapping("/login")
-    String login(){
+    public String login(){
         return "/login";
     }
 
@@ -61,13 +67,19 @@ public class MainController {
             return "/settings";
         }
         if (!passwordUpdate.getNewPasswordFirst().equals(passwordUpdate.getNewPasswordSecond())){
-            bindingResult.rejectValue("newPasswordSecond", "err_not_equal" ,"Passwords must be equal!");
+            bindingResult.rejectValue(
+                    "newPasswordSecond",
+                    "err_not_equal" ,
+                    "Passwords must be equal!");
             return "/settings";
         }
         String username = principal.getName();
         String actualPassword = appUsersDAO.getAppUserByName(username).getPassword();
         if (!passwordUpdate.getOldPassword().equals(actualPassword)){
-            bindingResult.rejectValue("oldPassword","err_bad_password" ,"Wrong password!");
+            bindingResult.rejectValue(
+                    "oldPassword",
+                    "err_bad_password" ,
+                    "Wrong password!");
             return "/settings";
         }
         appUsersDAO.updateAppUserPassword(username, passwordUpdate.getNewPasswordFirst());

@@ -7,11 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import trol.domain.trol_api.model.TransmissionType;
+import trol.model.TransmissionType;
 import trol.service.headers.HeadersService;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 public class HeadersController {

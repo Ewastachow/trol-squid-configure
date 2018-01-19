@@ -2,7 +2,7 @@ package trol.dao.users;
 
 import org.springframework.stereotype.Repository;
 import trol.domain.database_models.UserEntity;
-import trol.domain.trol_api.model.User;
+import trol.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

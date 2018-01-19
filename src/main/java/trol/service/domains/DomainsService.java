@@ -1,21 +1,19 @@
 package trol.service.domains;
 
-import trol.domain.trol_api.exception.UnsuccessfulDeletException;
-import trol.domain.trol_api.exception.UnsuccessfulModificationException;
-import trol.domain.trol_api.model.Domain;
-import trol.domain.trol_api.model.DomainsList;
+import trol.model.Domain;
+import trol.model.DomainsList;
 
 import java.util.List;
 
 public interface DomainsService {
     List<DomainsList> getDomainsLists();
     DomainsList getDomainsList(int domainsListId);
-    int addDomainsList(DomainsList domainsList) throws UnsuccessfulModificationException;
-    void updateDomainsListProperties(DomainsList domainsList) throws UnsuccessfulModificationException;
-    void deleteDomainsList(int domainsListId) throws UnsuccessfulDeletException;
+    int addDomainsList(DomainsList domainsList);
+    void updateDomainsListProperties(DomainsList domainsList);
+    void deleteDomainsList(int domainsListId);
 
     Domain getDomain(int domainId);
     int addDomainToDomainsList(Domain domain);
-    void updateDomainInList(Domain domain) throws UnsuccessfulModificationException;
-    void deleteDomain(Domain domain) throws UnsuccessfulDeletException;
+    void updateDomainInList(Domain domain);
+    void deleteDomain(Domain domain);
 }

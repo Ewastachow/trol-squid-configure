@@ -3,11 +3,10 @@ package trol.dao.domains;
 import org.springframework.stereotype.Repository;
 import trol.domain.database_models.DomainsEntity;
 import trol.domain.database_models.DomainsListsEntity;
-import trol.domain.trol_api.model.Domain;
+import trol.model.Domain;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 @Transactional

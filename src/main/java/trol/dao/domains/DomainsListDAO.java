@@ -1,6 +1,6 @@
 package trol.dao.domains;
 
-import trol.domain.trol_api.model.DomainsList;
+import trol.model.DomainsList;
 
 import java.util.List;
 

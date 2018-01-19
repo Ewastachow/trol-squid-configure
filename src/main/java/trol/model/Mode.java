@@ -1,4 +1,4 @@
-package trol.domain.trol_api.model;
+package trol.model;
 
 public enum Mode {
     INACTIVE, BLACKLIST, WHITELIST

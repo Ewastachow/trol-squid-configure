@@ -2,8 +2,8 @@ package trol.domain.filemanager.squid;
 
 import trol.domain.filemanager.FilePaths;
 import trol.domain.filemanager.squid.headers.MimeList;
-import trol.domain.trol_api.model.TransmissionType;
 import trol.domain.util.FileHelper;
+import trol.model.TransmissionType;
 
 import java.io.IOException;
 import java.nio.file.Paths;

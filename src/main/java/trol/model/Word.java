@@ -1,4 +1,4 @@
-package trol.domain.trol_api.model;
+package trol.model;
 
 import org.hibernate.validator.constraints.Length;
 import trol.domain.database_models.WordsEntity;

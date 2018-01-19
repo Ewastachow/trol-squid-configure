@@ -3,7 +3,7 @@ package trol.service.users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import trol.dao.users.UserDAO;
-import trol.domain.trol_api.model.User;
+import trol.model.User;
 
 import java.util.List;
 

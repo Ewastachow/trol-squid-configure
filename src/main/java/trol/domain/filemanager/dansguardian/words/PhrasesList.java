@@ -1,8 +1,8 @@
 package trol.domain.filemanager.dansguardian.words;
 
 import trol.domain.filemanager.FilePaths;
-import trol.domain.trol_api.model.WordsList;
 import trol.domain.util.FileHelper;
+import trol.model.WordsList;
 
 import java.io.IOException;
 import java.nio.file.Path;

@@ -6,30 +6,33 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.access.AccessDeniedHandler;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 
+
+/**
+ * Configuration class for Spring Security.
+ * Contains methods managing authentication method and user roles and permissions.
+ */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    //@Autowired
-    //private AccessDeniedHandler accessDeniedHandler;
 
     @Qualifier("dataSource")
     @Autowired
     private DataSource dataSource;
 
+    /**
+     * Manages users permissions to specific http requests.
+     * Stylesheets and login page are available for all requests. Other requests have to be authorized.
+     * @param http allows configuring web based security for specific http requests
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
-                //.antMatchers("/admin/**").hasAnyRole("ADMIN")
-                //.antMatchers("/user/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -38,11 +41,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
-                //.and()
-                //.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
 
-    // create two users, admin and user
+
+    /**
+     *  Configures method of authentication. Application uses JDBC authentication.
+     *  Database should contain tables for users and user roles (authorities).
+     *  Sets queries for users and user roles.
+     * @param auth allows for building different types of authentication
+     * @throws Exception
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(
@@ -50,9 +58,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ).authoritiesByUsernameQuery(
                 "select username, role from authorities where username=?"
         );
-        //auth.inMemoryAuthentication()
-                //.withUser("user").password("password").roles("USER")
-                //.and()
-        //        .withUser("admin").password("password").roles("ADMIN");
     }
 }

@@ -6,8 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import trol.domain.filemanager.FilePaths;
 import trol.domain.filemanager.FilePathsTest;
-import trol.domain.trol_api.model.Domain;
-import trol.domain.trol_api.model.DomainsList;
+import trol.model.Domain;
+import trol.model.DomainsList;
 import trol.domain.util.FileHelper;
 
 import java.util.ArrayList;

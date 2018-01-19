@@ -2,11 +2,10 @@ package trol.dao.domains;
 
 import org.springframework.stereotype.Repository;
 import trol.domain.database_models.DomainsListsEntity;
-import trol.domain.trol_api.model.DomainsList;
+import trol.model.DomainsList;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.sql.Time;
 import java.util.List;
