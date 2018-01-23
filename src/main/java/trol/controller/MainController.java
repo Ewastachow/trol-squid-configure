@@ -36,17 +36,29 @@ public class MainController {
         return "/index";
     }
 
+    /**
+     * Returns login page of application.
+     * @return login page html
+     */
     @RequestMapping("/login")
     public String login(){
         return "/login";
     }
 
+    /**
+     * Saves application configuration. Blocking rules are updated.
+     */
     @GetMapping("/save")
     @ResponseStatus(HttpStatus.OK)
     public void saveConfiguration(){
         fileController.saveConfiguration();
     }
 
+    /**
+     * Returns status of application saving module. If it's currently saving configuration and restarting
+     * then BUSY status is returned. If it's idling and waiting for save request, then FREE status is returned.
+     * @return current status of cnfiguration saving module
+     */
     @GetMapping("/save/state")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody int getSaveState(){
@@ -54,18 +66,32 @@ public class MainController {
         return saveState == SaveState.FREE ? 1 : 0;
     }
 
+    /**
+     * Returns form for changing user password. To change password it is necessary to give an old password
+     * and type twice the new password.
+     * @param model empty data model for setting new password
+     * @return password change html form
+     */
     @GetMapping("/settings")
     public String getChangePasswordForm(Model model){
         model.addAttribute("passwordUpdate", new PasswordUpdate());
         return "/settings";
     }
 
+    /**
+     * Validates data given by user and saves new password if everything is valid.
+     * @param passwordUpdate structure containing old password typed by user and new password typed twice
+     * @param bindingResult result of validation
+     * @param principal user, who is sending this request
+     * @return logout and redirect to login page if data was valid, highlight errors in form otherwise
+     */
     @PostMapping("/settings")
     public String changePassword(
             @Valid PasswordUpdate passwordUpdate, BindingResult bindingResult, Principal principal){
         if (bindingResult.hasErrors()){
             return "/settings";
         }
+        // if new passwords are not equal, then return error
         if (!passwordUpdate.getNewPasswordFirst().equals(passwordUpdate.getNewPasswordSecond())){
             bindingResult.rejectValue(
                     "newPasswordSecond",
@@ -75,6 +101,7 @@ public class MainController {
         }
         String username = principal.getName();
         String actualPassword = appUsersDAO.getAppUserByName(username).getPassword();
+        // if old password and password given by user are not equal, then return error
         if (!passwordUpdate.getOldPassword().equals(actualPassword)){
             bindingResult.rejectValue(
                     "oldPassword",
