@@ -14,6 +14,8 @@ public class FilePathsTest {
         FilePaths.DANSGUARDIAN_LISTS_PATH = "src/test/resources/trol/blocking/filemanager/test/";
         FilePaths.SQUID_CONFIGURE_PATH = "src/test/resources/trol/blocking/filemanager/test/squid.conf";
         try {
+            Files.createDirectories(Paths.get("src/test/resources/trol/blocking"));
+            Files.createDirectories(Paths.get("src/test/resources/trol/blocking/filemanager"));
             Files.createDirectories(Paths.get("src/test/resources/trol/blocking/filemanager/test"));
             Files.createDirectory(Paths.get(FilePaths.DANSGUARDIAN_LISTS_PATH+"phraselists"));
             Files.createDirectory(Paths.get(FilePaths.DANSGUARDIAN_LISTS_PATH+"blacklists"));
