@@ -73,7 +73,7 @@ public class UsedTimeManager {
 
     /**
      * Should be called in equal intervals by Spring thread from thread pool with use of
-     * @Scheduled reads dansguardian logs and update users UsedTime field using UserDAO
+     * Scheduled reads dansguardian logs and update users UsedTime field using UserDAO
      * in database. After CRUD operations uses FileController class to proceed saving
      * configuration.
      * @throws IOException raised in case of any problem with access or reading log file.
