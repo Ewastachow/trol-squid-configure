@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Settings</title>
+    <link rel="stylesheet" type="text/css" href="/css/settings.css" />
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container-fluid settings">
+    <div class="settings-inside">
+        <div class="row">
+            <div class="box col-md-6 col-md-offset-3">
+                <h2>Change password:</h2>
+                    <form th:action="@{/settings}" th:object="${passwordUpdate}" method="post">
+                        <div class="form-group">
+                            <label for="old">Old Password:</label>
+                            <input type="password" class="form-control" th:field="*{oldPassword}" id="old"/>
+                            <div th:if="${#fields.hasErrors('oldPassword')}"
+                                 th:errors="*{oldPassword}" class="alert alert-danger"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newFirst">New Password:</label>
+                            <input type="password" class="form-control" th:field="*{newPasswordFirst}" id="newFirst"/>
+                            <div th:if="${#fields.hasErrors('newPasswordFirst')}"
+                                 th:errors="*{newPasswordFirst}" class="alert alert-danger"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newSecond">Repeat New Password:</label>
+                            <input type="password" class="form-control" th:field="*{newPasswordSecond}" id="newSecond"/>
+                            <div th:if="${#fields.hasErrors('newPasswordSecond')}"
+                                 th:errors="*{newPasswordSecond}" class="alert alert-danger"></div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6" id="button-save">
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Save"/>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

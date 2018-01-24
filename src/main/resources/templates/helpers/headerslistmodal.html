@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+</head>
+<body>
+<div th:fragment="modal">
+
+    <!-- Modal -->
+    <div id="helpModalHeaders" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Transsmision types</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This list contains collections of mime content-type divided into four sets:
+                        <ul>
+                            <li>Video_streams - blocks mime types using in video streaming,</li>
+                            <li>Video - block mime types using in sending video data,</li>
+                            <li>Audio - block mime types using in sending audio data,</li>
+                            <li>Image - block mime types using in sending images.</li>
+                        </ul>
+                    </p>
+                    <p>Columns explanations:</p>
+                    <p style="text-align: center"><strong>Transmission type</strong> - text field containing name od specified
+                        set of mime types.
+                    </p>
+                    <p style="text-align: center"><strong>Active</strong> - boolean value indicating if transmission type is
+                        currently being used by blocking system. True means that set of mime types are prohibited.
+                    </p>
+                    <p style="text-align: center"><strong>Timed</strong> - boolean value indicating if set of mime types is active only in specified time.
+                        True means that words from list are used in time period specified by <em>Start time</em> and
+                        <em>End time</em>.
+                    </p>
+                    <p style="text-align: center"><strong>Start time</strong> - beginning of time period when set of mime types is being
+                        used in filtering process if <em>Timed</em> is true.
+                    </p>
+                    <p style="text-align: center"><strong>End time</strong> - end of time period when set of mime types is being used
+                        in filtering process if <em>Timed</em> is true.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

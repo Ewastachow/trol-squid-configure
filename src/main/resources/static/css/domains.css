@@ -1,0 +1,111 @@
+/* Domains.html */
+.domains-inside{
+    background-color: #c9e4f2;
+    color: #31708f;
+    margin: 2% 15% 3% 15%;
+    padding-bottom: 2%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+}
+
+#domains-inside-table{
+    margin-left: 15%;
+    width: 70%;
+}
+
+#domains-title{
+    display: inline;
+    overflow: hidden;
+}
+#domains-title>h2>a.btn, #domains-title>h2>button{
+    float: right;   !important;
+    margin-bottom: 1%;  !important;
+    margin-left: 1%;    !important;
+}
+
+#domains-table{
+    background-color: #eeeeee;
+    border: 1px solid #cccfcf;
+    text-align: center;
+}
+
+.table-bordered {
+    border: 2px solid #c9e4f2;
+}
+
+.thead{
+    background-color: #cccfcf;
+}
+
+#top>th{
+    vertical-align: top;
+}
+
+.th {
+    text-align: center;
+}
+
+#domains-table>tbody>tr>td, #domains-table>tbody>tr>th, #domains-table>tfoot>tr>td, #domains-table>tfoot>tr>th, #domains-table>thead>tr>td, #domains-table>thead>tr>th{
+    vertical-align: middle;
+}
+
+/* Form.html */
+.adding-form-inside{
+    background-color: #c9e4f2;
+    color: #31708f;
+    margin: 2% 15% 3% 15%;
+    padding-bottom: 2%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+}
+
+#mode{
+    display: block;
+}
+
+.form-check-inline{
+    display: inline-block;
+    padding-right: 10%;
+}
+
+/* Domainslist.html */
+.domains-edit-inside{
+    background-color: #c9e4f2;
+    color: #31708f;
+    margin: 2% 15% 3% 15%;
+    padding-bottom: 2%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+}
+
+#domainsList{
+    width: 50%;
+    margin: 2% 15% 3% 25%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+#add-domain{
+    margin: 2% 15% 5% 15%;
+    padding: 3% 3%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    font-weight: 700;
+}
+
+
+
+
+
+
+
+
+

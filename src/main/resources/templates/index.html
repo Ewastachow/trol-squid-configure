@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+<div class="container-all">
+    <div class="container jumbo">
+        <div class="row">
+            <div class="jumbotron">
+                <h1 class="text-jumbo"><a href="/"><img src="/css/trolsmall.png"/> Trol - Your Network Guard</a></h1>
+                <h2 class="text-jumbo">Unwanted content shall not pass! </h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <a th:href="@{/domains}" class="btn btn-secondary btn-xlarge" role="button">Domains</a>
+            <a th:href="@{/words}" class="btn btn-secondary btn-xlarge" role="button">Words lists</a>
+            <a th:href="@{/headers}" class="btn btn-secondary btn-xlarge">Headers list</a>
+            <a th:href="@{/users}" class="btn btn-secondary btn-xlarge">Users list</a>
+        </div>
+    </div>
+</div>
+    <div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

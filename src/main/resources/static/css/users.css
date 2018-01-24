@@ -1,0 +1,118 @@
+.container-fluid {
+    padding-top: 80px;
+}
+
+/* userslist.html */
+.users-inside{
+    background-color: #c9e4f2;
+    color: #31708f;
+    margin: 2% 15% 3% 15%;
+    padding-bottom: 2%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+}
+
+#users-list{
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 75%;
+}
+
+#users-title{
+    display: inline;
+    overflow: hidden;
+}
+
+#users-title>h2>a.btn, #users-title>h2>button{
+    float: right;
+    margin-bottom: 1%;
+    margin-left: 1%;
+}
+
+#users-table{
+    background-color: #eeeeee;
+    border: 1px solid #cccfcf;
+    text-align: center;
+}
+
+.table-bordered {
+    border: 2px solid #c9e4f2;
+}
+
+.thead{
+    background-color: #cccfcf;
+}
+
+#top>th{
+    vertical-align: top;
+}
+
+.th {
+    text-align: center;
+}
+
+#users-table>tbody>tr>td, #users-table>tbody>tr>th, #users-table>tfoot>tr>td, #users-table>tfoot>tr>th, #users-table>thead>tr>td, #users-table>thead>tr>th{
+    vertical-align: middle;
+}
+
+/* userform.html */
+.adding-form-inside{
+    background-color: #c9e4f2;
+    color: #31708f;
+    margin: 2% 15% 3% 15%;
+    padding-bottom: 2%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+}
+
+#mode{
+    display: block;
+}
+
+.form-check-inline{
+    display: inline-block;
+    padding-right: 10%;
+}
+
+/* user.html */
+.users-edit-inside{
+    background-color: #c9e4f2;
+    color: #31708f;
+    margin: 2% 15% 3% 15%;
+    padding-bottom: 2%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+}
+
+/*
+#domainsList{
+    width: 50%;
+    margin: 2% 15% 3% 25%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+#add-domain{
+    margin: 2% 15% 5% 15%;
+    padding: 3% 3%;
+    border: 3px solid #eeeeee;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    font-weight: 700;
+}
+*/
+
+
+
+
+
+
+
+

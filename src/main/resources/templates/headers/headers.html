@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Headers</title>
+    <link rel="stylesheet" type="text/css" href="/css/headers.css" />
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container-fluid" id="headers">
+    <div class="headers-inside">
+        <div class="row">
+            <div class="box col-md-6 col-md-offset-3" id="headers-list">
+                <div id="headers-title">
+                <h2>Blocked transmission types list
+                    <button type="button" class="btn btn-info btn-lg"
+                            data-toggle="modal" data-target="#helpModalHeaders">Help</button>
+                </h2>
+                    <div th:replace="helpers/headerslistmodal :: modal"/>
+                </div>
+                <div>
+                    <table class="table table-bordered" id="headers-table">
+                        <thead class="thead">
+                        <tr id="top">
+                            <th class="th">Transmission type</th>
+                            <th class="th">Active</th>
+                            <th class="th">Time blocked</th>
+                            <th class="th">Start time</th>
+                            <th class="th">End time</th>
+                            <th class="th"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${headers.empty}">
+                            <td id="empty" colspan="6">List is empty</td>
+                        </tr>
+                        <tr th:unless="${headers.empty}" th:each="item : ${headers}">
+                            <td class="header" th:text="${item.transmissionTypeName}">Empty</td>
+                            <td>
+                                <span th:if="${item.isActive}" class="glyphicon glyphicon-ok"></span>
+                                <span th:unless="${item.isActive}" class="glyphicon glyphicon-remove"></span>
+                            </td>
+                            <td>
+                                <span th:if="${item.isTimed}" class="glyphicon glyphicon-ok"></span>
+                                <span th:unless="${item.isTimed}" class="glyphicon glyphicon-remove"></span>
+                            </td>
+                            <td th:text="${item.timeBegin}"></td>
+                            <td th:text="${item.timeEnd}"></td>
+                            <td>
+                                <a th:href="@{/headers/edit/}+${item.getIdTransmissionType()}"
+                                   class="btn btn-info" role="button">Edit</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

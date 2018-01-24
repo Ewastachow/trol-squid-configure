@@ -1,0 +1,72 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Words list</title>
+    <link rel="stylesheet" type="text/css" href="/css/words.css" />
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container-fluid domains">
+    <div class="words-inside">
+        <div class="row">
+            <div class="box col-md-6 col-md-offset-3" id="main-table">
+                <div id="words-title">
+                    <h2>Words List
+                        <a th:href="@{/words/add}" class="btn btn-lg btn-success" role="button">Add</a>
+                        <button type="button" class="btn btn-info btn-lg"
+                                data-toggle="modal" data-target="#helpModalWords">Help</button>
+                    </h2>
+                    <div th:replace="helpers/wordslistmodal :: modal"/>
+                </div>
+                <div>
+                    <table class="table table-bordered" id="words-table">
+                        <thead class="thead">
+                        <tr id="top">
+                            <th class="th">List name</th>
+                            <th class="th">Active</th>
+                            <th class="th">Timed</th>
+                            <th class="th">Start time</th>
+                            <th class="th">End time</th>
+                            <th class="th"></th>
+                            <th class="th"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${words.empty}">
+                            <td id="empty" colspan="7">List is empty</td>
+                        </tr>
+                        <tr th:if="${!words.empty}" th:each="item : ${words}">
+                            <td class="word" th:text="${item.getWordsListName()}">Empty</td>
+                            <td>
+                                <span th:if="${item.isActive}" class="glyphicon glyphicon-ok"></span>
+                                <span th:unless="${item.isActive}" class="glyphicon glyphicon-remove"></span>
+                            </td>
+                            <td>
+                                <span th:if="${item.isTimed}" class="glyphicon glyphicon-ok"></span>
+                                <span th:unless="${item.isTimed}" class="glyphicon glyphicon-remove"></span>
+                            </td>
+                            <td th:text="${item.timeBegin}"></td>
+                            <td th:text="${item.timeEnd}"></td>
+                            <td>
+                                <a th:href="@{/words/list/}+${item.getIdWordsList()}"
+                                   class="btn btn-info" role="button">Edit</a>
+                            </td>
+                            <td>
+                                <a th:href="@{/words/delete/}+${item.getIdWordsList()}"
+                                   class="btn btn-danger" role="button">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

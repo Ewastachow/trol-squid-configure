@@ -1,0 +1,69 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Domains list</title>
+    <link rel="stylesheet" type="text/css" href="/css/domains.css" />
+    <div th:replace="fragments/header :: header-css"/></head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container-fluid domainslist">
+    <div class="domains-edit-inside">
+    <div class="row">
+        <div class="box col-md-6 col-md-offset-3">
+            <h2>Edit domains list:</h2>
+            <input type="hidden" id="listName" th:value="${domainsList.getDomainsListName()}"/>
+            <input type="hidden" id="listId" th:value="${domainsList.getIdDomainsList()}"/>
+            <form action="#"
+                  th:action="@{/domains/list/}+${domainsList.getIdDomainsList()}"
+                  th:object="${domainsList}" method="post">
+                <div th:replace="fragments/domainform :: form"/>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="box col-md-6 col-md-offset-3" id="domainsList">
+            <div id="add-domain">
+                Add domain:
+                <form action="#" th:action="@{/domains/list/{id}/edit(id = ${domainsList.getIdDomainsList()})}"
+                      th:object="${newdomain}" method="post">
+                    <input type="text" th:field="*{domainString}" id="domainString"/>
+                    <input type="hidden" th:field="*{idDomainsList}" id="idDomainsList"/>
+                    <div th:if="${#fields.hasErrors('domainString')}"
+                         th:errors="*{domainString}" class="alert alert-danger"></div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+            <table class="table table-bordered" id="domains-table">
+                <thead class="thead">
+                <tr id="top">
+                    <th class="th">Domain</th>
+                    <th class="th"></th>
+                    <th class="th"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${domainsList.getDomainsSet().empty}">
+                    <td id="empty" colspan="3">List is empty</td>
+                </tr>
+                <tr th:if="${!domainsList.getDomainsSet().empty}" th:each="item : ${domainsList.getDomainsSet()}">
+                    <td>
+                        <div th:text="${item.domainString}" class="domain"></div>
+                    </td>
+                    <td><button class="btn btn-default editdomain">Edit</button></td>
+                    <td><button class="btn btn-danger removedomain">Remove</button></td>
+                    <input type="hidden" class="id" th:value="${item.idDomain}"/>
+                    <input type="hidden" class="oldDomain" th:value="${item.domainString}"/>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+<script src="/js/domains/domainslist.js"></script>
+
+</body>
+</html>

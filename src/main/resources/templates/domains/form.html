@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Domains list</title>
+    <link rel="stylesheet" type="text/css" href="/css/domains.css" />
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+<!--Adding form-->
+<div class="container-fluid domainsform">
+    <div class="adding-form-inside">
+    <div class="row">
+        <div class="box col-md-6 col-md-offset-3">
+            <h2>Add new domains list:</h2>
+                <form th:action="@{/domains/add}" th:object="${domainsList}" method="post">
+                    <div th:replace="fragments/domainform :: form"/>
+                </form>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

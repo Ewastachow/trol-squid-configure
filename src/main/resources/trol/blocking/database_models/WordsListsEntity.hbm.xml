@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="trol.blocking.database_models.WordsListsEntity" table="words_lists" schema="estacho1">
+        <id name="idWordsList" column="id_words_list">
+            <generator class="native"/>
+        </id>
+        <property name="wordsListName" column="words_list_name"/>
+        <property name="isActive" column="is_active"/>
+        <property name="isTimed" column="is_timed"/>
+        <property name="timeBegin" column="time_begin"/>
+        <property name="timeEnd" column="time_end"/>
+        <set name="wordsEntitySet" table="words" inverse="true">
+            <key column="id_words_list"/>
+            <one-to-many class="trol.blocking.database_models.WordsEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

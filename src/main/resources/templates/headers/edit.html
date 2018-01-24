@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Transmission type details</title>
+    <link rel="stylesheet" type="text/css" href="/css/headers.css" />
+    <div th:replace="fragments/header :: header-css"/></head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container-fluid" id="headerslist">
+    <div class="headers-edit-inside">
+        <div class="row">
+            <div class="box col-md-6 col-md-offset-3">
+                <h2>Edit transmission type blocking properties:</h2>
+                <form action="#"
+                      th:action="@{/headers/edit/}+${header.getIdTransmissionType()}"
+                      th:object="${header}" method="post">
+                    <input type="hidden" th:field="*{idTransmissionType}"/>
+                    <div class="form-group">
+                        <label for="name">Transmission type:</label>
+                        <input type="text" disabled="disabled" class="form-control"
+                               th:field="*{transmissionTypeName}" id="name"/>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" th:field="*{isActive}"/>
+                            Activate blocking?
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" th:field="*{isTimed}"/>
+                            Is blocking time limited?
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="timebegin">Start time:</label>
+                        <input type="time" class="form-control" th:field="*{timeBegin}" id="timebegin"/>
+                        <div th:if="${#fields.hasErrors('timeBegin')}"
+                             th:errors="*{timeBegin}" class="alert alert-danger"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeend">End time:</label>
+                        <input type="time" class="form-control" th:field="*{timeEnd}" id="timeend"/>
+                        <div th:if="${#fields.hasErrors('timeEnd')}"
+                             th:errors="*{timeEnd}" class="alert alert-danger"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

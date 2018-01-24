@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users</title>
+    <link rel="stylesheet" type="text/css" href="/css/users.css" />
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+<!--Adding form-->
+<div class="container-fluid usersform">
+    <div class="adding-form-inside">
+        <div class="row">
+            <div class="box col-md-6 col-md-offset-3">
+                <h2>Block user:</h2>
+                <form th:action="@{/users/add}" th:object="${user}" method="post">
+                    <div th:replace="fragments/userform :: form"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
