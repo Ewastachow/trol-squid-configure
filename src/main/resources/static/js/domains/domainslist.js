@@ -15,34 +15,10 @@ $(document).on('click', '.removedomain', function (e) {
         contentType: "application/json",
     }).done(function(result){
         location.reload();
-        //TODO
     });
     $(this).parent().parent().remove();
 });
 
-$(document).on('click', '.addDomain', function (e) {
-    e.preventDefault();
-    var input = $(this).parent().find(".domain");
-    var listId = $('#listId').val();
-    var url = "/domains/list/"+listId+"/edit"
-    var domain = input.val();
-    $.ajax({
-        type: 'POST',
-        url: url,
-        contentType: "application/json",
-        data: domain
-    }).done(function(result){
-        console.log(result);
-        console.log(result.message);
-        location.reload();
-        //TODO
-    }).fail(function (xhr, status, error) {
-        console.log(xhr);
-        var response = JSON.parse(xhr.responseText);
-        var error = response.error[0];
-        $("#adderror").html(getErrorInfo(error));
-    });
-});
 
 $(document).on('click', '.editdomain', function (e) {
     var tr = $(this).parent().parent();
@@ -74,7 +50,6 @@ $(document).on('click', '.applyEdit', function (e) {
         contentType: "application/json",
         data: newDomain
     }).done(function(result){
-        console.log(result);
         location.reload();
     }).fail(function (xhr, status, error) {
         var response = JSON.parse(xhr.responseText);

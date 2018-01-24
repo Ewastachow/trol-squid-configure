@@ -15,7 +15,6 @@ $(document).on('click', '.removeword', function (e) {
         contentType: "application/json",
     }).done(function(result){
         location.reload();
-        //TODO
     });
     $(this).parent().parent().remove();
 });
@@ -32,12 +31,8 @@ $(document).on('click', '.addWord', function (e) {
         contentType: "application/json",
         data: word
     }).done(function(result){
-        console.log(result);
-        console.log(result.message);
         location.reload();
-        //TODO
     }).fail(function (xhr, status, error) {
-        console.log(xhr);
         var response = JSON.parse(xhr.responseText);
         var error = response.error[0];
         $("#adderror").html(getErrorInfo(error));
@@ -74,7 +69,6 @@ $(document).on('click', '.applyEdit', function (e) {
         contentType: "application/json",
         data: newWord
     }).done(function(result){
-        console.log(result);
         location.reload();
     }).fail(function (xhr, status, error) {
         var response = JSON.parse(xhr.responseText);
