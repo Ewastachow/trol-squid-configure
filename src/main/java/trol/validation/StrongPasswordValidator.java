@@ -3,6 +3,9 @@ package trol.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+/**
+ * Validates password strength. Password must be at least 6 characters long and contain 1 digit to be valid.
+ */
 public class StrongPasswordValidator implements ConstraintValidator<StrongPassword, String> {
 
     @Override
