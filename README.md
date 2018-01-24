@@ -10,35 +10,44 @@ Instrukcja została stworzona dla linuxa, a dokładnie dystrybucji Fedora 27 Wor
 
 Do poprawnego działania programu niezbędna jest instajacja javy 8.
 
-`wget http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm
-rpm -ivh jdk-8u151-linux-x64.rpm `
+`wget http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm`
 
-`wget http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm
-rpm -ivh jdk-8u151-linux-x64.rpm `
+`rpm -ivh jdk-8u151-linux-x64.rpm `
+
+`wget http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm`
+
+`rpm -ivh jdk-8u151-linux-x64.rpm `
 
 Dla ubuntu będzie to:
 
-`sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java8-installer`
+`sudo add-apt-repository ppa:webupd8team/java`
 
-\subsubsection{Instalacja Gradle}
-\begin{verbatim}
-sudo -s
-wget https://services.gradle.org/distributions/gradle-4.2.1-all.zip
-mkdir /opt/gradle
-unzip -d /opt/gradle gradle-4.2.1-all.zip
-export PATH=$PATH:/opt/gradle/gradle-4.2.1/bin
-\end{verbatim}
+`sudo apt-get update`
 
-\subsubsection{Konfiguracja squid-a}
+`sudo apt-get install oracle-java8-installer`
+
+#### Instalacja Gradle
+
+`sudo -s`
+
+`wget https://services.gradle.org/distributions/gradle-4.2.1-all.zip`
+
+`mkdir /opt/gradle`
+
+`unzip -d /opt/gradle gradle-4.2.1-all.zip`
+
+`export PATH=$PATH:/opt/gradle/gradle-4.2.1/bin`
+
+
+
+#### Konfiguracja squid-a
 
 Dla systemów Fedora , Red Hat, CentOS (w najnowszej wersji) zalecana jest instalacja z Squida 4 z oficjalnego repozytorium.
-\begin{verbatim}
-sudo dnf install squid
-\end{verbatim}
+
+`sudo dnf install squid`
+
 Dla systemów bazujących  na debianie (m.in. Debian, Ubuntu, LinuxMint) zaleca się pobranie Squida 4 z oficjalnej strony projektu, oraz zbudowanie go z flagami: 
-\begin{lstlisting}[breaklines]
+
 '--program-prefix='
 '--prefix=/usr'
 '--exec-prefix=/usr'
@@ -91,14 +100,14 @@ Dla systemów bazujących  na debianie (m.in. Debian, Ubuntu, LinuxMint) zaleca 
 '--with-openssl'
 '--with-pthreads'
 '--with-pic'
-\end{lstlisting}
 
-\begin{verbatim}
-sudo -s
-wget http://www.squid-cache.org/Versions/v4/squid-4.0.21.tar.gz
-tar xvzf squid-4.0.21.tar.gz
-cd squid-4.0.21
-\end{verbatim}
+`sudo -s`
+
+`wget http://www.squid-cache.org/Versions/v4/squid-4.0.21.tar.gz`
+
+`tar xvzf squid-4.0.21.tar.gz`
+
+`cd squid-4.0.21`
 
 Jako parametr poniższego configure należy podać powyższe flagi
 \begin{verbatim}
