@@ -1,6 +1,6 @@
 package trol.model;
 
-import trol.domain.database_models.TransmissionTypesEntity;
+import trol.blocking.database_models.TransmissionTypesEntity;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;

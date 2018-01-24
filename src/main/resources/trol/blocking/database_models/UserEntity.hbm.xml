@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="trol.blocking.database_models.UserEntity" table="user" schema="estacho1">
+        <id name="idUser" column="id_user">
+            <generator class="native"/>
+        </id>
+        <property name="userIp" column="user_ip"/>
+        <property name="isActive" column="is_active"/>
+        <property name="isTimed" column="is_timed"/>
+        <property name="timeBegin" column="time_begin"/>
+        <property name="timeEnd" column="time_end"/>
+        <property name="hasDuration" column="has_duration"/>
+        <property name="durationInterval" column="duration_interval"/>
+        <property name="usedTime" column="used_time"/>
+    </class>
+</hibernate-mapping>

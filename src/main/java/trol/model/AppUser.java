@@ -1,6 +1,6 @@
 package trol.model;
 
-import trol.domain.database_models.AppUserEntity;
+import trol.blocking.database_models.AppUserEntity;
 
 public class AppUser {
     private String username;

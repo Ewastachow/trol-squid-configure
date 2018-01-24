@@ -1,8 +1,8 @@
 package trol.dao.domains;
 
 import org.springframework.stereotype.Repository;
-import trol.domain.database_models.DomainsEntity;
-import trol.domain.database_models.DomainsListsEntity;
+import trol.blocking.database_models.DomainsEntity;
+import trol.blocking.database_models.DomainsListsEntity;
 import trol.model.Domain;
 
 import javax.persistence.EntityManager;

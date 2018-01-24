@@ -1,7 +1,7 @@
 package trol.model;
 
 import org.hibernate.validator.constraints.Length;
-import trol.domain.database_models.WordsEntity;
+import trol.blocking.database_models.WordsEntity;
 
 public class Word implements Comparable<Word>{
 

@@ -1,6 +1,6 @@
 package trol.model;
 
-import trol.domain.database_models.DomainsEntity;
+import trol.blocking.database_models.DomainsEntity;
 import trol.validation.TrolDomain;
 
 public class Domain implements Comparable<Domain>{

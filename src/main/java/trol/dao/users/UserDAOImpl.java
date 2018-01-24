@@ -1,7 +1,7 @@
 package trol.dao.users;
 
 import org.springframework.stereotype.Repository;
-import trol.domain.database_models.UserEntity;
+import trol.blocking.database_models.UserEntity;
 import trol.model.User;
 
 import javax.persistence.EntityManager;

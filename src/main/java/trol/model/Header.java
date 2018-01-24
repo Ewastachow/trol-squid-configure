@@ -1,6 +1,6 @@
 package trol.model;
 
-import trol.domain.database_models.HeadersEntity;
+import trol.blocking.database_models.HeadersEntity;
 
 public class Header implements Comparable<Header>{
     private int idHeader;

@@ -1,7 +1,7 @@
 package trol.dao.appusers;
 
 import org.springframework.stereotype.Repository;
-import trol.domain.database_models.AppUserEntity;
+import trol.blocking.database_models.AppUserEntity;
 import trol.model.AppUser;
 
 import javax.persistence.EntityManager;

@@ -1,8 +1,8 @@
 package trol.dao.headers;
 
 import org.springframework.stereotype.Repository;
-import trol.domain.database_models.HeadersEntity;
-import trol.domain.database_models.TransmissionTypesEntity;
+import trol.blocking.database_models.HeadersEntity;
+import trol.blocking.database_models.TransmissionTypesEntity;
 import trol.model.Header;
 
 import javax.persistence.EntityManager;

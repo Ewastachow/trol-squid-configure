@@ -1,7 +1,7 @@
 package trol.model;
 
 import org.hibernate.validator.constraints.Length;
-import trol.domain.database_models.WordsListsEntity;
+import trol.blocking.database_models.WordsListsEntity;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;

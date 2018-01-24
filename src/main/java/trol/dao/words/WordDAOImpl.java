@@ -1,8 +1,8 @@
 package trol.dao.words;
 
 import org.springframework.stereotype.Repository;
-import trol.domain.database_models.WordsEntity;
-import trol.domain.database_models.WordsListsEntity;
+import trol.blocking.database_models.WordsEntity;
+import trol.blocking.database_models.WordsListsEntity;
 import trol.model.Word;
 
 import javax.persistence.EntityManager;

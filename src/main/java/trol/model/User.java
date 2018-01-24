@@ -1,6 +1,6 @@
 package trol.model;
 
-import trol.domain.database_models.UserEntity;
+import trol.blocking.database_models.UserEntity;
 import trol.validation.IPv4;
 
 import javax.validation.constraints.Min;

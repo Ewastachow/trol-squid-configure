@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import trol.dao.appusers.AppUsersDAO;
-import trol.domain.filemanager.FileController;
-import trol.domain.filemanager.SaveState;
+import trol.blocking.filemanager.FileController;
+import trol.blocking.filemanager.SaveState;
 import trol.model.helpers.PasswordUpdate;
 
 import javax.validation.Valid;
