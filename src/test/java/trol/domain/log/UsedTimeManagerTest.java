@@ -19,16 +19,14 @@ public class UsedTimeManagerTest {
 
     @Test
     public void getState() {
-        UsedTimeManager man = new UsedTimeManager("resources/trol.log/testLogFile1",
-                new TerminalExecute());
+        UsedTimeManager man = new UsedTimeManager("resources/trol.log/testLogFile1");
         assertEquals(UsedTimeManagerState.FREE,man.getState());
     }
 
     @Test
     public void parseLineExistedTest() {
         UsedTimeManager testManager =
-                new UsedTimeManager("src/test/resources/trol.log/testLogFile1",
-                new TerminalExecute());
+                new UsedTimeManager("src/test/resources/trol.log/testLogFile1");
         Map<String, Integer> users = new HashMap<>();
         users.put("10.10.10.245", 1);
 
@@ -56,8 +54,7 @@ public class UsedTimeManagerTest {
     @Test
     public void parseLineFindingTest() {
         UsedTimeManager testManager =
-                new UsedTimeManager("src/test/resources/trol.log/testLogFile1",
-                        new TerminalExecute());
+                new UsedTimeManager("src/test/resources/trol.log/testLogFile1");
         Map<String, Integer> users = new HashMap<>();
         users.put("10.10.10.245", 1);
         assertEquals(false,users.containsKey("10.10.10.246"));
