@@ -5,6 +5,9 @@ import trol.model.DomainsList;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Creating dansguardian domains files.
+ */
 public class DomainsFileController {
 
     /**

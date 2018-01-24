@@ -5,6 +5,11 @@ import trol.model.WordsList;
 import java.io.IOException;
 import java.util.List;
 
+
+/**
+ * Creating file /etc/dansguardian/lists/bannedphraselist
+ * i pliki zawierające konkretne listy w /etc/dansguardian/lists/phraselists
+ */
 public class WordsFileController {
 
     /**

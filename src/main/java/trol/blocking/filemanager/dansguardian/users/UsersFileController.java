@@ -5,6 +5,9 @@ import trol.model.User;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Creating file /etc/dansguardian/lists/bannediplist which include blocked ip address
+ */
 public class UsersFileController {
     /**
      * Saves currently bloked ip-s to bannediplist in dansguardian configuration list
