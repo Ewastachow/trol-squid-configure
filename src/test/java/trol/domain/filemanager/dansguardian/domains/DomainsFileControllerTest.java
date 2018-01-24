@@ -36,20 +36,6 @@ public class DomainsFileControllerTest {
         Assert.assertEquals("Create empty site include file",expectedFile,createdFile);
     }
 
-//    @Test
-//    public void saveFileTestWhiteEmpty() throws Exception {
-//        Set<Domain> domainSet = new TreeSet<>();
-//        List<DomainsList> domainsListList = new ArrayList<>();
-//        domainsListList.add(createDomainsList(1,"SiteTest",true,false,domainSet));
-//
-//        DomainsFileController.saveFile(domainsListList);
-//
-//        List<String> createdFile = FileHelper.createLineListFromFile(FilePaths.DANSGUARDIAN_SITE_BLACK_INCLUDE_LIST_PATH);
-//        List<String> expectedFile = new ArrayList<>();
-//
-//        Assert.assertEquals("Create empty black site include file",expectedFile,createdFile);
-//    }
-
     @Test
     public void saveFileTestBlackNotActive() throws Exception {
         Set<Domain> domainSet = new TreeSet<>();
@@ -63,21 +49,6 @@ public class DomainsFileControllerTest {
 
         Assert.assertEquals("Create empty black site include file becouse not active",expectedFile,createdFile);
     }
-
-//    @Test
-//    public void saveFileTestBlackActive() throws Exception {
-//        Set<Domain> domainSet = new TreeSet<>();
-//        List<DomainsList> domainsListList = new ArrayList<>();
-//        domainsListList.add(createDomainsList(1,"SiteTest",true,true,domainSet));
-//
-//        DomainsFileController.saveFile(domainsListList);
-//
-//        List<String> createdFile = FileHelper.createLineListFromFile(FilePaths.DANSGUARDIAN_SITE_BLACK_INCLUDE_LIST_PATH);
-//        List<String> expectedFile = new ArrayList<>();
-//        expectedFile.add(".Include<" + FilePaths.DANSGUARDIAN_SITE_LISTS_PATH + "sitetest1-black>");
-//
-//        Assert.assertEquals("Create one domainslist file",expectedFile,createdFile);
-//    }
 
 
     private DomainsList createDomainsList(int id, String name, boolean isActive, boolean isBlack, Set<Domain> set){
