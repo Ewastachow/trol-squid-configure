@@ -35,7 +35,6 @@ public class WordDAOImpl implements WordDAO{
 
     @Override
     public void deleteWord(Word word) {
-        //TODO
         WordsListsEntity listsEntity = entityManager.find(WordsListsEntity.class,word.getIdWordsList());
         WordsEntity wordsEntity = entityManager.find(WordsEntity.class,word.getIdWord());
         listsEntity.getWordsEntitySet().remove(wordsEntity);
