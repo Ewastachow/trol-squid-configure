@@ -48,7 +48,7 @@ Dla systemów Fedora , Red Hat, CentOS (w najnowszej wersji) zalecana jest insta
 
 Dla systemów bazujących  na debianie (m.in. Debian, Ubuntu, LinuxMint) zaleca się pobranie Squida 4 z oficjalnej strony projektu, oraz zbudowanie go z flagami: 
 
-'--program-prefix='
+`'--program-prefix='
 '--prefix=/usr'
 '--exec-prefix=/usr'
 '--bindir=/usr/bin'
@@ -99,7 +99,7 @@ Dla systemów bazujących  na debianie (m.in. Debian, Ubuntu, LinuxMint) zaleca 
 '--with-dl'
 '--with-openssl'
 '--with-pthreads'
-'--with-pic'
+'--with-pic'`
 
 `sudo -s`
 
@@ -110,104 +110,117 @@ Dla systemów bazujących  na debianie (m.in. Debian, Ubuntu, LinuxMint) zaleca 
 `cd squid-4.0.21`
 
 Jako parametr poniższego configure należy podać powyższe flagi
-\begin{verbatim}
-./configure
-make
-make install
-\end{verbatim}
 
-\subsubsection{Konfiguracja dansguardian}
+`./configure`
+
+`make`
+
+`make install`
+
+#### Konfiguracja dansguardian
 
 Ze względu na brak dansguardiana w oficjalnym repozytorium fedory 
-\begin{lstlisting}[breaklines]
-sudo -s
-wget ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/home:/Kenzy:/packages/CentOS_7/x86_64/dansguardian-2.12.0.3-1.1.x86_64.rpm
-rpm -ivh dansguardian-2.12.0.3-1.1.x86_64.rpm
-\end{lstlisting}
+
+`sudo -s`
+
+`wget ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/home:/Kenzy:/packages/CentOS_7/x86_64/dansguardian-2.12.0.3-1.1.x86_64.rpm`
+
+`rpm -ivh dansguardian-2.12.0.3-1.1.x86_64.rpm`
 
 W przypadku ubuntu, debiana i linuxmint-a wystarczy wpisać
-\begin{verbatim}
-sudo apt-get install dansguardian
-\end{verbatim}
+
+`sudo apt-get install dansguardian`
 
 W niektórych kompilacjach dansguardiana instnieje konieczność zakomentowania jednej z początkowych linii pliku 
 
-\textit{/etc/dansguardian/dansguardian.conf} 
-zawierającej 
-\textbf{UNCONFIGURED}
+_/etc/dansguardian/dansguardian.conf_
 
-\subsubsection{Instalacja MySQL}
-\begin{verbatim}
-sudo -s
-dnf install https://dev.mysql.com/get/mysql57-community-release-fc27-10.noarch.rpm
-dnf install mysql-community-server
-dnf --enablerepo=mysql80-community install mysql-community-server
-systemctl restart mysqld.service
-systemctl enable mysqld.service
-/usr/bin/mysql_secure_installation
-mysqladmin -u root password [your_password_here]
-\end{verbatim}
+zawierającej 
+
+_UNCONFIGURED_
+
+#### Instalacja MySQL
+
+`sudo -s`
+
+`dnf install https://dev.mysql.com/get/mysql57-community-release-fc27-10.noarch.rpm`
+
+`dnf install mysql-community-server`
+
+`dnf --enablerepo=mysql80-community install mysql-community-server`
+
+`systemctl restart mysqld.service`
+
+`systemctl enable mysqld.service`
+
+`/usr/bin/mysql_secure_installation`
+
+`mysqladmin -u root password [your_password_here]`
 
 Nalezy stworzyć bazę danych trol
-\begin{verbatim}
-mysql> create database trol;
-\end{verbatim}
+
+`mysql> create database trol;`
 
 Oraz wczytać plik ze skryptem z resources projektu
-\begin{verbatim}
-mysql -p trol -u root -p
-mysql> source [path\_do\_skryptu];
-\end{verbatim}
 
-\subsubsection{Konfiguracja przechwytywania ruchu oraz ustawienie https}
+`mysql -p trol -u root -p`
+`mysql> source [path\_do\_skryptu];`
+
+#### Konfiguracja przechwytywania ruchu oraz ustawienie https
 
 W celu przechwycenia ruchu z sieci lokalnej należy wykonać instrukcję na serverze pełniącym rolę bramy w sieci lokalnej. Oraz dodać w mielscu 'http\_port 3128' 'transparent' w pliku squidHeader.conf w katalogu /filemanager w resources projektu
 
 W celu ustawienia https należy wygenerować certyfikaty openssl
 
-\begin{verbatim}
-openssl genrsa 4096 > private_root.pem
-openssl req -new -x509 -days 3650 -key private_root.pem -out my_rootCA.crt
-openssl x509 -in my_rootCA.crt -outform DER -out my_rootCA.der
-openssl genrsa 4096 > private_cert.pem
-\end{verbatim}
+`openssl genrsa 4096 > private_root.pem`
 
-oraz dodać do pliku squidFooter.conf w resources projektu w katalogu /filemanager
-\begin{lstlisting}[breaklines]
-http_port 3128 intercept
-https_port 3129 intercept ssl-bump generate-host-certificates=on dynamic_cert_mem_cache_size=4MB cert=private_root.pem key=private_root.pem 
-ssl_bump server-first all
-\end{lstlisting}
+`openssl req -new -x509 -days 3650 -key private_root.pem -out my_rootCA.crt`
+
+`openssl x509 -in my_rootCA.crt -outform DER -out my_rootCA.der`
+
+`openssl genrsa 4096 > private_cert.pem`
+
+oraz dodać do pliku _squidFooter.conf_ w resources projektu w katalogu _/filemanager_
+
+`http_port 3128 intercept`
+
+`https_port 3129 intercept ssl-bump generate-host-certificates=on dynamic_cert_mem_cache_size=4MB cert=private_root.pem key=private_root.pem`
+
+`ssl_bump server-first all`
+
 gdzie w cert oraz key powinna znajdować się pełna ścierzka do wygenerowanych kluczy
 
-\subsection{Instrukcja instalacji aplikacji}
+#### Instrukcja instalacji aplikacji
 
 Należy skonfigurować plik application.properties z resources projektu podmieniając wartości poniższych linii na
 
-\begin{verbatim}
-spring.datasource.url=jdbc:mysql://localhost:3306/trol
-spring.datasource.username=root
-spring.datasource.password=
-\end{verbatim}
+`spring.datasource.url=jdbc:mysql://localhost:3306/trol`
+
+`spring.datasource.username=root`
+
+`spring.datasource.password=`
 
 Jeżeli w trakcie instalacji servera mysql lub jego konfiguracji podano inne dane, należy podać w powyższych linijkach dane pozwalające połączyć się ze stworzoną bazą trol.
 
 Następnie należy zbudować projekt.
-Jeżeli w trakcie tej operacji wystąpią błędy należy upewnić się, że root oraz user z poziomu którego budujemy projekt mają stworzoną zmienną środowiskową \$JAVA\_HOME wskazującą na folder javy8 oraz dodaną TYLKO javę 8 do \$PATH.
+Jeżeli w trakcie tej operacji wystąpią błędy należy upewnić się, że root oraz user z poziomu którego budujemy projekt mają stworzoną zmienną środowiskową $JAVA_HOME wskazującą na folder javy8 oraz dodaną TYLKO javę 8 do $PATH.
 
-\begin{verbatim}
-git clone https://github.com/Ewastachow/trol-squid-configure.git
-cd trol-squid-configure
-gradle build -x test
-gradle wrapper
-sudo ./gradlew run
-\end{verbatim}
+`git clone https://github.com/Ewastachow/trol-squid-configure.git`
+
+`cd trol-squid-configure`
+
+`gradle build -x test`
+
+`gradle wrapper`
+
+`sudo ./gradlew run`
 
 W celach testowych należy wykonać próbę restartu squida oraz dansguardiana:
-\begin{verbatim}
-systemctl restart squid.service
-systemctl restart dansguardian.service
-\end{verbatim}
-w przypadku problemów należy podmienić zawartość pliku /etc/squid/squid.conf /etc/dansguardian/dansguardian.conf oraz /etc/dansguardian/dansguardianf1.conf na zawartość plików w resources projektu /workingConfigFile
+
+`systemctl restart squid.service`
+
+`systemctl restart dansguardian.service`
+
+w przypadku problemów należy podmienić zawartość pliku _/etc/squid/squid.conf_ _/etc/dansguardian/dansguardian.conf_ oraz _/etc/dansguardian/dansguardianf1.conf_ na zawartość plików w resources projektu _/workingConfigFile_
 
 Należy ustawić proxy na port 8080 dla http oraz https
