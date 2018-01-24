@@ -17,7 +17,7 @@ public class FileHelperTest {
 
     @Test
     public void createLineListFromFile() throws Exception {
-        List<String> tokens = FileHelper.createLineListFromFile("src/test/resources/trol.util/testFileToLineList");
+        List<String> tokens = FileHelper.createLineListFromFile("src/test/resources/trol/util/testFileToLineList");
 
         Assert.assertEquals(15,tokens.size());
         Assert.assertEquals("acl SSL_ports port 443",tokens.get(0));
@@ -28,12 +28,12 @@ public class FileHelperTest {
     @Test (expected = IOException.class)
     public void createLineListFromFileNotExistFile() throws Exception {
         List<String> tokens = FileHelper.
-                createLineListFromFile("src/test/resources/trol.util/testFileToLineListNotExist");
+                createLineListFromFile("src/test/resources/trol/util/testFileToLineListNotExist");
     }
 
     @Test
     public void createLineListFromFileWithoutBlank() throws Exception {
-        List<String> tokens = FileHelper.createLineListFromFileWithoutBlank("src/test/resources/trol.util/testFileToLineList");
+        List<String> tokens = FileHelper.createLineListFromFileWithoutBlank("src/test/resources/trol/util/testFileToLineList");
 
         Assert.assertEquals(13,tokens.size());
         Assert.assertEquals("acl SSL_ports port 443",tokens.get(0));
@@ -200,13 +200,13 @@ public class FileHelperTest {
     @Test
     public void readLastNLines() throws IOException {
         List<String> tokens = FileHelper.
-                readLastLinesSince("src/test/resources/trol.util/testReading",2);
+                readLastLinesSince("src/test/resources/trol/util/testReading",2);
 
         Assert.assertEquals(1,tokens.size());
         Assert.assertEquals("text",tokens.get(0));
 
         tokens = FileHelper.
-                readLastLinesSince("src/test/resources/trol.util/testReading",3);
+                readLastLinesSince("src/test/resources/trol/util/testReading",3);
 
         Assert.assertEquals(0,tokens.size());
     }
@@ -214,14 +214,14 @@ public class FileHelperTest {
     @Test
     public void fileGreaterOrEqualThanTest() throws IOException {
         Assert.assertTrue(FileHelper.
-                fileGreaterOrEqualThan("src/test/resources/trol.util/testReading",2));
+                fileGreaterOrEqualThan("src/test/resources/trol/util/testReading",2));
         Assert.assertTrue(FileHelper.
-                fileGreaterOrEqualThan("src/test/resources/trol.util/testReading",3));
+                fileGreaterOrEqualThan("src/test/resources/trol/util/testReading",3));
         Assert.assertTrue(FileHelper.
-                fileGreaterOrEqualThan("src/test/resources/trol.util/testReading",-5));
+                fileGreaterOrEqualThan("src/test/resources/trol/util/testReading",-5));
         Assert.assertTrue(FileHelper.
-                fileGreaterOrEqualThan("src/test/resources/trol.util/testReading",0));
+                fileGreaterOrEqualThan("src/test/resources/trol/util/testReading",0));
         Assert.assertFalse(FileHelper.
-                fileGreaterOrEqualThan("src/test/resources/trol.util/testReading",4));
+                fileGreaterOrEqualThan("src/test/resources/trol/util/testReading",4));
     }
 }
