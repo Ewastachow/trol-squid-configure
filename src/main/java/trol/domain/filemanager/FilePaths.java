@@ -18,5 +18,4 @@ public class FilePaths {
     public static String SQUID_FOOTER_CONFIGURATION_PATH = "src/main/resources/trol/domain/filemanager/squidFooter.conf";
 
     public static String DANSGUARDIAN_ACCESS_LOGS = "/var/log/dansguardian/access.log";
-    public static String SQUID_TROL_USER_TIME_LOG = "/var/log/squid/trolUserTimes.log";
 }
