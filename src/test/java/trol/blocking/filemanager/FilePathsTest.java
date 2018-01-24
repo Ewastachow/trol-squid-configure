@@ -34,11 +34,6 @@ public class FilePathsTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        try {
-//            Files.delete(Paths.get("src/test/resources/trol/domain/filemanager/test"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         FilePaths.DANSGUARDIAN_LISTS_PATH = "/etc/dansguardian/lists/";
         FilePaths.SQUID_CONFIGURE_PATH = "/etc/squid/squid.conf";
     }
