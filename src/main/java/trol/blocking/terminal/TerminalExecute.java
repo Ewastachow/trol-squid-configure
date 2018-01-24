@@ -21,20 +21,4 @@ public class TerminalExecute {
         return output;
     }
 
-    public void test1(){
-        //TODO: To remove
-        String output = "Lama3";
-        try {
-            output = executeCommand("service squid restart");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Lama1");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            System.out.println("Lama2");
-        }
-        System.out.print(output);
-    }
-
-
 }
